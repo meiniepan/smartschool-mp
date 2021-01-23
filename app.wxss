@@ -1,0 +1,30 @@
+/**app.wxss**/
+
+page {
+  --userToken: 'userToken';
+
+
+  --divider-line-color: #cecece;
+  --divider-line-color-dark: #5d5d5f;
+  --tags-font-size: 25rpx;
+  --tags-color: #777777;
+  --text-color: #fff;
+  --text-color-dark: #a9a9b2;
+  --page-backgroung-color: #F7F7F7;
+  --page-backgroung-color-dark: #343538;
+  --cell-background-color: #fff;
+  --cell-background-color-dark: #292a2d;
+  --login-header-color: #48C9B0;
+  --login-header-color-dark: #318c7a;
+  --marked-tag-color: #eb8242;
+  --collection-state-color: #c73420;
+}
+.container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 200rpx 0;
+  box-sizing: border-box;
+} 

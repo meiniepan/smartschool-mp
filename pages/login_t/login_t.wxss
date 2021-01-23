@@ -1,0 +1,109 @@
+/* pages/login_t/login_t.wxss */
+/* pages/login/login.wxss */
+
+page {
+  height: 100vh;
+  width: 100%;
+  background-color: var(--page-backgroung-color);
+}
+
+.header-background {
+  width: 100%;
+  height: 350rpx;
+  background-color: var(--login-header-color);
+}
+
+.logo-area {
+  position: absolute;
+  top: 55rpx;
+  left: 40rpx;
+  right: 40rpx;
+  height: 200rpx;
+
+}
+
+.img-logo {
+  width: 100%;
+  height: 100%;
+}
+
+.login-panel {
+  position: absolute;
+  height: 300rpx;
+  top: 250rpx;
+  left: 40rpx;
+  right: 40rpx;
+  background-color: var(--cell-background-color);
+  border-radius: 11rpx;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.account-area,
+.password-area {
+  margin: 0 40rpx;
+  height: 100rpx;
+  border-bottom: 0.5rpx solid var(--divider-line-color);
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.btn-login {
+  color: var(--text-color);
+  margin: 230rpx 40rpx 0 40rpx; 
+  height: 100rpx;
+  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border-radius: 11rpx;
+}
+
+.btn-enable-login {
+  background-color: var(--login-header-color);
+}
+
+.btn-disable-login {
+  background-color: #DBDCDE;
+}
+
+.btn-register {
+  color: #9E9E9E;
+  background-color: #F7F7F7;
+  font-size: 25rpx;
+  margin: 10rpx 40rpx 0 40rpx;
+
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+@media(prefers-color-scheme: dark) {
+  .btn-register,
+  page {
+      background-color: var(--page-backgroung-color-dark);
+  }
+
+  .header-background,
+  .btn-enable-login {
+      background-color: var(--login-header-color-dark);
+  }
+
+  .btn-disable-login,
+  .login-panel {
+      background-color: var(--cell-background-color-dark);
+  }
+
+  .btn-login {
+      color: var(--text-color-dark);
+  }
+
+  .account-area,
+  .password-area {
+      border-bottom: 0.5rpx solid var(--divider-line-color-dark);
+  }
+}
