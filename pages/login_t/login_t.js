@@ -39,7 +39,7 @@ Page({
               console.log(res)
               if (res.data.respCode == '0000') {
                 wx.showToast({
-                    title: "登陆成功",
+                    title: "登陆成功a",
                     icon: 'none'
                 });
             } else {
