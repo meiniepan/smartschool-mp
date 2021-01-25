@@ -1,7 +1,7 @@
 // pages/login/login.js
 
-let host = require('../../utils/host.js');
 let utils = require('../../utils/util.js');
+let app = getApp()
 
 Page({
 
@@ -24,37 +24,21 @@ Page({
     },
 
     login: function() {
-        let _this = this;
-        wx.request({
-            url: host.BASE_URL + '/api/v17/user/login/eloginin',
-            method: 'POST',
-            header: {
-                "Content-Type": "application/x-www-form-urlencoded"
-            },
-            data: {
-              phone: _this.data.account,
-              vcode: _this.data.password
-            },
-            success: function(res) {
-              console.log(res)
-              if (res.data.respCode == '0000') {
-                wx.showToast({
-                    title: "登陆成功a",
-                    icon: 'none'
-                });
-            } else {
-                    wx.showToast({
-                        title: res.data.respMsg,
-                        icon:'none'
-                    });
-                  }
-            },
-            fail: function(res) {
-                wx.showToast({
-                    title: res.data.respMsg ||'网络异常，请稍后重试',
-                    icon: 'none'
-                });
-            }
+        let _this = this
+        let data = {
+            phone: _this.data.account,
+            vcode: _this.data.password
+          };
+        app.httpPost('/api/v17/user/login/eloginin', data).then((res) => {
+            app.saveUnerInfo(res.respResult)
+            wx.navigateTo({
+              url: '/pages/home/home',
+            })
+            wx.showToast({
+                title: "登陆成功",
+                icon: 'none'
+            });
+
         });
     },
 

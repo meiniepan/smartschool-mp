@@ -41,7 +41,7 @@
   },
   "compileType": "miniprogram",
   "libVersion": "2.14.4",
-  "appid": "wxd20417935cc31a8b",
+  "appid": "wxa1fb9e4b6d07b138",
   "projectname": "SmartSchool-mp",
   "debugOptions": {
     "hidedInDevtools": []
@@ -49,23 +49,29 @@
   "scripts": {},
   "isGameTourist": false,
   "condition": {
-    "search": {
-      "list": []
-    },
-    "conversation": {
+    "plugin": {
       "list": []
     },
     "game": {
-      "list": []
-    },
-    "plugin": {
       "list": []
     },
     "gamePlugin": {
       "list": []
     },
     "miniprogram": {
-      "list": []
+      "list": [
+        {
+          "name": "pages/logs/logs",
+          "pathName": "pages/logs/logs",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/login_t/login_t",
+          "pathName": "pages/login_t/login_t",
+          "scene": null
+        }
+      ]
     }
   }
 }

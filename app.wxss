@@ -4,6 +4,8 @@ page {
   --userToken: 'userToken';
 
 
+  --themeColor: #445FF5;
+  --commonBlack: #222222;
   --divider-line-color: #cecece;
   --divider-line-color-dark: #5d5d5f;
   --tags-font-size: 25rpx;
@@ -13,11 +15,11 @@ page {
   --page-backgroung-color: #F7F7F7;
   --page-backgroung-color-dark: #343538;
   --cell-background-color: #fff;
-  --cell-background-color-dark: #292a2d;
   --login-header-color: #48C9B0;
-  --login-header-color-dark: #318c7a;
-  --marked-tag-color: #eb8242;
-  --collection-state-color: #c73420;
+
+  --themeBac: linear-gradient(to right,#445FF5,#6D0BBD);
+
+  font-size: 32rpx;
 }
 .container {
   height: 100%;

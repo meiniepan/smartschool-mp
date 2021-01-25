@@ -1,39 +1,151 @@
-// app.js
+//app.js
+let host = require('/utils/host.js');
 App({
-  onLaunch() {
-    // 展示本地存储能力
-    const logs = wx.getStorageSync('logs') || []
-    logs.unshift(Date.now())
-    wx.setStorageSync('logs', logs)
-
-    // 登录
-    wx.login({
-      success: res => {
-        // 发送 res.code 到后台换取 openId, sessionKey, unionId
-      }
-    })
-    // 获取用户信息
-    wx.getSetting({
-      success: res => {
-        if (res.authSetting['scope.userInfo']) {
-          // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
-          wx.getUserInfo({
-            success: res => {
-              // 可以将 res 发送给后台解码出 unionId
-              this.globalData.userInfo = res.userInfo
-
-              // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-              // 所以此处加入 callback 以防止这种情况
-              if (this.userInfoReadyCallback) {
-                this.userInfoReadyCallback(res)
+  onLaunch: function() {
+      wx.getSystemInfo({
+          success: (res) => {
+              this.globalData.systemInfo = res;
+              if (res.model.search('iphone X') !== -1) {
+                  this.globalData.isIpohoneX = true;
               }
-            }
-          })
-        }
-      }
-    })
+              // if (res.screenHeight - res.windowHeight - res.statusBarHeight - 34 > 72) {
+              //     this.globalData.isFullScreen = true;
+              // }
+
+              this.globalData.statusBarHeight = res.statusBarHeight;
+              let capsuleBound = wx.getMenuButtonBoundingClientRect();
+              this.globalData.navigationHeight = capsuleBound.top - res.statusBarHeight + capsuleBound.bottom;
+          }
+      });
   },
+
+
+  /**
+ * http请求封装
+ * @param method 请求方法类型
+ * @param url 请求路径
+ * @param data 请求参数
+ * @param loading 请求加载效果 {0: 正常加载, 1: 表单提交加载效果 }
+ * @param loadingMsg 请求提示信息
+ */
+  httpBase: function(method, url, data, loading = false, loadingMsg) {
+      let requestUrl = host.BASE_URL + url;
+
+      if (loading) {
+          wx.showLoading({
+              title: loadingMsg || '提交中...',
+              mask: true
+          });
+      } else {
+          wx.showNavigationBarLoading();
+      }
+
+      function request(resolve, reject) {
+          wx.request({
+              header: {
+                  'Content-Type': 'application/x-www-form-urlencoded',
+              },
+              method: method,
+              url: requestUrl,
+              data: data,
+              success: function(result) {
+                  if (loading) {
+                      wx.hideLoading({
+                        complete: (res) => {},
+                      });
+                  } else {
+                      wx.hideNavigationBarLoading({
+                        complete: (res) => {},
+                      });
+                  }
+
+                  let res = result.data || {};
+                  let code = res.respCode;
+                  let errMsg = res.respMsg;
+
+                  if (code != '0000') {
+                      reject(res);
+                      
+                      if (errMsg) {
+                          wx.showToast({
+                            title: errMsg,
+                            icon: 'none'
+                          });
+                      }
+                  } else {
+                      resolve(res);
+                  }
+              },
+              fail: function(res) {
+                  reject(res);
+
+                  if (loading) {
+                      wx.hideLoading({
+                        complete: (res) => {},
+                      });
+                  } else {
+                      wx.hideNavigationBarLoading({
+                        complete: (res) => {},
+                      });
+                  }
+
+                  wx.showToast({
+                    title: '网络异常，请稍后重试',
+                    icon: 'none'
+                  });
+              }
+          });
+      }
+      return new Promise(request);
+  },
+
+  httpGet: function(url, data, loading, loadingMsg) {
+      return this.httpBase('GET', url, data, loading, loadingMsg);
+  },
+
+  httpPost: function(url, data, loading, loadingMsg) {
+      return this.httpBase('POST', url, data, loading, loadingMsg);
+  },
+
+  saveUnerInfo: function(data) {
+    wx.setStorageSync('token', data.token)
+    wx.setStorageSync('uid', data.uid)
+    wx.setStorageSync('cno', data.cno)
+    wx.setStorageSync('sno', data.sno)
+    wx.setStorageSync('eduid', data.eduid)
+    wx.setStorageSync('realname', data.realname)
+    wx.setStorageSync('sex', data.sex)
+    wx.setStorageSync('phone', data.phone)
+    wx.setStorageSync('birthday', data.birthday)
+    wx.setStorageSync('portrait', data.portrait)
+    wx.setStorageSync('class_id', data.class_id)
+    wx.setStorageSync('schoolid', data.schoolid)
+    wx.setStorageSync('classname', data.classname)
+    wx.setStorageSync('companyid', data.companyid)
+    wx.setStorageSync('openid', data.openid)
+    wx.setStorageSync('wxname', data.wxname)
+    wx.setStorageSync('remark', data.remark)
+    wx.setStorageSync('isactive', data.isactive)
+    wx.setStorageSync('device_no', data.device_no)
+    wx.setStorageSync('parentphone', data.parentphone)
+    wx.setStorageSync('parentuid', data.parentuid)
+    wx.setStorageSync('parentname', data.parentname)
+    wx.setStorageSync('classmaster', data.classmaster)
+    wx.setStorageSync('isad', data.isad)
+    wx.setStorageSync('roleid', data.roleid)
+    wx.setStorageSync('usertype', data.usertype)
+    wx.setStorageSync('logintype', data.logintype)
+    wx.setStorageSync('parents', JSON.stringify(data.parents))
+    wx.setStorageSync('domain', data.domain)
+  
+},
+
   globalData: {
-    userInfo: null
+      systemInfo: null,
+      userInfo: null,
+      isIpohoneX: false,
+      // isFullScreen: false,
+      statusBarHeight: 0,
+      navigationHeight: 0
   }
 })

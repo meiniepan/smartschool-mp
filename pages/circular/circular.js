@@ -1,6 +1,4 @@
-const util = require("../../utils/util")
-
-// pages/splash/splash.js
+// pages/circular/circular.js
 Page({
 
   /**
@@ -14,19 +12,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    setTimeout(() => {
-      let token = wx.getStorageSync('token')
-      if (util.isEmpty(token)) {
-        wx.navigateTo({
-          url: '/pages/switch_role/switch_role',
-        })
-      } else {
-        wx.switchTab({
-          url: '/pages/circular/circular',
-        })
-      };
-    }
-      , 2000)
+
   },
 
   /**
