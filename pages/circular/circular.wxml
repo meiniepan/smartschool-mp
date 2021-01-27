@@ -1,2 +1,24 @@
 <!--pages/circular/circular.wxml-->
-<text>pages/circular/circular.wxml</text>
+<list show-empty="{{true}}"
+    empty-text="暂无结果"
+    end="{{end}}"
+    list-count="{{mData.length}}"
+    enable-back-to-top="{{enableBackToTop}}"
+    bind:more="more">
+		<view class="cell"
+		wx:for="{{mData}}"
+			wx:key="index"
+			data-url="{{item.link}}"
+			bindtap="articleDetail">
+			<view class="titles">
+				<view class="fresh" hidden="{{item.isRead}}"></view>
+				<view class="title">{{item.title}}</view>
+				<view class="tag date">{{item.noticetime}}</view>
+			</view>
+			<view class="tag" hidden="{{!item.isFeedback}}">@我</view>
+			<view class="tag">
+				<rich-text nodes="{{item.remark}}"></rich-text>
+			</view>
+			
+		</view>
+</list>

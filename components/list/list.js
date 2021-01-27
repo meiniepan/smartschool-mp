@@ -22,7 +22,7 @@ Component({
         },
         emptyUrl: {
 			type: String,
-			value: "../../assets/images/nothing.svg"
+			value: "../../assets/images/empty.png"
         },
         emptyText: {
 			type: String,

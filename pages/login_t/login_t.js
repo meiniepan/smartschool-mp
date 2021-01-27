@@ -31,8 +31,8 @@ Page({
           };
         app.httpPost('/api/v17/user/login/eloginin', data).then((res) => {
             app.saveUnerInfo(res.respResult)
-            wx.navigateTo({
-              url: '/pages/home/home',
+            wx.switchTab({
+              url: '/pages/circular/circular',
             })
             wx.showToast({
                 title: "登陆成功",
