@@ -1,13 +1,26 @@
 <!--pages/circular/circular.wxml-->
-<list show-empty="{{true}}"
-    empty-text="暂无结果"
-    end="{{end}}"
-    list-count="{{mData.length}}"
-    enable-back-to-top="{{enableBackToTop}}"
-    bind:more="more">
+<view class="top-wrap" style="top: {{navigationHeight}}px;">
+	<tab id="category"
+		tab-data="{{categoryMenu}}"
+		tab-cur="{{categoryCur}}"
+		size="{{80}}"
+		scroll="{{true}}"
+		bindchange="toggleCategory">
+	</tab>
+</view>
+
+<swiper current="{{categoryCur}}" duration="{{duration}}" bindanimationfinish="animationFinish">
+	<swiper-item >
+		<list show-empty="{{true}}"
+	  empty-text="暂无结果"
+	  end="{{end}}"
+	  list-count="{{mData.length}}"
+	  enable-back-to-top="{{enableBackToTop}}"
+		bind:more="more" xmlns:bind="http://www.w3.org/2001/XMLSchema">
+		<view class="cells">
 		<view class="cell"
 		wx:for="{{mData}}"
-			wx:key="index"
+			wx:key="index" 
 			data-url="{{item.link}}"
 			bindtap="articleDetail">
 			<view class="titles">
@@ -19,6 +32,14 @@
 			<view class="tag">
 				<rich-text nodes="{{item.remark}}"></rich-text>
 			</view>
-			
 		</view>
+	</view>
 </list>
+	</swiper-item>
+
+	<swiper-item>
+		<view>haha</view> 
+	</swiper-item>
+
+</swiper>
+

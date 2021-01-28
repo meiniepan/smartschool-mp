@@ -1,30 +1,27 @@
 <!--pages/login_t/login_t.wxml-->
-<form>
-    <view class="header-background"></view>
+<view class="header-background"></view>
 
-    <view class="logo-area">
-        <image class="img-logo" mode="widthFix" src="../../assets/images/ic_logo_page.png" mode=""></image>
+<view class="logo-area">
+    <image class="img-logo" mode="widthFix" src="../../assets/images/ic_logo_page.png" mode=""></image>
+</view>
+
+<view class="login-panel">
+    <view class="account-area">
+        <input placeholder="请输入账户名" style="width: 90%;" bindinput="accountInput" value="{{account}}"></input>
     </view>
 
-    <view class="login-panel">
-        <view class="account-area">
-            <input placeholder="请输入账户名" style="width: 90%;" bindinput="accountInput" value="{{account}}" bindfocus="accountFocus"></input>
-            <image hidden="{{!isShowAccountClearBtn}}" src="/assets/images/ic_close.png" style="width: 50rpx; height: 50rpx; margin-left: 10rpx;" bindtap="clearAccountContent"></image>
-        </view>
-
-        <view class="password-area">
-            <input placeholder="请输入密码" style="width: 80%;" password="{{!isShowPassword}}" bindinput="passwordInput" value="{{password}}" bindfocus="passwordFocus"></input>
-            <image hidden="{{!isShowPasswordClearBtnAndShowPasswordBtn}}" src="../../assets/images/ic_close.png" style="width: 50rpx; height: 50rpx; margin-left: 10rpx;" bindtap="clearPasswordContent"></image>
-            <image hidden="{{!isShowPasswordClearBtnAndShowPasswordBtn}}" src="../../assets/images/{{isShowPassword ? 'ic_eye' : 'ic_eye_no'}}.png" style="width: 50rpx; height: 50rpx; margin-left: 10rpx;" bindtap="showPassword"></image>
-        </view>
+    <view class="password-area">
+        <input placeholder="请输入密码" style="width: 80%;" password="{{!isShowPassword}}" bindinput="passwordInput"
+               value="{{password}}"></input>
+        <image hidden="{{!isShowPasswordClearBtnAndShowPasswordBtn}}"
+               src="../../assets/images/{{isShowPassword ? 'ic_eye' : 'ic_eye_no'}}.png"
+               style="width: 50rpx; height: 50rpx; margin-left: 10rpx;" bindtap="showPassword"></image>
     </view>
+</view>
 
-    <view wx:if="{{isAllowLogin === false}}">
-        <view class="btn-login btn-disable-login">登录</view>
-    </view>
-    <view wx:else>
-        <view class="btn-login btn-enable-login" bindtap="login">登录</view>
-    </view>
-
-    <view class="btn-register" bindtap="register">免费注册</view>
-</form>
+<view wx:if="{{isAllowLogin === false}}">
+    <view class="btn-login btn-disable-login">登录</view>
+</view>
+<view wx:else>
+    <view class="btn-login btn-enable-login" bindtap="login">登录</view>
+</view>

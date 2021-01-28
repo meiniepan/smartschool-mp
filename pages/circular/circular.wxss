@@ -1,45 +1,64 @@
 /* pages/circular/circular.wxss */
+page {
+    background-color: var(--page-backgroung-color);
+}
+.top-wrap {
+    left: 0;
+    /* top: 0; */
+    width: 100%;
+    background-color: var(--cell-background-color);
+    z-index: 99;
+    /* box-shadow: 0 0 20rpx -5rpx rgba(0, 0, 0, 0.1); */
+}
+
+swiper {
+    height: 100vh;
+}
+.cells {
+    background: var(--cell-background-color);
+    margin-top: 20rpx;
+}
 .cell {
-  padding: 13rpx 25rpx;
-  background-color: var(--cell-background-color);
+    padding: 13rpx 25rpx;
+    background-color: var(--cell-background-color);
 }
 
 .cell:not(:last-child) {
-  border-bottom: 1rpx solid var(--divider-line-color);
+    border-bottom: 1rpx solid var(--divider-line-color);
 }
 
 .tag {
-  color: var(--tags-color);
-  font-size: 24rpx;
+    color: var(--tags-color);
+    font-size: 24rpx;
 }
 
 .fresh {
-  width: 20rpx;
- height: 20rpx; 
-  border-radius: 10rpx;
-  background: var(--themeColor);
-  margin-right: 10rpx;
+    width: 20rpx;
+    height: 20rpx;
+    border-radius: 10rpx;
+    background: var(--themeColor);
+    margin-right: 10rpx;
 }
 
 .date {
-  flex: 1;
-  display: flex;
-  flex-direction: row-reverse;
-  margin-left: 15rpx;
+    flex: 1;
+    display: flex;
+    flex-direction: row-reverse;
+    margin-left: 15rpx;
 }
 
 .title {
-  margin: 12rpx 0;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
-  text-overflow: ellipsis;
-  overflow: hidden;
+    margin: 12rpx 0;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 
 
 .titles {
-  display: flex;
-  font-size: 28rpx;
-  align-items: center;
+    display: flex;
+    font-size: 28rpx;
+    align-items: center;
 }

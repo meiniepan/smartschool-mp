@@ -6,6 +6,10 @@ Page({
    * 页面的初始数据
    */
   data: {
+    duration: 300,  // swiper-item 切换过渡时间
+		categoryCur: 0, // 当前数据列索引
+		categoryMenu: ["1","2"], // 分类菜单数据, 字符串数组格式
+		navigationHeight: app.globalData.navigationHeight, 
     mData: [],
     lastId: null,
   },
@@ -53,12 +57,49 @@ Page({
       });
     });
   },
+  // 顶部tab切换事件
+	toggleCategory(e) {
+		console.log(1212)
+		this.setData({
+			duration: 0
+		});
+		setTimeout(() => {
+			this.setData({
+				categoryCur: e.detail.index
+			});
+		}, 0);
+	},
+	// 页面滑动切换事件
+	animationFinish(e) {
+		console.log(1313)
+
+		this.setData({
+			duration: 300
+		});
+		setTimeout(() => {
+			this.setData({
+				categoryCur: e.detail.current
+			});
+			let pageData = this.getCurrentData();
+			if (pageData.listData.length === 0) {
+				this.getList('refresh', pageStart);
+			}
+		}, 0);
+	},
   refresh() {
     this.setData({
       lastId: null
     });
     this.getList('refresh');
   },
+  // 更新页面数据
+	setCurrentData(currentCur, pageData) {
+		
+	},
+	// 获取当前激活页面的数据
+	getCurrentData() {
+		
+	},
   more() {
     this.getList('more');
   },
@@ -133,6 +174,7 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
+    this.more()
   },
 
   /**
