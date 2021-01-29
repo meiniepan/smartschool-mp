@@ -1,13 +1,14 @@
 /* pages/circular/circular.wxss */
 page {
-    background-color: var(--page-backgroung-color);
+    background-color: var(--tintBac);
 }
 .top-wrap {
+    top: 0;
     left: 0;
     /* top: 0; */
     width: 100%;
     background-color: var(--cell-background-color);
-    z-index: 99;
+    z-index: 50;
     /* box-shadow: 0 0 20rpx -5rpx rgba(0, 0, 0, 0.1); */
 }
 

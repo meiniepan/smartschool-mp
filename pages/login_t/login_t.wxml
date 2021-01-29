@@ -7,12 +7,12 @@
 
 <view class="login-panel">
     <view class="account-area">
-        <input placeholder="请输入账户名" style="width: 90%;" bindinput="accountInput" value="{{account}}"></input>
+        <input placeholder="请输入账户名" style="width: 90%;" bindinput="doInput" data-type="phone" value="{{phone}}"></input>
     </view>
 
     <view class="password-area">
-        <input placeholder="请输入密码" style="width: 80%;" password="{{!isShowPassword}}" bindinput="passwordInput"
-               value="{{password}}"></input>
+        <input placeholder="请输入验证码" style="width: 80%;" password="{{!isShowPassword}}" bindinput="doInput" data-type="vcode"
+               value="{{vcode}}"></input>
         <image hidden="{{!isShowPasswordClearBtnAndShowPasswordBtn}}"
                src="../../assets/images/{{isShowPassword ? 'ic_eye' : 'ic_eye_no'}}.png"
                style="width: 50rpx; height: 50rpx; margin-left: 10rpx;" bindtap="showPassword"></image>

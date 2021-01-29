@@ -10,107 +10,61 @@ Page({
      */
     data: {
         isAllowLogin: false,
-        account: "",
-        password: "",
-        isShowPassword: false,
-        isShowAccountClearBtn: false,
-        isShowPasswordClearBtnAndShowPasswordBtn: false
+        phone: "",
+        vcode: "",
+        isShowPassword: false
     },
 
-    register: function() {
-        wx.navigateTo({
-            url: '../register/register',
-        })
-    },
 
     login: function() {
-        let _this = this
         let data = {
-            phone: _this.data.account,
-            vcode: _this.data.password
+            phone: this.data.phone,
+            vcode: this.data.vcode
           };
         app.httpPost('/api/v17/user/login/eloginin', data).then((res) => {
-            app.saveUnerInfo(res.respResult)
-            wx.switchTab({
-              url: '/pages/circular/circular',
-            })
-            wx.showToast({
-                title: "登陆成功",
-                icon: 'none'
-            });
+            app.saveUserInfo(res.respResult)
+            let url;
+        if (wx.getStorageSync('usertype') === "1") {
+          url = "/api/v17/user/student/apps"
+        } else {
+          url = "/api/v17/user/teachers/apps"
+        }
+        let data = {
+          token: wx.getStorageSync('token')
+        };
+        app.httpPost(url, data).then((res) => {
+          console.log(res,res)
+          app.saveAppInfo(res.respResult)
+          wx.switchTab({
+            url: '/pages/circular/circular',
+          })
+          wx.showToast({
+              title: "登陆成功",
+              icon: 'none'
+          });
+        });
 
         });
     },
 
     setAllowLoginState: function() { 
-        if (this.data.account.length != 0 && this.data.password.length != 0) {
+        if (this.data.phone.length != 0 && this.data.vcode.length != 0) {
             this.setData({
                 isAllowLogin: true
             });
         } else {
-            console.log("账号密码不能为空");
             this.setData({
                 isAllowLogin: false
             });
         }
     },
 
-    accountInput: function(e) {
-        console.log(`输入的账户名为：${e.detail.value}`);
+    doInput: function(e) {
 
-        let _this = this;
-
-        this.setData({
-            account: e.detail.value
-        });
-
-        if (e.detail.value.length != 0) {
-            _this.setData({
-                isShowAccountClearBtn: true
-            });
-        } else {
-            _this.setData({
-                isShowAccountClearBtn: false
-            });
-        }
-
-        this.setAllowLoginState();
-    },
-
-    passwordInput: function(e) {
-        console.log(`输入的密码为:${e.detail.value}`);
-
-        let _this = this;
+        let type = e.currentTarget.dataset.type;
 
         this.setData({
-            password: e.detail.value,
-        });
-
-        if (e.detail.value.length != 0) {
-            _this.setData({
-                isShowPasswordClearBtnAndShowPasswordBtn: true
-            });
-        } else {
-            _this.setData({
-                isShowPasswordClearBtnAndShowPasswordBtn: false
-            });
-        }
-
-        this.setAllowLoginState();
-    },
-
-    clearAccountContent: function() {
-        this.setData({
-            account: "",
-            isShowAccountClearBtn: false
-        });
-        this.setAllowLoginState();
-    },
-
-    clearPasswordContent: function() {
-        this.setData({
-            password: "",
-            isShowPasswordClearBtnAndShowPasswordBtn: false
+            [type]: e.detail.value
         });
         this.setAllowLoginState();
     },
@@ -120,42 +74,6 @@ Page({
         this.setData({
             isShowPassword: isShowPassword
         });
-    },
-
-    accountFocus: function() {
-        let _this = this;
-
-        this.setData({
-            isShowPasswordClearBtnAndShowPasswordBtn: false
-        });
-
-        if (this.data.account.length != 0) {
-            _this.setData({
-                isShowAccountClearBtn: true,
-            });
-        } else {
-            _this.setData({
-                isShowAccountClearBtn: false,
-            });
-        }
-    },
-
-    passwordFocus: function() {
-        let _this = this;
-
-        this.setData({
-            isShowAccountClearBtn: false
-        });
-
-        if (this.data.password.length != 0) {
-            _this.setData({
-                isShowPasswordClearBtnAndShowPasswordBtn: true
-            });
-        } else {
-            _this.setData({
-                isShowPasswordClearBtnAndShowPasswordBtn: false
-            })
-        }
     },
 
     /**

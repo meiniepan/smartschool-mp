@@ -1,4 +1,5 @@
 const util = require("../../utils/util")
+const app = getApp()
 
 // pages/splash/splash.js
 Page({
@@ -21,9 +22,22 @@ Page({
           url: '/pages/switch_role/switch_role',
         })
       } else {
-        wx.switchTab({
-          url: '/pages/circular/circular',
-        })
+        let url;
+        if (wx.getStorageSync('usertype') === "1") {
+          url = "/api/v17/user/student/apps"
+        } else {
+          url = "/api/v17/user/teachers/apps"
+        }
+        let data = {
+          token: wx.getStorageSync('token')
+        };
+        app.httpPost(url, data).then((res) => {
+          console.log(res,res)
+          app.saveAppInfo(res.respResult)
+          wx.switchTab({
+            url: '/pages/circular/circular',
+          })
+        });
       };
     }
       , 2000)

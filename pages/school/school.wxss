@@ -1,1 +1,42 @@
 /* pages/school/school.wxss */
+page{
+    background-color: var(--tintBac);
+}
+.cells0{
+    padding: var(--titlePadding);
+}
+.name{
+    
+}
+.cell0{
+    
+}
+.cells1{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-bottom: 30rpx;
+}
+.cell1{
+    width: 320rpx;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    box-sizing: border-box;
+    border-radius: 40rpx;
+    padding: 40rpx;
+    margin-top: 20rpx;
+}
+.cell1 image{
+    width: 56rpx;
+    height: 56rpx;
+}
+.cell1 .text1{
+    font-size: 32rpx;
+    margin-top: 40rpx;
+}
+.cell1 .text2{
+    margin-top: 8rpx;
+    font-size: 24rpx;
+    color: var(--commonHint);
+}

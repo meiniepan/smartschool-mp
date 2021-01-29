@@ -1,2 +1,14 @@
 <!--pages/school/school.wxml-->
-<text>pages/school/school.wxml</text>
+<view class="cells0">
+    <view class="cell0" wx:for="{{mData}}" wx:key="index">
+        <text class="name">{{item.name}}</text>
+        <view class="cells1">
+        <view class="cell1" wx:for="{{item.items}}" wx:for-index="idx" wx:for-item="bean" wx:key="idx"
+            data-url="{{bean.click}}" bindtap="doClick">
+            <image src="{{bean.icon}}"></image>
+            <text class="text1">{{bean.name}}</text>
+            <text class="text2">{{bean.remark}}</text>
+        </view>
+        </view>
+    </view>
+</view>

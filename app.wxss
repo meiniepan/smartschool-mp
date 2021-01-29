@@ -5,7 +5,10 @@ page {
 
 
   --themeColor: #445FF5;
+  --tintBac: #F5F7FD;
+  --splitColor: #E3E6E9;
   --commonBlack: #222222;
+  --commonHint: #999999;
   --divider-line-color: #cecece;
   --divider-line-color-dark: #5d5d5f;
   --tags-font-size: 25rpx;
@@ -18,6 +21,7 @@ page {
   --login-header-color: #48C9B0;
 
   --themeBac: linear-gradient(to right,#445FF5,#6D0BBD);
+  --titlePadding: 46rpx;
 
   font-size: 32rpx;
 }

@@ -1,2 +1,13 @@
 <!--pages/mine/mine.wxml-->
-<text>pages/mine/mine.wxml</text>
+<view class="view">
+
+    <image class="img" src="{{img}}"></image>
+    <text class="text">{{name}}</text>
+    <myItem icon="/assets/images/ic_ziliao.png" text="我的资料" click=""/>
+    <myItem icon="/assets/images/ic_anquan.png" text="账号与安全" click=""/>
+    <myItem icon="/assets/images/ic_xuanzehaizi.png" text="选择孩子" click=""/>
+    <myItem icon="/assets/images/ic_yaoqing.png" text="我的邀请码" click=""/>
+    <myItem icon="/assets/images/ic_qiehuanshenfen.png" text="切换身份" click=""/>
+    <myItem icon="/assets/images/ic_bangding.png" text="绑定家长" click=""/>
+    <myItem icon="/assets/images/ic_setting.png" text="系统设置" click=""/>
+</view>
