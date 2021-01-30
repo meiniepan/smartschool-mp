@@ -2,19 +2,7 @@
 page {
     background-color: var(--tintBac);
 }
-.top-wrap {
-    top: 0;
-    left: 0;
-    /* top: 0; */
-    width: 100%;
-    background-color: var(--cell-background-color);
-    z-index: 50;
-    /* box-shadow: 0 0 20rpx -5rpx rgba(0, 0, 0, 0.1); */
-}
 
-swiper {
-    height: 100vh;
-}
 .cells {
     background: var(--cell-background-color);
     margin-top: 20rpx;

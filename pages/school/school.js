@@ -80,7 +80,7 @@ Page({
                     name: globalData.noticeTitle,
                     remark: "快速准确 一键提醒",
                     icon: "/assets/images/ic_tonggao.png",
-                    click: "/pages/logs/logs"
+                    click: "/pages/notice/notice"
                 })
         }
 
@@ -90,7 +90,7 @@ Page({
                     name: globalData.salaryTitle,
                     remark: "保护隐私 查看明细",
                     icon: "/assets/images/ic_gongzitiao.png",
-                    click: "/pages/logs/logs"
+                    click: "/pages/salary/salary"
                 })
         }
         if (app.checkRule1("admin/schedules/default")) {
@@ -99,7 +99,7 @@ Page({
                     name: globalData.scheduleTitle,
                     remark: "工作安排 井井有条",
                     icon: "/assets/images/ic_richeng.png",
-                    click: "/pages/logs/logs"
+                    click: "/pages/schedule/schedule"
                 })
         }
         if (bean1.items.length > 0) {
@@ -113,7 +113,7 @@ Page({
                     name: globalData.taskTitle,
                     remark: "任务管理 办公协作",
                     icon: "/assets/images/ic_renwu.png",
-                    click: "/pages/logs/logs"
+                    click: "/pages/task/task"
                 })
         }
         if (app.checkRule1("admin/repair/default")) {
@@ -180,6 +180,5 @@ Page({
         this.setData({
             mData: mData
         })
-        console.log(222, mData)
     }
 })

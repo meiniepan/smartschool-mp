@@ -27,7 +27,6 @@ Page({
     app.httpPost(url, data).then((res) => {
 
       let data = res.respResult.data;
-      console.log(data)
       if (type === 'more') {
         wx.stopPullDownRefresh();
         if (data.length > 0) {
@@ -57,49 +56,14 @@ Page({
       });
     });
   },
-  // 顶部tab切换事件
-	toggleCategory(e) {
-		console.log(1212)
-		this.setData({
-			duration: 0
-		});
-		setTimeout(() => {
-			this.setData({
-				categoryCur: e.detail.index
-			});
-		}, 0);
-	},
-	// 页面滑动切换事件
-	animationFinish(e) {
-		console.log(1313)
 
-		this.setData({
-			duration: 300
-		});
-		setTimeout(() => {
-			this.setData({
-				categoryCur: e.detail.current
-			});
-			let pageData = this.getCurrentData();
-			if (pageData.listData.length === 0) {
-				this.getList('refresh', pageStart);
-			}
-		}, 0);
-	},
   refresh() {
     this.setData({
       lastId: null
     });
     this.getList('refresh');
   },
-  // 更新页面数据
-	setCurrentData(currentCur, pageData) {
-		
-	},
-	// 获取当前激活页面的数据
-	getCurrentData() {
-		
-	},
+ 
   more() {
     this.getList('more');
   },

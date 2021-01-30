@@ -1,0 +1,67 @@
+/* pages/task/task.wxss */
+page {
+  background-color: var(--tintBac);
+}
+.top-wrap {
+  position: fixed;
+  top: 0;
+  left: 0;
+  /* top: 0; */
+  width: 100%;
+  background-color: var(--tintBac);
+  z-index: 99;
+  /* box-shadow: 0 0 20rpx -5rpx rgba(0, 0, 0, 0.1); */
+}
+
+swiper {
+  height: 100vh;
+}
+
+.cells {
+  padding-top: 20rpx;
+  margin-left: var(--titlePadding);
+  margin-right: var(--titlePadding);
+}
+.cell {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  border-radius: 40rpx;
+  padding-left: 40rpx;
+  padding-right: 40rpx;
+  padding-top: 24rpx;
+  padding-bottom: 24rpx;
+}
+
+.cell:not(:last-child) {
+  margin-bottom: 20rpx;
+}
+
+.titles {
+  display: flex;
+  font-size: 28rpx;
+  align-items: center;
+  justify-content: space-between;
+}
+.title {
+  font-weight: bold;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.status{
+  min-width: 100rpx;
+  text-align: right;
+  color: var(--themeColor);
+}
+
+.tag {
+  margin-top: 12rpx;
+  font-size: 24rpx;
+}
+.tag1 {
+  margin-top: 22rpx;
+  font-size: 24rpx;
+}

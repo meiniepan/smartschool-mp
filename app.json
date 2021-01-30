@@ -7,6 +7,10 @@
     "pages/switch_role/switch_role",
     "pages/home/home",
     "pages/circular/circular",
+    "pages/notice/notice",
+    "pages/schedule/schedule",
+    "pages/salary/salary",
+    "pages/task/task",
     "pages/school/school",
     "pages/mine/mine",
     "pages/logs/logs"

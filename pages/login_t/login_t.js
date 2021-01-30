@@ -33,7 +33,6 @@ Page({
           token: wx.getStorageSync('token')
         };
         app.httpPost(url, data).then((res) => {
-          console.log(res,res)
           app.saveAppInfo(res.respResult)
           wx.switchTab({
             url: '/pages/circular/circular',
