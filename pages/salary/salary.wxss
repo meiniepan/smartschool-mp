@@ -1,0 +1,82 @@
+/* pages/salary/salary.wxss */
+.out1 {
+  display: flex;
+  flex-direction: column;
+  padding: 0 var(--titlePadding);
+}
+
+.title {
+  margin-top: 40rpx;
+  font-size: 72rpx;
+  font-weight: bold;
+}
+
+.title2 {
+  margin-top: 24rpx;
+  font-size: 32rpx;
+}
+
+.phone {
+  margin-top: 120rpx;
+  padding-bottom: 28rpx;
+  border-bottom: var(--splitColor) solid 1rpx;
+}
+
+.ovcode {
+  display: flex;
+  justify-content: space-between;
+  padding: 28rpx 0;
+  border-bottom: var(--splitColor) solid 1rpx;
+}
+
+.vcode {
+  font-size: 32rpx;
+}
+
+.send {
+  color: var(--themeColor);
+}
+
+.confirm {
+  display: flex;
+  position: absolute;
+  align-items: center;
+  justify-content: center;
+  width: calc(100vw - 2*var(--titlePadding));
+  height: 84rpx;
+  border-radius: 42rpx;
+  background: var(--themeBac);
+  color: var(--white);
+  bottom: 188rpx;
+}
+
+.cells {
+  background: var(--tintBac);
+  padding-top: 20rpx;
+}
+
+.cell {}
+
+.dataTitles {
+  display: flex;
+  padding: 24rpx var(--titlePadding);
+  justify-content: space-between;
+  align-items: center;
+  background: var(--white);
+}
+
+.dataTitles2 {
+  display: flex;
+  padding: 24rpx var(--titlePadding);
+  justify-content: space-between;
+  align-items: center;
+}
+
+.dataTitle {
+  font-size: 32rpx;
+  font-weight: bold;
+}
+
+.date {
+  font-size: 28rpx;
+}

@@ -13,6 +13,12 @@
     "pages/task/task",
     "pages/school/school",
     "pages/mine/mine",
+    "pages/mine_info/mine_info",
+    "pages/security/security",
+    "pages/choose_child/choose_child",
+    "pages/my_code/my_code",
+    "pages/bind_parent/bind_parent",
+    "pages/setting/setting",
     "pages/logs/logs"
   ],
   "tabBar": {

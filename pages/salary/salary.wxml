@@ -1,0 +1,38 @@
+<!--pages/salary/salary.wxml-->
+<view class="out1" hidden="{{hiddenPage1}}">
+  <view class="title">工资条为私人信息</view>
+  <view class="title2">请先验证您的账号信息</view>
+  <view class="phone">{{phone}}</view>
+  <view class="ovcode">
+    <input class="vcode" placeholder="输入验证码" data-type="vcode" bindinput="doInput"></input>
+    <text class="send" bindtap="doSend" >{{vcodeStr}}</text>
+  </view>
+  <text class="confirm" bindtap="doConfirm">确定</text>
+</view>
+<scroll hidden="{{hiddenPage2}}" 
+			end="{{end}}"
+			list-count="{{mData.length}}"
+			top-size="80"
+			>
+		<view class="cells">
+		<view class="cell"
+		wx:for="{{mData}}"
+			wx:key="index" 
+			data-url="{{item.link}}"
+      bindtap="articleDetail">
+      <block wx:if="{{index%2==0}}">
+        <view class="dataTitles">
+				<view class="dataTitle">{{item.title}}</view>
+				<view class="date">{{item.createtime}}</view>
+			</view>
+      </block>
+      <block wx:else>
+        <view class="dataTitles2">
+				<view class="dataTitle">{{item.title}}</view>
+				<view class="date">{{item.createtime}}</view>
+			</view>
+      </block>
+			
+			</view>
+	</view>
+		</scroll>

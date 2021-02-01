@@ -67,7 +67,6 @@ App({
 
                     if (code != '0000') {
                         reject(res);
-
                         if (errMsg) {
                             wx.showToast({
                                 title: errMsg,
@@ -161,13 +160,15 @@ App({
     },
     checkRule2(key) {
         let beans = wx.getStorageSync("appInfo")
-        beans.forEach(it => {
-            it.items.forEach(item => {
-                if (item.url == key) {
-                    return item.choice == "1"
+        console.log("aapp",beans)
+        for(var i= 0;i< beans.length; i++){
+            for(var j= 0;j< beans[i].items.length; j++){
+                if (beans[i].items[j].url == key) {
+                    console.log(beans[i].items[j].url,beans[i].items[j].choice)
+                    return beans[i].items[j].choice == "1"
                 }
-            })
-        })
+            }
+        }
         return false
     }
     ,

@@ -16,37 +16,37 @@ Page({
     },
 
 
-    login: function() {
+    login: function () {
         let data = {
             phone: this.data.phone,
             vcode: this.data.vcode
-          };
+        };
         app.httpPost('/api/v17/user/login/eloginin', data).then((res) => {
             app.saveUserInfo(res.respResult)
             let url;
-        if (wx.getStorageSync('usertype') === "1") {
-          url = "/api/v17/user/student/apps"
-        } else {
-          url = "/api/v17/user/teachers/apps"
-        }
-        let data = {
-          token: wx.getStorageSync('token')
-        };
-        app.httpPost(url, data).then((res) => {
-          app.saveAppInfo(res.respResult)
-          wx.switchTab({
-            url: '/pages/circular/circular',
-          })
-          wx.showToast({
-              title: "登陆成功",
-              icon: 'none'
-          });
-        });
+            if (wx.getStorageSync('usertype') === "1") {
+                url = "/api/v17/user/student/apps"
+            } else {
+                url = "/api/v17/user/teachers/apps"
+            }
+            let data = {
+                token: wx.getStorageSync('token')
+            };
+            app.httpPost(url, data).then((res) => {
+                app.saveAppInfo(res.respResult)
+                wx.switchTab({
+                    url: '/pages/circular/circular',
+                })
+                wx.showToast({
+                    title: "登陆成功",
+                    icon: 'none'
+                });
+            });
 
         });
     },
 
-    setAllowLoginState: function() { 
+    setAllowLoginState: function () {
         if (this.data.phone.length != 0 && this.data.vcode.length != 0) {
             this.setData({
                 isAllowLogin: true
@@ -58,7 +58,7 @@ Page({
         }
     },
 
-    doInput: function(e) {
+    doInput: function (e) {
 
         let type = e.currentTarget.dataset.type;
 
@@ -68,7 +68,7 @@ Page({
         this.setAllowLoginState();
     },
 
-    showPassword: function() {
+    showPassword: function () {
         let isShowPassword = !this.data.isShowPassword;
         this.setData({
             isShowPassword: isShowPassword
@@ -79,7 +79,7 @@ Page({
      * Lifecycle function--Called when page load
      */
     onLoad: function (options) {
-        
+
     },
 
     /**

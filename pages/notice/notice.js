@@ -1,4 +1,3 @@
-// pages/circular/circular.js
 import { isLogin, showToastWithoutIcon } from '../../utils/util';
 let app = getApp();
 Page({
@@ -27,7 +26,9 @@ Page({
     app.httpPost(url, data).then((res) => {
 
       let data = res.respResult.data;
+      console.log(data)
       if (type === 'more') {
+        wx.stopPullDownRefresh();
         if (data.length > 0) {
           let lastId = data[data.length-1].id
           this.setData({
@@ -38,7 +39,6 @@ Page({
           showToastWithoutIcon('无更多数据');
         }
       } else {
-        wx.stopPullDownRefresh();
         let lastId = data[data.length-1].id
         this.setData({
           mData: data,
@@ -56,14 +56,14 @@ Page({
       });
     });
   },
-
+  
   refresh() {
     this.setData({
       lastId: null
     });
     this.getList('refresh');
   },
- 
+  
   more() {
     this.getList('more');
   },

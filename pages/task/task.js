@@ -11,15 +11,17 @@ Page({
         categoryCur: 0, // 当前数据列索引
         categoryMenu: [], // 分类菜单数据
         categoryData: [], // 所有数据列
-        lastId: null,
+        lastid: null,
         completestatus: null,
         status: null,
         navigationHeight: app.globalData.navigationHeight,
     },
-    getList(type, lastId) {
+    getList(type, lastid) {
         let currentCur = this.data.categoryCur;
         let pageData = this.getCurrentData(currentCur);
-
+        if (type === 'refresh') {
+            pageData.end = false
+        }
         if (pageData.end) return;
 
         pageData.requesting = true;
@@ -30,19 +32,19 @@ Page({
         if (pageData.taskStatus == "-1") {
             data = {
                 token: wx.getStorageSync('token'),
-                id: lastId,
+                id: lastid,
             }
         }
         else if (pageData.type == "1") {
             data = {
                 token: wx.getStorageSync('token'),
-                id: lastId,
+                id: lastid,
                 completestatus: pageData.taskStatus,
             }
         } else {
             data = {
                 token: wx.getStorageSync('token'),
-                id: lastId,
+                id: lastid,
                 status: pageData.taskStatus,
             }
         }
@@ -54,11 +56,11 @@ Page({
             };
             let listData = data.data || [];
             pageData.requesting = false;
-            if (listData.length>0) { 
-                pageData.lastId  = listData[listData.length-1].id
-            } else { 
+            if (listData.length > 0) {
+                pageData.lastid = listData[listData.length - 1].id
+            } else {
                 pageData.end = true;
-                pageData.lastId=null
+                pageData.lastid = null
             }
             if (type === 'refresh') {
                 pageData.listData = listData;
@@ -68,15 +70,6 @@ Page({
             this.initStr(pageData)
 
             this.setCurrentData(currentCur, pageData);
-            // var data2 = this.data.mData;
-            // data2.forEach(item => {
-            //   item.isRead = this.isRead(item)
-            //   item.isFeedback = this.isFeedback(item)
-            // });
-
-            // this.setData({
-            //   mData: data2
-            // });
         })
     },
     //初始化item显示
@@ -143,14 +136,17 @@ Page({
     // 页面滑动切换事件
     animationFinish(e) {
         this.setData({
-            duration: 300
-        });
-        setTimeout(() => {
-            this.setData({
-                categoryCur: e.detail.current
-            });
-
-        }, 0);
+			duration: 300
+		});
+		setTimeout(() => {
+			this.setData({
+				categoryCur: e.detail.current
+			});
+			let pageData = this.getCurrentData();
+			if (pageData.listData.length === 0) {
+				this.getList('refresh', null);
+			}
+		}, 0);
     },
     // 更新页面数据
     setCurrentData(currentCur, pageData) {
@@ -166,11 +162,11 @@ Page({
         return this.data.categoryData[this.data.categoryCur]
     },
     refresh() {
-        this.getList('refresh');
+        this.getList('refresh',null);
     },
 
     more() {
-        this.getList('more', this.getCurrentData(this.data.categoryCur).lastId);
+        this.getList('more', this.getCurrentData(this.data.categoryCur).lastid);
     },
 
 
@@ -207,7 +203,7 @@ Page({
                     requesting: false,
                     end: false,
                     emptyShow: true,
-                    lastId: null,
+                    lastid: null,
                     listData: [],
                     type: type,
                     url: url,
@@ -245,7 +241,7 @@ Page({
                     requesting: false,
                     end: false,
                     emptyShow: true,
-                    lastId: null,
+                    lastid: null,
                     listData: [],
                     type: type,
                     url: url,

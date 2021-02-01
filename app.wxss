@@ -6,6 +6,8 @@ page {
 
   --themeColor: #445FF5;
   --tintBac: #F5F7FD;
+  --commonBac: #ffffff;
+  --white: #ffffff;
   --splitColor: #E3E6E9;
   --commonBlack: #222222;
   --commonHint: #999999;

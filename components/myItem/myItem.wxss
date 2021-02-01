@@ -1,0 +1,30 @@
+/* components/myItem/myItem.wxss */
+.view{
+  display: flex;
+  padding-top: 30rpx;
+  padding-bottom: 30rpx;
+  padding-left: var(--titlePadding);
+  padding-right: var(--titlePadding);
+  align-items: center;
+  justify-content: space-between;
+}
+.view1{
+  display: flex;
+  align-items: center;
+}
+.view text{
+  
+}
+.img1{
+width: 28rpx;
+height: 28rpx;
+margin-right: 10rpx;
+}
+.img2{
+  height: 28rpx;
+  }
+.bl{
+  margin-left: var(--titlePadding);
+  height: 1rpx;
+  background-color: var(--splitColor);
+}
