@@ -1,0 +1,7 @@
+<!--components/commonButton/commonButton.wxml-->
+<block wx:if="{{mType=='1'}}">
+<text class="confirm" bindtap="doConfirm">{{text}}</text>
+</block>
+<block wx:else>
+<text class="confirm2" bindtap="doConfirm">{{text}}</text>
+</block>

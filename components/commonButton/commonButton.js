@@ -1,25 +1,17 @@
-// components/myItem/myItem.js
+// components/commonButton/commonButton.js
 Component({
   /**
    * 组件的属性列表
    */
   properties: {
-    icon: {
-      type: String,
-      value: ""
-    },
     text: {
       type: String,
-      value: ""
+      value: "确定"
     },
-    click: {
+    mType: {
       type: String,
-      value: ""
+      value: "1"
     },
-    hidden: {
-      type: Boolean,
-      value: false
-    }
   },
 
   /**
@@ -33,6 +25,6 @@ Component({
    * 组件的方法列表
    */
   methods: {
-    
+
   }
 })

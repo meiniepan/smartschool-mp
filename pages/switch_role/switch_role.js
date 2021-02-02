@@ -57,18 +57,18 @@ Page({
 
   },
   btn1(){
-    wx.navigateTo({
+    wx.redirectTo({
       url: '/pages/login_s/login_s',
     })
   },
   btn2(){
-    wx.navigateTo({
-      url: '/pages/login_t/login_t',
+    wx.redirectTo({
+      url: '/pages/login_t/login_t?id=2',
     })
   },
   btn3(){
-    wx.navigateTo({
-      url: '/pages/login_p/login_p',
+    wx.redirectTo({
+      url: '/pages/login_t/login_t?id=3',
     })
   },
   /**

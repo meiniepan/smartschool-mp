@@ -9,10 +9,8 @@ Page({
    * Page initial data
    */
   data: {
-    changeStr: "密码登录",
-    string1: "验证码登录",
-    string2: "密码登录",
-    isPwd: false,
+    name: "",
+    classCode: "",
     phone: "",
     vcode: "",
     pwd: "",
@@ -27,26 +25,8 @@ Page({
     wx.navigateTo({
       url: '/pages/regist/regist',
     })
-   },
-  doChange() {
-    if (this.data.isPwd) {
-      this.setData({
-        changeStr: "密码登录",
-        isPwd: false,
-      })
-    } else {
-      this.setData({
-        changeStr: "验证码登录",
-        isPwd: true,
-      })
-    }
   },
-  showPassword: function() {
-    let isShowPassword = !this.data.isShowPassword;
-    this.setData({
-        isShowPassword: isShowPassword
-    });
-},
+
   doSend() {
     if (this.data.isDisabled) {
       return
@@ -88,57 +68,41 @@ Page({
       }
     }, 1000);
   },
-
+  showPassword: function() {
+    let isShowPassword = !this.data.isShowPassword;
+    this.setData({
+        isShowPassword: isShowPassword
+    });
+},
   login: function () {
+    let name = this.data.name
+    let classCode = this.data.classCode
     let phone = this.data.phone
     let vcode = this.data.vcode
     let pwd = this.data.pwd
-    let url, data;
-    let isP;
-    if (this.data.isPwd) {
-      isP = pwd.length > 0
-      data = {
-        phone: phone,
-        spassword: pwd
-      };
-    } else {
-      isP = vcode.length > 0
-      data = {
-        phone: phone,
-        vcode: vcode
-      };
-    }
-    if (phone.length > 0 && isP > 0) {
 
-      app.httpPost('/api/v17/user/login/sloginin', data).then((res) => {
-        app.saveUserInfo(res.respResult)
-        let url;
-        if (wx.getStorageSync('usertype') === "1") {
-          url = "/api/v17/user/student/apps"
-        } else {
-          url = "/api/v17/user/teachers/apps"
-        }
-        let data = {
-          token: wx.getStorageSync('token')
-        };
-        app.httpPost(url, data).then((res) => {
-          app.saveAppInfo(res.respResult)
-          wx.switchTab({
-            url: '/pages/circular/circular',
+    if (phone.length > 0 && classCode.length > 0 && name.length > 0 && vcode.length > 0) {
+      let data = {
+        phone: phone,
+        vcode: vcode,
+        invitecode: vcode,
+        realname: vcode,
+        spassword: vcode,
+      }
+      app.httpPost('/api/v17/user/login/register', data).then((res) => {
+          wx.redirectTo({
+            url: '/pages/login_s/login_s',
           })
           wx.showToast({
-            title: "登陆成功",
+            title: "注册成功",
             icon: 'none'
           });
-        });
-
       });
     } else {
       showToastWithoutIcon("请输入完整信息")
       return
     }
   },
-
   doSwitch() {
     wx.redirectTo({
       url: '/pages/switch_role/switch_role',

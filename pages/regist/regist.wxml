@@ -1,33 +1,33 @@
 <!--pages/login_t/login_t.wxml-->
 <view class="out">
-    <view class="title1">登录</view>
+    <view class="title1">注册</view>
     <view class="title2">
-    <view >还没有账号？ 快来</view>
-    <view class="regist"bindtap="doRegist">注册</view>
-    <view >学生账号吧！</view>
-</view>
+        <view>填写下面信息进行注册吧！</view>
+    </view>
+    <view class="name-area">
+        <input placeholder="输入真实姓名" bindinput="doInput" data-type="name"></input>
+    </view>
+    <view class="phone-area">
+        <input placeholder="输入班级邀请码" bindinput="doInput" data-type="classCode"></input>
+    </view>
     <view class="phone-area">
         <input placeholder="输入手机号" bindinput="doInput" data-type="phone" value="{{phone}}"></input>
     </view>
-<block wx:if="{{!isPwd}}">
     <view class="vcode-area">
         <input placeholder="输入验证码" bindinput="doInput" data-type="vcode" value="{{vcode}}"></input>
         <text class="vcode" bindtap="doSend">{{vcodeStr}}</text>
     </view>
-</block>
-<block wx:else>
     <view class="vcode-area">
         <input placeholder="输入密码" bindinput="doInput" password="{{!isShowPassword}}" data-type="pwd"></input>
         <image class="showPwd" src="../../assets/images/{{isShowPassword ? 'ic_eye_no' : 'ic_eye'}}.png"
             bindtap="showPassword"></image>
     </view>
-</block>
     <view class="change" bindtap="doChange">{{changeStr}}</view>
 
-    <commonButton class="btn-login" bindtap="login" text="登录" />
+    <commonButton class="btn-login" bindtap="login" text="注册" />
     <view class="protocol-area">
         <text>我已阅读并同意</text>
         <text class="protocol" bindtap="doProtocol">《用户协议及隐私政策》</text>
     </view>
-    <commonButton class="btn-switch" mType="2" bindtap="doSwitch" text="切换身份" style="margin-top:20rpx;margin-bottom:20rpx;"/>
+    <commonButton class="btn-switch" mType="2" bindtap="doSwitch" text="切换身份" style="margin-top:20rpx;margin-bottom:20rpx;" />
 </view>

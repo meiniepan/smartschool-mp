@@ -74,13 +74,15 @@ Page({
             content: '切换身份后将改变您的操作权限',
             success(res) {
                 if (res.confirm) {
+                    app.logout()
                     wx.redirectTo({
                         url: '/pages/switch_role/switch_role',
                     })
                 } else if (res.cancel) {
 
                 }
-            }
+            },
+            confirmColor:"#445FF5",
         })
     },
 

@@ -1,4 +1,6 @@
 <!--pages/switch_role/switch_role.wxml-->
+<view class="out">
 <button bindtap="btn1" type="primary" class="btn">我是学生</button>
 <button bindtap="btn2" type="primary" class="btn">我是老师</button>
 <button bindtap="btn3" type="primary" class="btn">我是家长</button>
+</view>

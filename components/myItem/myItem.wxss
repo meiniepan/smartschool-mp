@@ -1,4 +1,7 @@
 /* components/myItem/myItem.wxss */
+.out{
+  box-sizing: border-box;
+}
 .view{
   display: flex;
   padding-top: 30rpx;

@@ -1,1 +1,61 @@
-/* pages/login_s/login_s.wxss */
+/* pages/login_t/login_t.wxss */
+/* pages/login/login.wxss */
+
+page {
+}
+.out{
+  display: flex;
+  flex-direction: column;
+padding: 0 var(--titlePadding);
+}
+.title1{
+font-size: 72rpx;
+font-weight: bold;
+margin-top: 120rpx;
+}
+.title2{
+  display: flex;
+  font-size: 32rpx;
+  font-weight: bold;
+  margin-top: 24rpx;
+  }
+  .regist{
+    color: var(--themeColor);
+  }
+.phone-area{
+  margin-top: 160rpx;
+  padding: 24rpx 0rpx;
+  border-bottom: 1rpx solid var(--splitColor);
+}
+.vcode-area {
+  margin-top: 20rpx;
+  display: flex;
+  justify-content: space-between;
+  padding: 24rpx 0rpx;
+  border-bottom: 1rpx solid var(--splitColor);
+}
+.vcode{
+  color: var(--themeColor);
+}
+.showPwd{
+  width: 28rpx;
+  height: 28rpx;
+}
+.change{
+  margin-top: 20rpx;
+  margin-left: auto;
+  margin-right: auto;
+  color: var(--commonHint);
+}
+.btn-login {
+  margin-top: 140rpx;
+}
+.protocol-area {
+  margin-top: 20rpx;
+  margin-left: auto;
+  margin-right: auto;
+}
+.protocol {
+  color: var(--themeColor);
+}
+

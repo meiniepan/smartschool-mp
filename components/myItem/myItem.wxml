@@ -1,11 +1,11 @@
 <!--components/myItem/myItem.wxml-->
-<view class="out" bindtap="doClick" hidden="{{hidden}}">
-<view class="view">
-  <view class="view1">
-  <image class="img1" src="{{icon}}"></image>
-  <text>{{text}}</text>
-</view>
-  <image class="img2" mode="heightFix" src="/assets/images/ic_next.png"/>
-</view>
-<view class="bl"></view>
-</view>
+<view class="out"  hidden="{{hidden}}">
+  <view class="view">
+    <view class="view1">
+      <image class="img1" src="{{icon}}"></image>
+      <text>{{text}}</text>
+    </view>
+    <image class="img2" mode="heightFix" src="/assets/images/ic_next.png" />
+  </view>
+  <view class="bl"></view>
+</view> 

@@ -3,7 +3,6 @@
     "pages/splash/splash",
     "pages/login_s/login_s",
     "pages/login_t/login_t",
-    "pages/login_p/login_p",
     "pages/switch_role/switch_role",
     "pages/home/home",
     "pages/circular/circular",
@@ -19,6 +18,8 @@
     "pages/my_code/my_code",
     "pages/bind_parent/bind_parent",
     "pages/setting/setting",
+    "pages/protocol/protocol",
+    "pages/regist/regist",
     "pages/logs/logs"
   ],
   "tabBar": {

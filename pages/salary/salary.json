@@ -1,6 +1,7 @@
 {
   "usingComponents": {
-    "navigaiton": "../../components/navigation/navigation"
+    "navigaiton": "../../components/navigation/navigation",
+    "commonButton": "../../components/commonButton/commonButton"
   },
   "navigationBarTitleText": "工资条"
 }

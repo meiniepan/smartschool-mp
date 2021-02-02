@@ -111,6 +111,10 @@ App({
         return this.httpBase('POST', url, data, loading, loadingMsg);
     },
 
+    logout(){
+        wx.setStorageSync('token', null)
+    },
+
     saveUserInfo: function (data) {
         wx.setStorageSync('token', data.token)
         wx.setStorageSync('uid', data.uid)

@@ -14,12 +14,21 @@ font-weight: bold;
 margin-top: 120rpx;
 }
 .title2{
+  display: flex;
   font-size: 32rpx;
   font-weight: bold;
   margin-top: 24rpx;
   }
-.phone-area{
+  .regist{
+    color: var(--themeColor);
+  }
+.name-area{
   margin-top: 160rpx;
+  padding: 24rpx 0rpx;
+  border-bottom: 1rpx solid var(--splitColor);
+}
+.phone-area{
+  margin-top: 20rpx;
   padding: 24rpx 0rpx;
   border-bottom: 1rpx solid var(--splitColor);
 }
@@ -33,9 +42,21 @@ margin-top: 120rpx;
 .vcode{
   color: var(--themeColor);
 }
-
+.showPwd{
+  width: 28rpx;
+  height: 28rpx;
+}
+.change{
+  margin-top: 20rpx;
+  margin-left: auto;
+  margin-right: auto;
+  color: var(--commonHint);
+}
 .btn-login {
-  margin-top: 200rpx;
+  margin-top: 140rpx;
+}
+.btn-login {
+  margin-top: 140rpx;
 }
 .protocol-area {
   margin-top: 20rpx;

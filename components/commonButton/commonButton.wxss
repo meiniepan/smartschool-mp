@@ -1,0 +1,22 @@
+/* components/commonButton/commonButton.wxss */
+.confirm {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 84rpx;
+  border-radius: 42rpx;
+  background: var(--themeBac);
+  color: var(--white);
+}
+.confirm2 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 84rpx;
+  border-radius: 42rpx;
+  background: var(--white);
+  color: var(--themeColor);
+  border: var(--themeColor) solid 1rpx;
+}

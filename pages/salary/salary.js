@@ -51,6 +51,9 @@ Page({
     });
   },
   doSend() {
+    if (this.data.isDisabled) {
+      return
+    }
     let data = {
       token: wx.getStorageSync('token'),
     };
@@ -119,9 +122,6 @@ Page({
     }
   },
   countdown() {
-    if (this.data.isDisabled) {
-      return
-    }
     let _this = this
     let count = this.data.count;
     // 当count不为0开始倒计时，当count为0就关闭倒计时
@@ -138,7 +138,7 @@ Page({
         clearInterval(_this.data.interval);
       } else {
         this.setData({
-          vcodeStr: "发送验证码" + count--,
+          vcodeStr: "发送验证码 " + count--,
           isDisabled: true
         });
       }

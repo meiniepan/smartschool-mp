@@ -1,27 +1,20 @@
 <!--pages/login_t/login_t.wxml-->
-<view class="header-background"></view>
-
-<view class="logo-area">
-    <image class="img-logo" mode="widthFix" src="../../assets/images/ic_logo_page.png" mode=""></image>
-</view>
-
-<view class="login-panel">
-    <view class="account-area">
-        <input placeholder="请输入账户名" style="width: 90%;" bindinput="doInput" data-type="phone" value="{{phone}}"></input>
+<view class="out">
+    <view class="title1">登录</view>
+    <view class="title2">{{type}}</view>
+    <view class="phone-area">
+        <input placeholder="输入手机号" bindinput="doInput" data-type="phone" value="{{phone}}"></input>
     </view>
 
-    <view class="password-area">
-        <input placeholder="请输入验证码" style="width: 80%;" password="{{!isShowPassword}}" bindinput="doInput" data-type="vcode"
-               value="{{vcode}}"></input>
-        <image hidden="{{!isShowPasswordClearBtnAndShowPasswordBtn}}"
-               src="../../assets/images/{{isShowPassword ? 'ic_eye' : 'ic_eye_no'}}.png"
-               style="width: 50rpx; height: 50rpx; margin-left: 10rpx;" bindtap="showPassword"></image>
+    <view class="vcode-area">
+        <input placeholder="输入验证码" bindinput="doInput" data-type="vcode" value="{{vcode}}"></input>
+        <text class="vcode" bindtap="doSend">{{vcodeStr}}</text>
     </view>
-</view>
 
-<view wx:if="{{isAllowLogin === false}}">
-    <view class="btn-login btn-disable-login">登录</view>
-</view>
-<view wx:else>
-    <view class="btn-login btn-enable-login" bindtap="login">登录</view>
+    <commonButton class="btn-login" bindtap="login" text="登录" />
+    <view class="protocol-area">
+        <text>我已阅读并同意</text>
+        <text class="protocol" bindtap="doProtocol">《用户协议及隐私政策》</text>
+    </view>
+    <commonButton class="btn-switch" mType="2" bindtap="doSwitch" text="切换身份" style="margin-top:20rpx;margin-bottom:20rpx;"/>
 </view>

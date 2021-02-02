@@ -38,15 +38,8 @@
 }
 
 .confirm {
-  display: flex;
   position: absolute;
-  align-items: center;
-  justify-content: center;
   width: calc(100vw - 2*var(--titlePadding));
-  height: 84rpx;
-  border-radius: 42rpx;
-  background: var(--themeBac);
-  color: var(--white);
   bottom: 188rpx;
 }
 

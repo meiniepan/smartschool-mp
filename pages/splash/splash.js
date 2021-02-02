@@ -18,7 +18,7 @@ Page({
     setTimeout(() => {
       let token = wx.getStorageSync('token')
       if (util.isEmpty(token)) {
-        wx.navigateTo({
+        wx.redirectTo({
           url: '/pages/switch_role/switch_role',
         })
       } else {

@@ -69,6 +69,13 @@
         {
           "name": "pages/login_t/login_t",
           "pathName": "pages/login_t/login_t",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/salary/salary",
+          "pathName": "pages/salary/salary",
+          "query": "",
           "scene": null
         }
       ]

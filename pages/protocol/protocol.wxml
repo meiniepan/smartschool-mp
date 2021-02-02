@@ -1,0 +1,4 @@
+<!--pages/protocol/protocol.wxml-->
+<view class="text">
+<text>{{text}}</text>
+</view>

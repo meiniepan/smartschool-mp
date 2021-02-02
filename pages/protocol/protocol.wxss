@@ -1,0 +1,9 @@
+/* pages/protocol/protocol.wxss */
+page{
+  background: var(--tintBac);
+}
+.text{
+margin-top: 20rpx;
+background-color: var(--white);
+padding: 40rpx var(--titlePadding);
+}
