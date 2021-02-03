@@ -59,6 +59,9 @@
     height: 436rpx;
     border-radius: 32rpx;
 }
+.btn-read{
+    margin-top: 160rpx;
+}
 .bottom0{
     position: fixed;
     width: 100%;
@@ -74,16 +77,18 @@
 }
 .file-cells{
     display: flex;
-    height: 180rpx;
-    margin-top: 40rpx;
+    height: 150rpx;
+    margin-top: 20rpx;
 }
 .file-cell{
     display: flex;
+    flex-direction: column;
     background: var(--white);
     padding: 32rpx 20rpx;
     width: 180rpx;
-    height: 180rpx;
+    height: 150rpx;
     border-radius: 30rpx;
+    align-items: center;
     box-sizing: border-box;
 }
 .file-cell:not(:last-child){
@@ -92,6 +97,8 @@
 .text3{
     display: -webkit-box;
     -webkit-box-orient: vertical;
+    margin-top: 14rpx;
+    font-size: 24rpx;
     -webkit-line-clamp: 1;
     text-overflow: ellipsis;
     overflow: hidden;

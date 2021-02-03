@@ -12,6 +12,10 @@ Component({
       type: String,
       value: "1"
     },
+    mColor: {
+      type: String,
+      value: ""
+    },
   },
 
   /**

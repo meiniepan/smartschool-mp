@@ -17,12 +17,15 @@
             <image src="{{item}}"/>
         </view>
     </view>
+    <commonButton wx:if="{{isFeedback}}" class="btn-read" mColor="{{readColor}}" bindtap="doRead" text="{{readStr}}" />
+
 </view>
-    <view class="bottom0">
-        <text class="text2">全部附件</text>
+    <view class="bottom0" wx:if="{{mFiles.length>0}}">
+        <text class="text2" >全部附件</text>
         <scroll-view class="file-cells" enable-flex scroll-x="true" >
             <view class="file-cell"  wx:for="{{mFiles}}" wx:key="index" data-url="{{item}}" bindtap="openFile">
-                <view class="text3">{{item}}</view>
+                <image src="{{item.image}}" style="width: 50rpx;height: 50rpx"/>
+                <view class="text3">{{item.name}}</view>
                 </view>
         </scroll-view>
     </view>
