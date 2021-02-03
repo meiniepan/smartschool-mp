@@ -18,7 +18,7 @@
         <text class="vcode" bindtap="doSend">{{vcodeStr}}</text>
     </view>
     <view class="vcode-area">
-        <input placeholder="输入密码" bindinput="doInput" password="{{!isShowPassword}}" data-type="pwd"></input>
+        <input placeholder="请设置8位密码" bindinput="doInput" password="{{!isShowPassword}}" data-type="pwd"></input>
         <image class="showPwd" src="../../assets/images/{{isShowPassword ? 'ic_eye_no' : 'ic_eye'}}.png"
             bindtap="showPassword"></image>
     </view>

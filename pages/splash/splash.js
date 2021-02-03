@@ -29,7 +29,7 @@ Page({
           url = "/api/v17/user/teachers/apps"
         }
         let data = {
-          token: wx.getStorageSync('token')
+          token: token
         };
         app.httpPost(url, data).then((res) => {
           app.saveAppInfo(res.respResult)

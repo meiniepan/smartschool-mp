@@ -1,8 +1,7 @@
 /* components/myItem/myItem.wxss */
 .out{
-  box-sizing: border-box;
 }
-.view{
+.viewItem{
   display: flex;
   padding-top: 30rpx;
   padding-bottom: 30rpx;
@@ -11,13 +10,11 @@
   align-items: center;
   justify-content: space-between;
 }
-.view1{
+.viewItem1{
   display: flex;
   align-items: center;
 }
-.view text{
-  
-}
+
 .img1{
 width: 28rpx;
 height: 28rpx;

@@ -1,4 +1,4 @@
-import { isLogin, showToastWithoutIcon } from '../../utils/util';
+import { showToastWithoutIcon } from '../../utils/util';
 let app = getApp();
 Page({
   /**
@@ -66,6 +66,11 @@ Page({
   
   more() {
     this.getList('more');
+  },
+  doDetail(e){
+    wx.navigateTo({
+      url: '/pages/noticeDetail/noticeDetail?id='+e.currentTarget.dataset.url,
+    })
   },
   //判断是否已读
   isFeedback(item) {

@@ -1,7 +1,7 @@
 <!--pages/circular/circular.wxml-->
 
 <view class="cells">
-	<view class="cell" wx:for="{{mData}}" wx:key="index" data-url="{{item.link}}" bindtap="articleDetail">
+	<view class="cell" wx:for="{{mData}}" wx:key="index" data-url="{{item.id}}" bindtap="doDetail">
 		<view class="titles">
 			<view class="fresh" hidden="{{item.isRead}}"></view>
 			<view class="title">{{item.title}}</view>

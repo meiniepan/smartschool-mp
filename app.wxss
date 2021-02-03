@@ -11,16 +11,7 @@ page {
   --splitColor: #E3E6E9;
   --commonBlack: #222222;
   --commonHint: #999999;
-  --divider-line-color: #cecece;
-  --divider-line-color-dark: #5d5d5f;
-  --tags-font-size: 25rpx;
-  --tags-color: #777777;
-  --text-color: #fff;
-  --text-color-dark: #a9a9b2;
-  --page-backgroung-color: #F7F7F7;
-  --page-backgroung-color-dark: #343538;
-  --cell-background-color: #fff;
-  --login-header-color: #48C9B0;
+  --grayF6: #F6F6F6;
 
   --themeBac: linear-gradient(to right,#445FF5,#6D0BBD);
   --titlePadding: 46rpx;

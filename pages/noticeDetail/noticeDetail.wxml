@@ -1,0 +1,29 @@
+<!--pages/noticeDetail/noticeDetail.wxml-->
+<view class="root">
+<view class="out">
+<view class="name-area">
+    <text class="name" >{{mData.send_username}}</text>
+    <text class="number" >{{mRead}}</text>
+</view>
+<view class="date-area">
+    <text class="date">{{mData.updatetime}}</text>
+    <image src="/assets/images/ic_read.png" style="width: 24rpx;height: 24rpx"/>
+    <text class="text1">已阅数量</text>
+</view>
+    <text class="title">{{mData.title}}</text>
+    <text class="remark">{{mData.remark}}</text>
+    <view class="img-cells">
+        <view class="img-cell" wx:for="{{mImages}}" wx:key="index" >
+            <image src="{{item}}"/>
+        </view>
+    </view>
+</view>
+    <view class="bottom0">
+        <text class="text2">全部附件</text>
+        <scroll-view class="file-cells" enable-flex scroll-x="true" >
+            <view class="file-cell"  wx:for="{{mFiles}}" wx:key="index" data-url="{{item}}" bindtap="openFile">
+                <view class="text3">{{item}}</view>
+                </view>
+        </scroll-view>
+    </view>
+</view>

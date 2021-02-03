@@ -1,0 +1,98 @@
+/* pages/noticeDetail/noticeDetail.wxss */
+.root{
+    display: flex;
+    flex-direction: column;
+
+}
+.out {
+    display: flex;
+    flex-direction: column;
+    padding: 40rpx var(--titlePadding) 300rpx var(--titlePadding);
+    border-top: var(--tintBac) solid 20rpx;
+}
+
+.name-area {
+    display: flex;
+    justify-content: space-between;
+    font-size: 32rpx;
+    align-items: center;
+}
+
+.name {
+    color: var(--themeColor);
+}
+
+.number {
+    color: var(--commonHint);
+}
+
+.date-area {
+    display: flex;
+    margin-top: 20rpx;
+    align-items: center;
+}
+
+.date {
+    flex-grow: 1;
+}
+
+.text1 {
+    color: var(--commonHint);
+}
+
+.title {
+    font-size: 40rpx;
+    font-weight: bold;
+    margin-top: 40rpx;
+}
+
+.remark {
+    margin-top: 28rpx;
+}
+.img-cells{
+    margin-top: 20rpx;
+}
+.img-cell{
+    margin-bottom: 10rpx;
+}
+.img-cell image{
+    height: 436rpx;
+    border-radius: 32rpx;
+}
+.bottom0{
+    position: fixed;
+    width: 100%;
+    display: flex;
+    bottom: 0rpx;
+    flex-direction: column;
+    padding: 14rpx var(--titlePadding) 40rpx var(--titlePadding);
+    background: var(--grayF6);
+    box-sizing: border-box;
+}
+.text2{
+    font-size: 24rpx;
+}
+.file-cells{
+    display: flex;
+    height: 180rpx;
+    margin-top: 40rpx;
+}
+.file-cell{
+    display: flex;
+    background: var(--white);
+    padding: 32rpx 20rpx;
+    width: 180rpx;
+    height: 180rpx;
+    border-radius: 30rpx;
+    box-sizing: border-box;
+}
+.file-cell:not(:last-child){
+    margin-right: 10rpx;
+}
+.text3{
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}

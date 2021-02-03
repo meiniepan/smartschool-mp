@@ -10,7 +10,7 @@ Page({
      */
     data: {
         type: "我的身份是老师",
-        urlCaptche: '/api/v17/user/login/esmsCode',
+        urlCaptcha: '/api/v17/user/login/esmsCode',
         urlLogin: '/api/v17/user/login/eloginin',
         phone: "",
         vcode: "",
@@ -28,7 +28,7 @@ Page({
         let data = {
             phone: this.data.phone,
         };
-        app.httpPost(this.data.urlCaptche, data).then((res) => {
+        app.httpPost(this.data.urlCaptcha, data).then((res) => {
 
             wx.showToast({
                 title: "验证码已发送",
@@ -127,7 +127,7 @@ Page({
         if (options.id == "3") { //家长
             this.setData({
                 type: "我的身份是家长",
-                urlCaptche: '/api/v17/user/login/pSmsCode',
+                urlCaptcha: '/api/v17/user/login/pSmsCode',
                 urlLogin: '/api/v17/user/login/ploginin',
             })
         } else {

@@ -20,6 +20,8 @@
     "pages/setting/setting",
     "pages/protocol/protocol",
     "pages/regist/regist",
+    "pages/noticeDetail/noticeDetail",
+    "pages/webDetail/webDetail",
     "pages/logs/logs"
   ],
   "tabBar": {
