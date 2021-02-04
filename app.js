@@ -66,6 +66,12 @@ App({
                     let errMsg = res.respMsg;
 
                     if (code != '0000') {
+                        if(code == '0004'){
+                            wx.redirectTo({
+                                url: '/pages/switch_role/switch_role',
+                            })
+                            return
+                        }
                         reject(res);
                         if (errMsg) {
                             wx.showToast({

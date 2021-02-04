@@ -12,9 +12,13 @@ Component({
       type: String,
       value: "1"
     },
-    mColor: {
+    color: {
       type: String,
       value: ""
+    },
+    enable: {
+      type: Boolean,
+      value: true
     },
   },
 

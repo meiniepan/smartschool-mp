@@ -1,7 +1,12 @@
 <!--components/commonButton/commonButton.wxml-->
+<block wx:if="{{enable}}">
 <block wx:if="{{mType=='1'}}">
-<text class="confirm" bindtap="doConfirm" style="color:{{mColor}}">{{text}}</text>
+<text class="confirm" bindtap="doConfirm" style="color:{{color}}">{{text}}</text>
 </block>
 <block wx:else>
-<text class="confirm2" bindtap="doConfirm" style="color:{{mColor}}">{{text}}</text>
+<text class="confirm2" bindtap="doConfirm" style="color:{{color}}">{{text}}</text>
+</block>
+</block>
+<block wx:else>
+    <text class="confirm-disable" bindtap="doConfirm" style="color:{{color}}">{{text}}</text>
 </block>

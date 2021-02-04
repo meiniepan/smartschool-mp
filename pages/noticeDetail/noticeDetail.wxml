@@ -17,8 +17,8 @@
             <image src="{{item}}"/>
         </view>
     </view>
-    <commonButton wx:if="{{isFeedback}}" class="btn-read" mColor="{{readColor}}" bindtap="doRead" text="{{readStr}}" />
-
+    <commonButton wx:if="{{isUnreadFeedback}}" class="btn-read" enable="{{!isDisabled}}" color="{{readColor}}" bindtap="doReadFeedback" text="{{readStr}}" />
+<view wx:if="{{isReadFeedback}}" animation="{{animationData}}" class="has-read">我已阅读</view>
 </view>
     <view class="bottom0" wx:if="{{mFiles.length>0}}">
         <text class="text2" >全部附件</text>

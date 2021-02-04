@@ -6,20 +6,23 @@ Page({
      * 页面的初始数据
      */
     data: {
-      id:"",
+        id: "",
         mData: "",
-        mRead:"",
+        mRead: "",
         mImages: [],
         mFiles: [],
         isFeedback: "",
-        readStr: "我已阅读",
-        readColor:"gray",
-        count: 5,   // 倒计时的秒数
-        countConst: 5,
-        isDisabled: false,// 按钮是否禁用
+        isReadFeedback: false,
+        isUnreadFeedback: false,
+        readStr: "我已阅读 (5s)",
+        readColor: "gray",
+        count: 4,   // 倒计时的秒数
+        countConst: 4,
+        isDisabled: true,// 按钮是否禁用
         interval: "",
+        animationData: {}
     },
-  getData() {
+    getData() {
         let url;
         if (wx.getStorageSync('usertype') === "1") {
             url = "/api/v17/student/notices/info"
@@ -33,12 +36,14 @@ Page({
         app.httpPost(url, data).then((res) => {
 
             let data = res.respResult.data;
-            let mImages=[];
-            let mFiles=[];
-            
-            JSON.parse(data.fileinfo).forEach((it)=>{
-                if (it.type.indexOf("image/")>=0) {
-                    mImages.push(wx.getStorageSync("domain")+it.url)
+            let mImages = [];
+            let mFiles = [];
+            if (data.status == "0") {
+                this.doRead()
+            }
+            JSON.parse(data.fileinfo).forEach((it) => {
+                if (it.type.indexOf("image/") >= 0) {
+                    mImages.push(wx.getStorageSync("domain") + it.url)
                 } else {
                     let type;
                     let path = it.url
@@ -56,34 +61,68 @@ Page({
                     } else {
                         type = "/assets/images/ic_type_unknow.png"
                     }
-                    mFiles.push({name:it.name,image:type,url:wx.getStorageSync("domain")+it.url})
+                    mFiles.push({name: it.name, image: type, url: wx.getStorageSync("domain") + it.url})
                 }
             })
 
             let num = res.respResult.read + "/" + res.respResult.total
             this.setData({
                 mData: data,
-                mRead:num,
-                isFeedback:this.isFeedback(data),
-                isReadFeedback:this.isReadFeedback(data),
-                isUnreadFeedback:this.isUnreadFeedback(data),
-                mImages:mImages,
-                mFiles:mFiles
+                mRead: num,
+                isFeedback: this.isFeedback(data),
+                isReadFeedback: this.isReadFeedback(data),
+                isUnreadFeedback: this.isUnreadFeedback(data),
+                mImages: mImages,
+                mFiles: mFiles
             });
             this.countdown()
         });
     },
-    initReceivedUI(){},
-    openFile(e){
-      let url = encodeURIComponent(e.currentTarget.dataset.url);
+    initReceivedUI() {
+    },
+    openFile(e) {
+        let url = encodeURIComponent(e.currentTarget.dataset.url);
         wx.navigateTo({
-          url: `../webDetail/webDetail?url=${url}`,
+            url: `../webDetail/webDetail?url=${url}`,
         });
     },
-    doRead(){
-if (this.data.isDisabled){
-    return
-}
+    doRead() {
+        let url;
+        if (wx.getStorageSync('usertype') === "1") {
+            url = "/api/v17/student/notices/modify"
+        } else {
+            url = "/api/v17/teacher/notices/modify"
+        }
+        let data = {
+            token: wx.getStorageSync('token'),
+            id: this.data.id,
+            status: "1"
+        }
+        app.httpPost(url, data).then((res) => {
+
+        })
+    },
+    doReadFeedback() {
+        if (this.data.isDisabled) {
+            return
+        }
+        let url;
+        if (wx.getStorageSync('usertype') === "1") {
+            url = "/api/v17/student/notices/modify"
+        } else {
+            url = "/api/v17/teacher/notices/modify"
+        }
+        let data = {
+            token: wx.getStorageSync('token'),
+            id: this.data.id,
+            received: "1"
+        }
+        app.httpPost(url, data).then((res) => {
+            this.setData({
+                isReadFeedback: true,
+                isUnreadFeedback: false
+            })
+        })
     },
     countdown() {
         if (this.data.isUnreadFeedback) {
@@ -96,7 +135,7 @@ if (this.data.isDisabled){
                     this.setData({
                         readStr: "我已阅读",
                         count: this.data.countConst,
-                        readColor:"white",
+                        readColor: "white",
                         isDisabled: false
                     });
 
@@ -104,51 +143,51 @@ if (this.data.isDisabled){
                     clearInterval(_this.data.interval);
                 } else {
                     this.setData({
-                        readStr: "我已阅读 " + count-- + "s",
-                        readColor:"gray",
+                        readStr: "我已阅读 (" + count-- + "s)",
+                        readColor: "gray",
                         isDisabled: true
                     });
                 }
             }, 1000);
         }
     },
-  readNoFeedback() {
-    let url;
-    if (wx.getStorageSync('usertype') === "1") {
-      url = "/api/v17/student/notices/lists"
-    } else {
-      url = "/api/v17/teacher/notices/lists"
-    }
-    let data = {
-      token: wx.getStorageSync('token'),
-      id: this.data.lastId
-    }
-    app.httpPost(url, data).then((res) => {
-      this.setData({
-        mData: data2
-      });
-    });
-  },
+    readNoFeedback() {
+        let url;
+        if (wx.getStorageSync('usertype') === "1") {
+            url = "/api/v17/student/notices/lists"
+        } else {
+            url = "/api/v17/teacher/notices/lists"
+        }
+        let data = {
+            token: wx.getStorageSync('token'),
+            id: this.data.lastId
+        }
+        app.httpPost(url, data).then((res) => {
+            this.setData({
+                mData: data2
+            });
+        });
+    },
 
-  readFeedback() {
-    let url;
-    if (wx.getStorageSync('usertype') === "1") {
-      url = "/api/v17/student/notices/lists"
-    } else {
-      url = "/api/v17/teacher/notices/lists"
-    }
-    let data = {
-      token: wx.getStorageSync('token'),
-      id: this.data.lastId
-    }
-    app.httpPost(url, data).then((res) => {
-      this.setData({
-        mData: data2
-      });
-    });
-  },
+    readFeedback() {
+        let url;
+        if (wx.getStorageSync('usertype') === "1") {
+            url = "/api/v17/student/notices/lists"
+        } else {
+            url = "/api/v17/teacher/notices/lists"
+        }
+        let data = {
+            token: wx.getStorageSync('token'),
+            id: this.data.lastId
+        }
+        app.httpPost(url, data).then((res) => {
+            this.setData({
+                mData: data2
+            });
+        });
+    },
 
-  
+
     //判断是否已读
     isFeedback(item) {
         if (item.type == "feedback") {
@@ -157,7 +196,7 @@ if (this.data.isDisabled){
             return false
         }
     },
-    isUnreadFeedback(item){
+    isUnreadFeedback(item) {
         if (item.type == "feedback") {
             if (item.received != "1") {
                 return true
@@ -179,7 +218,7 @@ if (this.data.isDisabled){
      */
     onLoad: function (options) {
         this.setData({
-            id:options.id
+            id: options.id
         })
         this.getData()
     },
@@ -195,7 +234,18 @@ if (this.data.isDisabled){
      * 生命周期函数--监听页面显示
      */
     onShow: function () {
+        var animation = wx.createAnimation({
+            duration: 0,
+            timingFunction: 'ease',
+        })
 
+        this.animation = animation
+
+        animation.rotate(-15).opacity(0.3).step()
+
+        this.setData({
+            animationData: animation.export()
+        })
     },
 
     /**
@@ -209,7 +259,7 @@ if (this.data.isDisabled){
      * 生命周期函数--监听页面卸载
      */
     onUnload: function () {
-
+        clearInterval(this.data.interval);
     },
 
     /**
