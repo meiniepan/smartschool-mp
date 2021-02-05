@@ -1,1 +1,68 @@
 /* pages/schedule/schedule.wxss */
+.out {
+    background: var(--commonBlack);
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+.time{
+    margin-top: 20rpx;
+    margin-left: 20rpx;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    font-size: 36rpx;
+    min-height: 40rpx;
+    font-weight: bold;
+    color: var(--white);
+    box-sizing:borer-box;
+}
+.calendar {}
+
+.list {
+    display: flex;
+    flex-direction: column;
+    background: var(--tintBac);
+    border-top-left-radius: 80rpx;
+    border-top-right-radius: 80rpx;
+    flex-grow: 1;
+    padding-top: 80rpx;
+    padding-left: var(--titlePadding);
+    padding-right: var(--titlePadding);
+    overflow-y: auto
+}
+
+.cells {
+    margin-top: 20rpx;
+}
+
+.cell {
+    margin-bottom: 20rpx;
+    padding: 40rpx 24rpx;
+    background: var(--white);
+    border-radius: 40rpx;
+}
+
+.title-area {
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.title {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.date {
+    max-width: 200rpx;
+}
+
+.remark {
+    margin-top: 20rpx;
+}

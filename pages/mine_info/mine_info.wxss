@@ -1,1 +1,25 @@
 /* pages/mine_info/mine_info.wxss */
+.out{
+    display: flex;
+    flex-direction: column;
+}
+.img {
+    width: 160rpx;
+    height: 160rpx;
+    margin-left: calc(50% - 80rpx);
+    border-radius: 50%;
+}
+.info-area{
+    padding-left: var(--titlePadding);
+    margin-top: 120rpx;
+    padding-bottom: 20rpx;
+}
+.info-line{
+   display: flex;
+    justify-content: space-between;
+    padding-right: var(--titlePadding);
+    border-bottom: var(--splitColor) solid rpx;
+    align-items: center;
+    padding-top: 30rpx;
+    padding-bottom: 30rpx;
+}

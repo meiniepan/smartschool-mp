@@ -45,7 +45,6 @@ Page({
   doInput: function (e) {
 
     let type = e.currentTarget.dataset.type;
-    console.log(e)
     this.setData({
       [type]: e.detail.value
     });

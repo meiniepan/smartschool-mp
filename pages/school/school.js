@@ -151,7 +151,7 @@ Page({
                     name: globalData.attendanceTitle,
                     remark: "实时更新 系统上报",
                     icon: "/assets/images/ic_kaoqin.png",
-                    click: "/pages/logs/logs"
+                    click: "/pages/attendance/attendance"
                 })
         }
         if (app.checkRule1("admin/achievements/default")) {
@@ -160,7 +160,7 @@ Page({
                     name: globalData.achievementTitle,
                     remark: "各科成绩 汇总分析",
                     icon: "/assets/images/ic_chengji.png",
-                    click: "/pages/logs/logs"
+                    click: "/pages/achievement/achievement"
                 })
         }
 
@@ -170,7 +170,7 @@ Page({
                     name: globalData.timetableTitle,
                     remark: "班级课表 教学课表",
                     icon: "/assets/images/ic_kebiao.png",
-                    click: "/pages/logs/logs"
+                    click: "/pages/timetable/timetable"
                 })
         }
 

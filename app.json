@@ -21,6 +21,9 @@
     "pages/protocol/protocol",
     "pages/regist/regist",
     "pages/noticeDetail/noticeDetail",
+    "pages/timetable/timetable",
+    "pages/achievement/achievement",
+    "pages/attendance/attendance",
     "pages/webDetail/webDetail",
     "pages/logs/logs"
   ],

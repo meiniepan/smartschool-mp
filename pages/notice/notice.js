@@ -26,7 +26,6 @@ Page({
     app.httpPost(url, data).then((res) => {
 
       let data = res.respResult.data;
-      console.log(data)
       if (type === 'more') {
         wx.stopPullDownRefresh();
         if (data.length > 0) {

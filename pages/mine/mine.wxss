@@ -1,5 +1,5 @@
 /* pages/mine/mine.wxss */
-.view{
+.out{
     display: flex;
     flex-direction: column;
 }
@@ -8,7 +8,6 @@
     height: 160rpx;
     margin-left: calc(50% - 80rpx);
     border-radius: 50%;
-    margin-top: 60rpx;
 }
 .text {
     margin-top: 30rpx;

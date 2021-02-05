@@ -1,2 +1,24 @@
 <!--pages/schedule/schedule.wxml-->
-<calendar/>
+<view class="out">
+    <text class="time">{{semesters}}</text>
+    <calendar class="calendar" specialDays="{{mDataMonth}}" bind:lastMonth="lastMonth" bind:nextMonth="nextMonth" bind:select="doSelect"/>
+    <view class="list">
+        <text>日程安排</text>
+        <scroll-view class="cells" enable-flex scroll-y>
+            <view class="cell"  wx:for="{{mDataDay}}" wx:key="index" data-id="{{item}}" bindtap="doDetail">
+                <view class="title-area">
+                    <view class="title">
+                        {{item.title}}
+                    </view>
+                    <view class="date">
+                        {{item.timeStr}}
+                    </view>
+                </view>
+
+
+                <view class="remark">{{item.remarkStr}}</view>
+            </view>
+        </scroll-view>
+    </view>
+</view>
+

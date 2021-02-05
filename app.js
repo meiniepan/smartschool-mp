@@ -161,8 +161,6 @@ App({
     checkRule1(key) {
         let beans = wx.getStorageSync("appInfo")
         for(var i= 0;i< beans.length; i++){
-            // console.log("==key", key)
-            // console.log("==url", it.url)
             if (beans[i].url == key) {
                 return beans[i].choice == "1"
             }}
@@ -170,11 +168,9 @@ App({
     },
     checkRule2(key) {
         let beans = wx.getStorageSync("appInfo")
-        console.log("aapp",beans)
         for(var i= 0;i< beans.length; i++){
             for(var j= 0;j< beans[i].items.length; j++){
                 if (beans[i].items[j].url == key) {
-                    console.log(beans[i].items[j].url,beans[i].items[j].choice)
                     return beans[i].items[j].choice == "1"
                 }
             }

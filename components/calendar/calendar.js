@@ -31,6 +31,12 @@ Component({
         },
     },
 
+    observers: {
+        'specialDays': function () {
+            this.checkEvent()
+        },
+    },
+
     // 组件的初始数据
     data: {
         // 上个月
@@ -90,7 +96,7 @@ Component({
             year = temp.getFullYear()
             month = temp.getMonth() + 1
             date = temp.getDate()
-            today = year + '-' + this.zero(month) + '-' + this.zero(date)
+            today = year + this.zero(month) + this.zero(date)
             select = today
             this.setData({
                 year,
@@ -103,8 +109,6 @@ Component({
             //初始化日历组件UI
             this.display(year, month, date)
 
-            //发送事件监听
-            this.triggerEvent('select', select)
         },
 
         // 选择 并格式化数据
@@ -112,9 +116,7 @@ Component({
             let day = e.currentTarget.dataset.index,
                 select =
                     this.data.year +
-                    '-' +
                     day.monthFormat +
-                    '-' +
                     day.dateFormat
 
             this.setData({
@@ -123,7 +125,7 @@ Component({
                 date: day.dateFormat,
             })
             //发送事件监听
-            this.triggerEvent('select')
+            this.triggerEvent('select', select)
         },
 
         //上个月
@@ -132,6 +134,7 @@ Component({
             let year = this.data.month == 1 ? this.data.year - 1 : this.data.year
             //初始化日历组件UI
             this.display(year, month, 0)
+            this.triggerEvent('lastMonth', year + this.zero(month))
         },
 
         //下个月
@@ -140,6 +143,7 @@ Component({
             let year = this.data.month == 12 ? this.data.year + 1 : this.data.year
             //初始化日历组件UI
             this.display(year, month, 0)
+            this.triggerEvent('nextMonth', year + this.zero(month))
         },
 
         //获取指定月天数
@@ -154,19 +158,12 @@ Component({
 
             // 判断特殊
             for (let i = 1; i <= days; i++) {
-                let isSpecial = false,
-                    color = "white",
+                let color = "white",
                     monthFormat = this.zero(month),
                     dateFormat = this.zero(i)
                 //是否特殊
-                this.data.specialDays.map((item) => {
-                    // 20200101
-                    if (item === `${year}${monthFormat}${dateFormat}`) {
-                        isSpecial = true
-                    }
-                })
-                if (this.data.today.replace(new RegExp("-","gm"),"") === year+monthFormat+dateFormat) {
-                    console.log("select", year+monthFormat+dateFormat)
+
+                if (this.data.today === year + monthFormat + dateFormat) {
                     color = "darkgoldenrod";
                 }
                 thisDays.push({
@@ -177,11 +174,28 @@ Component({
                     week: this.data.weeks[
                         new Date(Date.UTC(year, month - 1, i)).getDay()
                         ],
-                    isSpecial: isSpecial,
                 })
             }
             this.setData({
                 thisDays,
+            })
+        },
+
+        checkEvent() {
+            let thisDays = this.data.thisDays
+            thisDays.forEach(it => {
+                let year = this.data.year,
+                    monthFormat = it.monthFormat,
+                    dateFormat = it.dateFormat
+                this.data.specialDays.map((item) => {
+                    // 20200101
+                    if (item === `${year}${monthFormat}${dateFormat}`) {
+                        it.isSpecial = true
+                    }
+                })
+            })
+            this.setData({
+                thisDays
             })
         },
 

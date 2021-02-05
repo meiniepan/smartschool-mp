@@ -1,2 +1,43 @@
 <!--pages/mine_info/mine_info.wxml-->
-<text>pages/mine_info/mine_info.wxml</text>
+<view class="out">
+    <image class="img" src="{{img}}"></image>
+    <view class="info-area">
+        <view class="info-line">
+            <text>姓名</text>
+            <text class="text">{{name}}</text>
+        </view>
+        <view class="info-line">
+            <text>性别</text>
+            <text class="text">{{name}}</text>
+        </view>
+        <view class="info-line">
+            <text>出生年月</text>
+            <text class="text">{{name}}</text>
+        </view>
+        <view class="info-line">
+            <text>手机号码</text>
+            <text class="text">{{name}}</text>
+        </view>
+        <view class="info-line">
+            <text>学号</text>
+            <text class="text">{{name}}</text>
+        </view>
+        <view class="info-line">
+            <text>工号</text>
+            <text class="text">{{name}}</text>
+        </view>
+        <view class="info-line">
+            <text>学籍号</text>
+            <text class="text">{{name}}</text>
+        </view>
+        <view class="info-line">
+            <text>教育ID</text>
+            <text class="text">{{name}}</text>
+        </view>
+        <view class="info-line">
+            <text>微信号</text>
+            <text class="text">{{name}}</text>
+        </view>
+    </view>
+
+</view>

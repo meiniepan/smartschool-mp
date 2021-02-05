@@ -63,6 +63,11 @@ function isEmptyObj(obj) {
   }
 }
 
+//补全0
+function zero (i) {
+  return i >= 10 ? i : '0' + i
+}
+
 module.exports = {
   formatTime: formatTime,
   formateDate: formateDate,
@@ -70,5 +75,6 @@ module.exports = {
   isLogin: isLogin,
   clearLoginInfo: clearLoginInfo,
   showToastWithoutIcon: showToastWithoutIcon,
-  isEmptyObj: isEmptyObj
+  isEmptyObj: isEmptyObj,
+  zero:zero
 }

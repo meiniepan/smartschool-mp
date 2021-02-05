@@ -1,5 +1,5 @@
 <!--pages/mine/mine.wxml-->
-<view class="view">
+<view class="out">
 
     <image class="img" src="{{img}}"></image>
     <text class="text">{{name}}</text>

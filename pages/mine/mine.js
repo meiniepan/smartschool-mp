@@ -49,10 +49,6 @@ Page({
             llItem4 = false
             llItem6 = false
         }
-        console.log("llItem2",llItem2)
-        console.log("llItem3",llItem3)
-        console.log("llItem4",llItem4)
-        console.log("llItem6",llItem6)
         this.setData({
             img: wx.getStorageSync("domain") + wx.getStorageSync("portrait"),
             name: wx.getStorageSync("realname"),

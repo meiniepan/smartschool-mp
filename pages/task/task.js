@@ -250,7 +250,6 @@ Page({
             }
 
         })
-        console.log(categoryData)
         this.setData({
             categoryData,
             categoryMenu
