@@ -6,37 +6,37 @@
             <text>姓名</text>
             <text class="text">{{name}}</text>
         </view>
-        <view class="info-line">
+        <view class="info-line" wx:if="{{llMineItem2}}">
             <text>性别</text>
-            <text class="text">{{name}}</text>
+            <text class="text">{{sex}}</text>
         </view>
-        <view class="info-line">
+        <view class="info-line" wx:if="{{llMineItem3}}">
             <text>出生年月</text>
-            <text class="text">{{name}}</text>
+            <text class="text">{{birthday}}</text>
         </view>
-        <view class="info-line">
+        <view class="info-line" wx:if="{{llMineItem4}}">
             <text>手机号码</text>
-            <text class="text">{{name}}</text>
+            <text class="text">{{phone}}</text>
         </view>
-        <view class="info-line">
+        <view class="info-line" wx:if="{{llMineItem5}}">
             <text>学号</text>
-            <text class="text">{{name}}</text>
+            <text class="text">{{cno}}</text>
         </view>
-        <view class="info-line">
+        <view class="info-line" wx:if="{{llMineItem6}}">
             <text>工号</text>
-            <text class="text">{{name}}</text>
+            <text class="text">{{cno}}</text>
         </view>
-        <view class="info-line">
+        <view class="info-line" wx:if="{{llMineItem7}}">
             <text>学籍号</text>
-            <text class="text">{{name}}</text>
+            <text class="text">{{sno}}</text>
         </view>
-        <view class="info-line">
+        <view class="info-line" wx:if="{{llMineItemEduId}}">
             <text>教育ID</text>
-            <text class="text">{{name}}</text>
+            <text class="text">{{eduid}}</text>
         </view>
-        <view class="info-line">
+        <view class="info-line" wx:if="{{llMineItem8}}">
             <text>微信号</text>
-            <text class="text">{{name}}</text>
+            <text class="text">{{wxname}}</text>
         </view>
     </view>
 

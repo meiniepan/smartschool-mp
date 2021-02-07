@@ -4,7 +4,7 @@
 	<view class="title2">请先验证您的账号信息</view>
 	<view class="phone">{{phone}}</view>
 	<view class="ovcode">
-		<input class="vcode" placeholder="输入验证码" data-type="vcode" bindinput="doInput"></input>
+		<input type="number" class="vcode" placeholder="输入验证码" data-type="vcode" bindinput="doInput"></input>
 		<text class="send" bindtap="doSend">{{vcodeStr}}</text>
 	</view>
 	<commonButton class="confirm" bindtap="doConfirm"></commonButton>

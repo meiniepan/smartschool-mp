@@ -4,9 +4,9 @@
     flex-direction: column;
 }
 .img {
+    margin: 0 auto;
     width: 160rpx;
     height: 160rpx;
-    margin-left: calc(50% - 80rpx);
     border-radius: 50%;
 }
 .text {

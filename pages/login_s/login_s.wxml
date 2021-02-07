@@ -7,11 +7,11 @@
     <view >学生账号吧！</view>
 </view>
     <view class="phone-area">
-        <input placeholder="输入手机号" bindinput="doInput" data-type="phone" value="{{phone}}"></input>
+        <input type="number" placeholder="输入手机号" bindinput="doInput" data-type="phone" value="{{phone}}"></input>
     </view>
 <block wx:if="{{!isPwd}}">
     <view class="vcode-area">
-        <input placeholder="输入验证码" bindinput="doInput" data-type="vcode" value="{{vcode}}"></input>
+        <input type="number" placeholder="输入验证码" bindinput="doInput" data-type="vcode" value="{{vcode}}"></input>
         <text class="vcode" bindtap="doSend">{{vcodeStr}}</text>
     </view>
 </block>

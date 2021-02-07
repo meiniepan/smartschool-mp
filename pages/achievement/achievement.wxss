@@ -1,1 +1,28 @@
 /* pages/achievement/achievement.wxss */
+.out{
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+.head-line{
+    display: flex;
+    align-items: center;
+    padding: 20rpx var(--titlePadding);
+    background: var(--tintBac);
+}
+.head-block{
+    display: flex;
+    align-items: center;
+}
+.title-line{
+    display: flex;
+    justify-content: space-between;
+    padding-right: var(--titlePadding);
+    border-bottom: var(--splitColor) solid 1rpx;
+    margin-left: var(--titlePadding);
+    align-items: center;
+    padding-top: 30rpx;
+    padding-bottom: 30rpx;
+    font-size: 32rpx;
+    font-weight: bold;
+}

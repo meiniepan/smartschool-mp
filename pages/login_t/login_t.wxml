@@ -3,11 +3,11 @@
     <view class="title1">登录</view>
     <view class="title2">{{type}}</view>
     <view class="phone-area">
-        <input placeholder="输入手机号" bindinput="doInput" data-type="phone" value="{{phone}}"></input>
+        <input type="number" placeholder="输入手机号" bindinput="doInput" data-type="phone" value="{{phone}}"></input>
     </view>
 
     <view class="vcode-area">
-        <input placeholder="输入验证码" bindinput="doInput" data-type="vcode" value="{{vcode}}"></input>
+        <input type="number" placeholder="输入验证码" bindinput="doInput" data-type="vcode" value="{{vcode}}"></input>
         <text class="vcode" bindtap="doSend">{{vcodeStr}}</text>
     </view>
 

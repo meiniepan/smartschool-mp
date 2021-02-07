@@ -33,7 +33,7 @@ App({
 
         if (loading) {
             wx.showLoading({
-                title: loadingMsg || '提交中...',
+                title: loadingMsg || '加载中...',
                 mask: true
             });
         } else {
@@ -113,7 +113,7 @@ App({
         return this.httpBase('GET', url, data, loading, loadingMsg);
     },
 
-    httpPost: function (url, data, loading, loadingMsg) {
+    httpPost: function (url, data, loading = true, loadingMsg) {
         return this.httpBase('POST', url, data, loading, loadingMsg);
     },
 

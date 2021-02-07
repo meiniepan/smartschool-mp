@@ -1,1 +1,20 @@
 /* pages/setting/setting.wxss */
+.out{
+    display: flex;
+    flex-direction: column;
+}
+
+.info-area{
+    padding-left: var(--titlePadding);
+    padding-bottom: 20rpx;
+    border-top: var(--tintBac) solid 20rpx;
+}
+.info-line{
+    display: flex;
+    justify-content: space-between;
+    padding-right: var(--titlePadding);
+    border-bottom: var(--splitColor) solid 1rpx;
+    align-items: center;
+    padding-top: 30rpx;
+    padding-bottom: 30rpx;
+}

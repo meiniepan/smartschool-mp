@@ -20,18 +20,15 @@ Page({
     onLoad: function (options) {
         let img = wx.getStorageSync("domain") + wx.getStorageSync("portrait");
         let name = wx.getStorageSync("realname");
-        let llItem2 = true;
-        let llItem3, llItem4, llItem5, llItem6=true;
-
-        if (app.checkRule2("user/student/modifyParents")) {
-            name = wx.getStorageSync("parentname")
-        }
+        let llItem2 = true,
+         llItem3=true, llItem4=true, llItem5=true, llItem6=true;
 
         if (app.checkRule2("user/student/modify")) {
             llItem3 = false
             llItem6 = true
             llItem4 = false
         }else if (app.checkRule2("user/student/modifyParents")) {
+            name = wx.getStorageSync("parentname")
             llItem3 = true
             llItem6 = false
             llItem2 = false
@@ -50,8 +47,8 @@ Page({
             llItem6 = false
         }
         this.setData({
-            img: wx.getStorageSync("domain") + wx.getStorageSync("portrait"),
-            name: wx.getStorageSync("realname"),
+            img: img,
+            name: name,
             llItem2: llItem2,
             llItem3: llItem3,
             llItem4: llItem4,

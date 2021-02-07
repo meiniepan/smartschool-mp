@@ -33,9 +33,11 @@
     padding-right: var(--titlePadding);
     overflow-y: auto
 }
-
+.text{
+    padding-bottom: 20rpx;
+}
 .cells {
-    margin-top: 20rpx;
+
 }
 
 .cell {

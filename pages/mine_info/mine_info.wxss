@@ -6,7 +6,7 @@
 .img {
     width: 160rpx;
     height: 160rpx;
-    margin-left: calc(50% - 80rpx);
+    margin: 0 auto;
     border-radius: 50%;
 }
 .info-area{
@@ -18,7 +18,7 @@
    display: flex;
     justify-content: space-between;
     padding-right: var(--titlePadding);
-    border-bottom: var(--splitColor) solid rpx;
+    border-bottom: var(--splitColor) solid 1rpx;
     align-items: center;
     padding-top: 30rpx;
     padding-bottom: 30rpx;

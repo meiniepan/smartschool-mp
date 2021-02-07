@@ -5,8 +5,10 @@
     <text class="text">{{name}}</text>
     <myItem icon="/assets/images/ic_ziliao.png" text="我的资料" bindtap="doClick" data-url="/pages/mine_info/mine_info">
         </myItem>
+    <block wx:if="{{false}}">
     <myItem icon="/assets/images/ic_anquan.png" text="账号与安全" bindtap="doClick" data-url="/pages/security/security">
         </myItem>
+    </block>
     <block wx:if="{{llItem3}}">
         <myItem icon="/assets/images/ic_xuanzehaizi.png" text="选择孩子" bindtap="doClick"
             data-url="/pages/choose_child/choose_child" />

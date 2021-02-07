@@ -7,7 +7,11 @@ Page({
   data: {
 
   },
-
+  doProtocol(){
+    wx.navigateTo({
+      url: '/pages/protocol/protocol',
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */

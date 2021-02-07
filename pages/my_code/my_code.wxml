@@ -1,2 +1,11 @@
 <!--pages/my_code/my_code.wxml-->
-<text>pages/my_code/my_code.wxml</text>
+<view class="cells">
+    <view class="cell" wx:for="{{mData}}" wx:key="index" >
+        <image class="image" src="/assets/images/bac_invite.png"/>
+        <view class="out2">
+            <view class="singleLine name">{{item.classname}}</view>
+            <view class="singleLine code">{{item.code}}</view>
+        <text class="copy" bindtap="doCopy" data-id="{{item.code}}">复制邀请码</text>
+        </view>
+    </view>
+</view>

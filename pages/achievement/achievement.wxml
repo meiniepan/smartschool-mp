@@ -1,2 +1,47 @@
 <!--pages/achievement/achievement.wxml-->
-<text>pages/achievement/achievement.wxml</text>
+<view class="out">
+    <view class="head-line">
+
+                <picker bindchange="bindPickerChange" data-type="indexClass" value="{{index}}" range="{{classArrays}}">
+                    <view class="head-block">
+                    <view class="picker">
+                        {{classArrays[indexClass]}}
+                    </view>
+                    <image src="/assets/images/ic_gray_triangle.png" style="margin-left: 4rpx;height: 10rpx"mode="heightFix"/>
+        </view>
+                </picker>
+
+        <picker bindchange="bindPickerChange"  style="margin-left: 40rpx" data-type="indexTest" value="{{index}}" range="{{testArrays}}">
+            <view class="head-block">
+                <view class="picker">
+                    {{testArrays[indexTest]}}
+                </view>
+                <image src="/assets/images/ic_gray_triangle.png" style="margin-left: 4rpx;height: 10rpx"mode="heightFix"/>
+            </view>
+        </picker>
+        <picker bindchange="bindPickerChange" style="margin-left: 40rpx" data-type="indexCourse" value="{{index}}" range="{{courseArrays}}">
+            <view class="head-block">
+                <view class="picker">
+                    {{courseArrays[indexCourse]}}
+                </view>
+                <image src="/assets/images/ic_gray_triangle.png" style="margin-left: 4rpx;height: 10rpx"mode="heightFix"/>
+            </view>
+        </picker>
+    </view>
+    <view class="title-line" >
+        <text>时间</text>
+        <text>学号</text>
+        <text>姓名</text>
+        <text>分数</text>
+    </view>
+    <view class="cells">
+        <view class="cell" wx:for="{{mData}}" wx:key="index">
+            <view class="title-line" style="font-size: 28rpx;font-weight: normal" >
+                <text>{{item.testtime}}</text>
+                <text>{{item.cno}}</text>
+                <text>{{item.realname}}</text>
+                <text>{{item.achievement}}</text>
+            </view>
+        </view>
+    </view>
+</view>
