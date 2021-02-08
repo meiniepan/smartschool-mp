@@ -6,6 +6,7 @@ Page({
      * 页面的初始数据
      */
     data: {
+        isStu: false,
         classData: [],
         indexTest: 0,
         indexClass: 0,
@@ -67,6 +68,7 @@ Page({
                 }
             }
             this.setData({
+                courseData: courseData,
                 classData: data.classs,
                 currentTest,
                 classid,
@@ -75,20 +77,24 @@ Page({
                 classArrays,
                 courseArrays,
             });
+            this.getList()
         });
     },
     getList() {
         let url;
         if (wx.getStorageSync('usertype') === "1") {
-            url = "/api/v17/student/notices/lists"
+            url = "/api/v17/student/achievements/lists"
         } else {
-            url = "/api/v17/teacher/notices/lists"
+            url = "/api/v17/teacher/achievements/lists"
         }
         let data = {
             token: wx.getStorageSync('token'),
+            testname:this.data.testArrays[this.data.indexTest],
+            cno:this.data.courseData[this.data.indexCourse].cno,
+            classid:this.data.classData[this.data.indexClass].classid,
         }
         app.httpPost(url, data).then((res) => {
-            let data = res.respResult;
+            let data = res.respResult.list;
             console.log("data", data)
             this.setData({
                 mData: data,
@@ -98,14 +104,21 @@ Page({
     bindPickerChange: function (e) {
         let type = e.currentTarget.dataset.type;
         this.setData({
-            [type]: e.detail.value
+            [type]: e.detail.value,
         })
+        this.getList()
     },
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
+        if (app.checkRule2("student/achievements/testCourse")){
+            this.setData({
+                isStu: true,
+            })
+        }
         this.getTestCourse()
+
     },
 
     /**

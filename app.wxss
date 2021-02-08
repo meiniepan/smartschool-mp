@@ -32,6 +32,10 @@ page {
   text-overflow: ellipsis;
   overflow: hidden;
 }
+.hint{
+  font-size: 24rpx;
+  color: var(--commonHint);
+}
 .container {
   height: 100%;
   display: flex;

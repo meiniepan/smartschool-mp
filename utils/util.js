@@ -68,6 +68,12 @@ function zero (i) {
   return i >= 10 ? i : '0' + i
 }
 
+//今天周几   日0一1
+function getDayInWeek () {
+  let temp = new Date()
+  return temp.getDay()
+}
+
 module.exports = {
   formatTime: formatTime,
   formateDate: formateDate,
@@ -76,5 +82,6 @@ module.exports = {
   clearLoginInfo: clearLoginInfo,
   showToastWithoutIcon: showToastWithoutIcon,
   isEmptyObj: isEmptyObj,
-  zero:zero
+  zero:zero,
+  getDayInWeek:getDayInWeek,
 }

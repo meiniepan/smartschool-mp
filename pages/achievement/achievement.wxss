@@ -26,3 +26,15 @@
     font-size: 32rpx;
     font-weight: bold;
 }
+.item-s{
+    width:25vw;
+
+}
+.item-m{
+    width:25vw;
+    text-align: center;
+}
+.item-e{
+    width:25vw;
+    text-align: end;
+}

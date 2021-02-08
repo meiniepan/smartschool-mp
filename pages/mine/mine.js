@@ -68,7 +68,7 @@ Page({
             success(res) {
                 if (res.confirm) {
                     app.logout()
-                    wx.redirectTo({
+                    wx.reLaunch({
                         url: '/pages/switch_role/switch_role',
                     })
                 } else if (res.cancel) {

@@ -69,6 +69,7 @@
     text-align: center;
     font-weight: bold;
 }
+/*scroll 父控件width: 100%;不然后导致滑动不到头*/
 .bottom0{
     position: fixed;
     width: 100%;
