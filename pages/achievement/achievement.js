@@ -48,7 +48,7 @@ Page({
                     },
                     confirmColor: "#445FF5",
                 })
-                return ;
+                return;
             }
             if (data.classs.length > 0) {
                 classid = data.classs[0].classid
@@ -56,9 +56,9 @@ Page({
                     classArrays.push(data.classs[i].classname)
                 }
             }
-            let courseData=[]
+            let courseData = []
             data.course.forEach(it => {
-                courseData=  courseData.concat(it.courses)
+                courseData = courseData.concat(it.courses)
 
             })
             if (courseData.length > 0) {
@@ -89,15 +89,17 @@ Page({
         }
         let data = {
             token: wx.getStorageSync('token'),
-            testname:this.data.testArrays[this.data.indexTest],
-            cno:this.data.courseData[this.data.indexCourse].cno,
-            classid:this.data.classData[this.data.indexClass].classid,
+            testname: this.data.testArrays[this.data.indexTest],
+            cno: this.data.courseData[this.data.indexCourse].cno,
+            classid: this.data.classData[this.data.indexClass].classid,
         }
         app.httpPost(url, data).then((res) => {
             let data = res.respResult.list;
+            let isEmpty = data.length==0
             console.log("data", data)
             this.setData({
                 mData: data,
+                isEmpty,
             });
         });
     },
@@ -112,7 +114,7 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-        if (app.checkRule2("student/achievements/testCourse")){
+        if (app.checkRule2("student/achievements/testCourse")) {
             this.setData({
                 isStu: true,
             })

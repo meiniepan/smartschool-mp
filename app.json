@@ -24,6 +24,7 @@
     "pages/timetable/timetable",
     "pages/achievement/achievement",
     "pages/attendance/attendance",
+    "pages/attendance2/attendance2",
     "pages/webDetail/webDetail",
     "pages/logs/logs"
   ],
@@ -58,5 +59,8 @@
     "navigationBarTextStyle":"black"
   },
   "style": "v2",
-  "sitemapLocation": "sitemap.json"
+  "sitemapLocation": "sitemap.json",
+  "usingComponents": {
+    "emptyView": "../../components/emptyView/emptyView"
+  }
 }

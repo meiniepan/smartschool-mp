@@ -1,59 +1,82 @@
 /* pages/timetable/timetable.wxss */
 
-.out{
+.out {
     display: flex;
     flex-direction: column;
-    width: 100vw;
-    box-sizing: border-box;
     height: 100vh;
 }
-.head-line{
+.head-area{
+    width: 100%;
+    position: fixed;
+padding-left: 100rpx;
+    background: var(--white);
+    top: 0;
+    z-index: 99;
+
+}
+.head-line {
     display: flex;
     align-items: center;
+    width: 100%;
+    height: 70rpx;
     padding: 20rpx;
     background: var(--tintBac);
-    margin-left: 100rpx;
     border-bottom: var(--splitColor) solid 1rpx;
+    box-sizing: border-box;
 }
-.head-block{
+
+.head-block {
     display: flex;
     align-items: center;
 }
-.list-area{
+
+.list-area {
     display: flex;
+    margin-top: 70rpx;
 }
-.cells0{
-margin-top: 70rpx;
+
+.cells0 {
+    margin-top: 70rpx;
 }
-.cell0{
+
+.cell0 {
     width: 100rpx;
     height: 148rpx;
-display: flex;
+    display: flex;
     flex-direction: column;
     justify-content: center;
     margin-bottom: 20rpx;
 }
-.item0{
+
+.item0 {
     font-size: 24rpx;
     color: var(--commonHint);
     margin-left: auto;
     margin-right: auto;
 }
-scroll-out{
-}
-.scroll{
+
+scroll-out {}
+
+.scroll {
     background: var(--tintBac);
+    overflow: scroll;
 }
-.cells1{
+
+.cells1 {
     display: flex;
     padding-left: 20rpx;
+    padding-right: 20rpx;
+    box-sizing: border-box;
+    white-space: nowrap;
 }
-.cell1{
-margin-right: 20rpx;
+
+.cell1 {
+    margin-right: 20rpx;
 }
-.cell1-cells{
-}
-.week-block{
+
+.cell1-cells {}
+
+.week-block {
     width: 380rpx;
     height: 70rpx;
     display: flex;
@@ -61,7 +84,7 @@ margin-right: 20rpx;
 
 }
 
-.check{
+.check {
     width: 20rpx;
     height: 20rpx;
     margin-top: auto;
@@ -70,13 +93,17 @@ margin-right: 20rpx;
     background: var(--themeBac);
     margin-right: 4rpx;
 }
-.week{
+
+.week {
     margin-top: auto;
     margin-bottom: auto;
     text-align: center;
+    font-size: 24rpx;
+    color: var(--commonHint);
 }
-.cell1-cell{
-width: 380rpx;
+
+.cell1-cell {
+    width: 380rpx;
     height: 148rpx;
     margin-bottom: 20rpx;
     background: var(--white);
@@ -85,16 +112,18 @@ width: 380rpx;
     flex-direction: column;
     justify-content: space-between;
     padding: 10rpx;
-    box-sizing:border-box;
+    box-sizing: border-box;
 }
-.cell1-cell-f{
+
+.cell1-cell-f {
     width: 380rpx;
     height: 148rpx;
     margin-bottom: 20rpx;
 
-    box-sizing:border-box;
+    box-sizing: border-box;
 }
-.text{
+
+.text {
     display: flex;
     justify-content: space-between;
     padding-right: var(--titlePadding);

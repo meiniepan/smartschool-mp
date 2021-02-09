@@ -1,6 +1,5 @@
 // pages/achievement/achievement.js
 import {getDayInWeek} from "../../utils/util";
-
 let app = getApp()
 Page({
 
@@ -9,6 +8,7 @@ Page({
      */
     data: {
         isMaster: false,
+        choseTeacher: false,
         classData: [],
         indexClass: 0,
         indexType: 0,
@@ -17,11 +17,13 @@ Page({
 
     getList(classid = null) {
         console.log("id", classid)
-        let url;
+        let url, choseTeacher;
         let data = {
             token: wx.getStorageSync('token'),
         }
+        choseTeacher = false
         if (classid == "teacher") {
+            choseTeacher = true
             url = "/api/v17/teacher/courses/timeTable"
         } else if (wx.getStorageSync('usertype') === "1") {
             url = "/api/v17/student/courses/timeTable"
@@ -36,6 +38,7 @@ Page({
                 }
 
             } else {
+                choseTeacher = true
                 url = "/api/v17/teacher/courses/timeTable"
             }
 
@@ -54,12 +57,12 @@ Page({
                 }
             }
             let total = mLabelData.length
-            data.forEach(it => {
+            for (let i = 0; i < data.length; i++) {
                 let mLessonData = [];
                 let mRealLessonData = [];
-                mLessonData = it.list
+                mLessonData = data[i].list
                 console.log("lesson1", mLessonData)
-                if (total > 0 && mLessonData.length > 0) {
+                if (total > 0 ) {
                     for (let i = 0; i < total; i++) {
                         mRealLessonData.push({})
                     }
@@ -70,8 +73,10 @@ Page({
                     })
                 }
                 console.log("lesson2", mRealLessonData)
-                it.list = mRealLessonData;
-            })
+                data[i].list = mRealLessonData;
+                data[i].id = "item" + i
+            }
+
             console.log("data2", data)
             this.setData({
                 mData: data,
@@ -79,7 +84,11 @@ Page({
                 classData,
                 classArrays,
                 indexClass,
+                choseTeacher,
+                toView: 'item' + this.data.todayInWeek,
             });
+
+            console.log("view", this.data.toView)
         });
     },
     bindPickerChange: function (e) {

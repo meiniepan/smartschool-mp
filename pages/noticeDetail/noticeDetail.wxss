@@ -71,8 +71,8 @@
 }
 /*scroll 父控件width: 100%;不然后导致滑动不到头*/
 .bottom0{
-    position: fixed;
     width: 100%;
+    position: fixed;
     display: flex;
     bottom: 0rpx;
     flex-direction: column;
@@ -83,18 +83,22 @@
 .text2{
     font-size: 24rpx;
 }
-.file-cells{
-    display: flex;
-    height: 150rpx;
+.scroll{
     margin-top: 20rpx;
+    overflow: scroll;
+}
+.file-cells{
+display: flex;
+    white-space: nowrap;
 }
 .file-cell{
     display: flex;
     flex-direction: column;
     background: var(--white);
     padding: 32rpx 20rpx;
-    width: 180rpx;
-    height: 150rpx;
+    width: 200rpx;
+    height: 200rpx;
+    justify-content: center;
     border-radius: 30rpx;
     align-items: center;
     box-sizing: border-box;

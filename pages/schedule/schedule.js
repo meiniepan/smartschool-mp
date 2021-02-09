@@ -45,8 +45,10 @@ Page({
 
                 item.timeStr = timeB + "~" + (timeE)
             })
+            let isEmpty = data.length==0
             this.setData({
                 mDataDay: data,
+                isEmpty,
                 semesters
             });
         });

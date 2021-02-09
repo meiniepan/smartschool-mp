@@ -4,7 +4,8 @@
     <calendar class="calendar" specialDays="{{mDataMonth}}" bind:lastMonth="lastMonth" bind:nextMonth="nextMonth" bind:select="doSelect"/>
     <view class="list">
         <text class="text">日程安排</text>
-        <scroll-view class="cells"  enable-flex scroll-y>
+        <emptyView wx:if="{{isEmpty}}"/>
+        <scroll-view wx:else class="cells"  enable-flex scroll-y>
             <view class="cell"  wx:for="{{mDataDay}}" wx:key="index" data-id="{{item}}" bindtap="doDetail">
                 <view class="title-area">
                     <view class="title">

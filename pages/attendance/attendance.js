@@ -1,66 +1,213 @@
 // pages/attendance/attendance.js
+import {getToday, getTodayMD} from "../../utils/util";
+
+let app = getApp()
 Page({
 
-  /**
-   * 页面的初始数据
-   */
-  data: {
+    /**
+     * 页面的初始数据
+     */
+    data: {
+        isMaster:false,
+        todayStr: "",
+        date: "",
+    },
 
-  },
+    /**
+     * 生命周期函数--监听页面加载
+     */
+    onLoad: function (options) {
+        let isMaster =false;
+        let typeArrays = [];
+        let mode = "";
+        let indexType = 0;
+        if (app.checkRule2("student/attendances/privateAtts")) {
+            
+            //学生管理员权限
+            if (app.checkRule2("student/attendances/lists")) {
+                typeArrays.push("课堂考勤")
+                mode = "stu-ad"
+            } else {
+                mode = "stu"
+            }
+            typeArrays.push("我的考勤")
+        } else if (app.checkRule2("teacher/attendances/lists")) {
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
+            if (app.checkRule2("teacher/attendances/masterlists")) {
+                typeArrays.push("班级考勤")
+                mode = "master"
+                isMaster = true
+            } else {
+                mode = "tea"
+            }
+            typeArrays.push("课堂考勤")
+        } else if (app.checkRule2("teacher/attendances/sclists")) {
+            typeArrays.push("校级考勤")
+            mode = "school"
+        } else {
+            
+        }
+        this.setData({
+            todayStr: getToday(),
+            date: getTodayMD(),
+            isMaster,
+            mode,
+            typeArrays,
+            indexType,
+        })
+    },
+    getList(classid = null) {
+        console.log("id", classid)
+        let url, choseTeacher;
+        let data = {
+            token: wx.getStorageSync('token'),
+        }
+        choseTeacher = false
+        if (classid == "teacher") {
+            choseTeacher = true
+            url = "/api/v17/teacher/courses/timeTable"
+        } else if (wx.getStorageSync('usertype') === "1") {
+            url = "/api/v17/student/courses/timeTable"
+        } else {
+            if (app.checkRule2("teacher/courses/mTimeTable")) {
+                url = "/api/v17/teacher/courses/mTimeTable"
+                if (classid != null) {
+                    data = {
+                        token: wx.getStorageSync('token'),
+                        classid: classid,
+                    }
+                }
 
-  },
+            } else {
+                choseTeacher = true
+                url = "/api/v17/teacher/courses/timeTable"
+            }
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
+        }
 
-  },
+        app.httpPost(url, data).then((res) => {
+            let data = res.respResult.list;
+            let mLabelData = res.respResult.positions;
+            let classData = res.respResult.classs;
+            let indexClass = 0;
+            let classArrays = [];
+            for (let i = 0; i < classData.length; i++) {
+                classArrays.push(classData[i].classname)
+                if (classData[i].choice == "1") {
+                    indexClass = i
+                }
+            }
+            let total = mLabelData.length
+            for (let i = 0; i < data.length; i++) {
+                let mLessonData = [];
+                let mRealLessonData = [];
+                mLessonData = data[i].list
+                console.log("lesson1", mLessonData)
+                if (total > 0) {
+                    for (let i = 0; i < total; i++) {
+                        mRealLessonData.push({})
+                    }
+                    mLessonData.forEach(it3 => {
+                        if (parseInt(it3.position) >= 0 && parseInt(it3.position) < total) {
+                            mRealLessonData[parseInt(it3.position)] = it3
+                        }
+                    })
+                }
+                console.log("lesson2", mRealLessonData)
+                data[i].list = mRealLessonData;
+                data[i].id = "item" + i
+            }
 
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
+            console.log("data2", data)
+            this.setData({
+                mData: data,
+                mLabelData,
+                classData,
+                classArrays,
+                indexClass,
+                choseTeacher,
+                toView: 'item' + this.data.todayInWeek,
+            });
 
-  },
+            console.log("view", this.data.toView)
+        });
+    },
+    bindPickerChange: function (e) {
+        let type = e.currentTarget.dataset.type;
+        let choseMaster;
+        if (type == "indexType") {
+            choseMaster = e.detail.value == 0;
+            this.setData({
+                [type]: e.detail.value,
+                choseMaster,
+            })
+            if (choseMaster) {
+                this.getList()
+            } else {
+                this.getList("teacher")
+            }
+        } else {
+            this.setData({
+                [type]: e.detail.value,
+            })
+            this.getList(this.data.classData[this.data.indexClass].classid)
+        }
+    },
+    bindDateChange(e) {
+        let a = e.detail.value.split("-")
+        if (a.length > 2) {
+            this.setData({
+                date: a[1] + "月" + a[2] + "日",
+            })
+        }
+        // this.getList(this.data.classData[this.data.indexClass].classid)
+    },
+    /**
+     * 生命周期函数--监听页面初次渲染完成
+     */
+    onReady: function () {
 
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
+    },
 
-  },
+    /**
+     * 生命周期函数--监听页面显示
+     */
+    onShow: function () {
 
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
+    },
 
-  },
+    /**
+     * 生命周期函数--监听页面隐藏
+     */
+    onHide: function () {
 
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
+    },
 
-  },
+    /**
+     * 生命周期函数--监听页面卸载
+     */
+    onUnload: function () {
 
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
+    },
 
-  },
+    /**
+     * 页面相关事件处理函数--监听用户下拉动作
+     */
+    onPullDownRefresh: function () {
 
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
+    },
 
-  }
+    /**
+     * 页面上拉触底事件的处理函数
+     */
+    onReachBottom: function () {
+
+    },
+
+    /**
+     * 用户点击右上角分享
+     */
+    onShareAppMessage: function () {
+
+    }
 })

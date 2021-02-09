@@ -1,0 +1,17 @@
+/* components/emptyView/emptyView.wxss */
+.empty{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 500rpx;
+}
+.empty image{
+    width: 200rpx;
+    height: 200rpx;
+    margin-left: auto;
+    margin-right: auto;
+}
+.empty text{
+    margin-top: 20rpx;
+text-align: center;
+}

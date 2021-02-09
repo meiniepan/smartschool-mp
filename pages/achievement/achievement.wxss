@@ -1,20 +1,23 @@
 /* pages/achievement/achievement.wxss */
-.out{
+.out {
     display: flex;
     flex-direction: column;
     height: 100vh;
 }
-.head-line{
+
+.head-line {
     display: flex;
     align-items: center;
     padding: 20rpx var(--titlePadding);
     background: var(--tintBac);
 }
-.head-block{
+
+.head-block {
     display: flex;
     align-items: center;
 }
-.title-line{
+
+.title-line {
     display: flex;
     justify-content: space-between;
     padding-right: var(--titlePadding);
@@ -26,15 +29,18 @@
     font-size: 32rpx;
     font-weight: bold;
 }
-.item-s{
-    width:25vw;
+
+.item-s {
+    width: 25vw;
 
 }
-.item-m{
-    width:25vw;
+
+.item-m {
+    width: 25vw;
     text-align: center;
 }
-.item-e{
-    width:25vw;
+
+.item-e {
+    width: 25vw;
     text-align: end;
 }
