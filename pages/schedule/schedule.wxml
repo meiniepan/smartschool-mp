@@ -1,12 +1,13 @@
 <!--pages/schedule/schedule.wxml-->
 <view class="out">
     <text class="time">{{semesters}}</text>
-    <calendar class="calendar" specialDays="{{mDataMonth}}" bind:lastMonth="lastMonth" bind:nextMonth="nextMonth" bind:select="doSelect"/>
+    <calendar class="calendar" specialDays="{{mDataMonth}}" bind:lastMonth="lastMonth" bind:nextMonth="nextMonth"
+        bind:select="doSelect" />
     <view class="list">
         <text class="text">日程安排</text>
-        <emptyView wx:if="{{isEmpty}}"/>
-        <scroll-view wx:else class="cells"  enable-flex scroll-y>
-            <view class="cell"  wx:for="{{mDataDay}}" wx:key="index" data-id="{{item}}" bindtap="doDetail">
+        <emptyView wx:if="{{isEmpty}}" />
+        <scroll-view wx:else class="cells" enable-flex scroll-y>
+            <view class="cell" wx:for="{{mDataDay}}" wx:key="index" data-id="{{item}}" bindtap="doDetail">
                 <view class="title-area">
                     <view class="title">
                         {{item.title}}
@@ -22,4 +23,3 @@
         </scroll-view>
     </view>
 </view>
-

@@ -1,5 +1,5 @@
 // pages/attendance/attendance.js
-import {getToday, getTodayMD} from "../../utils/util";
+import {getToday, getTodayMD,getTodayStr} from "../../utils/util";
 
 let app = getApp()
 Page({
@@ -8,21 +8,23 @@ Page({
      * 页面的初始数据
      */
     data: {
-        isMaster:false,
+        isMaster: false,
         todayStr: "",
         date: "",
+        classData:[],
+        indexClass:0,
     },
 
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-        let isMaster =false;
+        let isMaster = false;
         let typeArrays = [];
         let mode = "";
         let indexType = 0;
         if (app.checkRule2("student/attendances/privateAtts")) {
-            
+
             //学生管理员权限
             if (app.checkRule2("student/attendances/lists")) {
                 typeArrays.push("课堂考勤")
@@ -45,49 +47,52 @@ Page({
             typeArrays.push("校级考勤")
             mode = "school"
         } else {
-            
+
         }
         this.setData({
             todayStr: getToday(),
             date: getTodayMD(),
+            dateStr:getTodayStr(),
             isMaster,
             mode,
             typeArrays,
             indexType,
         })
+
+        if (app.checkRule2("student/attendances/privateAtts")) {
+            if (app.checkRule2("student/attendances/lists")) {
+                this.getTimetable()
+            } else {
+                this.getStuData()
+            }
+        } else if (app.checkRule2("teacher/attendances/lists")) {
+            if (app.checkRule2("teacher/attendances/masterlists")) {
+                this.getDataMaster()
+            } else {
+                this.getTimetable()
+            }
+        } else if (app.checkRule2("teacher/attendances/sclists")) {
+            this.getSchoolData()
+        } else {
+            this.getStuData()
+        }
     },
-    getList(classid = null) {
-        console.log("id", classid)
-        let url, choseTeacher;
-        let data = {
+    getDataMaster() {
+        let url;
+        let  data = {
             token: wx.getStorageSync('token'),
         }
-        choseTeacher = false
-        if (classid == "teacher") {
-            choseTeacher = true
-            url = "/api/v17/teacher/courses/timeTable"
-        } else if (wx.getStorageSync('usertype') === "1") {
-            url = "/api/v17/student/courses/timeTable"
-        } else {
-            if (app.checkRule2("teacher/courses/mTimeTable")) {
-                url = "/api/v17/teacher/courses/mTimeTable"
-                if (classid != null) {
-                    data = {
-                        token: wx.getStorageSync('token'),
-                        classid: classid,
-                    }
+            url = "/api/v17/teacher/attendances/lists"
+            if (this.data.classData.length>0) {
+                data = {
+                    token: wx.getStorageSync('token'),
+                    classid: this.data.classData[indexClass].classid,
+                    atttime: this.data.dateStr,
                 }
-
-            } else {
-                choseTeacher = true
-                url = "/api/v17/teacher/courses/timeTable"
             }
 
-        }
-
         app.httpPost(url, data).then((res) => {
-            let data = res.respResult.list;
-            let mLabelData = res.respResult.positions;
+            let data = res.respResult.data;
             let classData = res.respResult.classs;
             let indexClass = 0;
             let classArrays = [];
@@ -97,60 +102,63 @@ Page({
                     indexClass = i
                 }
             }
-            let total = mLabelData.length
-            for (let i = 0; i < data.length; i++) {
-                let mLessonData = [];
-                let mRealLessonData = [];
-                mLessonData = data[i].list
-                console.log("lesson1", mLessonData)
-                if (total > 0) {
-                    for (let i = 0; i < total; i++) {
-                        mRealLessonData.push({})
-                    }
-                    mLessonData.forEach(it3 => {
-                        if (parseInt(it3.position) >= 0 && parseInt(it3.position) < total) {
-                            mRealLessonData[parseInt(it3.position)] = it3
-                        }
-                    })
-                }
-                console.log("lesson2", mRealLessonData)
-                data[i].list = mRealLessonData;
-                data[i].id = "item" + i
-            }
+            console.log("data2", data)
+            this.setData({
+                mData: data,
+                classData,
+                classArrays,
+                indexClass,
+            });
+
+        });
+    },
+
+    getTimetable() {
+        let url;
+        let  data = {
+            token: wx.getStorageSync('token'),
+        }
+        if (wx.getStorageSync('usertype') === "1") {
+            url = "/api/v17/student/attendances/timeTable"
+        } else {
+            url = "/api/v17/teacher/attendances/timeTable"
+        }
+
+        app.httpPost(url, data).then((res) => {
+            let data = res.respResult.list;
 
             console.log("data2", data)
             this.setData({
                 mData: data,
-                mLabelData,
-                classData,
-                classArrays,
-                indexClass,
-                choseTeacher,
-                toView: 'item' + this.data.todayInWeek,
             });
 
-            console.log("view", this.data.toView)
         });
     },
     bindPickerChange: function (e) {
         let type = e.currentTarget.dataset.type;
-        let choseMaster;
+        let isMaster;
         if (type == "indexType") {
-            choseMaster = e.detail.value == 0;
-            this.setData({
-                [type]: e.detail.value,
-                choseMaster,
-            })
-            if (choseMaster) {
-                this.getList()
+            isMaster = e.detail.value == 0;
+            if (isMaster) {
+                this.setData({
+                    [type]: e.detail.value,
+                    isMaster,
+                    mode:"master",
+                })
+                this.getDataMaster()
             } else {
-                this.getList("teacher")
+                this.setData({
+                    [type]: e.detail.value,
+                    isMaster,
+                    mode:"tea",
+                })
+                this.getTimetable()
             }
         } else {
             this.setData({
                 [type]: e.detail.value,
             })
-            this.getList(this.data.classData[this.data.indexClass].classid)
+            this.getDataMaster()
         }
     },
     bindDateChange(e) {
@@ -158,9 +166,10 @@ Page({
         if (a.length > 2) {
             this.setData({
                 date: a[1] + "月" + a[2] + "日",
+                dateStr:a[0]+a[1]+a[2],
             })
         }
-        // this.getList(this.data.classData[this.data.indexClass].classid)
+        this.getDataMaster()
     },
     /**
      * 生命周期函数--监听页面初次渲染完成

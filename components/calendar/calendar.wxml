@@ -17,12 +17,13 @@
         <!-- 当月格子 -->
         <!-- 特殊 > 当前 -->
         <view class='grid' wx:for='{{ thisDays }}' wx:key='indx'>
-            <view class="{{ (select === year + item.monthFormat + item.dateFormat ? 'select' : 'normal') }}" data-index='{{item}}' style="color: {{item.color}}" bind:tap="select">
+            <view class="{{ (select === year + item.monthFormat + item.dateFormat ? 'select' : 'normal') }}"
+                data-index='{{item}}' style="color: {{item.color}}" bind:tap="select">
                 <view class="date0">
-                {{item.date}}
+                    {{item.date}}
                 </view>
                 <view wx:if="{{ item.isSpecial}}">
-                <view class="dot"></view>
+                    <view class="dot"></view>
                 </view>
             </view>
         </view>

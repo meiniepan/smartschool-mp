@@ -39,8 +39,8 @@
         <text wx:if="{{!isStu}}" class="singleLine item-m">姓名</text>
         <text class="singleLine item-e">分数</text>
     </view>
-    <emptyView wx:if="{{isEmpty}}"/>
-    <view class="cells" wx:else >
+    <emptyView wx:if="{{isEmpty}}" />
+    <view class="cells" wx:else>
         <view class="cell" wx:for="{{mData}}" wx:key="index">
             <view class="title-line" style="font-size: 28rpx;font-weight: normal">
                 <text class="singleLine item-s">{{item.testtime}}</text>

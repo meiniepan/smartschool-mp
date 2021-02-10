@@ -83,13 +83,22 @@ function getTodayMD() {
     return today
 }
 
-function getToday() {
-    let value= ['周日', '周一', '周二', '周三', '周四', '周五', '周六']
+function getTodayStr() {
     let temp = new Date();
     let year = temp.getFullYear(),
         month = temp.getMonth() + 1,
         date = temp.getDate();
-    let today = "今天是"+year+"年"+zero(month) + "月" + zero(date) + "日 "+value[temp.getDay()];
+    let today = year + zero(month) + zero(date);
+    return today
+}
+
+function getToday() {
+    let value = ['周日', '周一', '周二', '周三', '周四', '周五', '周六']
+    let temp = new Date();
+    let year = temp.getFullYear(),
+        month = temp.getMonth() + 1,
+        date = temp.getDate();
+    let today = "今天是" + year + "年" + zero(month) + "月" + zero(date) + "日 " + value[temp.getDay()];
     return today
 }
 
@@ -105,4 +114,5 @@ module.exports = {
     getDayInWeek: getDayInWeek,
     getTodayMD: getTodayMD,
     getToday: getToday,
+    getTodayStr: getTodayStr,
 }

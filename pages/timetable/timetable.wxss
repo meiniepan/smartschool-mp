@@ -5,15 +5,17 @@
     flex-direction: column;
     height: 100vh;
 }
-.head-area{
+
+.head-area {
     width: 100%;
     position: fixed;
-padding-left: 100rpx;
+    padding-left: 100rpx;
     background: var(--white);
     top: 0;
     z-index: 99;
 
 }
+
 .head-line {
     display: flex;
     align-items: center;

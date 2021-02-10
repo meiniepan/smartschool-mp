@@ -5,7 +5,8 @@
     flex-direction: column;
     height: 100vh;
 }
-.time{
+
+.time {
     margin-top: 20rpx;
     margin-left: 20rpx;
     display: -webkit-box;
@@ -17,8 +18,9 @@
     min-height: 40rpx;
     font-weight: bold;
     color: var(--white);
-    box-sizing:borer-box;
+    box-sizing: borer-box;
 }
+
 .calendar {}
 
 .list {
@@ -33,12 +35,12 @@
     padding-right: var(--titlePadding);
     overflow-y: auto
 }
-.text{
+
+.text {
     padding-bottom: 20rpx;
 }
-.cells {
 
-}
+.cells {}
 
 .cell {
     margin-bottom: 20rpx;

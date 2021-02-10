@@ -1,5 +1,5 @@
 // pages/achievement/achievement.js
-import {getDayInWeek} from "../../utils/util";
+import { getDayInWeek } from "../../utils/util";
 let app = getApp()
 Page({
 
@@ -62,7 +62,7 @@ Page({
                 let mRealLessonData = [];
                 mLessonData = data[i].list
                 console.log("lesson1", mLessonData)
-                if (total > 0 ) {
+                if (total > 0) {
                     for (let i = 0; i < total; i++) {
                         mRealLessonData.push({})
                     }

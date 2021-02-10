@@ -173,7 +173,7 @@ Component({
                     monthFormat: monthFormat,
                     week: this.data.weeks[
                         new Date(Date.UTC(year, month - 1, i)).getDay()
-                        ],
+                    ],
                 })
             }
             this.setData({
