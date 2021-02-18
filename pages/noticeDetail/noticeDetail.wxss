@@ -1,18 +1,22 @@
 /* pages/noticeDetail/noticeDetail.wxss */
-.root{
+.root {
     display: flex;
     flex-direction: column;
-
+    height: 100vh;
 }
+
 .out {
     display: flex;
+    height: calc(100vh - 300rpx);
     flex-direction: column;
-    padding: 40rpx var(--titlePadding) 300rpx var(--titlePadding);
+    padding: 0rpx var(--titlePadding) 0rpx;
     border-top: var(--tintBac) solid 20rpx;
+    box-sizing: border-box;
 }
 
 .name-area {
     display: flex;
+    margin-top: 40rpx;
     justify-content: space-between;
     font-size: 32rpx;
     align-items: center;
@@ -49,49 +53,61 @@
 .remark {
     margin-top: 28rpx;
 }
-.img-cells{
+
+.img-cells {
     margin-top: 20rpx;
 }
-.img-cell{
+
+.img-cell {
     margin-bottom: 10rpx;
 }
-.img-cell image{
+
+.img-cell image {
+    width: 100%;
     height: 436rpx;
     border-radius: 32rpx;
 }
-.btn-read{
+
+.btn-read {
     margin-top: 160rpx;
 }
-.has-read{
+
+.has-read {
     margin-top: 100rpx;
     font-size: 60rpx;
     color: var(--themeColor);
     text-align: center;
     font-weight: bold;
 }
+
 /*scroll 父控件width: 100%;不然后导致滑动不到头*/
-.bottom0{
+.bottom0 {
     width: 100%;
+    height: 300rpx;
     position: fixed;
     display: flex;
     bottom: 0rpx;
     flex-direction: column;
-    padding: 14rpx var(--titlePadding) 40rpx var(--titlePadding);
+    padding: 14rpx var(--titlePadding) 20rpx;
     background: var(--grayF6);
     box-sizing: border-box;
 }
-.text2{
+
+.text2 {
     font-size: 24rpx;
 }
-.scroll{
+
+.scroll {
     margin-top: 20rpx;
     overflow: scroll;
 }
-.file-cells{
-display: flex;
+
+.file-cells {
+    display: flex;
     white-space: nowrap;
 }
-.file-cell{
+
+.file-cell {
     display: flex;
     flex-direction: column;
     background: var(--white);
@@ -103,10 +119,13 @@ display: flex;
     align-items: center;
     box-sizing: border-box;
 }
-.file-cell:not(:last-child){
+
+.file-cell:not(:last-child) {
     margin-right: 10rpx;
 }
-.text3{
+
+.text3 {
+    width: 100%;
     display: -webkit-box;
     -webkit-box-orient: vertical;
     margin-top: 14rpx;

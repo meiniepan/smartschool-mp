@@ -1,32 +1,33 @@
 <!--pages/noticeDetail/noticeDetail.wxml-->
 <view class="root">
-<view class="out">
-<view class="name-area">
-    <text class="name" >{{mData.send_username}}</text>
-    <text class="number" >{{mRead}}</text>
-</view>
-<view class="date-area">
-    <text class="date">{{mData.updatetime}}</text>
-    <image src="/assets/images/ic_read.png" style="width: 24rpx;height: 24rpx"/>
-    <text class="text1">已阅数量</text>
-</view>
-    <text class="title">{{mData.title}}</text>
-    <text class="remark">{{mData.remark}}</text>
-    <view class="img-cells">
-        <view class="img-cell" wx:for="{{mImages}}" wx:key="index" >
-            <image src="{{item}}"/>
+    <scroll-view class="out" enable-flex scroll-y="true">
+        <view class="name-area">
+            <text class="name">{{mData.send_username}}</text>
+            <text class="number">{{mRead}}</text>
         </view>
-    </view>
-    <commonButton wx:if="{{isUnreadFeedback}}" class="btn-read" enable="{{!isDisabled}}" color="{{readColor}}" bindtap="doReadFeedback" text="{{readStr}}" />
-<view wx:if="{{isReadFeedback}}" animation="{{animationData}}" class="has-read">我已阅读</view>
-</view>
+        <view class="date-area">
+            <text class="date">{{mData.updatetime}}</text>
+            <image src="/assets/images/ic_read.png" style="width: 24rpx;height: 24rpx" />
+            <text class="text1">已阅数量</text>
+        </view>
+        <text class="title">{{mData.title}}</text>
+        <text class="remark">{{mData.remark}}</text>
+        <view class="img-cells">
+            <view class="img-cell" wx:for="{{mImages}}" wx:key="index">
+                <image src="{{item}}" />
+            </view>
+        </view>
+        <commonButton wx:if="{{isUnreadFeedback}}" class="btn-read" enable="{{!isDisabled}}" color="{{readColor}}"
+            bindtap="doReadFeedback" text="{{readStr}}" />
+        <view wx:if="{{isReadFeedback}}" animation="{{animationData}}" class="has-read">我已阅读</view>
+    </scroll-view>
     <view class="bottom0" wx:if="{{mFiles.length>0}}">
-        <text class="text2" >全部附件</text>
-        <scroll-view class="scroll" enable-flex scroll-x="true" >
+        <text class="text2">全部附件</text>
+        <scroll-view class="scroll" enable-flex scroll-x="true">
             <view class="file-cells">
-            <view class="file-cell"  wx:for="{{mFiles}}" wx:key="index" data-url="{{item}}" bindtap="openFile">
-                <image src="{{item.image}}" style="width: 50rpx;height: 50rpx"/>
-                <view class="text3">{{item.name}}</view>
+                <view class="file-cell" wx:for="{{mFiles}}" wx:key="index" data-url="{{item}}" bindtap="openFile">
+                    <image src="{{item.image}}" style="width: 50rpx;height: 50rpx" />
+                    <view class="text3">{{item.name}}</view>
                 </view>
             </view>
         </scroll-view>

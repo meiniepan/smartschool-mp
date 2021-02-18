@@ -34,9 +34,11 @@
     display: flex;
     align-items: center;
 }
-.cells-master{
+
+.cells-master {
     margin-top: 140rpx;
 }
+
 .title-area {
     display: flex;
     margin-left: var(--titlePadding);
@@ -47,19 +49,23 @@
     border-bottom: var(--splitColor) solid 1rpx;
     box-sizing: border-box;
 }
-.stu-code{
-    min-width:100rpx ;
+
+.stu-code {
+    min-width: 100rpx;
 }
-.stu-name{
+
+.stu-name {
     width: 140rpx;
     margin-left: 32rpx;
 }
-.stu-att-tag{
+
+.stu-att-tag {
     display: flex;
-margin-left: 20rpx;
+    margin-left: 20rpx;
     align-items: center;
 }
-.tag{
+
+.tag {
     width: 40rpx;
     height: 40rpx;
     background: var(--grayEE);
@@ -69,11 +75,13 @@ margin-left: 20rpx;
     font-size: 28rpx;
     color: var(--commonHint);
 }
-.tea-course-cells{
+
+.tea-course-cells {
     background: var(--tintBac);
     width: 100%;
 }
-.tea-course-area{
+
+.tea-course-area {
     position: relative;
     border-radius: 10rpx;
     display: flex;
@@ -83,21 +91,24 @@ margin-left: 20rpx;
     margin-left: var(--titlePadding);
     margin-right: var(--titlePadding);
     padding: 20rpx;
-    box-sizing:border-box;
-background: var(--white);
-    box-shadow:0rpx 2rpx 5rpx 5rpx var(--splitColor);
+    box-sizing: border-box;
+    background: var(--white);
+    box-shadow: 0rpx 2rpx 5rpx 5rpx var(--splitColor);
 }
-.tea-course-name{
+
+.tea-course-name {
     font-size: 36rpx;
 }
-.tea-course-time{
+
+.tea-course-time {
     font-size: 28rpx;
     color: var(--commonHint);
 }
-.tea-course-image{
+
+.tea-course-image {
     width: 40rpx;
     height: 40rpx;
-position: absolute;
+    position: absolute;
     right: 20rpx;
 
 }

@@ -27,6 +27,7 @@ page {
 }
 .singleLine{
   display: -webkit-box;
+  width: 100%;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 1;
   text-overflow: ellipsis;
