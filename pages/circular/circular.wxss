@@ -16,6 +16,7 @@ page {
   background-color: var(--commonBac);
   padding: 40rpx 24rpx;
   margin-bottom: 20rpx;
+  box-sizing: border-box;
 }
 
 

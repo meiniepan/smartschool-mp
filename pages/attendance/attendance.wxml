@@ -35,29 +35,29 @@
             </picker>
         </view>
     </view>
-    <emptyView wx:if="{{isEmpty}}" />
+    <emptyView wx:if="{{isEmpty}}"/>
 
     <scroll-view wx:else class="cells-master" enable-flex scroll-y>
         <block wx:if="{{mode=='master'}}">
-        <view class="cell" wx:for="{{mData}}" wx:key="index"  bindtap="doDetail">
-            <view class="title-area">
-                <view class="stu-code">
-                    {{item.cno}}
-                </view>
-                <view class="stu-name singleLine" >
-                    {{item.realname}}
-                </view>
-                <view class="stu-att-tag">
-                    <view class="cell" wx:for="{{item.tags}}" wx:for-index="idx" wx:for-item="bean" wx:key="idx">
-                        <view class="tag">{{bean}}</view>
+            <view class="cell" wx:for="{{mData}}" wx:key="index" bindtap="doDetail">
+                <view class="title-area">
+                    <view class="stu-code">
+                        {{item.cno}}
+                    </view>
+                    <view class="stu-name singleLine">
+                        {{item.realname}}
+                    </view>
+                    <view class="stu-att-tag">
+                        <view class="cell" wx:for="{{item.tags}}" wx:for-index="idx" wx:for-item="bean" wx:key="idx">
+                            <view class="tag">{{bean}}</view>
+                        </view>
                     </view>
                 </view>
             </view>
-        </view>
-    </block>
+        </block>
 
-        <view wx:elif="{{mode=='tea'}}" class="tea-course-cells">
-            <view class="cell" wx:for="{{mData}}" wx:key="index"  bindtap="doDetail">
+        <view wx:elif="{{mode=='tea'||mode=='stu-ad'}}" class="tea-course-cells">
+            <view class="cell" wx:for="{{mData}}" wx:key="index" data-data="{{item}}" bindtap="doClickCourse">
                 <view class="tea-course-area">
                     <view class="tea-course-name">
                         {{item.classname}}
@@ -72,6 +72,47 @@
 
                     </image>
 
+                </view>
+            </view>
+        </view>
+
+        <view wx:elif="{{mode=='stu'}}" class="stu-data-cells">
+            <view class="cell" wx:for="{{mData}}" wx:key="index">
+                <view class="stu-data-area">
+                    <view class="stu-leave-name">
+                        {{item.name}}
+                    </view>
+                    <view class="stu-leave-num">
+                        {{item.total+item.unit}}
+                    </view>
+
+                </view>
+            </view>
+        </view>
+
+        <view wx:elif="{{mode=='school'}}" class="school-data-cells">
+            <view class="cell" wx:for="{{mData}}" wx:key="index">
+                <view class="school-data-area">
+                    <view class="title-school" style="display: flex;justify-content: space-between">
+                        <view class="school-leave-name">
+                            {{item.name}}
+                        </view>
+                        <view class="school-leave-num">
+                            {{item.value}}
+                        </view>
+                    </view>
+                    <view class="cells-school-item">
+                        <view wx:for="{{item.list}}" wx:for-index="idx" wx:for-item="bean" wx:key="idx">
+                            <view style="display: flex;justify-content: space-between;margin-top: 20rpx">
+                                <view>
+                                    {{bean.realname}}
+                                </view>
+                                <view>
+                                    {{bean.classname}}
+                                </view>
+                            </view>
+                        </view>
+                    </view>
                 </view>
             </view>
         </view>

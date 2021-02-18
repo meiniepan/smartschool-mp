@@ -7,6 +7,7 @@ page {
   display: flex;
   flex-direction: column;
 padding: 0 var(--titlePadding);
+  box-sizing: border-box;
 }
 .title1{
 font-size: 72rpx;

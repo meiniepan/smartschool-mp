@@ -1,2 +1,22 @@
 <!--pages/attendance2/attendance2.wxml-->
-<text>pages/attendance2/attendance2.wxml</text>
+<view class="out">
+<emptyView wx:if="{{isEmpty}}"/>
+
+<scroll-view wx:else class="cells-master" enable-flex scroll-y>
+        <view class="cell" wx:for="{{mData}}" wx:key="index" bindtap="doDetail">
+            <view class="title-area">
+                <view class="stu-code">
+                    {{item.cno}}
+                </view>
+                <view class="stu-name singleLine">
+                    {{item.realname}}
+                </view>
+                <view class="stu-att-tag">
+                    <view class="cell" wx:for="{{item.tags}}" wx:for-index="idx" wx:for-item="bean" wx:key="idx">
+                        <view class="tag">{{bean}}</view>
+                    </view>
+                </view>
+            </view>
+        </view>
+</scroll-view>
+</view>

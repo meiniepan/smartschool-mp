@@ -1,4 +1,11 @@
 /* pages/attendance/attendance.wxss */
+.out{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100vh;
+    background: var(--tintBac);
+}
 .head-area {
     width: 100%;
     position: fixed;
@@ -37,6 +44,7 @@
 
 .cells-master {
     margin-top: 140rpx;
+    background: var(--white);
 }
 
 .title-area {
@@ -110,5 +118,33 @@
     height: 40rpx;
     position: absolute;
     right: 20rpx;
+}
+.stu-data-cells{
+    background: var(--white);
+}
+.stu-data-area{
+    display: flex;
+    justify-content: space-between;
+    margin-left: var(--titlePadding);
+    padding-right: var(--titlePadding);
+    padding-top: 20rpx;
+    padding-bottom: 20rpx;
+    border-bottom: var(--splitColor) solid 1rpx;
+    box-sizing: border-box;
+}
+.school-data-area{
+    display: flex;
+    flex-direction: column;
+    background: var(--white);
+    padding: 40rpx var(--titlePadding);
+    margin-bottom: 20rpx;
 
+}
+.school-leave-name{
+    font-size: 32rpx;
+    font-weight: bold;
+}
+.school-leave-num{
+    color: var(--themeColor);
+    font-weight: bold;
 }

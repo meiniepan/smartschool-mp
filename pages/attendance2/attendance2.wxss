@@ -1,1 +1,48 @@
 /* pages/attendance2/attendance2.wxss */
+.out{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100vh;
+    background: var(--tintBac);
+}
+.cells-master {
+    background: var(--white);
+    margin-top: 20rpx;
+}
+
+.title-area {
+    display: flex;
+    margin-left: var(--titlePadding);
+    padding-right: var(--titlePadding);
+    padding-top: 20rpx;
+    padding-bottom: 20rpx;
+    background: var(--white);
+    border-bottom: var(--splitColor) solid 1rpx;
+    box-sizing: border-box;
+}
+.stu-code {
+    min-width: 100rpx;
+}
+
+.stu-name {
+    width: 140rpx;
+    margin-left: 32rpx;
+}
+
+.stu-att-tag {
+    display: flex;
+    margin-left: 20rpx;
+    align-items: center;
+}
+
+.tag {
+    width: 40rpx;
+    height: 40rpx;
+    background: var(--grayEE);
+    border-radius: 50%;
+    margin-right: 4rpx;
+    text-align: center;
+    font-size: 28rpx;
+    color: var(--commonHint);
+}

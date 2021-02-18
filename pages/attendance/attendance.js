@@ -1,5 +1,5 @@
 // pages/attendance/attendance.js
-import {getToday, getTodayMD,getTodayStr} from "../../utils/util";
+import {getToday, getTodayMD, getTodayStr} from "../../utils/util";
 
 let app = getApp()
 Page({
@@ -11,8 +11,9 @@ Page({
         isMaster: false,
         todayStr: "",
         date: "",
-        classData:[],
-        indexClass:0,
+        mode: "",//"stu-ad","stu","tea","master","school"
+        classData: [],
+        indexClass: 0,
     },
 
     /**
@@ -52,7 +53,7 @@ Page({
         this.setData({
             todayStr: getToday(),
             date: getTodayMD(),
-            dateStr:getTodayStr(),
+            dateStr: getTodayStr(),
             isMaster,
             mode,
             typeArrays,
@@ -79,17 +80,17 @@ Page({
     },
     getDataMaster() {
         let url;
-        let  data = {
+        let data = {
             token: wx.getStorageSync('token'),
         }
-            url = "/api/v17/teacher/attendances/lists"
-            if (this.data.classData.length>0) {
-                data = {
-                    token: wx.getStorageSync('token'),
-                    classid: this.data.classData[indexClass].classid,
-                    atttime: this.data.dateStr,
-                }
+        url = "/api/v17/teacher/attendances/lists"
+        if (this.data.classData.length > 0) {
+            data = {
+                token: wx.getStorageSync('token'),
+                classid: this.data.classData[this.data.indexClass].classid,
+                atttime: this.data.dateStr,
             }
+        }
 
         app.httpPost(url, data).then((res) => {
             let data = res.respResult.data;
@@ -112,10 +113,47 @@ Page({
 
         });
     },
+    getStuData() {
+        let url;
+        let data = {
+            token: wx.getStorageSync('token'),
+        }
+        url = "/api/v17/student/attendances/privateAtts"
+        app.httpPost(url, data).then((res) => {
+            let data = res.respResult.attendances;
+
+            console.log("data2", data)
+            this.setData({
+                mData: data,
+            });
+
+        });
+    },
+    getSchoolData() {
+        let url;
+        let data = {
+            token: wx.getStorageSync('token'),
+        }
+        url = "/api/v17/teacher/attendances/sclists"
+        app.httpPost(url, data).then((res) => {
+            let data = res.respResult;
+            let data2 = [];
+            data2.push({name: "病假", value: data.sickleave + "人", list: data.sickleavelist});
+            data2.push({name: "事假", value: data.thingleave + "人", list: data.thingleavelist});
+            data2.push({name: "早间迟到", value: data.morninglate + "人", list: data.morninglatelist});
+            data2.push({name: "课堂迟到", value: data.courselate + "人", list: data.courselatelist});
+            data2.push({name: "旷课", value: data.truant + "人", list: data.truantlist});
+            console.log("data2", data2)
+            this.setData({
+                mData: data2,
+            });
+
+        });
+    },
 
     getTimetable() {
         let url;
-        let  data = {
+        let data = {
             token: wx.getStorageSync('token'),
         }
         if (wx.getStorageSync('usertype') === "1") {
@@ -134,6 +172,11 @@ Page({
 
         });
     },
+    doClickCourse(e){
+        wx.navigateTo({
+            url: '/pages/attendance2/attendance2?data='+JSON.stringify(e.currentTarget.dataset.data),
+        })
+    },
     bindPickerChange: function (e) {
         let type = e.currentTarget.dataset.type;
         let isMaster;
@@ -143,14 +186,14 @@ Page({
                 this.setData({
                     [type]: e.detail.value,
                     isMaster,
-                    mode:"master",
+                    mode: "master",
                 })
                 this.getDataMaster()
             } else {
                 this.setData({
                     [type]: e.detail.value,
                     isMaster,
-                    mode:"tea",
+                    mode: "tea",
                 })
                 this.getTimetable()
             }
@@ -166,7 +209,7 @@ Page({
         if (a.length > 2) {
             this.setData({
                 date: a[1] + "月" + a[2] + "日",
-                dateStr:a[0]+a[1]+a[2],
+                dateStr: a[0] + a[1] + a[2],
             })
         }
         this.getDataMaster()
