@@ -1,1 +1,14 @@
 /* pages/repair/repair.wxss */
+page{
+    background: var(--tintBac);
+}
+.record{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin: auto auto;
+}
+.repair-record{
+    color: var(--commonHint);
+    border-bottom: var(--commonHint) solid 1rpx;
+}

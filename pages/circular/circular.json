@@ -1,7 +1,6 @@
 {
   "usingComponents": {
-    "tab": "../../components/tab/tab",
-    "list": "../../components/list/list"
+    "tab": "../../components/tab/tab"
   },
   "navigationBarTitleText": "通知公告",
   "enablePullDownRefresh": true,

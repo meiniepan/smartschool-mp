@@ -1,2 +1,23 @@
 <!--pages/repairList/repairList.wxml-->
-<text>pages/repairList/repairList.wxml</text>
+<view class="out">
+<scroll requesting="{{mData.requesting}}"
+        end="{{mData.end}}"
+        empty-show="{{mData.emptyShow}}"
+        list-count="{{mData.listData.length}}"
+        top-size="80"
+        bottom-size="{{bottomHeight}}"
+        bind:refresh="refresh"
+        bind:more="more" style="margin-top: -80rpx">
+    <view class="cells">
+        <view class="cell"
+              wx:for="{{mData.listData}}"
+              wx:key="index"
+              bindtap="articleDetail">
+            <view class="titles">
+                <view class="title">{{item.remark}}</view>
+                <view class="status">{{item.remark}}</view>
+            </view>
+        </view>
+    </view>
+</scroll>
+</view>

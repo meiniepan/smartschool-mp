@@ -1,2 +1,11 @@
 <!--pages/repair/repair.wxml-->
-<text>pages/repair/repair.wxml</text>
+<view class="out">
+    <view class="record">
+        <view hidden="{{!isRepair}}" class="repair-record" style="margin-right: 86rpx" bindtap="doRepairList">
+            查看维修记录
+        </view>
+        <view class="repair-record" bindtap="doReportList">
+            查看报修历史
+        </view>
+    </view>
+</view>

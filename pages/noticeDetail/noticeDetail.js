@@ -1,5 +1,4 @@
 import {showToastWithoutIcon} from '../../utils/util';
-
 let app = getApp();
 Page({
     /**
