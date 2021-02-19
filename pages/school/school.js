@@ -122,7 +122,7 @@ Page({
                     name: globalData.propertyTitle,
                     remark: "一键拨打 随叫随到",
                     icon: "/assets/images/ic_baoxiu.png",
-                    click: "/pages/logs/logs"
+                    click: "/pages/repair/repair"
                 })
         }
         if (bean2.items.length > 0) {
@@ -136,7 +136,7 @@ Page({
                     name: globalData.siteTitle,
                     remark: "场地时段 一目了然",
                     icon: "/assets/images/ic_changdi.png",
-                    click: "/pages/logs/logs"
+                    click: "/pages/bookSiteList/bookSiteList"
                 })
         }
 
