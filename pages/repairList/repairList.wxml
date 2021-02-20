@@ -4,18 +4,59 @@
         end="{{mData.end}}"
         empty-show="{{mData.emptyShow}}"
         list-count="{{mData.listData.length}}"
-        top-size="80"
+        top-size="0"
         bottom-size="{{bottomHeight}}"
         bind:refresh="refresh"
-        bind:more="more" style="margin-top: -80rpx">
+        bind:more="more" style="padding-top: 0rpx">
     <view class="cells">
         <view class="cell"
               wx:for="{{mData.listData}}"
               wx:key="index"
               bindtap="articleDetail">
             <view class="titles">
-                <view class="title">{{item.remark}}</view>
-                <view class="status">{{item.remark}}</view>
+                <view class="title-name">报修时间</view>
+                <view class="title">{{item.reporttime}}</view>
+            </view>
+            <view class="titles">
+                <view class="title-name">工单编号</view>
+                <view class="title">{{item.id}}</view>
+            </view>
+            <view class="titles">
+                <view class="title-name">报修类型</view>
+                <view class="title">{{item.typename}}</view>
+            </view>
+            <view class="titles" hidden="{{typeStr=='report'}}">
+                <view class="title-name">发起人</view>
+                <view class="title">{{item.reportinfo.realname}}</view>
+            </view>
+            <view class="titles">
+                <view class="title-name">接单人</view>
+                <view class="title">{{item.repairerinfo.realname}}</view>
+            </view>
+            <view class="titles">
+                <view class="title-name">工单状态</view>
+                <view class="title">{{item.statusStr}}</view>
+            </view>
+            <view class="titles">
+                <view class="title-name">完成时间</view>
+                <view class="title">{{item.completetime}}</view>
+            </view>
+            <view class="titles">
+                <view class="title-name">工单详情</view>
+            </view>
+            <view class="titles">
+                <view class="remark">{{item.remark}}</view>
+            </view>
+            <view class="titles">
+                <view class="title-name">上传图片</view>
+            </view>
+            <view class="cells-image">
+            <view class="cell-image"
+                  wx:for="{{item.fileinfo}}"
+                  wx:key="index"
+                  bindtap="">
+                <image class="image" src="{{item.url}}"/>
+            </view>
             </view>
         </view>
     </view>

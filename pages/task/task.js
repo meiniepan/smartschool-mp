@@ -61,6 +61,7 @@ Page({
             } else {
                 pageData.end = true;
                 pageData.lastid = null
+                pageData.emptyShow = true
             }
             if (type === 'refresh') {
                 pageData.listData = listData;
@@ -174,6 +175,11 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
+        // wx.requestSubscribeMessage({
+        //     tmplIds: ['aasPBwm2xjII9E6K9Ee17ljHSYxQxwBWWDKxG0peDqc'],
+        //     success (res) { }
+        // })
+
         let categoryData = [];
         let categoryMenu; // 分类菜单数据
         let categoryMenuS = ["全部", "未完成", "已完成"]; // 分类菜单数据,学生
@@ -202,7 +208,6 @@ Page({
                     categoryCur: index,
                     requesting: false,
                     end: false,
-                    emptyShow: true,
                     lastid: null,
                     listData: [],
                     type: type,
@@ -240,7 +245,6 @@ Page({
                     categoryCur: index,
                     requesting: false,
                     end: false,
-                    emptyShow: true,
                     lastid: null,
                     listData: [],
                     type: type,

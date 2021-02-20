@@ -103,8 +103,12 @@ Page({
                     indexClass = i
                 }
             }
-            console.log("data2", data)
+            let isEmpty = false
+            if (data.length==0){
+                isEmpty = true
+            }
             this.setData({
+                isEmpty,
                 mData: data,
                 classData,
                 classArrays,
@@ -164,15 +168,18 @@ Page({
 
         app.httpPost(url, data).then((res) => {
             let data = res.respResult.list;
-
-            console.log("data2", data)
+            let isEmpty = false
+            if (data.length==0){
+                isEmpty = true
+            }
             this.setData({
+                isEmpty,
                 mData: data,
             });
 
         });
     },
-    doClickCourse(e){
+    doClickCourse: function(e){
         wx.navigateTo({
             url: '/pages/attendance2/attendance2?data='+JSON.stringify(e.currentTarget.dataset.data),
         })

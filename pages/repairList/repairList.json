@@ -2,7 +2,7 @@
   "usingComponents": {
     "scroll": "../../components/scroll/scroll"
   },
-  "navigationBarTitleText": "保修报送",
+  "navigationBarTitleText": "报修报送",
   "disableScroll": true,
   "backgroundTextStyle": "dark"
 }

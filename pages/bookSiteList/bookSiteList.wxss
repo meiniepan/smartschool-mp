@@ -1,1 +1,34 @@
-/* pages/bookSiteList/bookSiteList.wxss */
+page{
+    background: var(--tintBac);
+}
+.cells {
+    padding-top: 20rpx;
+}
+.cell {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    padding: 40rpx var(--titlePadding);
+    margin-bottom: 20rpx;
+}
+
+.titles {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20rpx;
+}
+.title-name{
+    font-size: 30rpx;
+    font-weight: bold;
+}
+.title {
+    color: var(--commonHint);
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    text-align: center;
+}
+
