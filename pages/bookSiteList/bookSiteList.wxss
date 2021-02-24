@@ -1,9 +1,11 @@
-page{
+page {
     background: var(--tintBac);
 }
+
 .cells {
     padding-top: 20rpx;
 }
+
 .cell {
     display: flex;
     flex-direction: column;
@@ -18,10 +20,12 @@ page{
     justify-content: space-between;
     margin-bottom: 20rpx;
 }
-.title-name{
+
+.title-name {
     font-size: 30rpx;
     font-weight: bold;
 }
+
 .title {
     color: var(--commonHint);
     display: -webkit-box;
@@ -31,4 +35,3 @@ page{
     overflow: hidden;
     text-align: center;
 }
-

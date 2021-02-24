@@ -2,7 +2,35 @@
 .out{
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  margin-top: 200rpx;
+  background-color: var(--commonBlack);
+}
+.image{
+  width: 100%;
+  height: clac(100vh - 600rpx);
+}
+.text1{
+  font-size: 72rpx;
+  font-weight: bold;
+}
+.text1{
+  font-size: 36rpx;
+  margin-top: 36rpx;
+  font-weight: bold;
+}
+.space1{
+  width: 140rpx;
+  height: 4rpx;
+  background-color: var(--commonBlack);
+  margin-top: 32rpx;
+}
+.bottom{
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  bottom: 0;
+  border-top-left-radius: 80rpx;
+  background-color: var(--white);
+  border-top-right-radius: 80rpx;
+  padding: 80rpx var(--titlePadding) 100rpx;
 }
 .btn{margin-bottom: 20rpx;}

@@ -5,7 +5,7 @@ Page({
      * 页面的初始数据
      */
     data: {
-        mData: {lastid: null, listData: []},
+        mData: { lastid: null, listData: [] },
     },
 
     getList(type, lastid) {

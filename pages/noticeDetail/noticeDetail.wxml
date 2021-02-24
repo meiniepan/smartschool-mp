@@ -14,7 +14,7 @@
         <text class="remark">{{mData.remark}}</text>
         <view class="img-cells">
             <view class="img-cell" wx:for="{{mImages}}" wx:key="index">
-                <image src="{{item}}" />
+                <image src="{{item}}"  mode="aspectFill"/>
             </view>
         </view>
         <commonButton wx:if="{{isUnreadFeedback}}" class="btn-read" enable="{{!isDisabled}}" color="{{readColor}}"

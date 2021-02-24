@@ -4,7 +4,7 @@ page {
   --userToken: 'userToken';
 
 
-  --themeColor: #445FF5;
+  --themeColor: #F95B49;
   --tintBac: #F5F7FD;
   --commonBac: #ffffff;
   --white: #ffffff;
@@ -14,7 +14,7 @@ page {
   --grayF6: #F6F6F6;
   --grayEE: #EEEEEE;
 
-  --themeBac: linear-gradient(to right,#445FF5,#6D0BBD);
+  --themeBac: linear-gradient(to right,#EF8D82,#F95B49);
   --titlePadding: 46rpx;
 
   font-size: 32rpx;

@@ -1,4 +1,4 @@
-import {showToastWithoutIcon} from '../../utils/util';
+import { showToastWithoutIcon } from '../../utils/util';
 let app = getApp();
 Page({
     /**
@@ -60,7 +60,7 @@ Page({
                     } else {
                         type = "/assets/images/ic_type_unknow.png"
                     }
-                    mFiles.push({name: it.name, image: type, url: wx.getStorageSync("domain") + it.url})
+                    mFiles.push({ name: it.name, image: type, url: wx.getStorageSync("domain") + it.url })
                 }
             })
 

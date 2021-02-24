@@ -6,7 +6,7 @@ Page({
      * 页面的初始数据
      */
     data: {
-        mData:{lastid:null,listData:[]},
+        mData: { lastid: null, listData: [] },
     },
 
     getList(type, lastid) {
@@ -24,44 +24,44 @@ Page({
         let data = {
             token: wx.getStorageSync('token'),
             lastid: lastid,
-            type:this.data.typeStr,
+            type: this.data.typeStr,
         }
 
         app.httpPost(url, data).then((res) => {
             mData.requesting = false;
             let listData = res.respResult.data
-            let statusStr=""
-            if (listData.length>0){
-                listData.forEach(item=>{
-                    if(item.status == "0"){
+            let statusStr = ""
+            if (listData.length > 0) {
+                listData.forEach(item => {
+                    if (item.status == "0") {
                         statusStr = "已撤销"
                     }
-                    else if(item.status == "1"){
+                    else if (item.status == "1") {
                         statusStr = "未接单"
                     }
-                    else if(item.status == "2"){
+                    else if (item.status == "2") {
                         if (item.isdelay == "1") {
                             statusStr = "已延期"
                         } else {
                             statusStr = "已接单"
                         }
                     }
-                    else if(item.status == "3"){
+                    else if (item.status == "3") {
                         statusStr = "已完成"
                     }
                     item.statusStr = statusStr;
-                    item.fileinfo.forEach(it=>{
-                        it.url = wx.getStorageSync("domain")+it.url
+                    item.fileinfo.forEach(it => {
+                        it.url = wx.getStorageSync("domain") + it.url
                     })
                     //图片个数凑够3的倍数，方便布局
-                    if (item.fileinfo.length>0){
-                        let n = 3-item.fileinfo.length%3
-                        for (let i = 0; i <n ; i++) {
-                            item.fileinfo.push({url:""})
+                    if (item.fileinfo.length > 0) {
+                        let n = 3 - item.fileinfo.length % 3
+                        for (let i = 0; i < n; i++) {
+                            item.fileinfo.push({ url: "" })
                         }
                     }
                 })
-            }else {
+            } else {
                 mData.emptyShow = true
             }
             if (listData.length > 0) {
@@ -81,7 +81,7 @@ Page({
         })
     },
     refresh() {
-        this.getList('refresh',null);
+        this.getList('refresh', null);
     },
 
     more() {

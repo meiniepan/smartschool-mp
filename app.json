@@ -33,7 +33,7 @@
   ],
   "tabBar": {
     "color": "#222222",
-    "selectedColor": "#445FF5",
+    "selectedColor": "#F95B49",
     "list": [
         {
             "pagePath": "pages/circular/circular",

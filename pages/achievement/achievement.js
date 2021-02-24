@@ -46,7 +46,7 @@ Page({
                             })
                         }
                     },
-                    confirmColor: "#445FF5",
+                    confirmColor: "#F95B49",
                 })
                 return;
             }

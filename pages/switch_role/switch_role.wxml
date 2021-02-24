@@ -1,6 +1,12 @@
 <!--pages/switch_role/switch_role.wxml-->
 <view class="out">
-<button bindtap="btn1" type="primary" class="btn">我是学生</button>
-<button bindtap="btn2" type="primary" class="btn">我是老师</button>
-<button bindtap="btn3" type="primary" class="btn">我是家长</button>
+    <image class="image" src="/assets/images/bac_splash.jpg" mode="widthFix"/>
+    <view class="bottom">
+        <view class="text1">欢迎！</view>
+        <view class="text2">选择您所在的身份状态，加入汇文云体验\n智慧校园生活。 </view>
+        <view class="space1"></view>
+        <commonButton bindtap="btn2" class="btn" text="老师" style="margin-top: 90rpx"/>
+        <commonButton bindtap="btn1" class="btn" text="学生" style="margin-top: 32rpx"/>
+        <commonButton bindtap="btn3" class="btn" text="家长" style="margin-top: 32rpx"/>
+    </view>
 </view>

@@ -1,10 +1,12 @@
 /* pages/repairList/repairList.wxss */
-page{
+page {
     background: var(--tintBac);
 }
+
 .cells {
     padding-top: 20rpx;
 }
+
 .cell {
     display: flex;
     flex-direction: column;
@@ -19,10 +21,12 @@ page{
     justify-content: space-between;
     margin-bottom: 20rpx;
 }
-.title-name{
+
+.title-name {
     font-size: 30rpx;
     font-weight: bold;
 }
+
 .title {
     display: -webkit-box;
     -webkit-box-orient: vertical;
@@ -30,15 +34,18 @@ page{
     text-overflow: ellipsis;
     overflow: hidden;
 }
-.remark{
+
+.remark {
     color: var(--commonHint);
 }
-.cells-image{
-display: flex;
+
+.cells-image {
+    display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
 }
-.image{
+
+.image {
     width: 200rpx;
     height: 200rpx;
     margin-top: 14rpx;

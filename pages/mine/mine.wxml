@@ -1,7 +1,7 @@
 <!--pages/mine/mine.wxml-->
 <view class="out">
 
-    <image class="img" src="{{img}}"></image>
+    <image class="img" src="{{img}}" mode="aspectFill"></image>
     <text class="text">{{name}}</text>
     <myItem icon="/assets/images/ic_ziliao.png" text="我的资料" bindtap="doClick" data-url="/pages/mine_info/mine_info">
         </myItem>
