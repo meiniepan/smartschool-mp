@@ -1,1 +1,24 @@
-/* pages/choose_child/choose_child.wxss */
+.cell{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-left: var(--titlePadding);
+    padding-right: var(--titlePadding);
+    padding-top: 30rpx;
+    padding-bottom: 30rpx;
+    border-bottom: var(--splitColor) solid 1rpx;
+}
+.check{
+    width: 24rpx;
+    height: 24rpx;
+}
+.title{
+    margin-left: 10rpx;
+}
+.bottom{
+    width: 100%;
+    padding: 0 var(--titlePadding);
+    box-sizing: border-box;
+    position: absolute;
+    bottom: 200rpx;
+}

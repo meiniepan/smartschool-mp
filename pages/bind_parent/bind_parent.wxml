@@ -1,2 +1,10 @@
 <!--pages/bind_parent/bind_parent.wxml-->
-<text>pages/bind_parent/bind_parent.wxml</text>
+<view class="out">
+    <view class="split"/>
+    <emptyView wx:if="{{isEmpty}}"/>
+    <view class="cells" wx:else>
+        <view class="cell" wx:for="{{mData}}" wx:key="index">
+            <text class="title">{{item.phone}}</text>
+        </view>
+    </view>
+</view>

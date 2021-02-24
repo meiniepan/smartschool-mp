@@ -12,9 +12,10 @@
   font-size: 72rpx;
   font-weight: bold;
 }
-.text1{
-  font-size: 36rpx;
-  margin-top: 36rpx;
+.text2{
+  font-size: 32rpx;
+  margin-top: 32rpx;
+  margin-top: 32rpx;
   font-weight: bold;
 }
 .space1{
@@ -24,6 +25,8 @@
   margin-top: 32rpx;
 }
 .bottom{
+  width: 100%;
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   position: fixed;

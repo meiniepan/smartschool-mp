@@ -50,10 +50,12 @@ Page({
             let classData = res.respResult.classs;
             let indexClass = 0;
             let classArrays = [];
-            for (let i = 0; i < classData.length; i++) {
-                classArrays.push(classData[i].classname)
-                if (classData[i].choice == "1") {
-                    indexClass = i
+            if (classData!=null){
+                for (let i = 0; i < classData.length; i++) {
+                    classArrays.push(classData[i].classname)
+                    if (classData[i].choice == "1") {
+                        indexClass = i
+                    }
                 }
             }
             let total = mLabelData.length

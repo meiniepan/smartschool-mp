@@ -3,7 +3,7 @@
     <image class="image" src="/assets/images/bac_splash.jpg" mode="widthFix"/>
     <view class="bottom">
         <view class="text1">欢迎！</view>
-        <view class="text2">选择您所在的身份状态，加入汇文云体验\n智慧校园生活。 </view>
+        <text class="text2" >选择您所在的身份状态，加入汇文云体验\n智慧校园生活。 </text>
         <view class="space1"></view>
         <commonButton bindtap="btn2" class="btn" text="老师" style="margin-top: 90rpx"/>
         <commonButton bindtap="btn1" class="btn" text="学生" style="margin-top: 32rpx"/>

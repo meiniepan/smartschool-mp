@@ -1,1 +1,8 @@
 /* pages/bind_parent/bind_parent.wxss */
+.cell{
+    margin-left: var(--titlePadding);
+    padding-right: var(--titlePadding);
+    padding-top: 30rpx;
+    padding-bottom: 30rpx;
+    border-bottom: var(--splitColor) solid 1rpx;
+}

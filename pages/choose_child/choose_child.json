@@ -1,3 +1,7 @@
 {
-  "usingComponents": {}
+  "usingComponents": {
+    "commonButton": "../../components/commonButton/commonButton",
+    "emptyView": "../../components/emptyView/emptyView"
+  },
+  "navigationBarTitleText": "选择孩子"
 }

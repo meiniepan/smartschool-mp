@@ -150,6 +150,7 @@ App({
         wx.setStorageSync('usertype', data.usertype)
         wx.setStorageSync('logintype', data.logintype)
         wx.setStorageSync('parents', JSON.stringify(data.parents))
+        wx.setStorageSync('students', JSON.stringify(data.students))
         wx.setStorageSync('domain', data.domain)
 
     },

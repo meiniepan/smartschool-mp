@@ -1,2 +1,13 @@
-<!--pages/choose_child/choose_child.wxml-->
-<text>pages/choose_child/choose_child.wxml</text>
+<view class="out">
+    <view class="split"/>
+    <emptyView wx:if="{{isEmpty}}"/>
+    <view class="cells" wx:else>
+        <view class="cell" wx:for="{{mData}}" wx:key="index" data-index="{{index}}" bindtap="check">
+            <image src="../../assets/images/{{item.choice=='1' ? 'ic_check_timetable_true' : 'ic_check_timetable_false'}}.png" class="check"/>
+            <text class="title">{{item.realname}}</text>
+        </view>
+    </view>
+    <view class="bottom">
+    <commonButton class="btn-confirm" bindtap="confirm" text="确定" />
+    </view>
+</view>

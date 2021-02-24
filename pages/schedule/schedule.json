@@ -1,6 +1,7 @@
 {
   "usingComponents": {
-    "calendar": "../../components/calendar/calendar"
+    "calendar": "../../components/calendar/calendar",
+    "emptyView": "../../components/emptyView/emptyView"
   },
   "navigationBarTitleText": "日程安排"
 }
