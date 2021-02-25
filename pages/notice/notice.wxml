@@ -5,7 +5,7 @@
 		<view class="titles">
 			<view class="fresh" hidden="{{item.isRead}}"></view>
 			<view class="title">{{item.title}}</view>
-			<view class="date">{{item.noticetime}}</view>
+			<text class="date">{{item.noticetime}}</text>
 		</view>
 		<view class="tag1" hidden="{{!item.isFeedback}}">@我</view>
 		<text class="tag">{{item.remark}}</text>

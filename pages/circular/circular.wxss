@@ -35,6 +35,8 @@ page {
 }
 
 .title {
+
+  flex-grow: 1;
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 1;
@@ -43,10 +45,9 @@ page {
 }
 
 .date {
-  flex: 1;
-  display: flex;
+  min-width: 240rpx;
+  text-align: right;
   color: var(--commonHint);
-  flex-direction: row-reverse;
   margin-left: 15rpx;
 }
 

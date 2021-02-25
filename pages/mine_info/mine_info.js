@@ -13,12 +13,22 @@ Page({
         llItem5: false,
         llItem6: false,
     },
-
+    binderror(e){
+        let img="/assets/images/ic_avatar_default.png"
+        this.setData({
+            img
+        })
+    },
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-        let img = wx.getStorageSync("domain") + wx.getStorageSync("portrait");
+        let img=""
+        if (wx.getStorageSync("portrait")==""){
+            img="/asset/images/ic_avatar_default.png"
+        }else {
+            img = wx.getStorageSync("domain") + wx.getStorageSync("portrait");
+        }
         let name = wx.getStorageSync("realname");
         let phone = wx.getStorageSync("phone");
         let sex = wx.getStorageSync("sex")=="1"?"男":wx.getStorageSync("sex")=="2"?"女":"未知";
