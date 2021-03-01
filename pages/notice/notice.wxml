@@ -1,5 +1,5 @@
 <!--pages/circular/circular.wxml-->
-
+<view class="out">
 <view class="cells">
 	<view class="cell" wx:for="{{mData}}" wx:key="index" data-url="{{item.id}}" bindtap="doDetail">
 		<view class="titles">
@@ -10,4 +10,5 @@
 		<view class="tag1" hidden="{{!item.isFeedback}}">@我</view>
 		<text class="tag">{{item.remark}}</text>
 	</view>
+</view>
 </view>

@@ -49,7 +49,17 @@ Page({
         item.isRead = this.isRead(item)
         item.isFeedback = this.isFeedback(item)
       });
-      
+      let unRead = res.respResult.unread
+      wx.setNavigationBarTitle({
+        title: "通知"
+      })
+      if (unRead.length>0) {
+        if (parseInt(unRead)>0) {
+          wx.setNavigationBarTitle({
+            title: "通知("+unRead+")"
+          })
+        }
+      }
       this.setData({
         mData: data2
       });

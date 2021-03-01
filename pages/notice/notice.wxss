@@ -45,7 +45,7 @@ page {
 }
 
 .date {
-  width: 280rpx;
+  min-width: 240rpx;
   text-align: right;
   color: var(--commonHint);
   margin-left: 15rpx;
