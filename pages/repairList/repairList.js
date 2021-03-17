@@ -41,7 +41,7 @@ Page({
                     }
                     else if (item.status == "2") {
                         if (item.isdelay == "1") {
-                            statusStr = "已延期"
+                            statusStr = "已延期("+item.delayreasons+")"
                         } else {
                             statusStr = "已接单"
                         }
