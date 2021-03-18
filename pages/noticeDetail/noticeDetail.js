@@ -13,11 +13,11 @@ Page({
         isFeedback: "",
         isReadFeedback: false,
         isUnreadFeedback: false,
-        readStr: "我已阅读 (5s)",
-        readColor: "gray",
+        readStr: "我已阅读",
+        readColor: "white",
         count: 4,   // 倒计时的秒数
         countConst: 4,
-        isDisabled: true,// 按钮是否禁用
+        isDisabled: false,// 按钮是否禁用
         interval: "",
         animationData: {}
     },
@@ -74,7 +74,7 @@ Page({
                 mImages: mImages,
                 mFiles: mFiles
             });
-            this.countdown()
+            // this.countdown()
         });
     },
     initReceivedUI() {

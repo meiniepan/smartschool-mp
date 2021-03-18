@@ -33,18 +33,19 @@ Page({
         let llItem2 = true,
          llItem3=true, llItem4=true, llItem5=true, llItem6=true;
 
-        if (app.checkRule2("user/student/modify")) {
+        if (wx.getStorageSync("usertype") == "1") {
+            if (wx.getStorageSync("logintype") == "self") {
             llItem3 = false
             llItem6 = true
             llItem4 = false
-        }else if (app.checkRule2("user/student/modifyParents")) {
+        }else {
             name = wx.getStorageSync("parentname")
             llItem3 = true
             llItem6 = false
             llItem2 = false
-            llItem4 = false
-        }else if (app.checkRule2("user/teachers/modify")) {
-            if (app.checkRule2("teacher/classs/codeList")) {
+            llItem4 = false}
+        }else if (wx.getStorageSync("usertype") == "2" || wx.getStorageSync("usertype") == "99") {
+            if (wx.getStorageSync("classmaster") == "1") {
                 llItem4 = true
             } else {
                 llItem4 = false
