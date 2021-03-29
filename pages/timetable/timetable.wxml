@@ -46,7 +46,7 @@
                         </view>
                         <view wx:for="{{item.list}}" wx:for-index="idx" wx:for-item="bean" wx:key="idx">
                             <view class="cell1-cell" wx:if="{{bean.coursename!=null}}">
-                                <text wx:if="{{choseTeacher}}" class="singleLine ">{{bean.classname}}</text>
+                                <text wx:if="{{choseTeacher}}" class="singleLine ">{{bean.levelname+bean.classname}}</text>
                                 <text wx:else class="singleLine ">{{bean.coursename}}</text>
                                 <text class="singleLine hint">{{bean.campus}}</text>
                                 <text class="singleLine hint">{{bean.classroomname}}</text>

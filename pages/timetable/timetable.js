@@ -52,7 +52,7 @@ Page({
             let classArrays = [];
             if (classData!=null){
                 for (let i = 0; i < classData.length; i++) {
-                    classArrays.push(classData[i].classname)
+                    classArrays.push(classData[i].levelname+classData[i].classname)
                     if (classData[i].choice == "1") {
                         indexClass = i
                     }

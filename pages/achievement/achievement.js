@@ -53,7 +53,7 @@ Page({
             if (data.classs.length > 0) {
                 classid = data.classs[0].classid
                 for (let i = 0; i < data.classs.length; i++) {
-                    classArrays.push(data.classs[i].classname)
+                    classArrays.push(data.classs[i].levelname+data.classs[i].classname)
                 }
             }
             let courseData = []

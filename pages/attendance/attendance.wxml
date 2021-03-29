@@ -60,7 +60,7 @@
             <view class="cell" wx:for="{{mData}}" wx:key="index" data-data="{{item}}" bindtap="doClickCourse">
                 <view class="tea-course-area">
                     <view class="tea-course-name">
-                        {{item.classname}}
+                        {{item.levelname+item.classname}}
                     </view>
                     <view class="tea-course-time">
                         {{item.crstime}}
@@ -108,7 +108,7 @@
                                     {{bean.realname}}
                                 </view>
                                 <view>
-                                    {{bean.classname}}
+                                    {{bean.levelname+bean.classname}}
                                 </view>
                             </view>
                         </view>
