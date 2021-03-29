@@ -1,5 +1,6 @@
 <!--pages/my_code/my_code.wxml-->
-<view class="cells">
+<emptyView wx:if="{{isEmpty}}" />
+<view class="cells" wx:else>
     <view class="cell" wx:for="{{mData}}" wx:key="index" >
         <image class="image" src="/assets/images/bac_invite.png"/>
         <view class="out2">

@@ -15,9 +15,11 @@ Page({
         }
         app.httpPost(url, data).then((res) => {
             let data = res.respResult;
+            let isEmpty = data.length == 0
             console.log("data",data)
             this.setData({
                 mData: data,
+                isEmpty
             });
         });
     },
