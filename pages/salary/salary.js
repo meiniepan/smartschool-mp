@@ -18,9 +18,7 @@ Page({
     isDisabled: false,// 按钮是否禁用
     interval: "",
     hiddenPage2: true,
-    mData: [],
-    moreEnd: false,
-    lastid: "",
+    mData: {requesting:false,end:true,listData:[],lastid:null},
   },
 
   /**
@@ -33,12 +31,14 @@ Page({
   showPage1() {
     this.setData({
       hiddenPage1: false,
+      hiddenPage2: true,
       phone: wx.getStorageSync('phone')
     })
   },
   //显示数据页面
   showPage2() {
     this.setData({
+      hiddenPage1: true,
       hiddenPage2: false,
     })
   },
@@ -67,33 +67,49 @@ Page({
     });
   },
   getList(type, lastid) {
-    let moreEnd = this.data.moreEnd
-    if (moreEnd) return;
-    let mData = this.data.mData
-    let _lastid = lastid
+    let pageData = this.data.mData
+    if (type === 'refresh') {
+      pageData.end = false
+    }
+    if (pageData.end) return;
+
+    pageData.requesting = true;
+    this.setData({
+      mData: pageData,
+    })
     let data = {
       token: wx.getStorageSync('token'),
+      lastid
     };
     app.httpPost('/api/v17/admin/wages/mywdlists', data).then((res) => {
       this.showPage2()
-      let data = res.respResult.data;
-      if (data.length > 0) {
-        _lastid = data[data.length - 1].id
+      console.log("data",res)
+      let listData = res.respResult.data;
+      pageData.requesting = false;
+      if (listData.length > 0) {
+        pageData.lastid = listData[listData.length - 1].id
       } else {
-        moreEnd = true
+        pageData.end = true;
+        pageData.lastid = null
+
       }
       if (type === 'refresh') {
-        mData = data;
+        pageData.listData = listData;
+        pageData.emptyShow = pageData.listData.length==0
       } else {
-        mData = mData.concat(data);
+        pageData.listData = pageData.listData.concat(listData);
       }
       this.setData({
-        mData: mData,
-        lastid: _lastid,
-        moreEnd: moreEnd
+        mData: pageData,
       })
+
     },(res)=>{
-      if (res.respCode != '0001') {
+      pageData.requesting = false;
+      this.setData({
+        mData: pageData,
+      })
+      console.log("res",res)
+      if (res.respCode != '0000') {
         this.showPage1()
     }
     });

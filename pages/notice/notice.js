@@ -38,10 +38,16 @@ Page({
           showToastWithoutIcon('无更多数据');
         }
       } else {
-        let lastId = data[data.length-1].id
+        let isEmpty = data.length == 0
+        wx.stopPullDownRefresh();
+        let lastId = ""
+        if (data.length > 0) {
+          lastId = data[data.length - 1].id
+        }
         this.setData({
           mData: data,
-          lastId: lastId
+          lastId: lastId,
+          isEmpty
         });
       }
       var data2 = this.data.mData;

@@ -21,6 +21,7 @@ Page({
      */
     onLoad: function (options) {
         let isMaster = false;
+        let modeMaster = false;
         let typeArrays = [];
         let mode = "";
         let indexType = 0;
@@ -40,6 +41,7 @@ Page({
                 typeArrays.push("班级考勤")
                 mode = "master"
                 isMaster = true
+                modeMaster = true
             } else {
                 mode = "tea"
             }
@@ -55,6 +57,7 @@ Page({
             date: getTodayMD(),
             dateStr: getTodayStr(),
             isMaster,
+            modeMaster,
             mode,
             typeArrays,
             indexType,
@@ -98,13 +101,13 @@ Page({
             let indexClass = 0;
             let classArrays = [];
             for (let i = 0; i < classData.length; i++) {
-                classArrays.push(classData[i].levelname+classData[i].classname)
+                classArrays.push(classData[i].levelname + classData[i].classname)
                 if (classData[i].choice == "1") {
                     indexClass = i
                 }
             }
             let isEmpty = false
-            if (data.length==0){
+            if (data.length == 0) {
                 isEmpty = true
             }
             this.setData({
@@ -169,7 +172,7 @@ Page({
         app.httpPost(url, data).then((res) => {
             let data = res.respResult.list;
             let isEmpty = false
-            if (data.length==0){
+            if (data.length == 0) {
                 isEmpty = true
             }
             this.setData({
@@ -179,31 +182,46 @@ Page({
 
         });
     },
-    doClickCourse: function(e){
+    doClickCourse: function (e) {
         wx.navigateTo({
-            url: '/pages/attendance2/attendance2?data='+JSON.stringify(e.currentTarget.dataset.data),
+            url: '/pages/attendance2/attendance2?data=' + JSON.stringify(e.currentTarget.dataset.data),
         })
     },
     bindPickerChange: function (e) {
         let type = e.currentTarget.dataset.type;
         let isMaster;
         if (type == "indexType") {
-            isMaster = e.detail.value == 0;
-            if (isMaster) {
+           let typeStr = this.data.typeArrays[e.detail.value]
+            console.log("type",typeStr)
+            isMaster = typeStr=="班级考勤";
+           if(this.data.modeMaster){
+               if (isMaster) {
+                   this.setData({
+                       mode: "master",
+                       isMaster,
+                   })
+               }else{
+                   this.setData({
+                       mode: "tea",
+                       isMaster,
+                   })
+               }
+           }
+
                 this.setData({
                     [type]: e.detail.value,
-                    isMaster,
-                    mode: "master",
+
                 })
-                this.getDataMaster()
-            } else {
-                this.setData({
-                    [type]: e.detail.value,
-                    isMaster,
-                    mode: "tea",
-                })
-                this.getTimetable()
-            }
+                if (typeStr=="课堂考勤"){
+                    this.getTimetable()
+                }else if(typeStr=="我的考勤"){
+                    this.getStuData()
+                }else if(typeStr=="班级考勤"){
+                    this.getDataMaster()
+                }else if(typeStr=="校级考勤"){
+                    this.getSchoolData()
+                }
+
         } else {
             this.setData({
                 [type]: e.detail.value,

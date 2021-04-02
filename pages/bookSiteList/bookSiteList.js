@@ -51,11 +51,13 @@ Page({
                     item.timeStr = timeStr;
                 })
             }
+
             if (listData.length > 0) {
                 mData.lastid = listData[listData.length - 1].id
             } else {
                 mData.end = true;
                 mData.lastid = null
+                mData.emptyShow = true
             }
             if (type === 'refresh') {
                 mData.listData = listData;

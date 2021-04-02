@@ -48,7 +48,8 @@
   padding-top: 20rpx;
 }
 
-.cell {}
+.cell {display: flex;
+  flex-direction: column;}
 
 .dataTitles {
   display: flex;

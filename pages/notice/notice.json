@@ -1,5 +1,6 @@
 {
   "usingComponents": {
+    "emptyView": "../../components/emptyView/emptyView"
   },
   "navigationBarTitleText": "通知公告",
   "enablePullDownRefresh": true,
