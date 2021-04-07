@@ -9,6 +9,7 @@
     "pages/notice/notice",
     "pages/schedule/schedule",
     "pages/salary/salary",
+    "pages/salaryDetail/salaryDetail",
     "pages/repair/repair",
     "pages/repairList/repairList",
     "pages/bookSiteList/bookSiteList",

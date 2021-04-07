@@ -159,6 +159,13 @@ Page({
       }
     }, 1000);
   },
+
+  salaryDetail(e){
+    wx.navigateTo({
+      url: '/pages/salaryDetail/salaryDetail?id='+e.currentTarget.dataset.url,
+    })
+  },
+
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

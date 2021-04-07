@@ -1,4 +1,7 @@
 /* pages/salary/salary.wxss */
+page{
+  background: var(--tintBac);
+}
 .out1 {
   display: flex;
   flex-direction: column;

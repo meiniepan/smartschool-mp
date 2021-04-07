@@ -1,0 +1,13 @@
+<!--pages/salaryDetail/salaryDetail.wxml-->
+<view class="out1">
+<text class="title1">{{mData.reachwages}}</text>
+<text class="title2">{{mData.title+"实发工资"}}</text>
+    <view class="cells">
+        <view class="cell" wx:for="{{mData.expand.keys}}" wx:key="index" bindtap="articleDetail">
+            <view class="ext">
+                <view class="ext-key">{{mData.expand.keys[index]}}</view>
+                <view class="ext-value">{{mData.expand.vals[index]}}</view>
+            </view>
+        </view>
+    </view>
+</view>

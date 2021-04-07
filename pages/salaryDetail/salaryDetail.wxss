@@ -1,0 +1,44 @@
+/* pages/salaryDetail/salaryDetail.wxss */
+page{
+    background: var(--themeBac);
+}
+
+.out1 {
+    display: flex;
+    flex-direction: column;
+    padding: 0 var(--titlePadding);
+}
+.title1 {
+    margin-top: 40rpx;
+    font-size: 60rpx;
+    font-weight: bold;
+    color: var(--white);
+}
+
+.title2 {
+    margin-top: 0rpx;
+    font-size: 24rpx;
+    color: var(--white);
+}
+.cells{
+    margin-top: 40rpx;
+    margin-bottom: 40rpx;
+    background: var(--white);
+    border-radius: 12rpx;
+}
+.cell:not(:last-child) {
+    border-bottom: var(--splitColor) 1rpx;
+}
+.ext{
+    display: flex;
+    justify-content: space-between;
+}
+.ext-key{
+    font-size: 28rpx;
+    color: var(--commonHint);
+}
+.ext-value{
+    font-size: 40rpx;
+    font-weight: bold;
+    color: var(--commonBlack);
+}
