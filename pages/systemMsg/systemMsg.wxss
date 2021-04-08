@@ -1,0 +1,47 @@
+/* pages/systemMsg/systemMsg.wxss */
+page {
+    background-color: var(--tintBac);
+}
+
+.cells {
+    margin-top: 20rpx;
+
+}
+
+.cell {
+    display: flex;
+    flex-direction: column;
+    margin-left: var(--titlePadding);
+    margin-right: var(--titlePadding);
+    border-radius: 40rpx;
+    background-color: var(--commonBac);
+    padding: 40rpx 24rpx;
+    margin-bottom: 20rpx;
+    box-sizing: border-box;
+}
+
+
+.titles {
+    display: flex;
+    font-size: 28rpx;
+    align-items: center;
+}
+
+
+.title {
+
+    flex-grow: 1;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.date {
+    min-width: 240rpx;
+    text-align: right;
+    color: var(--commonHint);
+    margin-left: 15rpx;
+}
+

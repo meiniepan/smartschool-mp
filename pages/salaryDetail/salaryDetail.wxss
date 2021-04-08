@@ -26,12 +26,16 @@ page{
     background: var(--white);
     border-radius: 12rpx;
 }
+.cell{
+    padding:30rpx 22rpx;
+}
 .cell:not(:last-child) {
-    border-bottom: var(--splitColor) 1rpx;
+    border-bottom: var(--splitColor) solid 1rpx;
 }
 .ext{
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 .ext-key{
     font-size: 28rpx;

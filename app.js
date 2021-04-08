@@ -124,7 +124,7 @@ App({
     saveUserInfo: function (data) {
         wx.setStorageSync('token', data.token)
         wx.setStorageSync('uid', data.uid)
-        wx.setStorageSync('cno', data.cno)
+        wx.setStorageSync('idcard', data.idcard)
         wx.setStorageSync('sno', data.sno)
         wx.setStorageSync('eduid', data.eduid)
         wx.setStorageSync('realname', data.realname)

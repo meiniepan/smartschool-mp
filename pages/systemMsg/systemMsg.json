@@ -1,12 +1,9 @@
 {
   "usingComponents": {
-    "tab": "../../components/tab/tab",
     "emptyView": "../../components/emptyView/emptyView",
     "navigation": "../../components/navigation/navigation"
   },
-  "navigationBarTitleText": "通知公告",
-  "navigationStyle":"custom",
+  "navigationBarTitleText": "系统消息",
   "enablePullDownRefresh": true,
   "backgroundTextStyle": "dark"
-  
 }

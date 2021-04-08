@@ -33,7 +33,7 @@ Page({
         let phone = wx.getStorageSync("phone");
         let sex = wx.getStorageSync("sex") == "1" ? "男" : wx.getStorageSync("sex") == "2" ? "女" : "未知";
         let birthday = wx.getStorageSync("birthday");
-        let cno = wx.getStorageSync("cno");
+        let idcard = wx.getStorageSync("idcard");
         let sno = wx.getStorageSync("sno");
         let eduid = wx.getStorageSync("eduid");
         let wxname = wx.getStorageSync("wxname");
@@ -78,7 +78,7 @@ Page({
             phone,
             sex,
             birthday,
-            cno,
+            idcard,
             sno,
             eduid,
             wxname,

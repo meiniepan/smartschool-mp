@@ -1,0 +1,10 @@
+<!--pages/systemMsg/systemMsg.wxml-->
+<emptyView wx:if="{{isEmpty}}" />
+<view class="cells" wx:else>
+    <view class="cell" wx:for="{{mData}}" wx:key="index" data-url="{{item.id}}" bindtap="doDetail">
+        <view class="titles">
+            <view class="title">{{item.title}}</view>
+            <view class="date">{{item.noticetime}}</view>
+        </view>
+    </view>
+</view>

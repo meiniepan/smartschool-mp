@@ -23,8 +23,8 @@
             <text class="text">{{cno}}</text>
         </view>
         <view class="info-line" wx:if="{{llMineItem6}}">
-            <text>工号</text>
-            <text class="text">{{cno}}</text>
+            <text>身份证号</text>
+            <text class="text">{{idcard}}</text>
         </view>
         <view class="info-line" wx:if="{{llMineItem7}}">
             <text>学籍号</text>
@@ -34,10 +34,7 @@
             <text>教育ID</text>
             <text class="text">{{eduid}}</text>
         </view>
-        <view class="info-line" wx:if="{{llMineItem8}}">
-            <text>微信号</text>
-            <text class="text">{{wxname}}</text>
-        </view>
+
     </view>
 
 </view>
