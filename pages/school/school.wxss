@@ -3,7 +3,8 @@ page{
     background-color: var(--tintBac);
 }
 .cells0{
-    padding: var(--titlePadding);
+    margin-left: var(--titlePadding);
+    margin-right: var(--titlePadding);
 }
 .name{
     
@@ -15,17 +16,17 @@ page{
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    margin-bottom: 30rpx;
+    margin-bottom: 40rpx;
 }
 .cell1{
-    width: 320rpx;
+    width: 315rpx;
     display: flex;
     flex-direction: column;
     background-color: white;
     box-sizing: border-box;
     border-radius: 40rpx;
     padding: 40rpx;
-    margin-top: 20rpx;
+    margin-top: 40rpx;
 }
 .cell1 image{
     width: 56rpx;

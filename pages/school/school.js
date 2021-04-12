@@ -74,6 +74,15 @@ Page({
     checkRules() {//判断权限
         let mData = [];
         var bean1 = { name: "信息递送", items: [] }
+        if (app.checkRule1("admin/spacebook/default")) {
+            bean1.items.push(
+                {
+                    name: globalData.siteTitle,
+                    remark: "场地时段 一目了然",
+                    icon: "/assets/images/ic_changdi.png",
+                    click: "/pages/bookSiteList/bookSiteList"
+                })
+        }
         if (app.checkRule1("admin/notices/default")) {
             bean1.items.push(
                 {
@@ -84,15 +93,6 @@ Page({
                 })
         }
 
-        if (app.checkRule1("admin/wages/default")) {
-            bean1.items.push(
-                {
-                    name: globalData.salaryTitle,
-                    remark: "保护隐私 查看明细",
-                    icon: "/assets/images/ic_gongzitiao.png",
-                    click: "/pages/salary/salary"
-                })
-        }
         if (app.checkRule1("admin/schedules/default")) {
             bean1.items.push(
                 {
@@ -102,22 +102,17 @@ Page({
                     click: "/pages/schedule/schedule"
                 })
         }
-        if (bean1.items.length > 0) {
-            mData.push(bean1)
-        }
-
-        var bean2 = { name: "效率提升", items: [] }
-        if (app.checkRule1("admin/tasks/default")) {
-            bean2.items.push(
+        if (app.checkRule1("admin/wages/default")) {
+            bean1.items.push(
                 {
-                    name: globalData.taskTitle,
-                    remark: "任务管理 办公协作",
-                    icon: "/assets/images/ic_renwu.png",
-                    click: "/pages/task/task"
+                    name: globalData.salaryTitle,
+                    remark: "保护隐私 查看明细",
+                    icon: "/assets/images/ic_gongzitiao.png",
+                    click: "/pages/salary/salary"
                 })
         }
         if (app.checkRule1("admin/repair/default")) {
-            bean2.items.push(
+            bean1.items.push(
                 {
                     name: globalData.propertyTitle,
                     remark: "一键拨打 随叫随到",
@@ -125,28 +120,18 @@ Page({
                     click: "/pages/repair/repair"
                 })
         }
-        if (bean2.items.length > 0) {
-            mData.push(bean2)
-        }
-
-        var bean3 = { name: "OA办公", items: [] }
-        if (app.checkRule1("admin/spacebook/default")) {
-            bean3.items.push(
+        if (app.checkRule1("admin/tasks/default")) {
+            bean1.items.push(
                 {
-                    name: globalData.siteTitle,
-                    remark: "场地时段 一目了然",
-                    icon: "/assets/images/ic_changdi.png",
-                    click: "/pages/bookSiteList/bookSiteList"
+                    name: globalData.taskTitle,
+                    remark: "任务管理 办公协作",
+                    icon: "/assets/images/ic_renwu.png",
+                    click: "/pages/task/task"
                 })
         }
 
-        if (bean3.items.length > 0) {
-            mData.push(bean3)
-        }
-
-        var bean4 = { name: "家校协同", items: [] }
         if (app.checkRule1("admin/attendances/default")) {
-            bean4.items.push(
+            bean1.items.push(
                 {
                     name: globalData.attendanceTitle,
                     remark: "实时更新 系统上报",
@@ -155,7 +140,7 @@ Page({
                 })
         }
         if (app.checkRule1("admin/achievements/default")) {
-            bean4.items.push(
+            bean1.items.push(
                 {
                     name: globalData.achievementTitle,
                     remark: "各科成绩 汇总分析",
@@ -165,7 +150,7 @@ Page({
         }
 
         if (app.checkRule1("admin/courses/default")) {
-            bean4.items.push(
+            bean1.items.push(
                 {
                     name: globalData.timetableTitle,
                     remark: "班级课表 教学课表",
@@ -173,10 +158,10 @@ Page({
                     click: "/pages/timetable/timetable"
                 })
         }
-
-        if (bean4.items.length > 0) {
-            mData.push(bean4)
+        if (bean1.items.length > 0) {
+            mData.push(bean1)
         }
+        
         this.setData({
             mData: mData
         })

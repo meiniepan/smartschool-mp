@@ -1,7 +1,6 @@
 <!--pages/school/school.wxml-->
 <view class="cells0">
     <view class="cell0" wx:for="{{mData}}" wx:key="index">
-        <text class="name">{{item.name}}</text>
         <view class="cells1">
         <view class="cell1" wx:for="{{item.items}}" wx:for-index="idx" wx:for-item="bean" wx:key="idx"
             data-url="{{bean.click}}" bindtap="doClick">
