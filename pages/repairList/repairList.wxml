@@ -21,6 +21,18 @@
                     <view class="title-name">发起人</view>
                     <view class="title">{{item.reportinfo.realname}}</view>
                 </view>
+                <view class="titles" hidden="{{typeStr=='report'}}">
+                    <view class="title-name">发起人电话</view>
+                    <view class="title under-line" data-src="{{item.reportinfo.phone}}" bindtap="makeCall">{{item.reportinfo.phone}}</view>
+                </view>
+                <view class="titles" hidden="{{typeStr=='report'}}">
+                    <view class="title-name">发起人所在部门</view>
+                    <view class="title" data-src="{{item.reportinfo.dep_name}}">{{item.reportinfo.dep_name}}</view>
+                </view>
+                <view class="titles" hidden="{{typeStr=='report'}}">
+                    <view class="title-name">发起人所在班级</view>
+                    <view class="title" data-src="{{item.reportinfo.phone}}">{{item.reportinfo.classmaster_classname}}</view>
+                </view>
                 <view class="titles">
                     <view class="title-name">接单人</view>
                     <view class="title">{{item.repairerinfo.realname}}</view>
@@ -40,12 +52,20 @@
                     <view class="remark">{{item.remark}}</view>
                 </view>
                 <view class="titles">
+                    <view class="title-name">详细地址</view>
+                    <view class="title">{{item.addr}}</view>
+                </view>
+                <view class="titles">
                     <view class="title-name">上传图片</view>
                 </view>
                 <view class="cells-image">
-                    <view class="cell-image" wx:for="{{item.fileinfo}}" wx:key="index" bindtap="">
-                        <image class="image" src="{{item.url}}" mode="aspectFill" />
+                    <view class="cell-image" wx:for="{{item.fileinfo}}" wx:key="index" >
+                        <image class="image" src="{{item.url}}" mode="aspectFill" data-src="{{item.url}}" bindtap="preview" />
                     </view>
+                </view>
+                <view class="titles">
+                    <view class="title-name">工单完成备注</view>
+                    <view class="title">{{item.completeremark}}</view>
                 </view>
             </view>
         </view>

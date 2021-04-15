@@ -6,7 +6,7 @@ Page({
      * 页面的初始数据
      */
     data: {
-        mData: { lastid: null, listData: [] },
+        mData: {lastid: null, listData: []},
     },
 
     getList(type, lastid) {
@@ -35,18 +35,15 @@ Page({
                 listData.forEach(item => {
                     if (item.status == "0") {
                         statusStr = "已撤销"
-                    }
-                    else if (item.status == "1") {
+                    } else if (item.status == "1") {
                         statusStr = "未接单"
-                    }
-                    else if (item.status == "2") {
+                    } else if (item.status == "2") {
                         if (item.isdelay == "1") {
-                            statusStr = "已延期("+item.delayreasons+")"
+                            statusStr = "已延期(" + item.delayreasons + ")"
                         } else {
                             statusStr = "已接单"
                         }
-                    }
-                    else if (item.status == "3") {
+                    } else if (item.status == "3") {
                         statusStr = "已完成"
                     }
                     item.statusStr = statusStr;
@@ -55,9 +52,11 @@ Page({
                     })
                     //图片个数凑够3的倍数，方便布局
                     if (item.fileinfo.length > 0) {
-                        let n = 3 - item.fileinfo.length % 3
-                        for (let i = 0; i < n; i++) {
-                            item.fileinfo.push({ url: "" })
+                        if (item.fileinfo.length % 3 != 0) {
+                            let n = 3 - item.fileinfo.length % 3
+                            for (let i = 0; i < n; i++) {
+                                item.fileinfo.push({url: ""})
+                            }
                         }
                     }
                 })
@@ -78,6 +77,25 @@ Page({
             this.setData({
                 mData,
             });
+        })
+    },
+    preview(event) {
+        let currentUrl = event.currentTarget.dataset.src
+        let u = []
+        u.push(currentUrl)
+        wx.previewImage({
+            current: currentUrl, // 当前显示图片的http链接
+            urls: u // 需要预览的图片http链接列表
+        })
+    },
+
+    makeCall(event) {
+        let number = event.currentTarget.dataset.src
+        wx.makePhoneCall({
+            phoneNumber: number,
+            success: function () {
+                console.log("成功拨打电话")
+            },
         })
     },
     refresh() {

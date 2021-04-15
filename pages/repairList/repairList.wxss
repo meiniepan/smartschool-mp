@@ -30,9 +30,13 @@ page {
 .title {
     display: -webkit-box;
     -webkit-box-orient: vertical;
+    color: var(--commonHint);
     -webkit-line-clamp: 1;
     text-overflow: ellipsis;
     overflow: hidden;
+}
+.under-line {
+    border-bottom: var(--themeColor) solid 1rpx;
 }
 
 .remark {
