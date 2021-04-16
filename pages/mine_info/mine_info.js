@@ -25,7 +25,7 @@ Page({
     onLoad: function (options) {
         let img = ""
         if (wx.getStorageSync("portrait") == "") {
-            img = "/asset/images/ic_avatar_default.png"
+            img = "/assets/images/ic_avatar_default.png"
         } else {
             img = wx.getStorageSync("domain") + wx.getStorageSync("portrait");
         }
