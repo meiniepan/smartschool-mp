@@ -1,4 +1,4 @@
-import { showToastWithoutIcon } from '../../utils/util';
+import { showToastWithoutIcon } from '../../../utils/util';
 let app = getApp();
 Page({
   /**

@@ -6,7 +6,6 @@
     "pages/switch_role/switch_role",
     "pages/home/home",
     "pages/circular/circular",
-    "pages/notice/notice",
     "pages/schedule/schedule",
     "pages/salary/salary",
     "pages/salaryDetail/salaryDetail",
@@ -32,6 +31,21 @@
     "pages/attendance2/attendance2",
     "pages/webDetail/webDetail",
     "pages/logs/logs"
+  ],
+  "subpackages": [
+    {
+      "root": "packageA",
+      "pages": [
+        "pages/notice/notice"
+      ]
+    }, {
+      "root": "packageB",
+      "name": "pack2",
+      "pages": [
+        "pages/apple",
+        "pages/banana"
+      ]
+    }
   ],
   "tabBar": {
     "color": "#222222",

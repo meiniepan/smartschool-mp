@@ -89,7 +89,7 @@ Page({
                     name: globalData.noticeTitle,
                     remark: "快速准确 一键提醒",
                     icon: "/assets/images/ic_tonggao.png",
-                    click: "/pages/notice/notice"
+                    click: "/packageA/pages/notice/notice"
                 })
         }
 
