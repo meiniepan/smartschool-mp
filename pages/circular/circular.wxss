@@ -1,6 +1,11 @@
 page {
   background-color: var(--tintBac);
 }
+.banner{
+  width: calc(100% - 72rpx);
+  margin: 24rpx 36rpx;
+  box-sizing: border-box;
+}
 .out1{
   position: relative;
 }

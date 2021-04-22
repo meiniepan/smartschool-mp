@@ -6,6 +6,7 @@
 		<view class="red" hidden="{{noUnread}}"></view>
 		</view>
 	</navigation>
+	<image class="banner" src="/assets/images/bac_banner2.png" mode="widthFix"></image>
 <emptyView wx:if="{{isEmpty}}" />
 <view class="cells" wx:else>
 	<view class="cell" wx:for="{{mData}}" wx:key="index" data-url="{{item.id}}" bindtap="doDetail">
