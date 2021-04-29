@@ -68,7 +68,9 @@ Page({
                 llMineItem8 = false
             }
         } else if (wx.getStorageSync("usertype") == "2" || wx.getStorageSync("usertype") == "99") {
+            llMineItem3 = false
             llMineItem5 = false
+            llMineItem6 = false
             llMineItem7 = false
             llMineItemEduId = false
         }
