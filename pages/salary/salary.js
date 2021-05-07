@@ -25,7 +25,8 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.refresh()
+    // this.refresh()
+    this.showPage1()
   },
   //显示验证页面
   showPage1() {

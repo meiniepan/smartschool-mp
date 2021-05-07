@@ -29,7 +29,7 @@ App({
      * @param loadingMsg 请求提示信息
      */
     httpBase: function (method, url, data, loading = false, loadingMsg) {
-        let requestUrl = host.BASE_URL + url;
+        let requestUrl = host.BASE_URL_DEV + url;
 
         if (loading) {
             wx.showLoading({
