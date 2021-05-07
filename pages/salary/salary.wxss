@@ -48,7 +48,7 @@ page{
 
 .cells {
   background: var(--tintBac);
-  padding-top: 20rpx;
+  padding-top: 0rpx;
 }
 
 .cell {display: flex;
@@ -59,9 +59,17 @@ page{
   padding: 24rpx var(--titlePadding);
   justify-content: space-between;
   align-items: center;
+}
+.background{
   background: var(--white);
 }
-
+.fresh {
+  width: 20rpx;
+  height: 20rpx;
+  border-radius: 10rpx;
+  background: var(--themeColor);
+  margin-right: 10rpx;
+}
 .dataTitles2 {
   display: flex;
   padding: 24rpx var(--titlePadding);
