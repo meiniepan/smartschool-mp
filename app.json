@@ -13,6 +13,7 @@
     "pages/repairList/repairList",
     "pages/bookSiteList/bookSiteList",
     "pages/task/task",
+    "pages/taskDetail/taskDetail",
     "pages/school/school",
     "pages/mine/mine",
     "pages/mine_info/mine_info",
@@ -29,8 +30,7 @@
     "pages/achievement/achievement",
     "pages/attendance/attendance",
     "pages/attendance2/attendance2",
-    "pages/webDetail/webDetail",
-    "pages/logs/logs"
+    "pages/webDetail/webDetail"
   ],
   "subpackages": [
     {
@@ -38,7 +38,8 @@
       "pages": [
         "pages/notice/notice"
       ]
-    }, {
+    },
+     {
       "root": "packageB",
       "name": "pack2",
       "pages": [

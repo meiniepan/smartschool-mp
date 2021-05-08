@@ -266,7 +266,7 @@ Page({
 
     doTaskDetail(e){
         wx.navigateTo({
-            url: '/pages/salaryDetail/salaryDetail?id=' + e.currentTarget.dataset.url,
+            url: '/pages/taskDetail/taskDetail?id=' + e.currentTarget.dataset.url+'&type=' + this.data.categoryData[this.data.categoryCur].type,
         })
     },
 
