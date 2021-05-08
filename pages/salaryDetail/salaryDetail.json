@@ -1,4 +1,6 @@
 {
-  "usingComponents": {},
-  "navigationBarTitleText": "工资条"
+  "usingComponents": {
+    "navigation": "../../components/navigation/navigation"
+  },
+  "navigationStyle": "custom"
 }

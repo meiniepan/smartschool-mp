@@ -6,7 +6,6 @@ view {
 }
 
 .cu-custom {
-	background-color: #fff;
 }
 
 .cu-custom .cu-bar {

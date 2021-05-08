@@ -2,6 +2,10 @@
 page{
     background: var(--tintBac);
 }
+.act{
+    width: 20rpx;
+    height: 20rpx;
+}
 .out{
     width: 100vw;
     position: relative;
@@ -13,23 +17,24 @@ page{
     height: 368rpx;
     display: flex;
     flex-direction: column;
-    padding: 0 var(--titlePadding);
     background: var(--themeBac);
 }
 .title1 {
-    margin-top: 40rpx;
+    padding: 0 var(--titlePadding);
+    margin-top: 30rpx;
     font-size: 60rpx;
     font-weight: bold;
     color: var(--white);
 }
 
 .title2 {
+    padding: 0 var(--titlePadding);
     margin-top: 0rpx;
     font-size: 24rpx;
     color: var(--white);
 }
 .cells{
-    width: clac(100vw - 46rpx);
+    width: calc(100vw - 2*var(--titlePadding));
     display: flex;
     flex-direction: column;
     position: absolute;
@@ -43,7 +48,8 @@ page{
     box-sizing: border-box;
 }
 .cell{
-
+    display: flex;
+    flex-direction: column;
 }
 .cell:not(:last-child) {
 
@@ -51,11 +57,12 @@ page{
 .ext{
     display: flex;
     padding:30rpx 22rpx;
-    justify-content: space-between;
     align-items: center;
     border-bottom: var(--splitColor) solid 1rpx;
 }
 .ext-key{
+    display: flex;
+    flex-grow: 1;
     font-size: 28rpx;
     color: var(--commonHint);
 }
@@ -63,4 +70,16 @@ page{
     font-size: 40rpx;
     font-weight: bold;
     color: var(--commonBlack);
+}
+.img{
+    width: 30rpx;
+    height: 30rpx;
+    padding: 20rpx;
+}
+.remark{
+    font-size: 28rpx;
+    color: var(--commonHint);
+    padding:30rpx 42rpx;
+    align-items: center;
+    border-bottom: var(--splitColor) solid 1rpx;
 }

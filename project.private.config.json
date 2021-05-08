@@ -1,0 +1,42 @@
+{
+  "setting": {},
+  "condition": {
+    "plugin": {
+      "list": []
+    },
+    "game": {
+      "list": []
+    },
+    "gamePlugin": {
+      "list": []
+    },
+    "miniprogram": {
+      "list": [
+        {
+          "name": "pages/logs/logs",
+          "pathName": "pages/logs/logs",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/login_t/login_t",
+          "pathName": "pages/login_t/login_t",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/salary/salary",
+          "pathName": "pages/salary/salary",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/salaryDetail/salaryDetail",
+          "pathName": "pages/salaryDetail/salaryDetail",
+          "query": "id=284",
+          "scene": null
+        }
+      ]
+    }
+  }
+}

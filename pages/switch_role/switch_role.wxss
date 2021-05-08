@@ -6,7 +6,7 @@
 }
 .image{
   width: 100%;
-  height: clac(100vh - 600rpx);
+  height: calc(100vh - 600rpx);
 }
 .text1{
   font-size: 72rpx;
