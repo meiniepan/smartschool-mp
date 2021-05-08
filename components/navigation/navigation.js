@@ -11,6 +11,10 @@ Component({
             type: String,
             value: "#ffffff"
         },
+        titleColor: {
+            type: String,
+            value: "#000000"
+        },
         title: {
             type: String,
             value: "WanAndroid"

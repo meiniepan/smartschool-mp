@@ -57,7 +57,6 @@ page{
 .dataTitles {
   display: flex;
   padding: 24rpx var(--titlePadding);
-  justify-content: space-between;
   align-items: center;
 }
 .background{
@@ -70,14 +69,10 @@ page{
   background: var(--themeColor);
   margin-right: 10rpx;
 }
-.dataTitles2 {
-  display: flex;
-  padding: 24rpx var(--titlePadding);
-  justify-content: space-between;
-  align-items: center;
-}
 
 .dataTitle {
+  display: flex;
+  flex-grow: 1;
   font-size: 32rpx;
   font-weight: bold;
 }

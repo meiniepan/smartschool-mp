@@ -3,7 +3,7 @@
 <view class="out">
 
 <view class="out1">
-    <navigation title="{{title}}">
+    <navigation title="{{title}}" titleColor="#ffffff">
         <image class="act" src="/assets/images/icon_back_white_a.png" mode="widthFix" bindtap="doFinish"></image>
     </navigation>
 <text class="title1">{{mData.reachwages}}</text>

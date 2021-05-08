@@ -7,16 +7,15 @@ Page({
      * 页面的初始数据
      */
     data: {
-        mData: {
-            title:app.globalData.salaryTitle
-        }
+        mData: {},
+        title:globalData.salaryTitle
     },
 
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-        console.log("id", options.id)
+        console.log("id", globalData.salaryTitle)
         this.setData({
             id: options.id,
         })

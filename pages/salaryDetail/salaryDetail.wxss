@@ -14,7 +14,7 @@ page{
 }
 .out1 {
     width: 100%;
-    height: 368rpx;
+    height: 418rpx;
     display: flex;
     flex-direction: column;
     background: var(--themeBac);
@@ -38,7 +38,7 @@ page{
     display: flex;
     flex-direction: column;
     position: absolute;
-    margin-top: 288rpx;
+    margin-top: 338rpx;
     margin-bottom: 40rpx;
     margin-left: var(--titlePadding);
     margin-right: var(--titlePadding);

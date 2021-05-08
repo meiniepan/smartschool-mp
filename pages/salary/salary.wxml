@@ -7,7 +7,7 @@
                 bind:more="more"
                 style="padding-top: 0rpx">
             <view class="cells">
-                <view class="cell" wx:for="{{mData.listData}}" wx:key="index" data-url="{{item.id}}"
+                <view class="cell" wx:for="{{mData.listData}}" wx:key="index" data-url="{{item.id}}" data-read="{{item.read}}"
                       bindtap="salaryDetail">
                     <view class="{{index%2==0?'dataTitles':'dataTitles background'}}">
                     <view class="fresh" hidden="{{item.read=='1'}}"></view>
