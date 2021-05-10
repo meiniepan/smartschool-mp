@@ -1,2 +1,5 @@
 <!--pages/taskDetail/taskDetail.wxml-->
-<text>pages/taskDetail/taskDetail.wxml</text>
+<view class="out">
+    <view class="split"></view>
+    <text class="title">{{mData.taskname}}</text>
+</view>
