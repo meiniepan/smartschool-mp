@@ -1,5 +1,7 @@
 /* pages/timetable/timetable.wxss */
-
+page{
+    background: var(--tintBac);
+}
 .out {
     display: flex;
     flex-direction: column;
@@ -35,6 +37,7 @@
 .list-area {
     display: flex;
     margin-top: 70rpx;
+    background: var(--white);
 }
 
 .cells0 {
@@ -64,6 +67,7 @@ scroll-out {}
 .scroll {
     background: var(--tintBac);
     overflow: scroll;
+    padding-left: 20rpx;
 }
 
 .cells1 {
