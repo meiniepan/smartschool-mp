@@ -265,9 +265,9 @@ Page({
     },
 
     doTaskDetail(e){
-        // wx.navigateTo({
-        //     url: '/pages/taskDetail/taskDetail?id=' + e.currentTarget.dataset.url+'&type=' + this.data.categoryData[this.data.categoryCur].type,
-        // })
+        wx.navigateTo({
+            url: '/pages/taskDetail/taskDetail?id=' + e.currentTarget.dataset.url+'&type=' + this.data.categoryData[this.data.categoryCur].type,
+        })
     },
 
     /**

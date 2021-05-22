@@ -31,9 +31,9 @@
           "scene": null
         },
         {
-          "name": "pages/salaryDetail/salaryDetail",
-          "pathName": "pages/salaryDetail/salaryDetail",
-          "query": "id=284",
+          "name": "pages/taskDetail/taskDetail",
+          "pathName": "pages/taskDetail/taskDetail",
+          "query": "id=7112&type=1",
           "scene": null
         }
       ]

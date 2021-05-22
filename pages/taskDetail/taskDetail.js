@@ -12,7 +12,7 @@ Page({
      */
     onLoad: function (options) {
         let url, data = ''
-        console.log('type', options.type)
+        console.log('type', options.id)
         if (wx.getStorageSync('usertype') === "1") {
             url = "/api/v17/student/tasks/info"
             data = {
