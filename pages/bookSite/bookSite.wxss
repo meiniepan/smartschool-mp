@@ -1,0 +1,62 @@
+/* pages/bookSite/bookSite.wxss */
+.out {
+    background: var(--commonBlack);
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+.navi-1{
+    font-size: 24rpx;
+}
+.act{
+    width: 20rpx;
+    height: 20rpx;
+    margin-right: 20rpx;
+}
+.list {
+    display: flex;
+    flex-direction: column;
+    background: var(--tintBac);
+    border-top-left-radius: 80rpx;
+    border-top-right-radius: 80rpx;
+    flex-grow: 1;
+    padding-top: 80rpx;
+    padding-left: var(--titlePadding);
+    padding-right: var(--titlePadding);
+    overflow-y: auto
+}
+
+.text {
+    padding-bottom: 20rpx;
+}
+
+.cells {}
+
+.cell {
+    margin-bottom: 20rpx;
+    padding: 40rpx 24rpx;
+    background: var(--white);
+    border-radius: 40rpx;
+}
+
+.title-area {
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.title {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.date {
+    max-width: 200rpx;
+}
+
+.remark {
+    margin-top: 20rpx;
+}

@@ -4,7 +4,7 @@
     "emptyView": "../../components/emptyView/emptyView",
     "navigation": "../../components/navigation/navigation"
   },
-  "navigationBarTitleText": "通知公告",
+  "navigationBarTitleText": "通知",
   "navigationStyle":"custom",
   "enablePullDownRefresh": true,
   "backgroundTextStyle": "dark"

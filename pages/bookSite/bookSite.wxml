@@ -1,10 +1,14 @@
-<!--pages/schedule/schedule.wxml-->
+<!--pages/bookSite/bookSite.wxml-->
 <view class="out">
+    <navigation title="场地预约">
+        <image class="act" src="/assets/images/icon_back_black_a.png" mode="widthFix" bindtap="doFinish"></image>
+        <view class="navi-1" bindtap="doRecord">我的预约</view>
+    </navigation>
     <calendar class="calendar" specialDays="{{mDataMonth}}" bind:lastMonth="lastMonth" bind:nextMonth="nextMonth"
-        bind:select="doSelect" />
+              bind:select="doSelect"/>
     <view class="list">
         <text class="text">日程安排</text>
-        <emptyView wx:if="{{isEmpty}}" />
+        <emptyView wx:if="{{isEmpty}}"/>
         <scroll-view wx:else class="cells" enable-flex scroll-y>
             <view class="cell" wx:for="{{mDataDay}}" wx:key="index" data-id="{{item}}" bindtap="doDetail">
                 <view class="title-area">

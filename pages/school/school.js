@@ -80,7 +80,7 @@ Page({
                     name: globalData.siteTitle,
                     remark: "场地时段 一目了然",
                     icon: "/assets/images/ic_changdi.png",
-                    click: "/pages/bookSiteList/bookSiteList"
+                    click: "/pages/bookSite/bookSite"
                 })
         }
         if (app.checkRule1("admin/notices/default")) {

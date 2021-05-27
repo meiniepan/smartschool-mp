@@ -164,7 +164,7 @@ Component({
                 //是否特殊
 
                 if (this.data.today === year + monthFormat + dateFormat) {
-                    color = "darkgoldenrod";
+                    color = "#FBB347";
                 }
                 thisDays.push({
                     date: i,

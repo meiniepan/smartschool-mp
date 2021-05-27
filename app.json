@@ -12,6 +12,7 @@
     "pages/repair/repair",
     "pages/repairList/repairList",
     "pages/bookSiteList/bookSiteList",
+    "pages/bookSite/bookSite",
     "pages/task/task",
     "pages/taskDetail/taskDetail",
     "pages/school/school",

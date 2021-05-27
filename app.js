@@ -30,7 +30,7 @@ App({
      */
     httpBase: function (method, url, data, loading = false, loadingMsg) {
         let requestUrl = host.BASE_URL_DEV + url;
-
+        console.log("url", requestUrl)
         if (loading) {
             wx.showLoading({
                 title: loadingMsg || '加载中...',
@@ -66,7 +66,7 @@ App({
                     let errMsg = res.respMsg;
 
                     if (code != '0000') {
-                        if(code == '0004'){
+                        if (code == '0004') {
                             wx.redirectTo({
                                 url: '/pages/switch_role/switch_role',
                             })
@@ -117,7 +117,7 @@ App({
         return this.httpBase('POST', url, data, loading, loadingMsg);
     },
 
-    logout(){
+    logout() {
         wx.setStorageSync('token', null)
     },
 
@@ -161,16 +161,17 @@ App({
 
     checkRule1(key) {
         let beans = wx.getStorageSync("appInfo")
-        for(var i= 0;i< beans.length; i++){
+        for (var i = 0; i < beans.length; i++) {
             if (beans[i].url == key) {
                 return beans[i].choice == "1"
-            }}
+            }
+        }
         return false
     },
     checkRule2(key) {
         let beans = wx.getStorageSync("appInfo")
-        for(var i= 0;i< beans.length; i++){
-            for(var j= 0;j< beans[i].items.length; j++){
+        for (var i = 0; i < beans.length; i++) {
+            for (var j = 0; j < beans[i].items.length; j++) {
                 if (beans[i].items[j].url == key) {
                     return beans[i].items[j].choice == "1"
                 }

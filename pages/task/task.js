@@ -77,7 +77,7 @@ Page({
     initStr(pageData) {
 
         pageData.listData.forEach((item) => {
-            var statusStr = ""
+            let statusStr = ""
             var line2Str = "负责人：" + item.operatorname
             var ss = ""
             let it = item.involve
