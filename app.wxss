@@ -64,3 +64,7 @@ page {
   height: 2rpx;
   background-color: var(--splitColor);
 }
+.textc{
+  font-size: 28rpx;
+
+}

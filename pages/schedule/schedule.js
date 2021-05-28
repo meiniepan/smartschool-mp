@@ -65,12 +65,10 @@ Page({
             month: month
         }
         app.httpPost(url, data).then((res) => {
-            let data = res.respResult.data;
+            let data = res.respResult.days;
             let mDataMonth = []
             data.forEach((item) => {
-                if (item.list.length > 0) {
-                    mDataMonth.push(item.day)
-                }
+                mDataMonth.push(item)
             });
             this.setData({
                 mDataMonth: mDataMonth,

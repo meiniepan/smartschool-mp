@@ -7,21 +7,23 @@
     <calendar class="calendar" specialDays="{{mDataMonth}}" bind:lastMonth="lastMonth" bind:nextMonth="nextMonth"
               bind:select="doSelect"/>
     <view class="list">
-        <text class="text">日程安排</text>
+        <text class="text">预约信息</text>
         <emptyView wx:if="{{isEmpty}}"/>
         <scroll-view wx:else class="cells" enable-flex scroll-y>
             <view class="cell" wx:for="{{mDataDay}}" wx:key="index" data-id="{{item}}" bindtap="doDetail">
                 <view class="title-area">
                     <view class="title">
-                        {{item.title}}
+                        {{item.classroomname}}
                     </view>
-                    <view class="date">
+                    <view class="date textc">
                         {{item.timeStr}}
                     </view>
                 </view>
 
-
-                <view class="remark">{{item.remarkStr}}</view>
+                <view class="title-area" style="margin-top: 20rpx">
+                    <view class="remark textc">{{item.remark}}</view>
+                    <view class="remark textc">{{item.operator.realname}}</view>
+                </view>
             </view>
         </scroll-view>
     </view>

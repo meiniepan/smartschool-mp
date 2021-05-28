@@ -9,34 +9,37 @@ Page({
      */
     data: {},
     getDataDay(day) {
+        console.log("day", day)
+        let oldTime = (new Date(day)).getTime() + 24 * 3600 * 1000;
+        console.log("oldTime", (new Date(day)).getTime())
+        let temp = new Date(oldTime);
+        let nextDay = temp.getFullYear() +
+            zero(temp.getMonth() + 1) +
+            zero(temp.getDate())
+        console.log("day+next", day + "==" + nextDay)
         let url = "/api/v17/admin/spacebook/booklists"
         let data = {
             token: wx.getStorageSync('token'),
             starttime: day,
-            endtime: day
+            endtime: nextDay
         }
         app.httpPost(url, data).then((res) => {
             let data = res.respResult.data;
             let semesters = res.respResult.semesters
             data.forEach((item) => {
-                item.remarkStr = "备   注: " + item.remark
-                var timeB = ""
-                var timeE = ""
-                if (item.scheduletime.length >= 5) {
-                    timeB = item.scheduletime.substring(
-                        item.scheduletime.length - 5,
-                        item.scheduletime.length
+                var timeB = item.ostime
+                var timeE = item.ostime
+                if (timeB.length >= 5) {
+                    timeB = timeB.substring(
+                        timeB.length - 5,
+                        timeB.length
                     )
-                } else {
-                    timeB = item.scheduletime
                 }
-                if (item.scheduleover.length >= 5) {
-                    timeE = item.scheduleover.substring(
-                        item.scheduleover.length - 5,
-                        item.scheduleover.length
+                if (timeE.length >= 5) {
+                    timeE = timeE.substring(
+                        timeE.length - 5,
+                        timeE.length
                     )
-                } else {
-                    timeE = item.scheduleover
                 }
 
                 item.timeStr = timeB + "~" + (timeE)
@@ -49,25 +52,22 @@ Page({
             });
         });
     },
-    doFinish(){
+    doFinish() {
         wx.navigateBack({
             delta: 1,
         })
     },
     getDataMonth(month) {
-        let url="/api/v17/admin/spacebook/myBookLists"
+        let url = "/api/v17/admin/spacebook/myBookLists"
         let data = {
             token: wx.getStorageSync('token'),
             month: month
         }
         app.httpPost(url, data).then((res) => {
-            let data = res.respResult.data;
-            console.log("month",data)
+            let data = res.respResult.days;
             let mDataMonth = []
             data.forEach((item) => {
-                if (item.list.length > 0) {
-                    mDataMonth.push(item.day)
-                }
+                    mDataMonth.push(item)
             });
             this.setData({
                 mDataMonth: mDataMonth,
@@ -111,7 +111,7 @@ Page({
         let year = temp.getFullYear()
         let month = temp.getMonth() + 1
         let date = temp.getDate()
-        let today = year + zero(month) + zero(date)
+        let today = year + '/' + zero(month) + '/' + zero(date)
         this.getDataDay(today)
         this.getDataMonth(year + zero(month))
     },

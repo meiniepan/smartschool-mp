@@ -113,11 +113,15 @@ Component({
 
         // 选择 并格式化数据
         select: function (e) {
-            let day = e.currentTarget.dataset.index,
-                select =
-                    this.data.year +
-                    day.monthFormat +
-                    day.dateFormat
+            let day = e.currentTarget.dataset.index
+            let select =
+                this.data.year +
+                day.monthFormat +
+                day.dateFormat
+            let select2 =
+                this.data.year + '/' +
+                day.monthFormat + '/' +
+                day.dateFormat
 
             this.setData({
                 select,
@@ -125,13 +129,13 @@ Component({
                 date: day.dateFormat,
             })
             //发送事件监听
-            this.triggerEvent('select', select)
+            this.triggerEvent('select', select2)
         },
 
         //上个月
         lastMonth: function () {
-            let month = this.data.month == 1 ? 12 : parseInt(this.data.month) - 1
-            let year = this.data.month == 1 ? this.data.year - 1 : this.data.year
+            let month = this.data.month === 1 ? 12 : parseInt(this.data.month) - 1
+            let year = this.data.month === 1 ? this.data.year - 1 : this.data.year
             //初始化日历组件UI
             this.display(year, month, 0)
             this.triggerEvent('lastMonth', year + this.zero(month))
@@ -139,8 +143,8 @@ Component({
 
         //下个月
         nextMonth: function () {
-            let month = this.data.month == 12 ? 1 : parseInt(this.data.month) + 1
-            let year = this.data.month == 12 ? this.data.year + 1 : this.data.year
+            let month = this.data.month === 12 ? 1 : parseInt(this.data.month) + 1
+            let year = this.data.month === 12 ? this.data.year + 1 : this.data.year
             //初始化日历组件UI
             this.display(year, month, 0)
             this.triggerEvent('nextMonth', year + this.zero(month))
@@ -173,7 +177,7 @@ Component({
                     monthFormat: monthFormat,
                     week: this.data.weeks[
                         new Date(Date.UTC(year, month - 1, i)).getDay()
-                    ],
+                        ],
                 })
             }
             this.setData({

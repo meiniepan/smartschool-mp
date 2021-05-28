@@ -49,6 +49,8 @@
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 1;
+    font-size: 30rpx;
+    font-weight: bold;
     text-overflow: ellipsis;
     overflow: hidden;
 }
@@ -58,5 +60,5 @@
 }
 
 .remark {
-    margin-top: 20rpx;
+
 }
