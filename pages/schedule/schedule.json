@@ -3,5 +3,6 @@
     "calendar": "../../components/calendar/calendar",
     "emptyView": "../../components/emptyView/emptyView"
   },
-  "navigationBarTitleText": "日程安排"
+  "navigationBarTitleText": "日程安排",
+  "disableScroll": true
 }
