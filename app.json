@@ -10,6 +10,7 @@
     "pages/salary/salary",
     "pages/salaryDetail/salaryDetail",
     "pages/repair/repair",
+    "pages/cloud/cloud",
     "pages/repairList/repairList",
     "pages/bookSiteList/bookSiteList",
     "pages/bookSite/bookSite",

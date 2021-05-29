@@ -129,6 +129,15 @@ Page({
                     click: "/pages/task/task"
                 })
         }
+        if (app.checkRule1("disk/folder/default")) {
+            bean1.items.push(
+                {
+                    name: globalData.taskTitle,
+                    remark: "校本资源 协同备课",
+                    icon: "/assets/images/ic_yunpan.png",
+                    click: "/pages/cloud/cloud"
+                })
+        }
 
         if (app.checkRule1("admin/attendances/default")) {
             bean1.items.push(

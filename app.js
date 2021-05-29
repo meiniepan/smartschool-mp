@@ -193,6 +193,7 @@ App({
         noticeTitle: "通知公告",
         salaryTitle: "工资条",
         taskTitle: "任务协作",
+        cloudTitle: "教学云盘",
         propertyTitle: "报修报送",
         siteTitle: "场地预约",
         attendanceTitle: "学生考勤",
