@@ -1,11 +1,6 @@
 page {
   background-color: var(--tintBac);
 }
-.banner{
-  width: calc(100% - 72rpx);
-  margin: 24rpx 36rpx;
-  box-sizing: border-box;
-}
 .out1{
   position: relative;
 }
@@ -22,9 +17,14 @@ page {
   top: 0rpx;
   right: 0rpx;
 }
+.banner{
+  width: calc(100% - 72rpx);
+  margin: 24rpx 36rpx;
+  box-sizing: border-box;
+}
 .cells {
   margin-top: 20rpx;
-
+  height: 0rpx;
 }
 
 .cell {

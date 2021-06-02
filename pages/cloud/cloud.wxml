@@ -1,2 +1,23 @@
 <!--pages/cloud/cloud.wxml-->
-<text>pages/cloud/cloud.wxml</text>
+<view class="out">
+    <view class="tabs">
+        <view class="tab-self">
+
+        </view>
+        <view class="tab-share">
+
+        </view>
+    </view>
+    <emptyView wx:if="{{isEmpty}}" />
+    <view class="cells" wx:else>
+        <view class="cell" wx:for="{{mData}}" wx:key="index" data-url="{{item.id}}" bindtap="doDetail">
+            <view class="titles">
+                <view class="fresh" hidden="{{item.isRead}}"></view>
+                <view class="title">{{item.title}}</view>
+                <text class="date">{{item.noticetime}}</text>
+            </view>
+            <view class="tag1" hidden="{{!item.isFeedback}}">@我</view>
+            <text class="tag">{{item.remark}}</text>
+        </view>
+    </view>
+</view>
