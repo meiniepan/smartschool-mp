@@ -132,7 +132,7 @@ Page({
         if (app.checkRule1("disk/folder/default")) {
             bean1.items.push(
                 {
-                    name: globalData.taskTitle,
+                    name: globalData.cloudTitle,
                     remark: "校本资源 协同备课",
                     icon: "/assets/images/ic_yunpan.png",
                     click: "/pages/cloud/cloud"
