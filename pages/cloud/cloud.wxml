@@ -1,23 +1,21 @@
 <!--pages/cloud/cloud.wxml-->
 <view class="out">
     <view class="tabs">
-        <view class="tab-self">
-
-        </view>
-        <view class="tab-share">
-
-        </view>
+        <view class="{{mCurrent==0?'tab-self':'tab-share'}}" bindtap="checkPri">我创建的</view>
+        <view class="{{mCurrent!=0?'tab-self':'tab-share'}}" style="margin-left: 34rpx" bindtap="checkPub">共享文件夹</view>
     </view>
-    <emptyView wx:if="{{isEmpty}}" />
+    <emptyView wx:if="{{isEmpty}}"/>
     <view class="cells" wx:else>
         <view class="cell" wx:for="{{mData}}" wx:key="index" data-url="{{item.id}}" bindtap="doDetail">
+            <image class="icon" src="{{item.icon}}"></image>
             <view class="titles">
-                <view class="fresh" hidden="{{item.isRead}}"></view>
-                <view class="title">{{item.title}}</view>
-                <text class="date">{{item.noticetime}}</text>
+                <view class="title">
+                    <view class="fileName singleLine">{{item.name}}</view>
+                    <view class="creName hint singleLine" hidden="{{!item.isAdmin}}">{{item.cuser_realname}}</view>
+                </view>
+                <text class="date">{{item.updatetime}}</text>
             </view>
-            <view class="tag1" hidden="{{!item.isFeedback}}">@我</view>
-            <text class="tag">{{item.remark}}</text>
+            <image class="iconAdmin" hidden="{{!item.isAdmin}}" src="/assets/images/ic_admin.png"></image>
         </view>
     </view>
 </view>

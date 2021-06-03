@@ -1,4 +1,5 @@
 import { showToastWithoutIcon } from '../../utils/util';
+import { getFileImage } from '../../utils/util';
 let app = getApp();
 Page({
     /**
@@ -44,22 +45,8 @@ Page({
                 if (it.type.indexOf("image/") >= 0) {
                     mImages.push(wx.getStorageSync("domain") + it.url)
                 } else {
-                    let type;
-                    let path = it.url
-                    if (path.endsWith(".doc") || path.endsWith(".docx")) {
-                        type = "/assets/images/ic_type_word.png"
-                    } else if (path.endsWith(".xls") || path.endsWith(".xlsx")) {
-                        type = "/assets/images/ic_type_excel.png"
-                    } else if (path.endsWith(".pdf")) {
-                        type = "/assets/images/ic_type_pdf.png"
-                    } else if (path.endsWith(".zip") || path.endsWith(".rar") || path.endsWith(".tar") || path.endsWith(
-                        ".gz"
-                    )
-                    ) {
-                        type = "/assets/images/ic_type_zip.png"
-                    } else {
-                        type = "/assets/images/ic_type_unknow.png"
-                    }
+                    let type = getFileImage(it.url);
+
                     mFiles.push({ name: it.name, image: type, url: wx.getStorageSync("domain") + it.url })
                 }
             })

@@ -1,73 +1,79 @@
 /* pages/cloud/cloud.wxss */
 page {
-    background-color: var(--tintBac);
 }
-.tabs{
 
+.tabs {
+    border-top: var(--splitColor) 1rpx solid;
+    border-bottom: var(--splitColor) 1rpx solid;
+    padding: 24rpx var(--titlePadding);
+    display: flex;
+    align-content: space-between;
 }
+.tab-self{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: calc(100% - 2*var(--titlePadding) - 34rpx);
+    height: 88rpx;
+    background: var(--themeColor);
+    border-radius: 44rpx;
+    color: var(--white);
+}
+.tab-share{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: calc(100% - 2*var(--titlePadding) - 34rpx);
+    height: 88rpx;
+    background: var(--white);
+    border-radius: 44rpx;
+    border: var(--themeColor) 1rpx solid;
+    color: var(--themeColor);
+    box-sizing: border-box;
+}
+
 .cells {
-    margin-top: 20rpx;
-    height: 0rpx;
+    margin-top: 0rpx;
 }
 
 .cell {
     display: flex;
-    flex-direction: column;
     margin-left: var(--titlePadding);
-    margin-right: var(--titlePadding);
-    border-radius: 40rpx;
-    background-color: var(--commonBac);
-    padding: 40rpx 24rpx;
-    margin-bottom: 20rpx;
-}
-
-
-.titles {
-    width: 100%;
-    display: flex;
-    font-size: 28rpx;
+    padding: 20rpx 0rpx;
+    border-bottom: var(--splitColor) 1rpx solid;
     align-items: center;
 }
 
-.fresh {
-    width: 20rpx;
-    height: 20rpx;
-    border-radius: 10rpx;
-    background: var(--themeColor);
+.icon{
+    width: 52rpx;
+    height: 52rpx;
     margin-right: 10rpx;
 }
+.iconAdmin{
+    width: 24rpx;
+    height: 24rpx;
+    margin-left: 20rpx;
+}
+.titles {
+    display: flex;
+    flex-direction: column;
+}
+
 
 .title {
-
-    flex-grow: 1;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 1;
-    text-overflow: ellipsis;
-    overflow: hidden;
+    display: flex;
+align-items: baseline;
+}
+.fileName {
+    display: flex;
+    width: max-conten;
+    font-weight: bold;
+}
+.creName{
+    display: flex;
+    width: max-conten;
+    margin-left: 20rpx;
 }
 
 .date {
-    min-width: 240rpx;
-    text-align: right;
-    color: var(--commonHint);
-    margin-left: 15rpx;
-}
-
-.tag1 {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 86rpx;
-    height: 28rpx;
-    color: var(--white);
-    background: var(--themeBac);
-    font-size: 20rpx;
-    margin-top: 12rpx;
-    border-radius: 12rpx;
-}
-
-.tag {
-    margin-top: 12rpx;
-    font-size: 24rpx;
 }
