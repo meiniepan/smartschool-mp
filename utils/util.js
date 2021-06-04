@@ -148,6 +148,7 @@ function formatShowTime(date) {
 
 function getFileImage(path) {
     let type = ""
+    path = path.toLocaleLowerCase()
     if (path.endsWith(".doc") || path.endsWith(".docx")) {
         type = "/assets/images/ic_type_word.png"
     } else if (path.endsWith(".xls") || path.endsWith(".xlsx")) {
@@ -162,6 +163,50 @@ function getFileImage(path) {
     } else {
         type = "/assets/images/ic_type_unknow.png"
     }
+    return type
+}
+
+function isVideo(path) {
+    let type = false
+    path = path.toLocaleLowerCase()
+    console.log("path", path)
+    wx.getSystemInfo({
+        success: (result) => {
+            if (result.system.indexOf('iOS') != -1) {
+                if (path.endsWith(".mp4") || path.endsWith(".mov")
+                    || path.endsWith(".m4v")
+                    || path.endsWith(".3gp")
+                    || path.endsWith(".avi")
+                    || path.endsWith(".m3u8")) {
+                    type = true
+                }
+
+            } else {
+                if (path.endsWith(".mp4")
+                    || path.endsWith(".3gp")
+                    || path.endsWith(".m3u8")
+                    || path.endsWith(".webm")) {
+                    type = true
+                }
+            }
+        },
+    })
+    return type
+}
+
+function isImage(path) {
+    let type = false
+    path = path.toLocaleLowerCase()
+    console.log("path", path)
+
+    if (path.endsWith(".jpg") || path.endsWith(".png")
+        || path.endsWith(".jpeg")
+        || path.endsWith(".gif")
+        || path.endsWith(".bmp")) {
+        type = true
+    }
+
+
     return type
 }
 
@@ -180,4 +225,6 @@ module.exports = {
     getTodayStr: getTodayStr,
     getFileImage: getFileImage,
     formatShowTime: formatShowTime,
+    isVideo: isVideo,
+    isImage: isImage,
 }

@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "emptyView": "../../../components/emptyView/emptyView"
+  },
+  "navigationBarTitleText": "教学云盘",
+  "enablePullDownRefresh": false,
+  "backgroundTextStyle": "dark"
+}

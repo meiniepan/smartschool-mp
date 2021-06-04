@@ -1,9 +1,7 @@
-<!--pages/cloud/cloud.wxml-->
+<!--pages/cloudFolder/cloudFolder.wxml-->
 <view class="out">
-    <view class="tabs" >
-        <view class="{{mCurrent==0?'tab-self':'tab-share'}}" bindtap="checkPri">我创建的</view>
-        <view class="{{mCurrent!=0?'tab-self':'tab-share'}}" style="margin-left: 34rpx" bindtap="checkPub">共享文件夹</view>
-    </view>
+    <view class="singleLine path">{{mPath}}</view>
+    <view class="split-line"></view>
     <emptyView wx:if="{{isEmpty}}"/>
     <view class="cells" wx:else>
         <view class="cell" wx:for="{{mData}}" wx:key="index" data-position="{{index}}" bindtap="doDetail">
@@ -19,3 +17,4 @@
         </view>
     </view>
 </view>
+

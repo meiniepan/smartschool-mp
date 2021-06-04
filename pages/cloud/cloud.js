@@ -13,7 +13,10 @@ Page({
         categoryMenu: ["1", "2"], // 分类菜单数据, 字符串数组格式
         navigationHeight: app.globalData.navigationHeight,
         mData: [],
+        mPathData: [],
+        mPath: "",
         isInit: false,
+        isHome: true,
         mDataPriFolder: [],
         mDataPubFolder: [],
         lastId: null,
@@ -35,39 +38,42 @@ Page({
         }
         app.httpPost(url, data).then((res) => {
             let data = res.respResult.data;
-            console.log("data", data)
+            data.type = type
             let isEmpty = data.length == 0
             data.forEach(item => {
-                console.log("cuid", item.cuser_id)
                 item.isAdmin = (wx.getStorageSync('uid') == item.cuser_id && type == 1)
-                console.log("isAdmin", item.isAdmin)
 
                 item.name = item.foldername
                 item.icon = '/assets/images/ic_file.png'
                 item.updatetime = formatShowTime(item.updatetime)
             })
-            let mDataPriFolder, mDataPubFolder
+            let mDataPriFolder, mDataPubFolder,mPath
             if (type === 0) {
                 mDataPriFolder = data
+                mPath = '我创建的'
             } else {
                 mDataPubFolder = data
+                mPath = '共享文件夹'
             }
             if (init === true) {
                 this.setData({
                     mDataPubFolder,
-                    isEmpty
+                    isEmpty,
+                    mPath,
                 });
             } else {
                 if (type === 0) {
                     this.setData({
                         mData: data,
                         mDataPriFolder,
+                        mPath,
                         isEmpty
                     });
                 } else {
                     this.setData({
                         mData: data,
                         mDataPubFolder,
+                        mPath,
                         isEmpty
                     });
                 }
@@ -92,8 +98,12 @@ Page({
     },
 
     doDetail(e) {
+        console.log("ee",e.currentTarget)
+        let position = e.currentTarget.dataset.position
+        let bean = this.data.mData[position]
+        bean.fullName = this.data.mPath
         wx.navigateTo({
-            url: '/pages/noticeDetail/noticeDetail?id=' + e.currentTarget.data.url,
+            url: '/pages/cloudFolder/cloudFolder?bean=' + JSON.stringify(bean),
         })
     },
 
@@ -102,7 +112,7 @@ Page({
      */
     onLoad: function (options) {
         this.getFolder(0, null)
-        this.getFolder(1, null,true)
+        this.getFolder(1, null, true)
     },
 
     /**

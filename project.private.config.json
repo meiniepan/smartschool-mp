@@ -19,8 +19,8 @@
           "scene": null
         },
         {
-          "name": "pages/login_t/login_t",
-          "pathName": "pages/login_t/login_t",
+          "name": "pages/cloud/cloud",
+          "pathName": "pages/cloud/cloud",
           "query": "",
           "scene": null
         },

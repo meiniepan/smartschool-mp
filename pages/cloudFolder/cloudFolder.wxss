@@ -1,0 +1,59 @@
+/* pages/cloudFolder/cloudFolder.wxss */
+page {
+}
+
+.path{
+    display: flex;
+    border-top: var(--splitColor) 1rpx solid;
+    padding-top: 40rpx;
+    padding-left: var(--titlePadding);
+    padding-right: var(--titlePadding);
+    margin-bottom: 40rpx;
+}
+
+.cells {
+    margin-top: 0rpx;
+}
+
+.cell {
+    display: flex;
+    margin-left: var(--titlePadding);
+    padding: 20rpx 0rpx;
+    border-bottom: var(--splitColor) 1rpx solid;
+    align-items: center;
+}
+
+.icon{
+    width: 52rpx;
+    height: 52rpx;
+    margin-right: 10rpx;
+}
+.iconAdmin{
+    width: 24rpx;
+    height: 24rpx;
+    margin-left: 20rpx;
+}
+.titles {
+    display: flex;
+    flex-direction: column;
+}
+
+
+.title {
+    display: flex;
+    align-items: baseline;
+}
+.fileName {
+    display: flex;
+    width: max-conten;
+    font-weight: bold;
+}
+.creName{
+    display: flex;
+    width: max-conten;
+    margin-left: 20rpx;
+}
+
+.date {
+
+}
