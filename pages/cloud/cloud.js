@@ -38,11 +38,11 @@ Page({
         }
         app.httpPost(url, data).then((res) => {
             let data = res.respResult.data;
-            data.type = type
+
             let isEmpty = data.length == 0
             data.forEach(item => {
                 item.isAdmin = (wx.getStorageSync('uid') == item.cuser_id && type == 1)
-
+                item.type = type
                 item.name = item.foldername
                 item.icon = '/assets/images/ic_file.png'
                 item.updatetime = formatShowTime(item.updatetime)

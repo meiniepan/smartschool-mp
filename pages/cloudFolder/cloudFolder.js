@@ -34,9 +34,9 @@ Page({
         }
         app.httpPost(url, data).then((res) => {
             let data = res.respResult.data;
-            console.log("data", data)
             let isEmpty = data.length == 0
             data.forEach(item => {
+                item.type = type
                 item.isAdmin = (wx.getStorageSync('uid') == item.cuser_id && type == 1)
                 item.name = item.foldername
                 item.icon = '/assets/images/ic_file.png'

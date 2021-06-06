@@ -1,5 +1,6 @@
 /* pages/cloud/cloud.wxss */
 page {
+
 }
 
 .tabs {
@@ -8,6 +9,11 @@ page {
     padding: 24rpx var(--titlePadding);
     display: flex;
     align-content: space-between;
+    position: fixed;
+    width: 100%;
+    box-sizing: border-box;
+    background: var(--white);
+    z-index: 999;
 }
 .path{
     border-top: var(--splitColor) 1rpx solid;
@@ -39,7 +45,7 @@ page {
 }
 
 .cells {
-    margin-top: 0rpx;
+    margin-top: 136rpx;
 }
 
 .cell {

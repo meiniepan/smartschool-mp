@@ -9,14 +9,28 @@ function getRandomColor() {
 }
 
 Page({
+  data: {
+    mPath: '',
+    danmuList:
+        [{
+          text: '第 1s 出现的弹幕',
+          color: '#ff0000',
+          time: 1
+        }, {
+          text: '第 3s 出现的弹幕',
+          color: '#ff00ff',
+          time: 3
+        }],
+  },
   onShareAppMessage() {
+    console.log('url',this.data.mPath)
     return {
-      title: 'video',
-      path: 'page/component/pages/video/video'
+      title: '云盘',
+      path: 'pages/videoPlayer/videoPlayer?url='+this.data.mPath
     }
   },
   onLoad: function (options) {
-    console.log('url',options.url)
+
     this.setData({
       mPath: options.url,
     })
@@ -30,18 +44,7 @@ Page({
   },
 
   inputValue: '',
-  data: {
-    danmuList:
-        [{
-          text: '第 1s 出现的弹幕',
-          color: '#ff0000',
-          time: 1
-        }, {
-          text: '第 3s 出现的弹幕',
-          color: '#ff00ff',
-          time: 3
-        }],
-  },
+
 
   bindInputBlur(e) {
     this.inputValue = e.detail.value
