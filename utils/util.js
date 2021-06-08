@@ -149,7 +149,11 @@ function formatShowTime(date) {
 function getFileImage(path) {
     let type = ""
     path = path.toLocaleLowerCase()
-    if (path.endsWith(".doc") || path.endsWith(".docx")) {
+    if (isImage(path)) {
+        type = "/assets/images/ic_type_image.png"
+    } else if (isVideo(path)) {
+        type = "/assets/images/ic_type_video.png"
+    } else if (path.endsWith(".doc") || path.endsWith(".docx")) {
         type = "/assets/images/ic_type_word.png"
     } else if (path.endsWith(".xls") || path.endsWith(".xlsx")) {
         type = "/assets/images/ic_type_excel.png"
