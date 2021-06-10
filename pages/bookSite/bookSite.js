@@ -7,7 +7,9 @@ Page({
     /**
      * 页面的初始数据
      */
-    data: {},
+    data: {
+        navigationHeight: app.globalData.navigationHeight
+    },
     getDataDay(day) {
         console.log("day", day)
         let oldTime = (new Date(day)).getTime() + 24 * 3600 * 1000;
@@ -76,9 +78,11 @@ Page({
     },
     nextMonth(e) {
         this.getDataMonth(e.detail)
+        this.selectComponent(".c2").nextMonth(e)
     },
     lastMonth(e) {
         this.getDataMonth(e.detail)
+        this.selectComponent(".c2").lastMonth(e)
     },
     doSelect(e) {
         this.getDataDay(e.detail)

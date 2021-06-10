@@ -1,46 +1,44 @@
 /* pages/schedule/schedule.wxss */
 .out {
-    background: var(--commonBlack);
     display: flex;
     flex-direction: column;
+    background: var(--tintBac);
     height: 100vh;
 }
 
-.time {
-    margin-top: 20rpx;
-    margin-left: 20rpx;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 1;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    font-size: 36rpx;
-    min-height: 40rpx;
-    font-weight: bold;
-    color: var(--white);
-    box-sizing: borer-box;
+.top {
+    background: var(--commonBlack);
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    z-index: 999;
 }
 
-.calendar {}
-
-.list {
+.list-title {
     display: flex;
     flex-direction: column;
     background: var(--tintBac);
     border-top-left-radius: 80rpx;
     border-top-right-radius: 80rpx;
-    flex-grow: 1;
     padding-top: 80rpx;
+    padding-bottom: 20rpx;
     padding-left: var(--titlePadding);
     padding-right: var(--titlePadding);
-    overflow-y: auto
 }
 
-.text {
-    padding-bottom: 20rpx;
+.list{
+    background: var(--tintBac);
+    padding-left: var(--titlePadding);
+    padding-right: var(--titlePadding);
 }
+.top2 {
+    background: var(--commonBlack);
+    display: flex;
+    flex-direction: column;
+}
+.cells {
 
-.cells {}
+}
 
 .cell {
     margin-bottom: 20rpx;

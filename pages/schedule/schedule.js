@@ -77,9 +77,11 @@ Page({
     },
     nextMonth(e) {
         this.getDataMonth(e.detail)
+        this.selectComponent(".c2").nextMonth(e)
     },
     lastMonth(e) {
         this.getDataMonth(e.detail)
+        this.selectComponent(".c2").lastMonth(e)
     },
     doSelect(e) {
         this.getDataDay(e.detail)

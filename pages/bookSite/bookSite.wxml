@@ -4,12 +4,19 @@
         <image class="act" src="/assets/images/icon_back_black_a.png" mode="widthFix" bindtap="doFinish"></image>
         <view class="navi-1" bindtap="doRecord">我的预约</view>
     </navigation>
-    <calendar class="calendar" specialDays="{{mDataMonth}}" bind:lastMonth="lastMonth" bind:nextMonth="nextMonth"
-              bind:select="doSelect"/>
+    <view class="top" style="margin-top: {{navigationHeight}}px">
+        <calendar class="calendar" specialDays="{{mDataMonth}}" bind:lastMonth="lastMonth" bind:nextMonth="nextMonth"
+                  bind:select="doSelect" />
+        <text class="list-title">预约信息</text>
+    </view>
     <view class="list">
-        <text class="text">预约信息</text>
+        <view class="top2">
+            <calendar class="c2" specialDays="{{mDataMonth}}"
+                       />
+            <text class="list-title">预约信息</text>
+        </view>
         <emptyView wx:if="{{isEmpty}}"/>
-        <scroll-view wx:else class="cells" enable-flex scroll-y>
+        <view wx:else class="cells" >
             <view class="cell" wx:for="{{mDataDay}}" wx:key="index" data-id="{{item}}" bindtap="doDetail">
                 <view class="title-area">
                     <view class="title">
@@ -25,6 +32,6 @@
                     <view class="remark textc">{{item.operator.realname}}</view>
                 </view>
             </view>
-        </scroll-view>
+        </view>
     </view>
 </view>
