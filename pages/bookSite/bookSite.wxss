@@ -1,8 +1,10 @@
 /* pages/bookSite/bookSite.wxss */
+page{
+    background: var(--tintBac);
+}
 .out {
     display: flex;
     flex-direction: column;
-    background: var(--tintBac);
     height: 100vh;
 }
 .navi-1{
@@ -18,7 +20,7 @@
     display: flex;
     flex-direction: column;
     position: fixed;
-    z-index: 9999;
+    z-index: 999;
 }
 
 .list-title {
@@ -36,7 +38,6 @@
 .list{
     display: flex;
     width: 100%;
-    height: 100%;
     flex-direction: column;
     background: var(--tintBac);
     padding-left: var(--titlePadding);

@@ -1,8 +1,10 @@
 /* pages/schedule/schedule.wxss */
+page{
+    background: var(--tintBac);
+}
 .out {
     display: flex;
     flex-direction: column;
-    background: var(--tintBac);
     height: 100vh;
 }
 
@@ -27,6 +29,9 @@
 }
 
 .list{
+    display: flex;
+    width: 100%;
+    flex-direction: column;
     background: var(--tintBac);
     padding-left: var(--titlePadding);
     padding-right: var(--titlePadding);

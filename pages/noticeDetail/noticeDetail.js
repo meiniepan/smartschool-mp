@@ -68,6 +68,8 @@ Page({
     },
     openFile(e) {
         let url = encodeURIComponent(e.currentTarget.dataset.url);
+        console.log("url",e.currentTarget.dataset.url)
+
         wx.navigateTo({
             url: `../webDetail/webDetail?url=${url}`,
         });

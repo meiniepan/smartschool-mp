@@ -13,6 +13,7 @@ Page({
    */
   onLoad: function (options) {
     let url = decodeURIComponent(options.url);
+    console.log("url2",url)
     wx.getSystemInfo({
       success: (result) => {
         if(result.system.indexOf('iOS')!= -1){
@@ -21,14 +22,15 @@ Page({
             url: url
           });
         }else{
-          console.log("sys","and")
           wx.downloadFile({
             url: url,
             success: (res) => {
+              console.log("sys","download_suc")
               var path = res.tempFilePath;
               wx.openDocument({
                 filePath: path,
                 success:(res)=>{
+                  console.log("sys","open_suc")
                   wx.navigateBack({
                     delta: 1,
                   })

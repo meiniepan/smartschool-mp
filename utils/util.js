@@ -173,7 +173,6 @@ function getFileImage(path) {
 function isVideo(path) {
     let type = false
     path = path.toLocaleLowerCase()
-    console.log("path", path)
     wx.getSystemInfo({
         success: (result) => {
             if (result.system.indexOf('iOS') != -1) {
@@ -201,8 +200,6 @@ function isVideo(path) {
 function isImage(path) {
     let type = false
     path = path.toLocaleLowerCase()
-    console.log("path", path)
-
     if (path.endsWith(".jpg") || path.endsWith(".png")
         || path.endsWith(".jpeg")
         || path.endsWith(".gif")
