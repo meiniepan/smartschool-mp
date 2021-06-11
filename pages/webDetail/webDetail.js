@@ -21,6 +21,7 @@ Page({
           this.setData({
             url: url
           });
+
         }else{
           wx.downloadFile({
             url: url,
