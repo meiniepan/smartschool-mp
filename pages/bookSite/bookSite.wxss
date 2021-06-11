@@ -42,6 +42,7 @@ page{
     background: var(--tintBac);
     padding-left: var(--titlePadding);
     padding-right: var(--titlePadding);
+    box-sizing: border-box;
 }
 .top2 {
     background: var(--commonBlack);

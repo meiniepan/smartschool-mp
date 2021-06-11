@@ -22,6 +22,7 @@ Page({
         app.httpPost(url, data).then((res) => {
             let data = res.respResult.data;
             let semesters = res.respResult.semesters
+            console.log("data",data)
             data.forEach((item) => {
                 item.remarkStr = "备   注: " + item.remark
                 var timeB = ""

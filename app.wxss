@@ -17,6 +17,7 @@ page {
 
   --themeBac: linear-gradient(to right,#EF8D82,#F95B49);
   --titlePadding: 46rpx;
+  --maxWidth: 500rpx;
 
   font-size: 32rpx;
 }
@@ -27,9 +28,7 @@ page {
   display: none;
 }
 .singleLine{
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 1;
+  white-space:nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
 }

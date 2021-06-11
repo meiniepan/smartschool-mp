@@ -20,6 +20,7 @@ page {
     margin-left: var(--titlePadding);
     padding: 20rpx 0rpx;
     border-bottom: var(--splitColor) 1rpx solid;
+    padding-right: var(--titlePadding);
     align-items: center;
 }
 
@@ -44,13 +45,11 @@ page {
     align-items: baseline;
 }
 .fileName {
-    display: flex;
-    width: max-conten;
+    max-width: var(--maxWidth);
     font-weight: bold;
 }
 .creName{
     display: flex;
-    width: max-conten;
     margin-left: 20rpx;
 }
 

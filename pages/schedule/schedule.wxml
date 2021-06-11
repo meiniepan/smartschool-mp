@@ -14,6 +14,7 @@
         <view wx:else class="cells" >
             <view class="cell" wx:for="{{mDataDay}}" wx:key="index" data-id="{{item}}" bindtap="doDetail">
                 <view class="title-area">
+                    <view class="share" style="background: {{item.color}}"></view>
                     <view class="title">
                         {{item.title}}
                     </view>

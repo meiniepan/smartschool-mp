@@ -78,12 +78,11 @@ align-items: baseline;
 }
 .fileName {
     display: flex;
-    width: max-conten;
+    max-width: var(--maxWidth);
     font-weight: bold;
 }
 .creName{
     display: flex;
-    width: max-conten;
     margin-left: 20rpx;
 }
 

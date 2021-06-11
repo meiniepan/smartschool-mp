@@ -124,10 +124,10 @@ function isSameYear(date) {
 
 function formatShowTime(date) {
     let result = "";
-    if (date.length >= 10) {
+    if (date.length > 10) {
         if (isSameDay(date)) {
             result = date.substring(
-                date.length - 5,
+                11,
                 date.length
             )
         } else if (isSameYear(date)) {
