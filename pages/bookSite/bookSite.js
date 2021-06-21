@@ -30,7 +30,7 @@ Page({
             let semesters = res.respResult.semesters
             data.forEach((item) => {
                 var timeB = item.ostime
-                var timeE = item.ostime
+                var timeE = item.oetime
                 if (timeB.length >= 5) {
                     timeB = timeB.substring(
                         timeB.length - 5,
