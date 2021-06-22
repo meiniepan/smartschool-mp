@@ -14,8 +14,12 @@
                     <view class="title">{{item.id}}</view>
                 </view>
                 <view class="titles">
-                    <view class="title-name">报修类型</view>
-                    <view class="title">{{item.typename}}</view>
+                    <view class="title-name">设备类型</view>
+                    <view class="title">{{item.type2name}}</view>
+                </view>
+                <view class="titles">
+                    <view class="title-name">报修设备</view>
+                    <view class="title">{{item.device}}</view>
                 </view>
                 <view class="titles" hidden="{{typeStr=='report'}}">
                     <view class="title-name">发起人</view>
@@ -65,7 +69,9 @@
                 </view>
                 <view class="titles">
                     <view class="title-name">工单完成备注</view>
-                    <view class="title">{{item.completeremark}}</view>
+                </view>
+                <view class="titles">
+                    <view class="remark">{{item.completeremark}}</view>
                 </view>
             </view>
         </view>

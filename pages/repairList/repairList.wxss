@@ -25,6 +25,7 @@ page {
 .title-name {
     font-size: 30rpx;
     font-weight: bold;
+    min-width: 150rpx;
 }
 
 .title {
@@ -47,6 +48,7 @@ page {
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
+    margin-bottom: 20rpx;
 }
 
 .image {

@@ -181,6 +181,9 @@ Page({
      * Called when user click on the top right corner to share
      */
     onShareAppMessage: function () {
-
+        return {
+            title: '汇文云',
+            path: 'pages/splash/splash'
+        }
     }
 })
