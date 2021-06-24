@@ -23,6 +23,7 @@ Page({
           });
 
         }else{
+          console.log("sys",result.system)
           wx.downloadFile({
             url: url,
             success: (res) => {
@@ -37,7 +38,10 @@ Page({
                   })
                 }
               })
-            }
+            },
+            fail: function (res) {
+              console.log(res);
+            },
           })
         }
       },
