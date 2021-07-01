@@ -10,7 +10,7 @@
             <image class="icon" src="{{item.icon}}"></image>
             <view class="titles">
                 <view class="title">
-                    <view class="fileName singleLine">{{item.name}}</view>
+                    <text class="fileName singleLine" >{{item.name}}</text>
                     <view class="creName hint singleLine" hidden="{{!item.isAdmin}}">{{item.cuser_realname}}</view>
                 </view>
                 <text class="date">{{item.updatetime}}</text>

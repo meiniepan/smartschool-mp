@@ -142,6 +142,8 @@ function formatShowTime(date) {
             )
         }
 
+    }else {
+        result = date
     }
     return result
 }

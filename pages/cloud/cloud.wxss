@@ -77,8 +77,8 @@ page {
 align-items: baseline;
 }
 .fileName {
-    display: flex;
-    max-width: var(--maxWidth);
+    display: block;
+    width: var(--maxTextWidth);
     font-weight: bold;
 }
 .creName{

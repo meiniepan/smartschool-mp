@@ -18,6 +18,7 @@ page {
   --themeBac: linear-gradient(to right,#EF8D82,#F95B49);
   --titlePadding: 46rpx;
   --maxWidth: 500rpx;
+  --maxTextWidth: 300rpx;
 
   font-size: 32rpx;
 }
@@ -28,9 +29,19 @@ page {
   display: none;
 }
 .singleLine{
-  white-space:nowrap;
-  text-overflow: ellipsis;
+  display: block;
   overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.singleLine-more{
+  display: -webkit-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+  white-space: normal !important;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
 }
 .hint{
   font-size: 24rpx;

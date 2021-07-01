@@ -39,7 +39,7 @@ Page({
         app.httpPost(url, data).then((res) => {
             let data = res.respResult.data;
 
-            let isEmpty = data.length == 0
+
             data.forEach(item => {
                 item.isAdmin = (wx.getStorageSync('uid') == item.cuser_id && type == 1)
                 item.type = type
@@ -47,10 +47,11 @@ Page({
                 item.icon = '/assets/images/ic_file.png'
                 item.updatetime = formatShowTime(item.updatetime)
             })
-            let mDataPriFolder, mDataPubFolder,mPath
+            let mDataPriFolder, mDataPubFolder,mPath,isEmpty
             if (type === 0) {
                 mDataPriFolder = data
                 mPath = '我创建的'
+                isEmpty = data.length == 0
             } else {
                 mDataPubFolder = data
                 mPath = '共享文件夹'
@@ -58,7 +59,6 @@ Page({
             if (init === true) {
                 this.setData({
                     mDataPubFolder,
-                    isEmpty,
                     mPath,
                 });
             } else {
@@ -74,7 +74,6 @@ Page({
                         mData: data,
                         mDataPubFolder,
                         mPath,
-                        isEmpty
                     });
                 }
             }
@@ -84,7 +83,8 @@ Page({
         if (this.data.mCurrent === 1) {
             this.setData({
                 mCurrent: 0,
-                mData: this.data.mDataPriFolder
+                mData: this.data.mDataPriFolder,
+                isEmpty:this.data.mDataPriFolder.length==0
             })
         }
     },
@@ -92,7 +92,8 @@ Page({
         if (this.data.mCurrent === 0) {
             this.setData({
                 mCurrent: 1,
-                mData: this.data.mDataPubFolder
+                mData: this.data.mDataPubFolder,
+                isEmpty:this.data.mDataPubFolder.length==0
             })
         }
     },

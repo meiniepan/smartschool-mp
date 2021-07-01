@@ -45,7 +45,8 @@ page {
     align-items: baseline;
 }
 .fileName {
-    max-width: var(--maxWidth);
+    display: block;
+    max-width: var(--maxTextWidth);
     font-weight: bold;
 }
 .creName{
