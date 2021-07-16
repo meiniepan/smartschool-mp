@@ -190,6 +190,7 @@ App({
         navigationHeight: 0,
 
         scheduleTitle: "日程安排",
+        quantizeTitle: "量化评比",
         noticeTitle: "通知公告",
         salaryTitle: "工资条",
         taskTitle: "任务协作",

@@ -1,0 +1,6 @@
+<!--pages/quantize/quantize.wxml-->
+<view class="out">
+    <view class="item" bindtap="doJump">
+        <view class="title">特殊情况报备</view>
+    </view>
+</view>

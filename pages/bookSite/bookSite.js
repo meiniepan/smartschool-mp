@@ -1,5 +1,5 @@
 // pages/bookSite/bookSite.js
-import {zero} from "../../utils/util";
+import {zero,showToastWithoutIcon} from "../../utils/util";
 
 let app = getApp()
 Page({
@@ -104,6 +104,7 @@ Page({
         let today = year + '/' + zero(month) + '/' + zero(date)
         this.getDataDay(today)
         this.getDataMonth(year + zero(month))
+        
     },
 
     /**

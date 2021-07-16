@@ -1,0 +1,22 @@
+/* pages/quantize/quantize.wxss */
+page{
+    background: var(--tintBac);
+}
+.item {
+    border-radius: 12rpx;
+    display: flex;
+    margin-top: 24rpx;
+    margin-left: 32rpx;
+    margin-right: 32rpx;
+    box-sizing: border-box;
+    background: var(--white);
+    box-shadow: 0rpx 2rpx 5rpx 5rpx var(--splitColor);
+}
+.title{
+    display: flex;
+    font-weight: bold;
+    font-size: 36rpx;
+    margin-left: 60rpx;
+    margin-top: 56rpx;
+    margin-bottom: 56rpx;
+}

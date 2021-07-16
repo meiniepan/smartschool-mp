@@ -105,6 +105,17 @@ Page({
                     click: "/pages/schedule/schedule"
                 })
         }
+
+        if (app.checkRule1("moral/moral/default")) {
+            bean1.items.push(
+                {
+                    name: globalData.quantizeTitle,
+                    remark: "简化工作 随录随查",
+                    icon: "/assets/images/ic_quantize.png",
+                    click: "/pages/quantize/quantize"
+                })
+        }
+
         if (app.checkRule1("admin/wages/default")) {
             bean1.items.push(
                 {
