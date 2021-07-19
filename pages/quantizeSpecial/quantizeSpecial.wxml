@@ -1,2 +1,48 @@
 <!--pages/quantizeSpecial/quantizeSpecial.wxml-->
-<text>pages/quantizeSpecial/quantizeSpecial.wxml</text>
+<view class="out">
+    <view class="split-line"></view>
+    <view class="item" bindtap="doChoseStudent">
+        <view class="key text bold">选择学生</view>
+        <view class="require bold">*</view>
+        <view class="value hint">请选择学生</view>
+        <image class="next" src="/assets/images/ic_next.png" style="height: 28rpx" mode="heightFix"></image>
+    </view>
+    <picker mode="date" value="" start="2020-09-01" end="2025-09-01"
+            data-type="indexClass" bindchange="bindTimeS">
+        <view class="item">
+            <view class="key text bold">选择开始时间</view>
+            <view class="require bold">*</view>
+            <view class="value hint">{{quantizeBody.stime}}</view>
+            <image class="next" src="/assets/images/ic_next.png" style="height: 28rpx" mode="heightFix"></image>
+        </view>
+    </picker>
+    <picker mode="date" value="" start="2020-09-01" end="2025-09-01"
+            data-type="indexClass" bindchange="bindTimeE">
+        <view class="item">
+            <view class="key text bold">选择结束时间</view>
+            <view class="require bold">*</view>
+            <view class="value hint">{{quantizeBody.etime}}</view>
+            <image class="next" src="/assets/images/ic_next.png" style="height: 28rpx" mode="heightFix"></image>
+        </view>
+    </picker>
+
+    <view class="item" bindtap="doAct">
+        <view class="key text bold">情况类型</view>
+        <view class="require bold">*</view>
+        <view class="value hint">请选择情况类型</view>
+        <image class="next" src="/assets/images/ic_next.png" style="height: 28rpx" mode="heightFix"></image>
+    </view>
+    <view class="item" bindtap="doRule">
+        <view class="key text bold">影响项目</view>
+        <view class="require bold">*</view>
+        <view class="value hint">请选择影响项目</view>
+        <image class="next" src="/assets/images/ic_next.png" style="height: 28rpx" mode="heightFix"></image>
+    </view>
+    <view class="item-remark" bindtap="doChoseStudent">
+        <view class="horizontal">
+            <view class="key text bold">选择学生</view>
+            <view class="require bold">*</view>
+        </view>
+        <input placeholder="最多20个字" bindinput="doInput" data-type="remark" value="{{phone}}"/>
+    </view>
+</view>

@@ -10,6 +10,7 @@ page {
   --white: #ffffff;
   --splitColor: #E3E6E9;
   --commonBlack: #222222;
+  --commonRed2: #F95B49;
   --commonHint: #999999;
   --grayF6: #F6F6F6;
   --grayEE: #EEEEEE;
@@ -43,9 +44,24 @@ page {
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
 }
+.text{
+  font-size: 24rpx;
+  color: var(--commonBlack);
+}
+.bold{
+  font-weight: bold;
+}
 .hint{
   font-size: 24rpx;
   color: var(--commonHint);
+}
+.horizontal{
+  display: flex;
+  flex-direction: row;
+}
+.vertical{
+  display: flex;
+  flex-direction: column;
 }
 .container {
   height: 100%;

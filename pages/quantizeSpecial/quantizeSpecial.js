@@ -10,8 +10,8 @@ Page({
   data: {
 quantizeBody:{
   token:null,
-  stime:null,
-  etime:null,
+  stime:'请选择开始时间',
+  etime:'请选择结束时间',
   involve:null,
   actname:null,
   rulename:null,
@@ -24,7 +24,10 @@ quantizeBody:{
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    const eventChannel = this.getOpenerEventChannel();
+    eventChannel.on('choseInvolve',res=>{
+      console.log(res.data) // my from index page
+    })
   },
   getFolder(type, folderid, init) {
     if (involves.size == 0 || commit.stime.isNullOrEmpty() || commit.actname.isNullOrEmpty() || commit.rulename.isNullOrEmpty() || commit.remark.isNullOrEmpty()) {
@@ -47,6 +50,30 @@ quantizeBody:{
 
 
 
+    });
+  },
+  doChooseStudent(){},
+  bindTimeS(e){
+    let v = this.data.quantizeBody
+    v.stime = e.detail.value
+      this.setData({
+        quantizeBody: v,
+      })
+  },
+  bindTimeE(e){
+    let v = this.data.quantizeBody
+    v.etime = e.detail.value
+      this.setData({
+        quantizeBody: v,
+      })
+  },
+  doAct(){},
+  doRule(){},
+  doInput: function (e) {
+    const v = this.data.quantizeBody;
+    v.remark = e.detail.value
+    this.setData({
+      quantizeBody: v
     });
   },
   /**

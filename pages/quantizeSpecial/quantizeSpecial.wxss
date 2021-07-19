@@ -1,1 +1,22 @@
 /* pages/quantizeSpecial/quantizeSpecial.wxss */
+.require{
+    color: var(--commonRed2);
+}
+.item{
+    display: flex;
+    align-items: center;
+    padding: 30rpx var(--titlePadding);
+    border-bottom: 1rpx solid var(--splitColor);
+}
+.item-remark{
+    display: flex;
+    flex-direction: column;
+    padding: 30rpx var(--titlePadding);
+    border-bottom: 1rpx solid var(--splitColor);
+}
+.value{
+    flex-grow: 1;
+    text-align: right;
+    margin-left: 10rpx;
+    margin-right: 10rpx;
+}
