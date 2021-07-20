@@ -13,8 +13,8 @@
     "miniprogram": {
       "list": [
         {
-          "name": "pages/logs/logs",
-          "pathName": "pages/logs/logs",
+          "name": "pages/quantizeSpecial/quantizeSpecial",
+          "pathName": "pages/quantizeSpecial/quantizeSpecial",
           "query": "",
           "scene": null
         },

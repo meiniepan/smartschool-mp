@@ -39,7 +39,7 @@
     "minifyWXSS": true
   },
   "compileType": "miniprogram",
-  "libVersion": "2.14.4",
+  "libVersion": "2.18.0",
   "appid": "wx5b0b2787cbd3cbe9",
   "projectname": "SmartSchool-mp",
   "debugOptions": {
