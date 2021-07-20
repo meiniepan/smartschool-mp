@@ -1,7 +1,7 @@
 <!--pages/quantizeSpecial/quantizeSpecial.wxml-->
 <view class="out">
     <view class="split-line"></view>
-    <view class="item" bindtap="doChoseStudent">
+    <view class="item" bindtap="doChooseStudent">
         <view class="key text bold">选择学生</view>
         <view class="require bold">*</view>
         <view class="value hint">请选择学生</view>
@@ -25,13 +25,16 @@
             <image class="next" src="/assets/images/ic_next.png" style="height: 28rpx" mode="heightFix"></image>
         </view>
     </picker>
+    <picker bindchange="doAct"
+            data-type="indexAct" value="{{quantizeBody.actname}}" range="{{actArrays}}">
+        <view class="item">
+            <view class="key text bold">情况类型</view>
+            <view class="require bold">*</view>
+            <view class="value hint">{{quantizeBody.actname}}</view>
+            <image class="next" src="/assets/images/ic_next.png" style="height: 28rpx" mode="heightFix"></image>
+        </view>
+    </picker>
 
-    <view class="item" bindtap="doAct">
-        <view class="key text bold">情况类型</view>
-        <view class="require bold">*</view>
-        <view class="value hint">请选择情况类型</view>
-        <image class="next" src="/assets/images/ic_next.png" style="height: 28rpx" mode="heightFix"></image>
-    </view>
     <view class="item" bindtap="doRule">
         <view class="key text bold">影响项目</view>
         <view class="require bold">*</view>
@@ -43,6 +46,34 @@
             <view class="key text bold">选择学生</view>
             <view class="require bold">*</view>
         </view>
-        <input placeholder="最多20个字" bindinput="doInput" data-type="remark" value="{{phone}}"/>
+        <input placeholder="最多20个字" maxlength="20" bindinput="doInput" data-type="remark" value="{{phone}}"/>
     </view>
 </view>
+
+<page-container
+        show="{{show}}"
+        overlay="{{overlay}}"
+        close-on-slide-down
+        duration="300"
+        position="bottom"
+        z-index="999"
+        round
+        bindclickoverlay="onClickOverlay"
+        overlayStyle='z-index:99'
+        customStyle='z-index:999'
+>
+    <view class="layout0">
+        <view class="cells">
+            <view class="cell" wx:for="{{ruleArrays}}" wx:key="index" data-index="{{index}}" bindtap="checkRule">
+                <view >
+                    {{item.typename}}
+                </view>
+                <image wx:if="{{item.checked}}" class="image" mode="heightFix" src="/assets/images/ic_check_multi.png"/>
+            </view>
+        </view>
+        <view class="layout1">
+            <view class="btn1" bindtap="doBtn1">取消</view>
+            <view class="btn2" bindtap="doBtn2">确定</view>
+        </view>
+    </view>
+</page-container>

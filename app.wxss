@@ -45,14 +45,14 @@ page {
   -webkit-box-orient: vertical;
 }
 .text{
-  font-size: 24rpx;
+  font-size: 30rpx;
   color: var(--commonBlack);
 }
 .bold{
   font-weight: bold;
 }
 .hint{
-  font-size: 24rpx;
+  font-size: 28rpx;
   color: var(--commonHint);
 }
 .horizontal{

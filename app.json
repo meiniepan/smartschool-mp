@@ -29,6 +29,8 @@
     "pages/systemMsg/systemMsg",
     "pages/protocol/protocol",
     "pages/quantize/quantize",
+    "pages/addInvolve/addInvolve",
+    "pages/involvePerson/involvePerson",
     "pages/quantizeSpecialList/quantizeSpecialList",
     "pages/quantizeSpecial/quantizeSpecial",
     "pages/regist/regist",
