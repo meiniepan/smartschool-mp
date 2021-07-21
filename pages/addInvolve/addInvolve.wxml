@@ -1,2 +1,13 @@
 <!--pages/addInvolve/addInvolve.wxml-->
-<text>pages/addInvolve/addInvolve.wxml</text>
+<view class="out">
+    <view class="tabs" >
+        <view class="{{mCurrent==0?'tab-self':'tab-share'}}" bindtap="checkPri">组织架构</view>
+        <view class="{{mCurrent!=0?'tab-self':'tab-share'}}" style="margin-left: 34rpx" bindtap="checkPub">我的班级</view>
+    </view>
+    <emptyView wx:if="{{isEmpty}}"/>
+    <view class="cells" wx:else>
+        <view class="cell" wx:for="{{mData}}" wx:key="index" data-position="{{index}}" bindtap="doDetail">
+            {{item.name}}
+        </view>
+    </view>
+</view>

@@ -1,1 +1,74 @@
 /* pages/addInvolve/addInvolve.wxss */
+page {
+background: var(--tintBac);
+}
+
+.tabs {
+    border-top: var(--splitColor) 1rpx solid;
+    border-bottom: var(--splitColor) 1rpx solid;
+    padding: 24rpx var(--titlePadding);
+    display: flex;
+    align-content: space-between;
+    position: fixed;
+    width: 100%;
+    box-sizing: border-box;
+    background: var(--white);
+    z-index: 999;
+}
+
+.tab-self{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: calc(100% - 2*var(--titlePadding) - 34rpx);
+    height: 88rpx;
+    background: var(--themeColor);
+    border-radius: 44rpx;
+    color: var(--white);
+}
+.tab-share{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: calc(100% - 2*var(--titlePadding) - 34rpx);
+    height: 88rpx;
+    background: var(--white);
+    border-radius: 44rpx;
+    border: var(--themeColor) 1rpx solid;
+    color: var(--themeColor);
+    box-sizing: border-box;
+}
+
+.cells {
+    margin-top: 140rpx;
+    background: var(--white);
+    padding: 40rpx calc(var(--titlePadding) - 20rpx) 20rpx var(--titlePadding);
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+    box-sizing: border-box;
+}
+
+.cell {
+    display: flex;
+    width: calc((100% - 60rpx) / 3);
+    height: var(--textHeight);
+    margin-right: 20rpx;
+    margin-bottom: 20rpx;
+    border: var(--themeColor) 1rpx solid;
+    justify-content: center;
+    background: var(--white);
+    color: var(--themeColor);
+    border-radius: 10rpx;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.titles {
+    display: flex;
+    flex-direction: column;
+}
+
+.date {
+
+}

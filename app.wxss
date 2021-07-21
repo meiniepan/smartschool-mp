@@ -18,6 +18,7 @@ page {
 
   --themeBac: linear-gradient(to right,#EF8D82,#F95B49);
   --titlePadding: 46rpx;
+  --textHeight: 88rpx;
   --maxWidth: 500rpx;
   --maxTextWidth: 300rpx;
 

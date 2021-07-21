@@ -8,7 +8,6 @@ Page({
      * 页面的初始数据
      */
     data: {
-        duration: 300,  // swiper-item 切换过渡时间
         mCurrent: 0, // 当前tab
         categoryMenu: ["1", "2"], // 分类菜单数据, 字符串数组格式
         navigationHeight: app.globalData.navigationHeight,
