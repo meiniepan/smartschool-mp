@@ -13,8 +13,8 @@
     "miniprogram": {
       "list": [
         {
-          "name": "pages/quantizeSpecial/quantizeSpecial",
-          "pathName": "pages/quantizeSpecial/quantizeSpecial",
+          "name": "pages/quantize/quantize",
+          "pathName": "pages/quantize/quantize",
           "query": "",
           "scene": null
         },
@@ -25,8 +25,8 @@
           "scene": null
         },
         {
-          "name": "pages/salary/salary",
-          "pathName": "pages/salary/salary",
+          "name": "pages/addInvolve/addInvolve",
+          "pathName": "pages/addInvolve/addInvolve",
           "query": "",
           "scene": null
         },

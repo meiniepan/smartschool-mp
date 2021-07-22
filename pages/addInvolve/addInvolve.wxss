@@ -3,7 +3,8 @@ page {
 background: var(--tintBac);
 }
 .navi-1{
-    font-size: 24rpx;
+    font-size: 28rpx;
+    color: var(--themeColor);
 }
 .act{
     width: 20rpx;

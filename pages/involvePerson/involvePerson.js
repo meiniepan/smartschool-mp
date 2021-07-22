@@ -43,11 +43,10 @@ Page({
         app.httpPost(url, data).then((res) => {
             let data = [], mDataInvolve = [];
             if (type === 0) {
-                console.log("depart", res)
                 data = res.respResult;
                 data.forEach(bean => {
                     bean.data.forEach(it => {
-                        it.parentId = id
+                        it.parentId = this.data.bean.id
                         if (that.data.bean.id.indexOf("_")>=0) {
                             it.topdepartid = that.data.bean.id.split("_")[1]
                         }
@@ -60,7 +59,7 @@ Page({
             } else {
                 data = res.data
                 data.forEach(it => {
-                    it.parentId = id
+                    it.parentId = this.data.bean.
                     it.topdepartid = "grade0"
                     if (that.data.bean.id.indexOf("_")>=0) {
                         it.secdepartid = that.data.bean.id.split("_")[1]
@@ -74,7 +73,6 @@ Page({
 
                 mDataInvolve.push(bean)
             }
-            console.log("mDataInvolve", JSON.stringify(mDataInvolve))
             this.setData({
                 mDataInvolve
             })
@@ -94,13 +92,13 @@ Page({
                 }
             })
         })
-        this.getOpenerEventChannel().emit('involvePerson', {data:involve})
+        this.getOpenerEventChannel().emit('involvePerson', involve)
         wx.navigateBack({
             delta: 1,
         })
     },
     setChoice(it) {
-        this.data.mDataReceive.forEach(receive => {
+        this.data.bean.list.forEach(receive => {
             if (receive.uid == it.uid) {
                 it.checked = true
                 return

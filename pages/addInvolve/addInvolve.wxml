@@ -2,7 +2,7 @@
 <view class="out">
     <navigation title="组织架构">
         <image class="act" src="/assets/images/icon_back_black_a.png" mode="widthFix" bindtap="doFinish"></image>
-        <view class="navi-1" bindtap="doConfirm">我的预约</view>
+        <view class="navi-1" bindtap="doConfirm">{{confirmStr}}</view>
     </navigation>
     <view class="tabs" style="margin-top: {{navigationHeight}}px">
         <view class="{{mCurrent==0?'tab-self':'tab-share'}}" bindtap="checkPri">组织架构</view>

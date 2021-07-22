@@ -10,8 +10,9 @@ Page({
         navigationHeight: app.globalData.navigationHeight,
         mCurrent: 0, // 当前tab
         mData: [],
-        mDataLeft: [],
-        mDataRight: [],
+        mDataDepartment: [],
+        mDataClasses: [],
+        mDataInvolve: [],
     },
     getList(type, folderid, init) {
         let url = ""
@@ -28,46 +29,44 @@ Page({
         app.httpPost(url, data).then((res) => {
             let data = [];
             if (type === 0) {
-                console.log("depart",res)
                 data = res.respResult;
-                data.forEach(res=>{
-                    res.id = '0_'+res.id
+                data.forEach(res => {
+                    res.id = '0_' + res.id
                 })
             } else {
-                console.log("class",res)
                 res.respResult.forEach(res => {
                     res.list.forEach(res2 => {
                             data.push({id: res2.id, name: res2.levelclass})
                         }
                     )
                 })
-                data.forEach(res=>{
-                    res.id = '1_'+res.id
+                data.forEach(res => {
+                    res.id = '1_' + res.id
                 })
             }
 
-            let mDataLeft, mDataRight, isEmpty
+            let mDataDepartment, mDataClasses, isEmpty
             if (type === 0) {
-                mDataLeft = data
+                mDataDepartment = data
                 isEmpty = data.length == 0
             } else {
-                mDataRight = data
+                mDataClasses = data
             }
             if (init === true) {
                 this.setData({
-                    mDataRight,
+                    mDataClasses,
                 });
             } else {
                 if (type === 0) {
                     this.setData({
                         mData: data,
-                        mDataLeft,
+                        mDataDepartment,
                         isEmpty
                     });
                 } else {
                     this.setData({
                         mData: data,
-                        mDataRight,
+                        mDataClasses,
                     });
                 }
             }
@@ -77,8 +76,8 @@ Page({
         if (this.data.mCurrent === 1) {
             this.setData({
                 mCurrent: 0,
-                mData: this.data.mDataLeft,
-                isEmpty: this.data.mDataLeft.length == 0
+                mData: this.data.mDataDepartment,
+                isEmpty: this.data.mDataDepartment.length == 0
             })
         }
     },
@@ -86,27 +85,27 @@ Page({
         if (this.data.mCurrent === 0) {
             this.setData({
                 mCurrent: 1,
-                mData: this.data.mDataRight,
-                isEmpty: this.data.mDataRight.length == 0
+                mData: this.data.mDataClasses,
+                isEmpty: this.data.mDataClasses.length == 0
             })
         }
     },
 
     doDetail(e) {
-        console.log("ee", e.currentTarget)
+        var that = this
         let position = e.currentTarget.dataset.position
         let bean = this.data.mData[position]
         bean.type = this.data.mCurrent
         this.setData({
-            currentItemId:bean.id
+            currentItemId: bean.id
         })
         wx.navigateTo({
             url: '/pages/involvePerson/involvePerson?bean=' + JSON.stringify(bean),
             events: {
                 // 为指定事件添加一个监听器，获取被打开页面传送到当前页面的数据
-                involvePerson: function(data) {
+                involvePerson: function (data) {
                     //这里是获取被打开页面传送到当前页面的数据
-                    console.log('aishang', data);
+                    that.doResult(data);
                 }
             },
 
@@ -117,10 +116,67 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-        console.log('life','load')
+        if (options.receive != null) {
+            this.setData({
+                mDataReceive: JSON.parse(options.receive)
+            })
+        }
         this.getList(0, null)
         this.getList(1, null, true)
 
+    },
+    doResult(data) {
+        var removeList = []
+        var receiveList = data
+        this.data.mDataInvolve.forEach((it, index, array) => {
+
+        })
+        for (let i = this.data.mDataInvolve.length-1; i >=0 ; i--) {
+            if (this.data.mDataInvolve[i].parentId == this.data.currentItemId) {
+                this.data.mDataInvolve.splice(i, 1)
+            }
+        }
+        if (this.data.mCurrent == '0') {
+            this.data.mDataDepartment.forEach(it => {
+                if (it.id == this.data.currentItemId) {
+                    it.list = receiveList
+                    it.num = receiveList.length
+                }
+            })
+            this.setData({
+                mDataDepartment: this.data.mDataDepartment
+            })
+        } else {
+            this.data.mDataClasses.forEach(it => {
+                if (it.id == currentItemId) {
+                    it.list = receiveList
+                    it.num = receiveList.length
+                }
+            })
+            this.setData({
+                mDataClasses: this.data.mDataClasses
+            })
+        }
+
+        this.data.mDataInvolve = this.data.mDataInvolve.concat(receiveList)
+        this.setData({
+            mDataInvolve: this.data.mDataInvolve
+        })
+        this.setPersonNum()
+    },
+    setPersonNum() {
+        let num = this.data.mDataInvolve.length
+        if (num > 0) {
+            this.setData({
+                confirmStr: '确定(' + num + ')',
+                manage: true
+            })
+        } else {
+            this.setData({
+                confirmStr: '确定',
+                manage: false
+            })
+        }
     },
     doFinish() {
         wx.navigateBack({
@@ -128,10 +184,10 @@ Page({
         })
     },
     doConfirm() {
-        const involve= []
-        this.data.mDataInvolve.forEach(it=>{
-            it.data.forEach(it2=>{
-                if (it2.checked){
+        const involve = []
+        this.data.mDataInvolve.forEach(it => {
+            it.data.forEach(it2 => {
+                if (it2.checked) {
                     involve.push(it2)
                 }
             })
@@ -145,7 +201,6 @@ Page({
      * 生命周期函数--监听页面初次渲染完成
      */
     onReady: function () {
-        console.log('life','read')
     },
 
     /**
