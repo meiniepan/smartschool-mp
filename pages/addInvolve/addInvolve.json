@@ -1,4 +1,6 @@
 {
-  "usingComponents": {},
-  "navigationBarTitleText": "组织架构"
+  "usingComponents": {
+    "navigation": "../../components/navigation/navigation"
+  },
+  "navigationStyle":"custom"
 }

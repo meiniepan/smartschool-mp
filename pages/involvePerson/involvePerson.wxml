@@ -1,2 +1,25 @@
 <!--pages/involvePerson/involvePerson.wxml-->
-<text>pages/involvePerson/involvePerson.wxml</text>
+<view class="out">
+    <navigation title="组织架构">
+        <image class="act" src="/assets/images/icon_back_black_a.png" mode="widthFix" bindtap="doFinish"></image>
+        <view class="navi-1" bindtap="doConfirm">我的预约</view>
+    </navigation>
+    <view class="split"></view>
+    <view class="cells">
+        <view class="cell" wx:for="{{mDataInvolve}}" wx:key="index" data-position="{{index}}">
+            <view class="title-area">
+                <view class="title">{{item.departmentsname}}</view>
+                <image class="check" bindtap="doCheckAll" mode="heightFix" data-position="{{index}}"
+                       src="/assets/images/{{item.checked?'ic_check_timetable_true':'ic_check_timetable_false'}}.png"></image>
+                <view class="text">全选</view>
+            </view>
+            <view class="cells0">
+                <view class="cell0" wx:for="{{item.data}}" wx:for-index="idx" wx:for-item="bean" wx:key="idx"
+                      data-position0="{{index}}" data-position="{{idx}}"  bindtap="doPerson">
+                    <view class="{{bean.checked?'label-c':'label'}}">{{bean.label}}</view>
+                    <view class="name singleLine">{{bean.realname}}</view>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>

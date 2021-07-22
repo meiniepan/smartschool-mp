@@ -7,6 +7,7 @@ Page({
      * 页面的初始数据
      */
     data: {
+        navigationHeight: app.globalData.navigationHeight,
         mCurrent: 0, // 当前tab
         mData: [],
         mDataLeft: [],
@@ -101,6 +102,14 @@ Page({
         })
         wx.navigateTo({
             url: '/pages/involvePerson/involvePerson?bean=' + JSON.stringify(bean),
+            events: {
+                // 为指定事件添加一个监听器，获取被打开页面传送到当前页面的数据
+                involvePerson: function(data) {
+                    //这里是获取被打开页面传送到当前页面的数据
+                    console.log('aishang', data);
+                }
+            },
+
         })
     },
 
@@ -108,15 +117,35 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
+        console.log('life','load')
         this.getList(0, null)
         this.getList(1, null, true)
-    },
 
+    },
+    doFinish() {
+        wx.navigateBack({
+            delta: 1,
+        })
+    },
+    doConfirm() {
+        const involve= []
+        this.data.mDataInvolve.forEach(it=>{
+            it.data.forEach(it2=>{
+                if (it2.checked){
+                    involve.push(it2)
+                }
+            })
+        })
+        this.getOpenerEventChannel().emit('involvePerson', involve)
+        wx.navigateBack({
+            delta: 1,
+        })
+    },
     /**
      * 生命周期函数--监听页面初次渲染完成
      */
     onReady: function () {
-
+        console.log('life','read')
     },
 
     /**

@@ -2,7 +2,14 @@
 page {
 background: var(--tintBac);
 }
-
+.navi-1{
+    font-size: 24rpx;
+}
+.act{
+    width: 20rpx;
+    height: 20rpx;
+    margin-right: 20rpx;
+}
 .tabs {
     border-top: var(--splitColor) 1rpx solid;
     border-bottom: var(--splitColor) 1rpx solid;
