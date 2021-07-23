@@ -13,9 +13,44 @@ Page({
         mDataDepartment: [],
         mDataClasses: [],
         mDataInvolve: [],
+        isManage:false,
+        confirmStr: '确定',
+        marginLeft:"34rpx",
+        onlyDep: false,
+        onlyStu: false,
+    },
+    /**
+     * 生命周期函数--监听页面加载
+     */
+    onLoad: function (options) {
+        if (options.receive != null) {
+            this.setData({
+                mDataReceive: JSON.parse(options.receive)
+            })
+        }
+        if (options.type == '1') {
+            this.setData({
+                onlyStu: true,
+                marginLeft:"0",
+                mCurrent: 1, // 当前tab
+            })
+            this.getList(1, null)
+        }else if (options.type == '0') {
+            this.setData({
+                onlyDep: true,
+                marginLeft:"0",
+                mCurrent: 0, // 当前tab
+            })
+            this.getList(0, null)
+        }else {
+            this.getList(0, null)
+            this.getList(1, null, true)
+        }
+
+
     },
     getList(type, folderid, init) {
-        let url = ""
+        let that = this, url = ""
         let urlLeft = "/api/v17/teacher/departments/treeDep"
         let urlRight = "/api/v17/teacher/classs/treeClass"
         if (type === 0) {
@@ -42,6 +77,7 @@ Page({
                 })
                 data.forEach(res => {
                     res.id = '1_' + res.id
+                    res.list = []
                 })
             }
 
@@ -69,8 +105,11 @@ Page({
                         mDataClasses,
                     });
                 }
+
             }
+
         });
+
     },
     checkPri() {
         if (this.data.mCurrent === 1) {
@@ -112,19 +151,49 @@ Page({
         })
     },
 
-    /**
-     * 生命周期函数--监听页面加载
-     */
-    onLoad: function (options) {
-        if (options.receive != null) {
-            this.setData({
-                mDataReceive: JSON.parse(options.receive)
-            })
-        }
-        this.getList(0, null)
-        this.getList(1, null, true)
+    doDelete(e){
+        if(this.data.isManage) {
+            var p = e.currentTarget.dataset.position
 
+            this.data.mDataDepartment.forEach (it=>{
+                if (it.id == this.data.mDataInvolve[p].parentId) {
+                    if (it.num > 0) {
+                        for (let i = 0; i <it.list.length ; i++) {
+                            if (it.list[i].uid == this.data.mDataInvolve[p].uid){
+                                it.list.splice(i,1)
+                                break
+                            }
+                        }
+                        it.num = (it.num - 1)
+                    }
+                }
+            })
+            this.data.mDataClasses.forEach (it=>{
+                if (it.id == this.data.mDataInvolve[p].parentId) {
+                    if (it.num > 0) {
+                        for (let i = 0; i <it.list.length ; i++) {
+                            if (it.list[i].uid == this.data.mDataInvolve[p].uid){
+                                it.list.splice(i,1)
+                                break
+                            }
+                        }
+                        it.num = (it.num - 1)
+                    }
+                }
+            })
+
+            this.data.mDataInvolve.splice(p,1)
+            this.setData({
+                mDataInvolve: this.data.mDataInvolve,
+                mDataDepartment: this.data.mDataDepartment,
+                mDataClasses: this.data.mDataClasses,
+                mData:this.data.mData,
+            })
+            this.setPersonNum()
+        }
     },
+
+
     doResult(data) {
         var removeList = []
         var receiveList = data
@@ -148,9 +217,10 @@ Page({
             })
         } else {
             this.data.mDataClasses.forEach(it => {
-                if (it.id == currentItemId) {
+                if (it.id == this.data.currentItemId) {
                     it.list = receiveList
                     it.num = receiveList.length
+                    console.log("class",it)
                 }
             })
             this.setData({
@@ -160,7 +230,8 @@ Page({
 
         this.data.mDataInvolve = this.data.mDataInvolve.concat(receiveList)
         this.setData({
-            mDataInvolve: this.data.mDataInvolve
+            mDataInvolve: this.data.mDataInvolve,
+            mData:this.data.mData,
         })
         this.setPersonNum()
     },
@@ -184,17 +255,15 @@ Page({
         })
     },
     doConfirm() {
-        const involve = []
-        this.data.mDataInvolve.forEach(it => {
-            it.data.forEach(it2 => {
-                if (it2.checked) {
-                    involve.push(it2)
-                }
-            })
-        })
-        this.getOpenerEventChannel().emit('involvePerson', involve)
+
+        this.getOpenerEventChannel().emit('quantizeSpecial', this.data.mDataInvolve)
         wx.navigateBack({
             delta: 1,
+        })
+    },
+    doManage(){
+        this.setData({
+            isManage:!this.data.isManage
         })
     },
     /**

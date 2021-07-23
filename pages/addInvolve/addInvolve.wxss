@@ -28,7 +28,7 @@ background: var(--tintBac);
     display: flex;
     align-items: center;
     justify-content: center;
-    width: calc(100% - 2*var(--titlePadding) - 34rpx);
+    flex-grow: 1;
     height: 88rpx;
     background: var(--themeColor);
     border-radius: 44rpx;
@@ -38,7 +38,7 @@ background: var(--tintBac);
     display: flex;
     align-items: center;
     justify-content: center;
-    width: calc(100% - 2*var(--titlePadding) - 34rpx);
+    flex-grow: 1;
     height: 88rpx;
     background: var(--white);
     border-radius: 44rpx;
@@ -58,11 +58,20 @@ background: var(--tintBac);
 }
 
 .cell {
+    position: relative;
     display: flex;
-    width: calc((100% - 60rpx) / 3);
-    height: var(--textHeight);
     margin-right: 20rpx;
     margin-bottom: 20rpx;
+    width: calc((100% - 60rpx) / 3);
+    height: var(--textHeight);
+
+}
+.title0{
+    display: flex;
+    width: 100%;
+    height: 100%;
+    margin-right: 20rpx;
+    margin-top: 20rpx;
     border: var(--themeColor) 1rpx solid;
     justify-content: center;
     background: var(--white);
@@ -71,12 +80,99 @@ background: var(--tintBac);
     align-items: center;
     box-sizing: border-box;
 }
-
+.num{
+    display: flex;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 36rpx;
+    height: 36rpx;
+    align-items: center;
+    justify-content: center;
+    font-size: 24rpx;
+    color: var(--white);
+    background: var(--themeColor);
+    border-radius: 50%;
+}
 .titles {
     display: flex;
     flex-direction: column;
 }
 
-.date {
+.involve-area {
+    display: flex;
+    flex-direction: column;
+    padding: 40rpx var(--titlePadding);
+    background: var(--white);
+    margin-top: 20rpx;
+}
+.manage-area {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
 
+.title {
+    display: flex;
+    flex-grow: 1;
+    font-size: 28rpx;
+}
+
+.manage {
+    display: flex;
+    padding: 10rpx 20rpx;
+    color: var(--themeColor);
+    border: 1rpx solid var(--themeColor);
+    border-radius: 10rpx;
+    font-size: 28rpx;
+}
+
+.cells0 {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 30rpx;
+    padding: 0 18rpx;
+}
+
+.cell0 {
+    position: relative;
+    display: flex;
+    width: 120rpx;
+    flex-direction: column;
+    margin-bottom: 20rpx;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.label-c {
+    display: flex;
+    width: 80rpx;
+    height: 80rpx;
+    align-items: center;
+    justify-content: center;
+    background: var(--themeColor);
+    color: var(--white);
+    border-radius: 50%;
+    font-size: 44rpx;
+    box-sizing: border-box;
+}
+.delete{
+    position: absolute;
+    top: 0;
+    right: 15rpx;
+    width: 26rpx;
+    height: 26rpx;
+}
+
+.name {
+    margin-top: 4rpx;
+    font-size: 24rpx;
+    color: var(--commonHint);
+}
+.split{
+    display: flex;
+    width: 100%;
+    height: 20rpx;
+    background: var(--tintBac);
 }

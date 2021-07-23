@@ -57,9 +57,9 @@ Page({
                 })
                 mDataInvolve=mDataInvolve.concat(data)
             } else {
-                data = res.data
+                data = res.respResult.data
                 data.forEach(it => {
-                    it.parentId = this.data.bean.
+                    it.parentId = this.data.bean.id
                     it.topdepartid = "grade0"
                     if (that.data.bean.id.indexOf("_")>=0) {
                         it.secdepartid = that.data.bean.id.split("_")[1]

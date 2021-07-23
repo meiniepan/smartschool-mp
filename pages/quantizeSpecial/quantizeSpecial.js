@@ -12,6 +12,7 @@ Page({
             token: null,
             stime: '请选择开始时间',
             etime: '请选择结束时间',
+            stuStr: '请选择学生',
             involve: null,
             actname: '请选择情况类型',
             rulename: '请选择影响项目',
@@ -73,9 +74,31 @@ Page({
         });
     },
     doChooseStudent() {
+        let that = this
         wx.navigateTo({
-            url: "../addInvolve/addInvolve?url='${url}'",
+            url: "../addInvolve/addInvolve?type=2",
+            events: {
+                // 为指定事件添加一个监听器，获取被打开页面传送到当前页面的数据
+                quantizeSpecial: function (data) {
+                    //这里是获取被打开页面传送到当前页面的数据
+                    that.doResult(data);
+                }
+            },
         });
+    },
+    doResult(data) {
+        let str = '', involves = []
+        data.forEach(it => {
+            str = str + it.realname + "、"
+            involves.push(it)
+        })
+        str = str.substring(0, str.length - 1)
+        this.data.quantizeBody.involve = JSON.stringify(involves)
+        this.data.quantizeBody.stuStr = str
+        this.setData({
+                quantizeBody: this.data.quantizeBody,
+            }
+        )
     },
     bindTimeS(e) {
         let v = this.data.quantizeBody

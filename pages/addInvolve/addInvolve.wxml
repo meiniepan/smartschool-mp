@@ -5,13 +5,28 @@
         <view class="navi-1" bindtap="doConfirm">{{confirmStr}}</view>
     </navigation>
     <view class="tabs" style="margin-top: {{navigationHeight}}px">
-        <view class="{{mCurrent==0?'tab-self':'tab-share'}}" bindtap="checkPri">组织架构</view>
-        <view class="{{mCurrent!=0?'tab-self':'tab-share'}}" style="margin-left: 34rpx" bindtap="checkPub">我的班级</view>
+        <view wx:if="{{!onlyStu}}" class="{{mCurrent==0?'tab-self':'tab-share'}}" bindtap="checkPri">组织架构</view>
+        <view wx:if="{{!onlyDep}}" class="{{mCurrent!=0?'tab-self':'tab-share'}}" style="margin-left: {{marginLeft}}" bindtap="checkPub">我的班级</view>
     </view>
     <emptyView wx:if="{{isEmpty}}"/>
     <view class="cells" wx:else>
         <view class="cell" wx:for="{{mData}}" wx:key="index" data-position="{{index}}" bindtap="doDetail">
-            {{item.name}}
+            <view class="title0">{{item.name}}</view>
+        <view wx:if="{{item.num>0}}" class="num">{{item.num}}</view>
         </view>
+    </view>
+    <view class="involve-area" wx:if="{{mDataInvolve.length>0}}">
+    <view class="manage-area">
+        <view class="title">参与人</view>
+        <view class="manage" bindtap="doManage">{{isManage?'完成':'管理'}}</view>
+    </view>
+    <view class="cells0">
+        <view class="cell0" wx:for="{{mDataInvolve}}" wx:for-index="idx" wx:for-item="bean" wx:key="idx"
+              data-position="{{idx}}" bindtap="doDelete">
+            <view class="label-c">{{bean.label}}</view>
+            <image wx:if="{{isManage}}" class="delete" src="/assets/images/ic_no.png" mode="heightFix"/>
+            <view class="name singleLine">{{bean.realname}}</view>
+        </view>
+    </view>
     </view>
 </view>

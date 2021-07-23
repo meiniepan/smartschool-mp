@@ -4,8 +4,8 @@
     <view class="item" bindtap="doChooseStudent">
         <view class="key text bold">选择学生</view>
         <view class="require bold">*</view>
-        <view class="value hint">请选择学生</view>
-        <image class="next" src="/assets/images/ic_next.png" style="height: 28rpx" mode="heightFix"></image>
+        <view class="value hint singleLine">{{quantizeBody.stuStr}}</view>
+        <image class="next" src="/assets/images/ic_next.png" style="height: 28rpx" mode="widthFix"></image>
     </view>
     <picker mode="date" value="" start="2020-09-01" end="2025-09-01"
             data-type="indexClass" bindchange="bindTimeS">
@@ -13,7 +13,7 @@
             <view class="key text bold">选择开始时间</view>
             <view class="require bold">*</view>
             <view class="value hint">{{quantizeBody.stime}}</view>
-            <image class="next" src="/assets/images/ic_next.png" style="height: 28rpx" mode="heightFix"></image>
+            <image class="next" src="/assets/images/ic_next.png" style="height: 28rpx" mode="widthFix"></image>
         </view>
     </picker>
     <picker mode="date" value="" start="2020-09-01" end="2025-09-01"
@@ -22,7 +22,7 @@
             <view class="key text bold">选择结束时间</view>
             <view class="require bold">*</view>
             <view class="value hint">{{quantizeBody.etime}}</view>
-            <image class="next" src="/assets/images/ic_next.png" style="height: 28rpx" mode="heightFix"></image>
+            <image class="next" src="/assets/images/ic_next.png" style="height: 28rpx" mode="widthFix"></image>
         </view>
     </picker>
     <picker bindchange="doAct"
@@ -30,20 +30,20 @@
         <view class="item">
             <view class="key text bold">情况类型</view>
             <view class="require bold">*</view>
-            <view class="value hint">{{quantizeBody.actname}}</view>
-            <image class="next" src="/assets/images/ic_next.png" style="height: 28rpx" mode="heightFix"></image>
+            <view class="value hint singleLine">{{quantizeBody.actname}}</view>
+            <image class="next" src="/assets/images/ic_next.png" style="height: 28rpx" mode="widthFix"></image>
         </view>
     </picker>
 
     <view class="item" bindtap="doRule">
         <view class="key text bold">影响项目</view>
         <view class="require bold">*</view>
-        <view class="value hint">请选择影响项目</view>
-        <image class="next" src="/assets/images/ic_next.png" style="height: 28rpx" mode="heightFix"></image>
+        <view class="value hint singleLine">请选择影响项目</view>
+        <image class="next" src="/assets/images/ic_next.png" style="height: 28rpx" mode="widthFix"></image>
     </view>
     <view class="item-remark" bindtap="doChoseStudent">
         <view class="horizontal">
-            <view class="key text bold">选择学生</view>
+            <view class="key text bold">情况说明</view>
             <view class="require bold">*</view>
         </view>
         <input placeholder="最多20个字" maxlength="20" bindinput="doInput" data-type="remark" value="{{phone}}"/>

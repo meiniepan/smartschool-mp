@@ -4,9 +4,14 @@
 }
 .item{
     display: flex;
+    flex-direction: row;
     align-items: center;
     padding: 30rpx var(--titlePadding);
     border-bottom: 1rpx solid var(--splitColor);
+}
+.key{
+    display: flex;
+    white-space: nowrap;
 }
 .item-remark{
     display: flex;
@@ -17,8 +22,12 @@
 .value{
     flex-grow: 1;
     text-align: right;
-    margin-left: 10rpx;
+    margin-left: 20rpx;
     margin-right: 10rpx;
+}
+.next{
+    width: 20rpx;
+    flex-shrink: 0 ;
 }
 .layout0{
     display: flex;
