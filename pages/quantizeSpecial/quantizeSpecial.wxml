@@ -38,15 +38,18 @@
     <view class="item" bindtap="doRule">
         <view class="key text bold">影响项目</view>
         <view class="require bold">*</view>
-        <view class="value hint singleLine">请选择影响项目</view>
+        <view class="value hint singleLine">{{quantizeBody.rulename}}</view>
         <image class="next" src="/assets/images/ic_next.png" style="height: 28rpx" mode="widthFix"></image>
     </view>
-    <view class="item-remark" bindtap="doChoseStudent">
+    <view class="item-remark" bindtap="">
         <view class="horizontal">
             <view class="key text bold">情况说明</view>
             <view class="require bold">*</view>
         </view>
         <input placeholder="最多20个字" maxlength="20" bindinput="doInput" data-type="remark" value="{{phone}}"/>
+    </view>
+    <view class="bottom">
+        <view class="confirm" bindtap="doConfirm">提交</view>
     </view>
 </view>
 

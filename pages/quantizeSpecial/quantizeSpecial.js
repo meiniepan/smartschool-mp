@@ -1,5 +1,5 @@
 // pages/quantizeSpecial/quantizeSpecial.js
-import {formatShowTime} from "../../utils/util";
+import {showToastWithoutIcon} from "../../utils/util";
 
 let app = getApp();
 Page({
@@ -9,11 +9,11 @@ Page({
      */
     data: {
         quantizeBody: {
-            token: null,
+            token: wx.getStorageSync('token'),
             stime: '请选择开始时间',
             etime: '请选择结束时间',
             stuStr: '请选择学生',
-            involve: null,
+            involve: [],
             actname: '请选择情况类型',
             rulename: '请选择影响项目',
             types: null,
@@ -35,26 +35,23 @@ Page({
 
         this.getMoralTypeList()
     },
-    getFolder(type, folderid, init) {
-        if (involves.size == 0 || commit.stime.isNullOrEmpty() || commit.actname.isNullOrEmpty() || commit.rulename.isNullOrEmpty() || commit.remark.isNullOrEmpty()) {
-            toast(R.string.lack_info)
+    doConfirm() {
+        let bean = this.data.quantizeBody
+
+        if (bean.involve.length == 0 || bean.stime=="请选择开始时间"||
+            bean.etime=="请选择结束时间" || bean.actname=="请选择情况类型" ||
+            bean.rulename=="请选择影响项目" || bean.remark==null|| bean.remark=='') {
+            showToastWithoutIcon('请完善信息')
             return
         }
 
         let url = "/api/v17/moral/moralRuleSpecial/add"
-        if (type === 0) {
-            url = urlPriFolder
-        } else {
-            url = urlPubFolder
-        }
-        let data = {
-            token: wx.getStorageSync('token'),
-            folderid: folderid
-        }
+        let data = bean
         app.httpPost(url, data).then((res) => {
-            let data = res.respResult.data;
-
-
+            showToastWithoutIcon('处理完成')
+            wx.navigateBack({
+                delta:1
+            })
         });
     },
 
@@ -76,7 +73,7 @@ Page({
     doChooseStudent() {
         let that = this
         wx.navigateTo({
-            url: "../addInvolve/addInvolve?type=2",
+            url: "../addInvolve/addInvolve?type=1",
             events: {
                 // 为指定事件添加一个监听器，获取被打开页面传送到当前页面的数据
                 quantizeSpecial: function (data) {
@@ -138,6 +135,23 @@ Page({
             show: false,
             overlay: false,
         })
+
+        let bean = this.data.quantizeBody
+        let str = '',types = ''
+        this.data.ruleArrays.forEach(it=>{
+            if (it.checked){
+                str = str + it.typename + ","
+                types = types + it.id + ","
+            }
+        })
+        if (str.length>1){
+            str = str.substring(0, str.length - 1)
+            bean.rulename = str
+            bean.types = types
+            this.setData({
+                quantizeBody:bean
+            })
+        }
     },
     checkRule(e) {
         var v = this.data.ruleArrays

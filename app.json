@@ -16,6 +16,8 @@
     "pages/repairList/repairList",
     "pages/bookSiteList/bookSiteList",
     "pages/bookSite/bookSite",
+    "pages/addBookSite/addBookSite",
+    "pages/roomBookRecords/roomBookRecords",
     "pages/task/task",
     "pages/taskDetail/taskDetail",
     "pages/school/school",

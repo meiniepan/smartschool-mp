@@ -1,0 +1,43 @@
+<!--pages/addBookSite/addBookSite.wxml-->
+<view class="out">
+    <view class="split-line"></view>
+
+    <picker range="{{stimeArr}}"
+            data-type="indexClass" bindchange="bindTimeS">
+        <view class="item">
+            <view class="key text bold">开始时间</view>
+            <view class="require bold">*</view>
+            <view class="value hint">{{requestBody.ostime}}</view>
+            <image class="next" src="/assets/images/ic_next.png" style="height: 28rpx" mode="widthFix"></image>
+        </view>
+    </picker>
+    <picker range="{{etimeArr}}"
+            data-type="indexClass" bindchange="bindTimeE">
+        <view class="item">
+            <view class="key text bold">结束时间</view>
+            <view class="require bold">*</view>
+            <view class="value hint">{{requestBody.oetime}}</view>
+            <image class="next" src="/assets/images/ic_next.png" style="height: 28rpx" mode="widthFix"></image>
+        </view>
+    </picker>
+    <picker bindchange="doAct"
+            data-type="indexAct" value="{{requestBody.roomname}}" range="{{roomArr}}">
+        <view class="item">
+            <view class="key text bold">会议室</view>
+            <view class="require bold">*</view>
+            <view class="value hint singleLine">{{quantizeBody.roomname}}</view>
+            <image class="next" src="/assets/images/ic_next.png" style="height: 28rpx" mode="widthFix"></image>
+        </view>
+    </picker>
+
+    <view class="item-remark" bindtap="">
+        <view class="horizontal">
+            <view class="key text bold">会议主题</view>
+            <view class="require bold">*</view>
+        </view>
+        <input placeholder="请描述会议主题" maxlength="20" bindinput="doInput" data-type="remark" value="{{phone}}"/>
+    </view>
+    <view class="bottom">
+        <view class="confirm" bindtap="doConfirm">提交</view>
+    </view>
+</view>

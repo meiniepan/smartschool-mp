@@ -55,6 +55,25 @@ function showToastWithoutIcon(content) {
     });
 }
 
+function showModal(content,title='温馨提示') {
+    wx.showModal({
+        title:title ,
+        content: content,
+        success(res) {
+            if (res.confirm) {
+                wx.navigateBack({
+                    delta: 1,
+                })
+            } else if (res.cancel) {
+                wx.navigateBack({
+                    delta: 1,
+                })
+            }
+        },
+        confirmColor: "#F95B49",
+    })
+}
+
 function isEmptyObj(obj) {
     if (Object.keys(obj).length > 0) {
         return false;
@@ -220,6 +239,7 @@ module.exports = {
     isLogin: isLogin,
     clearLoginInfo: clearLoginInfo,
     showToastWithoutIcon: showToastWithoutIcon,
+    showModal: showModal,
     isEmptyObj: isEmptyObj,
     zero: zero,
     getDayInWeek: getDayInWeek,

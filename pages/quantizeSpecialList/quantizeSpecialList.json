@@ -1,3 +1,6 @@
 {
-  "usingComponents": {}
+  "usingComponents": {
+    "emptyView": "../../components/emptyView/emptyView"
+  },
+  "navigationBarTitleText": "量化评比"
 }

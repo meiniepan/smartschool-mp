@@ -1,1 +1,37 @@
 /* pages/quantizeSpecialList/quantizeSpecialList.wxss */
+page{
+    background: var(--tintBac);
+}
+.cells{
+    display: flex;
+    flex-direction: column;
+    margin-top: 24rpx;
+}
+.cell{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20rpx;
+    background: var(--white);
+    padding: 30rpx var(--titlePadding);
+}
+.title-area{
+    display: flex;
+    justify-content: space-between;
+}
+.remark-area{
+    display: flex;
+    flex-direction: column;
+}
+.key{
+    font-size: 30rpx;
+    font-weight: bold;
+}
+.value{
+    font-size: 28rpx;
+    color: var(--commonHint);
+    margin-left: 10rpx;
+}
+.value-remark{
+    font-size: 28rpx;
+    color: var(--commonHint);
+}
