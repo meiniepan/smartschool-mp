@@ -35,3 +35,14 @@ page {
     overflow: hidden;
     text-align: center;
 }
+.action{
+    display: flex;
+    height: var(--textHeight);
+    color: var(--themeColor);
+    background: var(--white);
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--textHeight);
+    border: 1rpx solid var(--themeColor);
+    box-sizing: border-box;
+}

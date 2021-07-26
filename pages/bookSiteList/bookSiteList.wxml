@@ -1,7 +1,7 @@
 <view class="out">
     <scroll requesting="{{mData.requesting}}" end="{{mData.end}}" empty-show="{{mData.emptyShow}}"
-        list-count="{{mData.listData.length}}" top-size="0" bottom-size="{{bottomHeight}}" bind:refresh="refresh"
-        style="padding-top: 0rpx">
+            list-count="{{mData.listData.length}}" top-size="0" bottom-size="{{bottomHeight}}" bind:refresh="refresh"
+            style="padding-top: 0rpx">
         <view class="cells">
             <view class="cell" wx:for="{{mData.listData}}" wx:key="index" bindtap="articleDetail">
                 <view class="titles">
@@ -25,7 +25,7 @@
                     <view class="title-name">会议室地点</view>
                     <view class="title">{{item.classroom.addr}}</view>
                 </view>
-
+                <view wx:if="{{item.status=='0'}}" data-id="{{item.id}}" bindtap="doAction" class="action">取消预约</view>
             </view>
         </view>
     </scroll>

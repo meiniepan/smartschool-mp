@@ -80,3 +80,10 @@ page{
 
 .remark {
 }
+.addBtn{
+    position: fixed;
+    bottom: 128rpx;
+    right: var(--titlePadding);
+    width: 136rpx;
+    height: 136rpx;
+}

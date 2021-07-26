@@ -8,6 +8,19 @@ Page({
      * 页面的初始数据
      */
     data: {},
+    /**
+     * 生命周期函数--监听页面加载
+     */
+    onLoad: function (options) {
+        let temp = new Date()
+        console.log("date", temp)
+        let year = temp.getFullYear()
+        let month = temp.getMonth() + 1
+        let date = temp.getDate()
+        let today = year + zero(month) + zero(date)
+        this.getDataDay(today)
+        this.getDataMonth(year + zero(month))
+    },
     getDataDay(day) {
         let url;
         if (wx.getStorageSync('usertype') === "1") {
@@ -87,19 +100,7 @@ Page({
     doSelect(e) {
         this.getDataDay(e.detail)
     },
-    /**
-     * 生命周期函数--监听页面加载
-     */
-    onLoad: function (options) {
-        let temp = new Date()
-        console.log("date", temp)
-        let year = temp.getFullYear()
-        let month = temp.getMonth() + 1
-        let date = temp.getDate()
-        let today = year + zero(month) + zero(date)
-        this.getDataDay(today)
-        this.getDataMonth(year + zero(month))
-    },
+
 
     /**
      * 生命周期函数--监听页面初次渲染完成

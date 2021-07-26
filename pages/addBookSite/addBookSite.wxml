@@ -2,8 +2,8 @@
 <view class="out">
     <view class="split-line"></view>
 
-    <picker range="{{stimeArr}}"
-            data-type="indexClass" bindchange="bindTimeS">
+    <picker range="{{timeArr}}"
+            data-type="stime" bindchange="bindTimeS">
         <view class="item">
             <view class="key text bold">开始时间</view>
             <view class="require bold">*</view>
@@ -12,7 +12,7 @@
         </view>
     </picker>
     <picker range="{{etimeArr}}"
-            data-type="indexClass" bindchange="bindTimeE">
+            data-type="etime" bindchange="bindTimeE">
         <view class="item">
             <view class="key text bold">结束时间</view>
             <view class="require bold">*</view>
@@ -20,12 +20,12 @@
             <image class="next" src="/assets/images/ic_next.png" style="height: 28rpx" mode="widthFix"></image>
         </view>
     </picker>
-    <picker bindchange="doAct"
+    <picker bindchange="doAct" bindtap=""
             data-type="indexAct" value="{{requestBody.roomname}}" range="{{roomArr}}">
         <view class="item">
             <view class="key text bold">会议室</view>
             <view class="require bold">*</view>
-            <view class="value hint singleLine">{{quantizeBody.roomname}}</view>
+            <view class="value hint singleLine">{{requestBody.roomname}}</view>
             <image class="next" src="/assets/images/ic_next.png" style="height: 28rpx" mode="widthFix"></image>
         </view>
     </picker>
@@ -35,7 +35,7 @@
             <view class="key text bold">会议主题</view>
             <view class="require bold">*</view>
         </view>
-        <input placeholder="请描述会议主题" maxlength="20" bindinput="doInput" data-type="remark" value="{{phone}}"/>
+        <input placeholder="请描述会议主题" maxlength="20" bindinput="doInput" data-type="remark" value="{{}}"/>
     </view>
     <view class="bottom">
         <view class="confirm" bindtap="doConfirm">提交</view>

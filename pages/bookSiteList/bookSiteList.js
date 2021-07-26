@@ -1,3 +1,5 @@
+import {showToastWithoutIcon} from "../../utils/util";
+
 let app = getApp();
 Page({
 
@@ -75,6 +77,18 @@ Page({
 
     more() {
         this.getList('more', this.data.mData.lastid);
+    },
+    doAction(e){
+        let url = "/api/v17/admin/spacebook/modify"
+        let data = {
+            token: wx.getStorageSync('token'),
+            id: e.currentTarget.dataset.id,
+            status: '-1',
+        }
+        app.httpPost(url, data).then((res) => {
+            showToastWithoutIcon('处理完成')
+            this.refresh()
+        });
     },
     /**
      * 生命周期函数--监听页面加载

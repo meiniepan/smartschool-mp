@@ -10,6 +10,18 @@ Page({
     data: {
         navigationHeight: app.globalData.navigationHeight
     },
+    /**
+     * 生命周期函数--监听页面加载
+     */
+    onLoad: function (options) {
+var redirect_uri ='/pages/schedule/schedule'
+        var url = 'plugin://login-plugin/login'
+        +'?redirect_uri='+encodeURIComponent(redirect_uri)
+        wx.navigateTo({
+            url:url
+        })
+
+    },
     getDataDay(day) {
         console.log("day", day)
         let oldTime = (new Date(day)).getTime() + 24 * 3600 * 1000;
@@ -59,6 +71,11 @@ Page({
             delta: 1,
         })
     },
+    doAdd(){
+        wx.navigateTo({
+            url: "/pages/addBookSite/addBookSite"
+        })
+    },
     getDataMonth(month) {
         let url = "/api/v17/admin/spacebook/myBookLists"
         let data = {
@@ -76,6 +93,12 @@ Page({
             });
         });
     },
+    doDetail(){
+        const bean = this.data.mDataDay
+        wx.navigateTo({
+            url: '/pages/roomBookRecords/roomBookRecords?bean=' + JSON.stringify(bean),
+        })
+    },
     nextMonth(e) {
         this.getDataMonth(e.detail)
         this.selectComponent(".c2").nextMonth(e)
@@ -92,20 +115,7 @@ Page({
             url: "/pages/bookSiteList/bookSiteList"
         })
     },
-    /**
-     * 生命周期函数--监听页面加载
-     */
-    onLoad: function (options) {
-        let temp = new Date()
-        console.log("date", temp)
-        let year = temp.getFullYear()
-        let month = temp.getMonth() + 1
-        let date = temp.getDate()
-        let today = year + '/' + zero(month) + '/' + zero(date)
-        this.getDataDay(today)
-        this.getDataMonth(year + zero(month))
-        
-    },
+
 
     /**
      * 生命周期函数--监听页面初次渲染完成
@@ -118,7 +128,14 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow: function () {
-
+        let temp = new Date()
+        console.log("date", temp)
+        let year = temp.getFullYear()
+        let month = temp.getMonth() + 1
+        let date = temp.getDate()
+        let today = year + '/' + zero(month) + '/' + zero(date)
+        this.getDataDay(today)
+        this.getDataMonth(year + zero(month))
     },
 
     /**

@@ -1,2 +1,29 @@
 <!--pages/roomBookRecords/roomBookRecords.wxml-->
-<text>pages/roomBookRecords/roomBookRecords.wxml</text>
+<view class="out">
+        <view class="cells">
+            <view class="cell" wx:for="{{mData}}" wx:key="index" bindtap="articleDetail">
+                <view class="titles">
+                    <view class="title-name">会议室名称</view>
+                    <view class="title">{{item.classroom.classroomname}}</view>
+                </view>
+                <view class="titles">
+                    <view class="title-name">预约时间</view>
+                    <view class="title">{{item.timeStr}}</view>
+                </view>
+
+                <view class="titles">
+                    <view class="title-name">当前状态</view>
+                    <view class="title">{{item.statusStr}}</view>
+                </view>
+                <view class="titles">
+                    <view class="title-name">会议名称</view>
+                    <view class="title">{{item.remark}}</view>
+                </view>
+                <view class="titles">
+                    <view class="title-name">会议室地点</view>
+                    <view class="title">{{item.classroom.addr}}</view>
+                </view>
+                <view wx:if="{{item.status=='0'&&admin}}" data-id="{{item.id}}" data-p="{{index}}" bindtap="doAction" class="action">占用会议室</view>
+            </view>
+        </view>
+</view>
