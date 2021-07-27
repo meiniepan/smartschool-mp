@@ -1,5 +1,4 @@
-// pages/switch_role/switch_role.js
-import {showModal} from "../../utils/util";
+// pages/scheduleDetail/scheduleDetail.js
 Page({
 
   /**
@@ -13,7 +12,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-showModal('code=='+options.code)
+
   },
 
   /**
@@ -57,26 +56,11 @@ showModal('code=='+options.code)
   onReachBottom: function () {
 
   },
-  btn1(){
-    wx.redirectTo({
-      url: '/pages/login_s/login_s',
-    })
-  },
-  btn2(){
-    wx.redirectTo({
-      url: '/pages/login_t/login_t?id=2',
-    })
-  },
-  btn3(){
-    wx.redirectTo({
-      url: '/pages/login_t/login_t?id=3',
-    })
-  },
+
   /**
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
 
   }
-  
 })

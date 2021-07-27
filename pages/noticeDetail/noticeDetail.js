@@ -1,5 +1,6 @@
-import { showToastWithoutIcon } from '../../utils/util';
-import { getFileImage } from '../../utils/util';
+import {showToastWithoutIcon} from '../../utils/util';
+import {getFileImage} from '../../utils/util';
+
 let app = getApp();
 Page({
     /**
@@ -46,8 +47,8 @@ Page({
                     mImages.push(wx.getStorageSync("domain") + it.url)
                 } else {
                     let type = getFileImage(it.url);
-
-                    mFiles.push({ name: it.name, image: type, url: wx.getStorageSync("domain") + it.url })
+                    console.log('domain', wx.getStorageSync("domain") + it.url)
+                    mFiles.push({name: it.name, image: type, url: wx.getStorageSync("domain") + it.url})
                 }
             })
 
@@ -68,7 +69,7 @@ Page({
     },
     openFile(e) {
         let url = encodeURIComponent(e.currentTarget.dataset.url);
-        console.log("url",e.currentTarget.dataset.url)
+        console.log("url", e.currentTarget.dataset.url)
 
         wx.navigateTo({
             url: `../webDetail/webDetail?url=${url}`,

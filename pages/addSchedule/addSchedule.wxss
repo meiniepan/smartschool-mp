@@ -1,0 +1,49 @@
+/* pages/addSchedule/addSchedule.wxss */
+.require{
+    color: var(--commonRed2);
+}
+.item{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 30rpx var(--titlePadding);
+    border-bottom: 1rpx solid var(--splitColor);
+}
+.key{
+    display: flex;
+    white-space: nowrap;
+}
+.item-remark{
+    display: flex;
+    flex-direction: column;
+    padding: 30rpx var(--titlePadding);
+    border-bottom: 1rpx solid var(--splitColor);
+}
+.value{
+    flex-grow: 1;
+    text-align: right;
+    margin-left: 20rpx;
+    margin-right: 10rpx;
+}
+.next{
+    width: 20rpx;
+    flex-shrink: 0 ;
+}
+.bottom{
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    display: flex;
+    flex-direction: row-reverse;
+    height: 84rpx;
+    background: var(--grayF6);
+}
+.confirm{
+    display: flex;
+    width: 172rpx;
+    height: 100%;
+    background: var(--themeBac);
+    color: var(--white);
+    align-items: center;
+    justify-content: center;
+}

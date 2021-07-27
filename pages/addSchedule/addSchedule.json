@@ -1,6 +1,6 @@
 {
   "usingComponents": {
-    "calendar": "../../components/calendar/calendar"
+    "dateTimePicker": "../../components/dateTimePicker/dateTimePicker"
   },
   "navigationBarTitleText": "日程安排"
 }

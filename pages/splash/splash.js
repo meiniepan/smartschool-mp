@@ -14,6 +14,10 @@ Page({
      */
     onLoad: function (options) {
         setTimeout(() => {
+
+                // wx.redirectTo({
+                //     url: '/packageA/pages/notice/notice',
+                // })
                 let token = wx.getStorageSync('token')
                 if (util.isEmpty(token)) {
                     wx.redirectTo({
@@ -36,7 +40,6 @@ Page({
                         })
                     });
                 }
-                ;
             }
             , 2000)
     },

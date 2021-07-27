@@ -1,5 +1,5 @@
 // pages/bookSite/bookSite.js
-import {zero,showToastWithoutIcon} from "../../utils/util";
+import {zero, showToastWithoutIcon} from "../../utils/util";
 
 let app = getApp()
 Page({
@@ -14,12 +14,7 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-var redirect_uri ='/pages/schedule/schedule'
-        var url = 'plugin://login-plugin/login'
-        +'?redirect_uri='+encodeURIComponent(redirect_uri)
-        wx.navigateTo({
-            url:url
-        })
+
 
     },
     getDataDay(day) {
@@ -71,7 +66,7 @@ var redirect_uri ='/pages/schedule/schedule'
             delta: 1,
         })
     },
-    doAdd(){
+    doAdd() {
         wx.navigateTo({
             url: "/pages/addBookSite/addBookSite"
         })
@@ -86,14 +81,14 @@ var redirect_uri ='/pages/schedule/schedule'
             let data = res.respResult.days;
             let mDataMonth = []
             data.forEach((item) => {
-                    mDataMonth.push(item)
+                mDataMonth.push(item)
             });
             this.setData({
                 mDataMonth: mDataMonth,
             });
         });
     },
-    doDetail(){
+    doDetail() {
         const bean = this.data.mDataDay
         wx.navigateTo({
             url: '/pages/roomBookRecords/roomBookRecords?bean=' + JSON.stringify(bean),

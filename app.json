@@ -7,6 +7,8 @@
     "pages/home/home",
     "pages/circular/circular",
     "pages/schedule/schedule",
+    "pages/scheduleDetail/scheduleDetail",
+    "pages/addSchedule/addSchedule",
     "pages/salary/salary",
     "pages/salaryDetail/salaryDetail",
     "pages/repair/repair",
@@ -47,8 +49,22 @@
     {
       "root": "packageA",
       "pages": [
-        "pages/notice/notice"
-      ]
+        "pages/notice/notice",
+        "pages/thirdLogin/thirdLogin"
+      ],
+      "plugins": {
+        "login-plugin": {
+          "version": "1.0.3",
+          "provider": "wx8099b285af1443c4",
+          "export": "loginPluginConfig.js",
+          "genericslmplementation": {
+            "set-first-phone": {
+              "epaas-phone-button": "miniprogram_npm/©tencent/miniapp-epass-phone/button"
+            }
+          }
+        }
+
+      }
     },
     {
       "root": "packageB",
@@ -93,18 +109,6 @@
   "sitemapLocation": "sitemap.json",
   "usingComponents": {
     "emptyView": "../../components/emptyView/emptyView"
-  },
-  "plugins": {
-    "login-plugin": {
-      "version": "1.0.0",
-      "provider": "wx8099b285af1443c4",
-      "export": "loginPluginConfig.js",
-      "genericslmplementation": {
-        "set-first-phone": {
-          "epaas-phone-button": "miniprogram_npm/©tencent/miniapp-epass-phone/button"
-        }
-      }
-    }
-
   }
+
 }

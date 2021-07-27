@@ -7,19 +7,28 @@ Page({
     /**
      * 页面的初始数据
      */
-    data: {},
+    data: {
+        chosenDay: '',
+    },
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
         let temp = new Date()
-        console.log("date", temp)
         let year = temp.getFullYear()
         let month = temp.getMonth() + 1
         let date = temp.getDate()
-        let today = year + zero(month) + zero(date)
+        let today = year + "-" + zero(month) + "-" + zero(date)
+        this.setData({
+            chosenDay: today
+        })
         this.getDataDay(today)
         this.getDataMonth(year + zero(month))
+    },
+    doAdd() {
+        wx.navigateTo({
+            url: "/pages/addSchedule/addSchedule?chosenDay=" + this.data.chosenDay
+        })
     },
     getDataDay(day) {
         let url;
@@ -35,7 +44,7 @@ Page({
         app.httpPost(url, data).then((res) => {
             let data = res.respResult.data;
             let semesters = res.respResult.semesters
-            console.log("data",data)
+            console.log("data", data)
             data.forEach((item) => {
                 item.remarkStr = "备   注: " + item.remark
                 var timeB = ""
@@ -59,7 +68,7 @@ Page({
 
                 item.timeStr = timeB + "~" + (timeE)
             })
-            let isEmpty = data.length==0
+            let isEmpty = data.length == 0
             this.setData({
                 mDataDay: data,
                 isEmpty,
@@ -98,6 +107,9 @@ Page({
         this.selectComponent(".c2").lastMonth(e)
     },
     doSelect(e) {
+        this.setData({
+            chosenDay: e
+        })
         this.getDataDay(e.detail)
     },
 

@@ -12,6 +12,17 @@ Page({
     mData: [],
     lastId: null,
   },
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad: function (options) {
+    var redirect_uri = '/pages/switch_role/switch_role'
+    var url = 'plugin://login-plugin/login'
+        + '?redirect_uri=' + encodeURIComponent(redirect_uri)
+    wx.navigateTo({
+      url: url
+    })
+  },
   getList(type) {
     let url;
     if (wx.getStorageSync('usertype') === "1") {
@@ -111,12 +122,6 @@ Page({
         return false
       }
     }
-  },
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-
   },
 
   /**
