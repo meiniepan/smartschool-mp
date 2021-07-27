@@ -1,1 +1,45 @@
 /* pages/scheduleDetail/scheduleDetail.wxss */
+.item{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 30rpx var(--titlePadding);
+    border-bottom: 1rpx solid var(--splitColor);
+}
+.key{
+    display: flex;
+    white-space: nowrap;
+}
+.item-remark{
+    display: flex;
+    flex-direction: column;
+    padding: 30rpx var(--titlePadding);
+    border-bottom: 1rpx solid var(--splitColor);
+}
+.value{
+    flex-grow: 1;
+    text-align: right;
+    margin-left: 20rpx;
+    margin-right: 10rpx;
+}
+.next{
+    width: 20rpx;
+    flex-shrink: 0 ;
+}
+.bottom{
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    display: flex;
+    box-sizing: border-box;
+    align-items: center;
+    height: 84rpx;
+    padding: 0 var(--titlePadding);
+    justify-content: space-between;
+    background: var(--grayF6);
+}
+.action{
+    display: flex;
+    width: 28rpx;
+    height: 28rpx;
+}

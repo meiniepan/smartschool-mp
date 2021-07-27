@@ -1,5 +1,6 @@
 // pages/addSchedule/addSchedule.js
 import {showToastWithoutIcon, zero} from "../../utils/util";
+
 const app = getApp()
 Page({
 
@@ -26,14 +27,23 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-
-        let chosenDay = ''
-        let temp = new Date()
-        let h = temp.getHours()
-        let m = temp.getMinutes()
-        let s = temp.getSeconds()
-        chosenDay = options.chosenDay + " " + zero(h) + ":" + zero(m) + ":" + zero(s)
-        console.log('chosenDay', chosenDay)
+        let b = {}, isModify = false
+        if (options.isModify=='1') {
+            isModify = true
+            b = JSON.parse(options.bean)
+            b.token= wx.getStorageSync('token')
+        } else {
+            let chosenDay = ''
+            let temp = new Date()
+            let h = temp.getHours()
+            let m = temp.getMinutes()
+            let s = temp.getSeconds()
+            chosenDay = options.chosenDay + " " + zero(h) + ":" + zero(m) + ":" + zero(s)
+            b = this.data.requestBody
+            b.scheduletime = chosenDay
+            b.scheduleover = chosenDay
+            console.log('chosenDay', chosenDay)
+        }
         let showChooseStudent = false
         if (wx.getStorageSync("usertype") == "1") {
 
@@ -45,8 +55,9 @@ Page({
             }
         }
         this.setData({
-            chosenDay,
-            showChooseStudent
+            showChooseStudent,
+            requestBody: b,
+            isModify,
         })
     },
 
@@ -55,8 +66,8 @@ Page({
         let isModify = this.data.isModify
         let url = ''
         if (bean.scheduletime == "请选择开始时间" ||
-            bean.scheduleover == "请选择结束时间"||
-            bean.title==null|| bean.title=='') {
+            bean.scheduleover == "请选择结束时间" ||
+            bean.title == null || bean.title == '') {
             showToastWithoutIcon('请完善信息')
             return
         }

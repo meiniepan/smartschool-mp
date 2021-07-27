@@ -113,7 +113,12 @@ Page({
         this.getDataDay(e.detail)
     },
 
-
+    doDetail(e) {
+        const bean = e.currentTarget.dataset.id
+        wx.navigateTo({
+            url: '/pages/scheduleDetail/scheduleDetail?bean=' + JSON.stringify(bean),
+        })
+    },
     /**
      * 生命周期函数--监听页面初次渲染完成
      */

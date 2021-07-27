@@ -8,7 +8,7 @@
         </view>
         <input placeholder="请填写日程名称" maxlength="20" bindinput="doInput" data-type="title" value="{{requestBody.title}}"/>
     </view>
-    <dateTimePicker value="{{chosenDay}}"
+    <dateTimePicker value="{{requestBody.scheduletime}}"
             data-type="indexClass" bindchange="bindTimeS">
         <view class="item">
             <view class="key text bold">开始时间</view>
@@ -17,7 +17,7 @@
             <image class="next" src="/assets/images/ic_next.png" style="height: 28rpx" mode="widthFix"></image>
         </view>
     </dateTimePicker>
-    <dateTimePicker value="{{chosenDay}}"
+    <dateTimePicker value="{{requestBody.scheduleover}}"
             data-type="indexClass" bindchange="bindTimeE">
         <view class="item">
             <view class="key text bold">结束时间</view>
