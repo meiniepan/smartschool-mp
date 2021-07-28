@@ -12,6 +12,7 @@
     "pages/salary/salary",
     "pages/salaryDetail/salaryDetail",
     "pages/repair/repair",
+    "pages/addRepair/addRepair",
     "pages/cloud/cloud",
     "pages/cloudFolder/cloudFolder",
     "pages/videoPlayer/videoPlayer",
@@ -57,9 +58,9 @@
           "version": "1.0.3",
           "provider": "wx8099b285af1443c4",
           "export": "loginPluginConfig.js",
-          "genericslmplementation": {
+          "genericsImplementation": {
             "set-first-phone": {
-              "epaas-phone-button": "miniprogram_npm/©tencent/miniapp-epass-phone/button"
+              "epaas-phone-button": "miniprogram_npm/@tencent/miniapp-epass-phone/button"
             }
           }
         }

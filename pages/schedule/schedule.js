@@ -14,6 +14,12 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
+
+    },
+    /**
+     * 生命周期函数--监听页面显示
+     */
+    onShow: function () {
         let temp = new Date()
         let year = temp.getFullYear()
         let month = temp.getMonth() + 1
@@ -126,12 +132,7 @@ Page({
 
     },
 
-    /**
-     * 生命周期函数--监听页面显示
-     */
-    onShow: function () {
 
-    },
 
     /**
      * 生命周期函数--监听页面隐藏

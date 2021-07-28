@@ -1,4 +1,4 @@
-// packageB/pages/apple.js
+// pages/addRepair/addRepair.js
 Page({
 
   /**
@@ -12,9 +12,30 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+   let bean = JSON.parse(options.bean)
+    this.setData({
+      bean,
+    })
   },
+  getType() {
+    let url = '/api/v17/admin/repair/listsType';
 
+    let data = {
+      token: wx.getStorageSync('token'),
+      typeid:'0'
+    }
+    app.httpPost(url, data).then((res) => {
+      let data = res.respResult;
+      console.log('types', data)
+      // let mDataMonth = []
+      // data.forEach((item) => {
+      //     mDataMonth.push(item)
+      // });
+      // this.setData({
+      //     mDataMonth: mDataMonth,
+      // });
+    });
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

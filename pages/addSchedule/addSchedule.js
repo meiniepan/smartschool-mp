@@ -32,6 +32,11 @@ Page({
             isModify = true
             b = JSON.parse(options.bean)
             b.token= wx.getStorageSync('token')
+            this.setData({
+                requestBody: b,
+                isModify,
+            })
+            this.doResult(JSON.parse(b.involve))
         } else {
             let chosenDay = ''
             let temp = new Date()
@@ -42,7 +47,10 @@ Page({
             b = this.data.requestBody
             b.scheduletime = chosenDay
             b.scheduleover = chosenDay
-            console.log('chosenDay', chosenDay)
+            this.setData({
+                requestBody: b,
+                isModify,
+            })
         }
         let showChooseStudent = false
         if (wx.getStorageSync("usertype") == "1") {
@@ -56,8 +64,6 @@ Page({
         }
         this.setData({
             showChooseStudent,
-            requestBody: b,
-            isModify,
         })
     },
 
@@ -73,14 +79,12 @@ Page({
         }
         if (wx.getStorageSync("usertype") == "1") {
             if (isModify) {
-                bean.involve = null
                 url = '/api/v17/student/schedules/modify'
             } else {
                 url = '/api/v17/student/schedules/add'
             }
         } else {
             if (isModify) {
-                bean.involve = null
                 url = '/api/v17/teacher/schedules/modify'
             } else {
                 url = '/api/v17/teacher/schedules/add'

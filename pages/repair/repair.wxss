@@ -2,13 +2,99 @@
 page{
     background: var(--tintBac);
 }
-.record{
-    width: 100%;
+.tabs {
+    border-top: var(--splitColor) 1rpx solid;
+    border-bottom: var(--splitColor) 1rpx solid;
+    padding: 24rpx var(--titlePadding);
     display: flex;
-    justify-content: center;
-    margin: auto auto;
+    align-content: space-between;
+    position: fixed;
+    width: 100%;
+    box-sizing: border-box;
+    background: var(--white);
+    z-index: 999;
 }
-.repair-record{
+
+.tab-self{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: calc(100% - 2*var(--titlePadding) - 34rpx);
+    height: 88rpx;
+    background: var(--themeColor);
+    border-radius: 44rpx;
+    color: var(--white);
+}
+.tab-share{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: calc(100% - 2*var(--titlePadding) - 34rpx);
+    height: 88rpx;
+    background: var(--white);
+    border-radius: 44rpx;
+    border: var(--themeColor) 1rpx solid;
+    color: var(--themeColor);
+    box-sizing: border-box;
+}
+.cells {
+    padding-top: 20rpx;
+}
+
+.cell {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    padding: 40rpx var(--titlePadding);
+    margin-bottom: 20rpx;
+}
+
+.titles {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20rpx;
+}
+
+.title-name {
+    font-size: 30rpx;
+    font-weight: bold;
+    min-width: 150rpx;
+}
+
+.title {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
     color: var(--commonHint);
-    border-bottom: var(--commonHint) solid 1rpx;
+    -webkit-line-clamp: 1;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+.under-line {
+    border-bottom: var(--themeColor) solid 1rpx;
+}
+
+.remark {
+    color: var(--commonHint);
+}
+
+.cells-image {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    margin-bottom: 20rpx;
+}
+
+.image {
+    width: 200rpx;
+    height: 200rpx;
+    margin-top: 14rpx;
+    border-radius: 12rpx;
+}
+.addBtn{
+    position: fixed;
+    bottom: 128rpx;
+    right: var(--titlePadding);
+    width: 136rpx;
+    height: 136rpx;
 }

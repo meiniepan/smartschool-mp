@@ -1,11 +1,95 @@
 <!--pages/repair/repair.wxml-->
 <view class="out">
-    <view class="record">
-        <view hidden="{{!isRepair}}" class="repair-record" style="margin-right: 86rpx" bindtap="doRepairList">
-            查看维修记录
-        </view>
-        <view class="repair-record" bindtap="doReportList">
-            查看报修历史
-        </view>
+    <view class="tabs">
+        <view class="{{categoryCur==0?'tab-self':'tab-share'}}" bindtap="checkPri">{{categoryMenu[0]}}</view>
+        <view class="{{categoryCur!=0?'tab-self':'tab-share'}}" style="margin-left: 34rpx" bindtap="checkPub">{{categoryMenu[1]}}</view>
     </view>
+    <swiper style="margin-top: 136rpx;height: 100%" current="{{categoryCur}}" duration="{{duration}}" bindanimationfinish="animationFinish">
+        <swiper-item wx:for="{{categoryData}}" wx:key="index">
+    <scroll requesting="{{item.requesting}}" end="{{item.end}}" empty-show="{{item.emptyShow}}"
+            list-count="{{item.listData.length}}" top-size="0" bottom-size="{{bottomHeight}}" bind:refresh="refresh"
+            bind:more="more" style="padding-top: 0rpx">
+        <view class="cells" >
+            <view class="cell" wx:for="{{item.listData}}" wx:key="index" bindtap="articleDetail">
+                <view class="titles">
+                    <view class="title-name">报修时间</view>
+                    <view class="title">{{item.reporttime}}</view>
+                </view>
+                <view class="titles">
+                    <view class="title-name">工单编号</view>
+                    <view class="title">{{item.id}}</view>
+                </view>
+                <view class="titles">
+                    <view class="title-name">设备类型</view>
+                    <view class="title">{{item.type2name}}</view>
+                </view>
+                <view class="titles">
+                    <view class="title-name">报修设备</view>
+                    <view class="title">{{item.device}}</view>
+                </view>
+                <view class="titles" hidden="{{categoryCur==1}}">
+                    <view class="title-name">发起人</view>
+                    <view class="title">{{item.reportinfo.realname}}</view>
+                </view>
+                <view class="titles" hidden="{{categoryCur==1}}">
+                    <view class="title-name">发起人电话</view>
+                    <view class="title under-line" data-src="{{item.reportinfo.phone}}" bindtap="makeCall">
+                        {{item.reportinfo.phone}}
+                    </view>
+                </view>
+                <view class="titles" hidden="{{categoryCur==1}}">
+                    <view class="title-name">发起人所在部门</view>
+                    <view class="title" data-src="{{item.reportinfo.dep_name}}">{{item.reportinfo.dep_name}}</view>
+                </view>
+                <view class="titles" hidden="{{categoryCur==1}}">
+                    <view class="title-name">发起人所在班级</view>
+                    <view class="title" data-src="{{item.reportinfo.phone}}">{{item.reportinfo.classmaster_classname}}
+                    </view>
+                </view>
+                <view class="titles">
+                    <view class="title-name">接单人</view>
+                    <view class="title">{{item.repairerinfo.realname}}</view>
+                </view>
+                <view class="titles">
+                    <view class="title-name">工单状态</view>
+                    <view class="title">{{item.statusStr}}</view>
+                </view>
+                <view class="titles">
+                    <view class="title-name">完成时间</view>
+                    <view class="title">{{item.completetime}}</view>
+                </view>
+                <view class="titles">
+                    <view class="title-name">工单详情</view>
+                </view>
+                <view class="titles">
+                    <view class="remark">{{item.remark}}</view>
+                </view>
+                <view class="titles">
+                    <view class="title-name">详细地址</view>
+                    <view class="title">{{item.addr}}</view>
+                </view>
+                <view class="titles">
+                    <view class="title-name">上传图片</view>
+                </view>
+                <view class="cells-image">
+                    <view class="cell-image" wx:for="{{item.fileinfo}}" wx:key="index">
+                        <image class="image" src="{{item.url}}" mode="aspectFill" data-src="{{item.url}}"
+                               bindtap="preview"/>
+                    </view>
+                </view>
+                <view class="titles">
+                    <view class="title-name">工单完成备注</view>
+                </view>
+                <view class="titles">
+                    <view class="remark">{{item.completeremark}}</view>
+                </view>
+            </view>
+        </view>
+    </scroll>
+        </swiper-item>
+    </swiper>
+    <picker bindchange="doAdd" bindtap=""
+            data-type="indexAct" value="{{}}" range="{{types}}" range-key="name">
+    <image class="addBtn" bindtap="" src="/assets/images/ic_add_common.png" mode="widthFix"></image>
+    </picker>
 </view>

@@ -15,8 +15,10 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
+        let bean = JSON.parse(options.bean)
+        bean.token = wx.getStorageSync("token")
         this.setData({
-            bean: JSON.parse(options.bean)
+            bean: bean
         })
     },
     doEdit(e) {

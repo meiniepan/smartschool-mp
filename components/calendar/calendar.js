@@ -191,6 +191,7 @@ Component({
                 let year = this.data.year,
                     monthFormat = it.monthFormat,
                     dateFormat = it.dateFormat
+                it.isSpecial = false
                 this.data.specialDays.map((item) => {
                     // 20200101
                     if (item === `${year}${monthFormat}${dateFormat}`) {

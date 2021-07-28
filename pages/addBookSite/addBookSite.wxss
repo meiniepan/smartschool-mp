@@ -1,4 +1,7 @@
 /* pages/addBookSite/addBookSite.wxss */
+.require{
+    color: var(--commonRed2);
+}
 .item{
     display: flex;
     flex-direction: row;
