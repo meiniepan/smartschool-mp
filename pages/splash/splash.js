@@ -13,35 +13,43 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-        setTimeout(() => {
+        const epaasLogin = require('@tencent/miniapp-epaas-sdk');
+        const appid = '800497'
+        var redirect_uri = '/packageA/pages/switch_role/switch_role'
+        epaasLogin({
+            redirect_uri: encodeURIComponent(redirect_uri),
+            appid
+        })
 
-                // wx.redirectTo({
-                //     url: '/packageA/pages/notice/notice',
-                // })
-                let token = wx.getStorageSync('token')
-                if (util.isEmpty(token)) {
-                    wx.redirectTo({
-                        url: '/pages/switch_role/switch_role',
-                    })
-                } else {
-                    let url;
-                    if (wx.getStorageSync('usertype') === "1") {
-                        url = "/api/v17/user/student/apps"
-                    } else {
-                        url = "/api/v17/user/teachers/apps"
-                    }
-                    let data = {
-                        token: token
-                    };
-                    app.httpPost(url, data, false).then((res) => {
-                        app.saveAppInfo(res.respResult)
-                        wx.switchTab({
-                            url: '/pages/circular/circular',
-                        })
-                    });
-                }
-            }
-            , 2000)
+        // setTimeout(() => {
+        //
+        //         // wx.redirectTo({
+        //         //     url: '/packageA/pages/notice/notice',
+        //         // })
+        //         let token = wx.getStorageSync('token')
+        //         if (util.isEmpty(token)) {
+        //             wx.redirectTo({
+        //                 url: '/packageA/pages/switch_role/switch_role',
+        //             })
+        //         } else {
+        //             let url;
+        //             if (wx.getStorageSync('usertype') === "1") {
+        //                 url = "/api/v17/user/student/apps"
+        //             } else {
+        //                 url = "/api/v17/user/teachers/apps"
+        //             }
+        //             let data = {
+        //                 token: token
+        //             };
+        //             app.httpPost(url, data, false).then((res) => {
+        //                 app.saveAppInfo(res.respResult)
+        //                 wx.switchTab({
+        //                     url: '/pages/circular/circular',
+        //                 })
+        //             });
+        //         }
+        //     }
+        //     , 2000)
     },
 
     /**

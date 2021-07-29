@@ -1,6 +1,6 @@
 <!--pages/circular/circular.wxml-->
 <view class="out">
-<image class="banner" src="/packageA/assets/images/bac_banner2.png" mode="widthFix"></image>
+<image class="banner" src="../../assets/images/bac_banner2.png" mode="widthFix"></image>
 	<emptyView wx:if="{{isEmpty}}" />
 	<view class="cells" wx:else>
 	<view class="cell" wx:for="{{mData}}" wx:key="index" data-url="{{item.id}}" bindtap="doDetail">

@@ -1,8 +1,8 @@
 {
   "usingComponents": {
-    "tab": "../../components/tab/tab",
-    "emptyView": "../../components/emptyView/emptyView",
-    "navigation": "../../components/navigation/navigation"
+    "tab": "/components/tab/tab",
+    "emptyView": "/components/emptyView/emptyView",
+    "navigation": "/components/navigation/navigation"
   },
   "navigationBarTitleText": "通知",
   "navigationStyle":"custom",

@@ -6,18 +6,16 @@ view {
 }
 
 .cu-custom {
-	background: var(--white);
 }
 
-.cu-custom .cu-bar {
+ .cu-bar {
 	min-height: 0px;
 	padding-right: 220rpx;
 	/* box-shadow: 0rpx 0rpx 0rpx; */
 	z-index: 9999;
-	background: var(--white);
 }
 
-.cu-bar.fixed{
+fixed{
 	position: fixed;
 	width: 100%;
 	top: 0;

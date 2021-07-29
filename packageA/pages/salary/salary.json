@@ -1,0 +1,9 @@
+{
+  "usingComponents": {
+    "scroll": "/components/scroll/scroll",
+    "commonButton": "/components/commonButton/commonButton"
+  },
+  "navigationBarTitleText": "工资条",
+  "disableScroll": true,
+  "backgroundTextStyle": "dark"
+}

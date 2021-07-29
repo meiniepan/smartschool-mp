@@ -83,7 +83,7 @@ Page({
                     name: globalData.siteTitle,
                     remark: "场地时段 一目了然",
                     icon: "/assets/images/ic_changdi.png",
-                    click: "/pages/bookSite/bookSite"
+                    click: "/packageA/pages/bookSite/bookSite"
                 })
         }
         if (app.checkRule1("admin/notices/default")) {
@@ -102,7 +102,7 @@ Page({
                     name: globalData.scheduleTitle,
                     remark: "工作安排 井井有条",
                     icon: "/assets/images/ic_richeng.png",
-                    click: "/pages/schedule/schedule"
+                    click: "/packageA/pages/schedule/schedule"
                 })
         }
 
@@ -112,7 +112,7 @@ Page({
                     name: globalData.quantizeTitle,
                     remark: "简化工作 随录随查",
                     icon: "/assets/images/ic_quantize.png",
-                    click: "/pages/quantize/quantize"
+                    click: "/packageA/pages/quantize/quantize"
                 })
         }
 
@@ -122,7 +122,7 @@ Page({
                     name: globalData.salaryTitle,
                     remark: "保护隐私 查看明细",
                     icon: "/assets/images/ic_gongzitiao.png",
-                    click: "/pages/salary/salary"
+                    click: "/packageA/pages/salary/salary"
                 })
         }
         if (app.checkRule1("admin/repair/default")) {
@@ -131,7 +131,7 @@ Page({
                     name: globalData.propertyTitle,
                     remark: "一键拨打 随叫随到",
                     icon: "/assets/images/ic_baoxiu.png",
-                    click: "/pages/repair/repair"
+                    click: "/packageA/pages/repair/repair"
                 })
         }
         if (app.checkRule1("admin/tasks/default")) {
@@ -140,7 +140,7 @@ Page({
                     name: globalData.taskTitle,
                     remark: "任务管理 办公协作",
                     icon: "/assets/images/ic_renwu.png",
-                    click: "/pages/task/task"
+                    click: "/packageA/pages/task/task"
                 })
         }
         if (app.checkRule1("disk/folder/default")) {
@@ -149,7 +149,7 @@ Page({
                     name: globalData.cloudTitle,
                     remark: "校本资源 协同备课",
                     icon: "/assets/images/ic_yunpan.png",
-                    click: "/pages/cloud/cloud"
+                    click: "/packageA/pages/cloud/cloud"
                 })
         }
 
@@ -159,7 +159,7 @@ Page({
                     name: globalData.attendanceTitle,
                     remark: "实时更新 系统上报",
                     icon: "/assets/images/ic_kaoqin.png",
-                    click: "/pages/attendance/attendance"
+                    click: "/packageA/pages/attendance/attendance"
                 })
         }
         if (app.checkRule1("admin/achievements/default")) {
@@ -168,7 +168,7 @@ Page({
                     name: globalData.achievementTitle,
                     remark: "各科成绩 汇总分析",
                     icon: "/assets/images/ic_chengji.png",
-                    click: "/pages/achievement/achievement"
+                    click: "/packageA/pages/achievement/achievement"
                 })
         }
 
@@ -178,7 +178,7 @@ Page({
                     name: globalData.timetableTitle,
                     remark: "班级课表 教学课表",
                     icon: "/assets/images/ic_kebiao.png",
-                    click: "/pages/timetable/timetable"
+                    click: "/packageA/pages/timetable/timetable"
                 })
         }
         if (bean1.items.length > 0) {

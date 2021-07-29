@@ -1,9 +1,0 @@
-{
-  "usingComponents": {
-    "emptyView": "../../components/emptyView/emptyView",
-    "navigation": "../../components/navigation/navigation"
-  },
-  "navigationBarTitleText": "系统消息",
-  "enablePullDownRefresh": true,
-  "backgroundTextStyle": "dark"
-}

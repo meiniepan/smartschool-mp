@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "scroll": "/components/scroll/scroll"
+  },
+  "navigationBarTitleText": "报修报送",
+  "disableScroll": true,
+  "backgroundTextStyle": "dark"
+}

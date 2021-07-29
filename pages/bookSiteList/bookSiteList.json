@@ -1,8 +1,0 @@
-{
-  "usingComponents": {
-    "scroll": "../../components/scroll/scroll"
-  },
-  "navigationBarTitleText": "场地预约",
-  "disableScroll": true,
-  "backgroundTextStyle": "dark"
-}

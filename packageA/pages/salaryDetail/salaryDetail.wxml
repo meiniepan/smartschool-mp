@@ -1,0 +1,24 @@
+<!--pages/salaryDetail/salaryDetail.wxml-->
+
+<view class="out">
+
+<view class="out11">
+    <navigation title="{{title}}" titleColor="#ffffff">
+        <image class="act" src="../../assets/images/icon_back_white_a.png" mode="widthFix" bindtap="doFinish"></image>
+    </navigation>
+<text class="title1">{{mData.reachwages}}</text>
+<text class="title2">{{mData.title+"实发工资"}}</text>
+</view>
+    <view class="cells">
+        <view class="cell" wx:for="{{mData.expand.keys}}" wx:key="index" >
+            <view class="item" hidden="{{mData.expand.remark[index].isShow=='0'}}">
+            <view class="ext" >
+                <view class="ext-key">{{mData.expand.keys[index]}}</view>
+                <view class="ext-value">{{mData.expand.vals[index]}}</view>
+                <image class="img" mode="widthFix" src="../../assets/images/{{mData.expand.remark[index].show?'ic_up':'ic_down'}}.png" hidden="{{mData.expand.remark[index].remark==''}}" bindtap="doRemark" data-index="{{index}}"/>
+            </view>
+            <view class="remark" hidden="{{!mData.expand.remark[index].show}}">{{mData.expand.remark[index].remark}}</view>
+            </view>
+        </view>
+    </view>
+</view>

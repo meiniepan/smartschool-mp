@@ -90,7 +90,7 @@ Page({
     },
     doAct() {
         wx.navigateTo({
-            url: '/pages/systemMsg/systemMsg',
+            url: '/packageA/pages/systemMsg/systemMsg',
         })
     },
     refresh() {
@@ -105,7 +105,7 @@ Page({
     },
     doDetail(e) {
         wx.navigateTo({
-            url: '/pages/noticeDetail/noticeDetail?id=' + e.currentTarget.dataset.url,
+            url: '/packageA/pages/noticeDetail/noticeDetail?id=' + e.currentTarget.dataset.url,
         })
     },
     //判断是否已读

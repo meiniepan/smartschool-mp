@@ -1,0 +1,53 @@
+<!--pages/achievement/achievement.wxml-->
+<view class="out">
+    <view class="head-line">
+
+        <picker wx:if="{{!isStu}}" bindchange="bindPickerChange" style="margin-right: 40rpx" data-type="indexClass"
+            value="{{index}}" range="{{classArrays}}">
+            <view class="head-block">
+                <view class="picker">
+                    {{classArrays[indexClass]}}
+                </view>
+                <image src="../../assets/images/ic_gray_triangle.png" style="margin-left: 4rpx;height: 10rpx"
+                    mode="heightFix" />
+            </view>
+        </picker>
+
+        <picker bindchange="bindPickerChange" data-type="indexTest" value="{{index}}" range="{{testArrays}}">
+            <view class="head-block">
+                <view class="picker">
+                    {{testArrays[indexTest]}}
+                </view>
+                <image src="../../assets/images/ic_gray_triangle.png" style="margin-left: 4rpx;height: 10rpx"
+                    mode="heightFix" />
+            </view>
+        </picker>
+        <picker bindchange="bindPickerChange" style="margin-left: 40rpx" data-type="indexCourse" value="{{index}}"
+            range="{{courseArrays}}">
+            <view class="head-block">
+                <view class="picker">
+                    {{courseArrays[indexCourse]}}
+                </view>
+                <image src="../../assets/images/ic_gray_triangle.png" style="margin-left: 4rpx;height: 10rpx"
+                    mode="heightFix" />
+            </view>
+        </picker>
+    </view>
+    <view class="title-line">
+        <text class="singleLine item-s">时间</text>
+        <text wx:if="{{!isStu}}" class="singleLine item-m">学号</text>
+        <text wx:if="{{!isStu}}" class="singleLine item-m">姓名</text>
+        <text class="singleLine item-e">分数</text>
+    </view>
+    <emptyView wx:if="{{isEmpty}}" />
+    <view class="cells" wx:else>
+        <view class="cell" wx:for="{{mData}}" wx:key="index">
+            <view class="title-line" style="font-size: 28rpx;font-weight: normal">
+                <text class="singleLine item-s">{{item.testtime}}</text>
+                <text wx:if="{{!isStu}}" class="singleLine item-m">{{item.cno}}</text>
+                <text wx:if="{{!isStu}}" class="singleLine item-m">{{item.realname}}</text>
+                <text class="singleLine item-e">{{item.achievement}}</text>
+            </view>
+        </view>
+    </view>
+</view>

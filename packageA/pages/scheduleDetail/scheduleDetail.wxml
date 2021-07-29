@@ -1,0 +1,35 @@
+<!--pages/scheduleDetail/scheduleDetail.wxml-->
+<view class="out">
+    <view class="split-line"></view>
+    <view class="item-remark" bindtap="">
+        <view class="horizontal">
+            <view class="key text bold">日程名称</view>
+        </view>
+        <view class="hint">{{bean.title}}</view>
+    </view>
+
+        <view class="item">
+            <view class="key text bold">开始时间</view>
+            <view class="value hint">{{bean.scheduletime}}</view>
+        </view>
+
+        <view class="item">
+            <view class="key text bold">结束时间</view>
+            <view class="value hint">{{bean.scheduleover}}</view>
+        </view>
+    <view class="item" wx:if="{{showChooseStudent}}" bindtap="doChooseStudent">
+        <view class="key text bold">日程同步给</view>
+        <view class="value hint singleLine">{{bean.stuStr}}</view>
+    </view>
+
+    <view class="item-remark" bindtap="">
+        <view class="horizontal">
+            <view class="key text bold">日程详情</view>
+        </view>
+        <view class="hint">{{bean.remark}}</view>
+    </view>
+    <view class="bottom">
+        <image class="action" bindtap="doEdit" src="../../assets/images/ic_edit.png"  mode="widthFix"></image>
+        <image class="action" bindtap="doDelete" src="../../assets/images/ic_delete.png"  mode="widthFix"></image>
+    </view>
+</view>

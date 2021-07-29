@@ -1,0 +1,65 @@
+/* pages/addRepair/addRepair.wxss */
+.root{
+display: flex;
+    flex-direction: column;
+    padding:0rpx var(--titlePadding) 20rpx var(--titlePadding);
+}
+.item-remark{
+    display: flex;
+    flex-direction: column;
+}
+.item {
+    display: flex;
+    align-items: center;
+    font-size: 32rpx;
+    padding: 20rpx;
+    width: 372rpx;
+    box-sizing: border-box;
+    height: 88rpx;
+    justify-content: space-between;
+    background: var(--tintBac);
+    border-radius: 20rpx;
+}
+.key{
+    display: flex;
+    white-space: nowrap;
+    font-size: 28rpx;
+    font-weight: bold;
+    margin-top: 24rpx;
+    margin-bottom: 16rpx;
+}
+.remark{
+    display: flex;
+    height: 340rpx;
+    padding: 20rpx;
+    background: var(--tintBac);
+    border-radius: 20rpx;
+    white-space: wrap;
+    box-sizing: border-box;
+}
+.addr{
+    display: flex;
+    height: 150rpx;
+    padding: 20rpx;
+    background: var(--tintBac);
+    border-radius: 20rpx;
+    box-sizing: border-box;
+}
+.bottom{
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    display: flex;
+    flex-direction: row-reverse;
+    height: 84rpx;
+    background: var(--grayF6);
+}
+.confirm{
+    display: flex;
+    width: 172rpx;
+    height: 100%;
+    background: var(--themeBac);
+    color: var(--white);
+    align-items: center;
+    justify-content: center;
+}

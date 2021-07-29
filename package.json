@@ -1,5 +1,19 @@
 {
+  "name": "smartschool-mp",
+  "version": "1.0.0",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@git.tiantianweike.com:wangboning/smartschool-mp.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
   "dependencies": {
-
+    "miniprogram-sm-crypto": "^0.3.2"
   }
 }

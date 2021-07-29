@@ -5,7 +5,7 @@
       <image class="img1" src="{{icon}}"></image>
       <text>{{text}}</text>
     </view>
-    <image class="img2" mode="heightFix" src="/assets/images/ic_next.png" />
+    <image class="img2" mode="heightFix" src="../../assets/images/ic_next.png" />
   </view>
   <view class="bl"></view>
 </view>

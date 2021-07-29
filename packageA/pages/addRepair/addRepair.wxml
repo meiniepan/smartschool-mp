@@ -1,0 +1,46 @@
+<!--pages/addRepair/addRepair.wxml-->
+<view class="out">
+    <view class="root">
+    <view class="item-remark" bindtap="">
+        <view class="key">设备类型</view>
+    <picker bindchange="doAct" bindtap=""
+            data-type="type" value="{{}}" range="{{arr0}}" range-key="name">
+        <view class="item">
+            <view class="picker">
+                {{requestBody.typename}}
+            </view>
+            <image src="../../assets/images/ic_gray_triangle.png" style="width: 20rpx"
+                   mode="widthFix" />
+        </view>
+    </picker>
+    </view>
+    <view class="item-remark" bindtap="">
+            <view class="key">报修设备</view>
+    <picker bindchange="doAct" bindtap=""
+            data-type="device" value="{{}}" range="{{arr1}}" range-key="name">
+        <view class="item">
+            <view class="picker">
+                {{requestBody.devicename}}
+            </view>
+            <image src="../../assets/images/ic_gray_triangle.png" style="width: 20rpx"
+                   mode="widthFix" />
+        </view>
+    </picker>
+    </view>
+    <view class="item-remark" bindtap="">
+        <view class="horizontal">
+            <view class="key">填写工单</view>
+        </view>
+        <textarea class="remark" placeholder="请简述您遇到的问题"  bindinput="doInput" data-type="remark" value="{{requestBody.remark}}"/>
+    </view>
+    <view class="item-remark" bindtap="">
+        <view class="horizontal">
+            <view class="key">详细地址</view>
+        </view>
+        <textarea class="addr" placeholder="例：xx楼xx栋xx层xxx房间"  bindinput="doInput" data-type="addr" value="{{requestBody.addr}}"/>
+    </view>
+    </view>
+    <view class="bottom">
+        <view class="confirm" bindtap="doConfirm">提交</view>
+    </view>
+</view>

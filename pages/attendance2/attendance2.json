@@ -1,6 +1,0 @@
-{
-  "usingComponents": {
-    "emptyView": "../../components/emptyView/emptyView"
-  },
-  "navigationBarTitleText": "学生考勤"
-}

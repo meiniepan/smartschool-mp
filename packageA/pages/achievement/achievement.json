@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "emptyView": "/components/emptyView/emptyView"
+  },
+  "navigationBarTitleText": "成绩汇总"
+}

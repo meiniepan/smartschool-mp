@@ -1,8 +1,0 @@
-{
-  "usingComponents": {
-    "emptyView": "../../components/emptyView/emptyView",
-    "calendar": "../../components/calendar/calendar",
-    "navigation": "../../components/navigation/navigation"
-  },
-  "navigationStyle":"custom"
-}

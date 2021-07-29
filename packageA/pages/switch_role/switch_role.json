@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "commonButton": "/components/commonButton/commonButton"
+  },
+  "disableScroll": true,
+  "navigationStyle":"custom"
+}

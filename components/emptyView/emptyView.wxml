@@ -1,5 +1,5 @@
 <!--components/emptyView/emptyView.wxml-->
 <view class="empty">
-  <image src="/assets/images/empty.png" mode="aspectFill"></image>
+  <image src="../../assets/images/empty.png" mode="aspectFill"></image>
   <text>暂无数据</text>
 </view>

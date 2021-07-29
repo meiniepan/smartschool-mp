@@ -1,0 +1,10 @@
+{
+  "usingComponents": {
+    "tab": "/components/tab/tab",
+    "scroll": "/components/scroll/scroll"
+  },
+  "navigationBarTitleText": "任务协作",
+  "disableScroll": true,
+  "backgroundTextStyle": "dark"
+  
+}

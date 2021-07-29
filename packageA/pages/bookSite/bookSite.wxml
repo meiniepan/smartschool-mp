@@ -1,0 +1,38 @@
+<!--pages/bookSite/bookSite.wxml-->
+<view class="out">
+    <navigation title="场地预约">
+        <image class="act" src="../../assets/images/icon_back_black_a.png" mode="widthFix" bindtap="doFinish"></image>
+        <view class="navi-1" bindtap="doRecord">我的预约</view>
+    </navigation>
+    <view class="top" style="margin-top: {{navigationHeight}}px">
+        <calendar class="calendar" specialDays="{{mDataMonth}}" bind:lastMonth="lastMonth" bind:nextMonth="nextMonth"
+                  bind:select="doSelect" />
+        <text class="list-title">预约信息</text>
+    </view>
+    <view class="list">
+        <view class="top2">
+            <calendar class="c2" specialDays="{{mDataMonth}}"
+                       />
+            <text class="list-title">预约信息</text>
+        </view>
+        <emptyView wx:if="{{isEmpty}}"/>
+        <view wx:else class="cells" >
+            <view class="cell" wx:for="{{mDataDay}}" wx:key="index" data-id="{{item}}" bindtap="doDetail">
+                <view class="title-area">
+                    <view class="title">
+                        {{item.classroomname}}
+                    </view>
+                    <view class="date textc">
+                        {{item.timeStr}}
+                    </view>
+                </view>
+
+                <view class="title-area" style="margin-top: 20rpx">
+                    <view class="remark textc">{{item.remark}}</view>
+                    <view class="remark textc text-right" >{{item.operator.realname}}</view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <image class="addBtn" bindtap="doAdd" src="../../assets/images/ic_add_common.png" mode="widthFix"></image>
+</view>

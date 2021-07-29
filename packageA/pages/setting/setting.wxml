@@ -1,0 +1,9 @@
+<!--pages/setting/setting.wxml-->
+<view class="out">
+<view class="info-area">
+    <view class="info-line" bind:tap="doProtocol">
+        <text>用户协议</text>
+        <image class="text" src="../../assets/images/ic_next.png"style="height: 28rpx" mode="heightFix"></image>
+    </view>
+</view>
+</view>

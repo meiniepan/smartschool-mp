@@ -1,71 +1,60 @@
 {
   "pages": [
     "pages/splash/splash",
-    "pages/login_s/login_s",
-    "pages/login_t/login_t",
-    "pages/switch_role/switch_role",
-    "pages/home/home",
     "pages/circular/circular",
-    "pages/schedule/schedule",
-    "pages/scheduleDetail/scheduleDetail",
-    "pages/addSchedule/addSchedule",
-    "pages/salary/salary",
-    "pages/salaryDetail/salaryDetail",
-    "pages/repair/repair",
-    "pages/addRepair/addRepair",
-    "pages/cloud/cloud",
-    "pages/cloudFolder/cloudFolder",
-    "pages/videoPlayer/videoPlayer",
-    "pages/repairList/repairList",
-    "pages/bookSiteList/bookSiteList",
-    "pages/bookSite/bookSite",
-    "pages/addBookSite/addBookSite",
-    "pages/roomBookRecords/roomBookRecords",
-    "pages/task/task",
-    "pages/taskDetail/taskDetail",
     "pages/school/school",
-    "pages/mine/mine",
-    "pages/mine_info/mine_info",
-    "pages/security/security",
-    "pages/choose_child/choose_child",
-    "pages/my_code/my_code",
-    "pages/bind_parent/bind_parent",
-    "pages/setting/setting",
-    "pages/systemMsg/systemMsg",
-    "pages/protocol/protocol",
-    "pages/quantize/quantize",
-    "pages/addInvolve/addInvolve",
-    "pages/involvePerson/involvePerson",
-    "pages/quantizeSpecialList/quantizeSpecialList",
-    "pages/quantizeSpecial/quantizeSpecial",
-    "pages/regist/regist",
-    "pages/noticeDetail/noticeDetail",
-    "pages/timetable/timetable",
-    "pages/achievement/achievement",
-    "pages/attendance/attendance",
-    "pages/attendance2/attendance2",
-    "pages/webDetail/webDetail"
+    "pages/mine/mine"
   ],
   "subpackages": [
     {
       "root": "packageA",
       "pages": [
         "pages/notice/notice",
-        "pages/thirdLogin/thirdLogin"
-      ],
-      "plugins": {
-        "login-plugin": {
-          "version": "1.0.3",
-          "provider": "wx8099b285af1443c4",
-          "export": "loginPluginConfig.js",
-          "genericsImplementation": {
-            "set-first-phone": {
-              "epaas-phone-button": "miniprogram_npm/@tencent/miniapp-epass-phone/button"
-            }
-          }
-        }
+        "pages/thirdLogin/thirdLogin",
+        "pages/wxwork/index",
+        "pages/login_s/login_s",
+        "pages/login_t/login_t",
+        "pages/switch_role/switch_role",
+        "pages/home/home",
+        "pages/schedule/schedule",
+        "pages/scheduleDetail/scheduleDetail",
+        "pages/addSchedule/addSchedule",
+        "pages/salary/salary",
+        "pages/salaryDetail/salaryDetail",
+        "pages/repair/repair",
+        "pages/addRepair/addRepair",
+        "pages/cloud/cloud",
+        "pages/cloudFolder/cloudFolder",
+        "pages/videoPlayer/videoPlayer",
+        "pages/repairList/repairList",
+        "pages/bookSiteList/bookSiteList",
+        "pages/bookSite/bookSite",
+        "pages/addBookSite/addBookSite",
+        "pages/roomBookRecords/roomBookRecords",
+        "pages/task/task",
+        "pages/taskDetail/taskDetail",
+        "pages/mine_info/mine_info",
+        "pages/security/security",
+        "pages/choose_child/choose_child",
+        "pages/my_code/my_code",
+        "pages/bind_parent/bind_parent",
+        "pages/setting/setting",
+        "pages/systemMsg/systemMsg",
+        "pages/protocol/protocol",
+        "pages/quantize/quantize",
+        "pages/addInvolve/addInvolve",
+        "pages/involvePerson/involvePerson",
+        "pages/quantizeSpecialList/quantizeSpecialList",
+        "pages/quantizeSpecial/quantizeSpecial",
+        "pages/regist/regist",
+        "pages/noticeDetail/noticeDetail",
+        "pages/timetable/timetable",
+        "pages/achievement/achievement",
+        "pages/attendance/attendance",
+        "pages/attendance2/attendance2",
+        "pages/webDetail/webDetail"
+      ]
 
-      }
     },
     {
       "root": "packageB",
@@ -108,6 +97,19 @@
   },
   "style": "v2",
   "sitemapLocation": "sitemap.json",
+  "plugins": {
+    "login-plugin": {
+      "version": "1.0.3",
+      "provider": "wx8099b285af1443c4",
+      "export": "loginPluginConfig.js",
+      "genericsImplementation": {
+        "set-first-phone": {
+          "epaas-phone-button": "miniprogram_npm/@tencent/miniapp-epass-phone/button"
+        }
+      }
+    }
+
+  },
   "usingComponents": {
     "emptyView": "../../components/emptyView/emptyView"
   }

@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "commonButton": "/components/commonButton/commonButton"
+  },
+  "navigationBarTitleText": "通知公告",
+  "disableScroll": true
+}
