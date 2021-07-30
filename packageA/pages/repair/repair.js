@@ -1,4 +1,5 @@
 // pages/repair/repair.js
+import {showToastWithoutIcon} from '../../../utils/util';
 let app = getApp();
 Page({
 
@@ -10,8 +11,8 @@ Page({
         categoryCur: 0, // 当前数据列索引
         categoryMenu: ['维修记录', '报修历史'], // 分类菜单数据
         categoryData: [], // 所有数据列
-        types: ['维修记录', '报修历史'], // 所有数据列
-        isInit: [true, false]
+        types: [], // 所有数据列
+        isInit: [true, false],
     },
 
     /**
@@ -81,7 +82,7 @@ Page({
             console.log('types', data)
 
             this.setData({
-                types:data,
+                types: data,
             });
         });
     },
@@ -119,6 +120,7 @@ Page({
             let statusStr = ""
             if (listData.length > 0) {
                 listData.forEach(item => {
+                    item.token = wx.getStorageSync('token')
                     if (item.status == "0") {
                         statusStr = "已撤销"
                     } else if (item.status == "1") {
@@ -145,6 +147,69 @@ Page({
                             }
                         }
                     }
+
+                    if (currentCur == 1) {
+                        //报修人逻辑
+                        //0撤销 1未接单 2接单 3完成
+                        item.isBottom = false
+                        if (item.status == "0") {
+                            item.isBottom = false
+                        } else if (item.status == "1") {
+                            item.isBottom = true
+                            item.isAction0 = true
+                            item.isAction1 = true
+                            item.action0 = 'doCancel'
+                            item.action0Str = '撤销'
+                            item.action1 = 'doRemind'
+                            item.action1Str = '提醒'
+
+                        } else if (item.status == "2") {
+                            item.isBottom = true
+                            item.isAction0 = false
+                            item.isAction1 = true
+                            item.action1 = 'doRemind'
+                            item.action1Str = '提醒'
+                        } else if (item.status == "3") {
+                            item.isBottom = false
+                        }
+
+                    } else if (currentCur == 0) {
+                        //维修人逻辑
+                        if (item.status == "0") {
+                            item.isBottom = false
+                        } else if (item.status == "1") {
+                            item.isBottom = true
+                            item.isAction0 = true
+                            item.isAction1 = true
+                            item.action0 = 'doShift'
+                            item.action0Str = '转单'
+                            item.action1 = 'doReceive'
+                            item.action1Str = '接单'
+
+                        } else if (item.status == "2") {
+                            if (item.isdelay == "1") {
+                                item.isBottom = true
+                                item.isAction0 = false
+                                item.isAction1 = true
+                                item.action1 = 'doFinish'
+                                item.action1Str = '完成'
+
+                            } else {
+                                item.isBottom = true
+                                item.isAction0 = true
+                                item.isAction1 = true
+                                item.action0 = 'doDelay'
+                                item.action0Str = '延期'
+                                item.action1 = 'doFinish'
+                                item.action1Str = '完成'
+
+                            }
+
+                        } else if (item.status == "3") {
+                            item.isBottom = false
+
+                        }
+                    }
                 })
             } else {
                 pageData.emptyShow = true
@@ -165,7 +230,113 @@ Page({
 
         })
     },
+    checkType(e){
+        let b = this.data.types
+        b.forEach(it=>{
+            it.checked = false
+        })
+        b[e.currentTarget.dataset.index].checked = true
+        this.setData({
+            types:b,
+        })
+    },
+    modify(bean) {
+        let url = "/api/v17/teacher/repair/modify"
+        let data = bean
 
+        app.httpPost(url, data).then((res) => {
+            showToastWithoutIcon('处理完成')
+            this.refresh()
+        })
+    },
+    remind(id) {
+        let url = "/api/v17/teacher/repair/remind"
+        let data = {
+            token: wx.getStorageSync('token'),
+            id: id
+        }
+
+        app.httpPost(url, data).then((res) => {
+            showToastWithoutIcon('处理完成')
+        })
+    },
+    doBtnFinish() {
+        let bean = this.data.requestBody
+        if (this.data.showFinish){
+
+        this.modify(bean)
+        }else if(this.data.showShift){
+            this.data.types.forEach(it=>{
+                if (it.checked){
+                    bean.typeid = it.id
+                }
+            })
+            this.modify(bean)
+        }
+        this.setData({
+            showDialog:false,
+            showFinish: false,
+            showShift: false,
+            overlay: false,
+        })
+
+    },
+    doInput: function (e) {
+        let type = e.currentTarget.dataset.type;
+        const v = this.data.requestBody;
+        if (type == 'addr') {
+            v.addr = e.detail.value
+        } else {
+            v.completeremark = e.detail.value
+        }
+        this.setData({
+            requestBody: v
+        });
+    },
+
+    doFinish(e) {
+        let bean=e.currentTarget.dataset.bean
+        bean.status = "3"
+        this.setData({
+            showDialog:true,
+            showFinish:true,
+            overlay: true,
+            requestBody:bean,
+            dialogTitle:'完成备注',
+        })
+    },
+    doReceive(e) {
+        let bean=e.currentTarget.dataset.bean
+        bean.status = "2"
+        bean.repairerid = wx.getStorageSync('uid')
+        this.modify(bean)
+    },
+    doRemind(e) {
+        let bean=e.currentTarget.dataset.bean
+        this.remind(bean.id)
+    },
+    doCancel(e) {
+        let bean=e.currentTarget.dataset.bean
+        bean.status = "0"
+        this.modify(bean)
+    },
+    doShift(e) {
+        console.log("aa",'shift')
+        let d = this.data.types
+        if(d.length>0){
+            d[0].checked = true
+        }
+        this.setData({
+            showDialog:true,
+            showShift:true,
+            overlay: true,
+            requestBody:e.currentTarget.dataset.bean,
+            types:d,
+            dialogTitle:'请选择转单给',
+        })
+    },
+    doDelay(e) {
+    },
     // 页面滑动切换事件
     animationFinish(e) {
         this.setData({

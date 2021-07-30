@@ -13,28 +13,30 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
+        console.log('options',options)
+
         let url = 'https://sso.qq.com/open/access_token';
 
         let data = {
-            appid: '800497',
-            secret: 'd9f84fc3c103464b80fc934a5b2710da',
+            appid: '800512',
+            secret: '442f96e404814854975d09d24b46007a',
             code: options.code,
             grant_type: 'authorization_code'
         }
         app.httpPost0(url, data).then((res) => {
             let data = res.data.access_token;
-            console.log('token',data)
+
             this.getUid(data)
         });
 
     },
     getUid(token) {
         let url = 'https://oapi.epaas.qq.com/account/userinfo';
-
+        console.log('access_token',token)
         let data = {
             access_token: token,
         }
-        app.httpPost0(url, data).then((res) => {
+        app.httpGet0(url, data).then((res) => {
             let data = res.userid;
             console.log('uid',data)
             this.getUserInfo(token, data)
@@ -44,10 +46,11 @@ Page({
         let url = 'https://oapi.epaas.qq.com/user/get_info';
 
         let data = {
-            access_token: token,
+            access_token: 'user_a51qysA74JsomP59c4DEGmY3iinmYHfjkM6h3TCnk7.JlwRGYJBacJmPQMdIafTZlxUUGftxEpm',
+            userid:'93820918'
         }
         app.httpPost0(url, data).then((res) => {
-            let data = res.basic_profile;
+            let data = res;
             console.log('info',data)
             showModal('code==' + data)
         });
