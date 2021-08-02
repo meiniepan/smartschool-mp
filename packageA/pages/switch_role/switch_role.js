@@ -18,8 +18,10 @@ Page({
         let url = 'https://sso.qq.com/open/access_token';
 
         let data = {
-            appid: '800512',
-            secret: '442f96e404814854975d09d24b46007a',
+            appid: '800497',
+            secret: 'd9f84fc3c103464b80fc934a5b2710da',
+            // appid: '800512',
+            // secret: '442f96e404814854975d09d24b46007a',
             code: options.code,
             grant_type: 'authorization_code'
         }
@@ -43,16 +45,35 @@ Page({
         });
     },
     getUserInfo(token, uid) {
-        let url = 'https://oapi.epaas.qq.com/user/get_info';
+        let url = 'https://oapi.epaas.qq.com/user/get_info?access_token='+token;
 
         let data = {
-            access_token: 'user_a51qysA74JsomP59c4DEGmY3iinmYHfjkM6h3TCnk7.JlwRGYJBacJmPQMdIafTZlxUUGftxEpm',
-            userid:'93820918'
+            // access_token: token,
+            userid:uid,
+            basic_fields:["native_place","honor","id_avatar_mediaid","nationality","user_number"],
         }
-        app.httpPost0(url, data).then((res) => {
-            let data = res;
+        console.log('data',JSON.stringify(data))
+        app.httpPost0(url, data,true,'','application/json').then((res) => {
+            let data = res.basic_profile;
+            data = JSON.parse(data)
             console.log('info',data)
-            showModal('code==' + data)
+            showModal('教工号' + data.user_number)
+        });
+    },
+    getStuInfo(token, uid) {
+        let url = 'https://oapi.epaas.qq.com/school/user/get';
+
+        let data = {
+            access_token: token,
+            userid:uid,
+            // basic_fields:["native_place","honor","id_avatar_mediaid","nationality","user_number"],
+        }
+        console.log('data',JSON.stringify(data))
+        app.httpGet0(url, data).then((res) => {
+            let data = res.basic_profile;
+            data = JSON.parse(data)
+            console.log('info',data)
+            showModal('教工号' + data.user_number)
         });
     },
 

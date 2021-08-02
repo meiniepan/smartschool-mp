@@ -11,7 +11,6 @@
       "pages": [
         "pages/notice/notice",
         "pages/thirdLogin/thirdLogin",
-        "pages/wxwork/index",
         "pages/login_s/login_s",
         "pages/login_t/login_t",
         "pages/switch_role/switch_role",
@@ -104,7 +103,7 @@
       "export": "loginPluginConfig.js",
       "genericsImplementation": {
         "set-first-phone": {
-          "epaas-phone-button": "miniprogram_npm/@tencent/miniapp-epass-phone/button"
+          "epaas-phone-button": "miniprogram_npm/@tencent/miniapp-epaas-sdk/button"
         }
       }
     }

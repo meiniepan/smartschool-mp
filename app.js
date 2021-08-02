@@ -108,7 +108,7 @@ App({
 
         return new Promise(request);
     },
-    httpBase0: function (method, url, data, loading = false, loadingMsg) {
+    httpBase0: function (method, url, data, loading = false, loadingMsg,contentType='application/x-www-form-urlencoded') {
         let requestUrl =  url;
         console.log("url", requestUrl)
         if (loading) {
@@ -123,7 +123,7 @@ App({
         function request(resolve, reject) {
             wx.request({
                 header: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
+                    'Content-Type': contentType,
                 },
                 method: method,
                 url: requestUrl,
@@ -184,8 +184,8 @@ App({
     httpPost: function (url, data, loading = true, loadingMsg) {
         return this.httpBase('POST', url, data, loading, loadingMsg);
     },
-    httpPost0: function (url, data, loading = true, loadingMsg) {
-        return this.httpBase0('POST', url, data, loading, loadingMsg);
+    httpPost0: function (url, data, loading = true, loadingMsg,contentType ) {
+        return this.httpBase0('POST', url, data, loading, loadingMsg,contentType);
     },
 
     logout() {

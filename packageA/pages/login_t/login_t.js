@@ -66,10 +66,12 @@ Page({
     login: function () {
         let phone = this.data.phone
         let vcode = this.data.vcode
+        console.log('openid',wx.getStorageSync('qy_openid'))
         if (phone.length > 0 && vcode.length > 0) {
             let data = {
                 phone: phone,
-                vcode: vcode
+                vcode: vcode,
+                openid:wx.getStorageSync('qy_openid'),
             };
             app.httpPost(this.data.urlLogin, data).then((res) => {
                 app.saveUserInfo(res.respResult)
@@ -85,7 +87,7 @@ Page({
                 app.httpPost(url, data,false).then((res) => {
                     app.saveAppInfo(res.respResult)
                     wx.switchTab({
-                        url: '/packageA/pages/circular/circular',
+                        url: '/pages/circular/circular',
                     })
                     wx.showToast({
                         title: "登陆成功",
