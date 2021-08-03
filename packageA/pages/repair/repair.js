@@ -231,13 +231,13 @@ Page({
         })
     },
     checkType(e){
-        let b = this.data.types
+        let b = this.data.types2
         b.forEach(it=>{
             it.checked = false
         })
         b[e.currentTarget.dataset.index].checked = true
         this.setData({
-            types:b,
+            types2:b,
         })
     },
     modify(bean) {
@@ -272,10 +272,29 @@ Page({
                 }
             })
             this.modify(bean)
+        }else if(this.data.showDelay){
+            if (bean.delayreasons==null){
+                let dd = false
+                this.data.types.forEach(it=>{
+                    if (it.checked){
+                        dd = true
+                        bean.delayreasons = it.name
+                    }
+                })
+                if(!dd){
+                    showToastWithoutIcon('请说明原因')
+                    return
+                }
+            }else {
+
+            }
+            bean.isdelay = "1"
+            this.modify(bean)
         }
         this.setData({
             showDialog:false,
             showFinish: false,
+            showDelay: false,
             showShift: false,
             overlay: false,
         })
@@ -284,8 +303,8 @@ Page({
     doInput: function (e) {
         let type = e.currentTarget.dataset.type;
         const v = this.data.requestBody;
-        if (type == 'addr') {
-            v.addr = e.detail.value
+        if (type == 'delay') {
+            v.delayreasons = e.detail.value
         } else {
             v.completeremark = e.detail.value
         }
@@ -298,6 +317,9 @@ Page({
         let bean=e.currentTarget.dataset.bean
         bean.status = "3"
         this.setData({
+
+            showDelay: false,
+            showShift: false,
             showDialog:true,
             showFinish:true,
             overlay: true,
@@ -327,15 +349,32 @@ Page({
             d[0].checked = true
         }
         this.setData({
+            showFinish: false,
+            showDelay: false,
+
             showDialog:true,
             showShift:true,
             overlay: true,
             requestBody:e.currentTarget.dataset.bean,
-            types:d,
+            types2:d,
             dialogTitle:'请选择转单给',
         })
     },
     doDelay(e) {
+        console.log("aa",'doDelay')
+        let d = [{name:'返厂维修',checked:false},{name:'购置新品',checked:false}]
+
+        this.setData({
+            showFinish: false,
+
+            showShift: false,
+            showDialog:true,
+            showDelay:true,
+            overlay: true,
+            requestBody:e.currentTarget.dataset.bean,
+            types2:d,
+            dialogTitle:'请选择延期原因',
+        })
     },
     // 页面滑动切换事件
     animationFinish(e) {

@@ -121,14 +121,18 @@
 >
     <view class="layout0">
         <view class="bRemark">{{dialogTitle}}</view>
-        <view wx:if="{{showShift}}" class="cells-shift">
-            <view class="{{item.checked?'shift0':'shift1'}}" wx:for="{{types}}" wx:key="index" data-index="{{index}}" bindtap="checkType">
+        <view wx:if="{{showShift||showDelay}}" class="cells-shift">
+            <view class="{{item.checked?'shift0':'shift1'}}" wx:for="{{types2}}" wx:key="index" data-index="{{index}}" bindtap="checkType">
                 <view >
                     {{item.name}}
                 </view>
             </view>
         </view>
         <textarea wx:if="{{showFinish}}" class="bInput" placeholder="请填写您的备注内容" bindinput="doInput" data-type="remark" value=""/>
+        <view class="other" wx:if="{{showDelay}}">
+            <view class="hint" style="font-size: 24rpx;margin-top: 40rpx">其他原因</view>
+            <input class="cInput" placeholder="最多输入10个字" maxlength="10" bindinput="doInput" data-type="delay" value=""/>
+        </view>
         <view class="bAction" bindtap="doBtnFinish">提交</view>
     </view>
 </page-container>

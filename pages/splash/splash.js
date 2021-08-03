@@ -13,7 +13,20 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-        this.epassLogin()//教育号插件登录
+        let this_ = this
+        wx.getSystemInfo({
+            success(res) {
+                if (res.environment != null) {//企业微信环境
+                    wx.setStorageSync('environment', true)
+                    this_.epassLogin()//教育号插件登录
+                } else {
+                    //非企业微信环境
+                    wx.setStorageSync('environment', false)
+                    this_.xnLogin()//校能登录
+                }
+            }
+        })
+
         // this.xnLogin()//校能登录
         // this.qyLogin()//企业微信登录
 
@@ -22,7 +35,7 @@ Page({
         const epaasLogin = require('@tencent/miniapp-epaas-sdk');
         // const appid = '800512'
         const appid = '800497'
-        var redirect_uri = '/packageA/pages/switch_role/switch_role'
+        var redirect_uri = '/packageA/pages/thirdLogin/thirdLogin'
         epaasLogin({
             redirect_uri: encodeURIComponent(redirect_uri),
             appid
@@ -58,7 +71,7 @@ Page({
                     });
                 }
             }
-            , 2000)
+            , 1000)
     },
     qyLogin() {
         var this_ = this

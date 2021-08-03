@@ -1,4 +1,8 @@
 // packageA/pages/thirdLogin/thirdLogin.js
+import {showModal} from "../../../utils/util";
+
+const app = getApp()
+
 Page({
 
   /**
@@ -12,12 +16,108 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var redirect_uri = '/pages/switch_role/switch_role'
-    var url = 'plugin://login-plugin/login'
-        + '?redirect_uri=' + encodeURIComponent(redirect_uri)
-    wx.navigateTo({
-      url: url
-    })
+    console.log('options',options)
+    if (wx.getStorageSync('environment')) {//企业微信环境
+      this.doCode(options)
+    } else {
+      //非企业微信环境
+    }
+  },
+  doCode(options){
+    console.log('options',options)
+    let url = 'https://sso.qq.com/open/access_token';
+
+    let data = {
+      appid: '800497',
+      secret: 'd9f84fc3c103464b80fc934a5b2710da',
+      // appid: '800512',
+      // secret: '442f96e404814854975d09d24b46007a',
+      code: options.code,
+      grant_type: 'authorization_code'
+    }
+    app.httpPost0(url, data).then((res) => {
+      let data = res.data.access_token;
+
+      this.getUid(data)
+    });
+  },
+  getUid(token) {
+    let url = 'https://oapi.epaas.qq.com/account/userinfo';
+    console.log('access_token',token)
+    let data = {
+      access_token: token,
+    }
+    app.httpGet0(url, data).then((res) => {
+      let data = res.userid;
+      console.log('uid',data)
+      this.getUserInfo(token, data)
+    });
+  },
+  getUserInfo(token, uid) {
+    let url = 'https://oapi.epaas.qq.com/user/get_info?access_token='+token;
+
+    let data = {
+      // access_token: token,
+      userid:uid,
+      basic_fields:["native_place","honor","id_avatar_mediaid","nationality","user_number"],
+    }
+    console.log('data',JSON.stringify(data))
+    app.httpPost0(url, data,true,'','application/json').then((res) => {
+      let data = res.basic_profile;
+      data = JSON.parse(data)
+      console.log('info',data)
+      // showModal('教工号' + data.user_number)
+      let url = "/api/v17/user/login/eCnologinin"
+
+      let data2 = {
+        cno: data.user_number
+      };
+      app.httpPost(url, data2,false).then((res) => {
+        app.saveAppInfo(res.respResult)
+        wx.switchTab({
+          url: '/pages/circular/circular',
+        })
+        wx.showToast({
+          title: "登陆成功",
+          icon: 'none'
+        });
+      },res=>{
+        console.log("reject", res)
+        wx.showModal({
+          title:'温馨提示' ,
+          content: '教工号不存在,是否手动登录',
+          success(res) {
+            if (res.confirm) {
+              wx.redirectTo({
+                url: '/packageA/pages/switch_role/switch_role',
+              })
+            } else if (res.cancel) {
+              wx.navigateBack({
+                delta: 1,
+              })
+            }
+          },
+          confirmColor: "#F95B49",
+        })
+
+      });
+    });
+  },
+  getStuInfo(token, uid) {
+    let url = 'https://oapi.epaas.qq.com/school/user/get';
+
+    let data = {
+      access_token: token,
+      userid:uid,
+      // basic_fields:["native_place","honor","id_avatar_mediaid","nationality","user_number"],
+    }
+    console.log('data',JSON.stringify(data))
+    app.httpGet0(url, data).then((res) => {
+      let data = res.basic_profile;
+      data = JSON.parse(data)
+      console.log('info',data)
+      showModal('教工号' + data.user_number)
+    });
   },
 
   /**

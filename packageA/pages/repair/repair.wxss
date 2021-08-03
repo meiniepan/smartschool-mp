@@ -146,6 +146,12 @@ page{
     background: var(--tintBac);
     border-radius: 20rpx;
 }
+.cInput{
+    padding: 20rpx;
+    margin-top: 24rpx;
+    background: var(--tintBac);
+    border-radius: 20rpx;
+}
 .bAction{
     display: flex;
     align-items: center;
@@ -192,4 +198,8 @@ page{
     border: var(--themeColor) 1rpx solid;
     color: var(--themeColor);
     box-sizing: border-box;
+}
+.other{
+    display: flex;
+    flex-direction: column;
 }
