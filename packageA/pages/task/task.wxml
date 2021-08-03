@@ -1,4 +1,5 @@
 <!--pages/task/task.wxml-->
+<view class="out">
 <view class="top-wrap">
     <tab id="category"
          tab-data="{{categoryMenu}}"
@@ -38,4 +39,5 @@
     </swiper-item>
 
 </swiper>
-
+    <image class="addBtn" wx:if="{{mType=='2'}}" bindtap="doAdd" src="../../assets/images/ic_add_common.png" mode="widthFix"></image>
+</view>

@@ -1,6 +1,6 @@
 <!--pages/addInvolve/addInvolve.wxml-->
 <view class="out">
-    <navigation title="组织架构">
+    <navigation title="组织架构" >
         <image class="act" src="../../assets/images/icon_back_black_a.png" mode="widthFix" bindtap="doFinish"></image>
         <view class="navi-1" bindtap="doConfirm">{{confirmStr}}</view>
     </navigation>

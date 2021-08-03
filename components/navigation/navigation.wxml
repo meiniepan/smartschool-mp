@@ -1,6 +1,6 @@
 
 <view class="cu-custom" style="height: {{navigationHeight}}px;">
-	<view class="cu-bar fixed" style="height: {{navigationHeight}}px; padding-top: {{statusBarHeight}}px;">
+	<view class="cu-bar" style="background: {{bgColor}}; height: {{navigationHeight}}px; padding-top: {{statusBarHeight}}px;">
 		<view class="action">
             <slot></slot>
 		</view>

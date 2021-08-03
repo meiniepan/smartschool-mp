@@ -1,4 +1,4 @@
-// pages/quantize/quantize.js
+// packageA/pages/addLog/addLog.js
 Page({
 
   /**
@@ -13,18 +13,6 @@ Page({
    */
   onLoad: function (options) {
 
-  },
-
-  doJump(e){
-    let url = ''
-    if (wx.getStorageSync('usertype') === "1"){
-      url = '/packageA/pages/quantizeSpecialList/quantizeSpecialList'
-    }else{
-      url = '/packageA/pages/quantizeSpecial/quantizeSpecial'
-    }
-    wx.navigateTo({
-      url: url
-    })
   },
 
   /**
@@ -73,9 +61,6 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-        return {
-            title: '汇文云',
-            path: 'pages/splash/splash'
-        }
-    }
+
+  }
 })

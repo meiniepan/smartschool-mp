@@ -16,6 +16,109 @@ Page({
         status: null,
         navigationHeight: app.globalData.navigationHeight,
     },
+    /**
+     * 生命周期函数--监听页面加载
+     */
+    onLoad: function (options) {
+        // wx.requestSubscribeMessage({
+        //     tmplIds: ['aasPBwm2xjII9E6K9Ee17ljHSYxQxwBWWDKxG0peDqc'],
+        //     success (res) { }
+        // })
+
+        let categoryData = [];
+        let categoryMenu; // 分类菜单数据
+        let categoryMenuS = ["全部", "未完成", "已完成"]; // 分类菜单数据,学生
+        let categoryMenuT = ["全部", "进行中", "草稿箱", "已关闭", "未完成", "已完成"]; // 分类菜单数据, 老师
+        if (wx.getStorageSync('usertype') === "1") {
+            categoryMenu = categoryMenuS
+            this.setData({
+                mType:'1'
+            })
+        } else {
+            categoryMenu = categoryMenuT
+            this.setData({
+                mType:'2'
+            })
+        }
+        let url, type, taskStatus;
+        categoryMenu.forEach((item, index) => {
+
+            if (wx.getStorageSync('usertype') === "1") {
+                url = "/api/v17/student/tasks/lists"
+                if (index == 0) {
+                    taskStatus = "-1"
+                    type = "1"
+                } else if (index == 1) {
+                    taskStatus = "0"
+                    type = "1"
+                } else if (index == 2) {
+                    taskStatus = "1"
+                    type = "1"
+                }
+                categoryData.push({
+                    categoryCur: index,
+                    requesting: false,
+                    end: false,
+                    lastid: null,
+                    listData: [],
+                    type: type,
+                    url: url,
+                    taskStatus: taskStatus
+                })
+            } else {
+                if (index == 0) {
+                    taskStatus = "-1"
+                    type = "1"
+                    url = "/api/v17/teacher/tasks/lists"
+                } else if (index == 1) {
+                    taskStatus = "1"
+                    type = "2"
+                    url = "/api/v17/teacher/tasks/tasklist"
+                } else if (index == 2) {
+                    taskStatus = "0"
+                    type = "2"
+                    url = "/api/v17/teacher/tasks/tasklist"
+                } else if (index == 3) {
+                    taskStatus = "3"
+                    type = "2"
+                    url = "/api/v17/teacher/tasks/tasklist"
+                } else if (index == 4) {
+                    taskStatus = "0"
+                    type = "1"
+                    url = "/api/v17/teacher/tasks/lists"
+                } else if (index == 5) {
+                    taskStatus = "1"
+                    type = "1"
+                    url = "/api/v17/teacher/tasks/lists"
+                }
+
+                categoryData.push({
+                    categoryCur: index,
+                    requesting: false,
+                    end: false,
+                    lastid: null,
+                    listData: [],
+                    type: type,
+                    url: url,
+                    taskStatus: taskStatus
+                })
+            }
+
+        })
+        this.setData({
+            categoryData,
+            categoryMenu
+        });
+
+        setTimeout(() => {
+            this.refresh();
+        }, 350);
+    },
+    doAdd() {
+        wx.navigateTo({
+            url: '/packageA/pages/addTask/addTask'
+        })
+    },
     getList(type, lastid) {
         let currentCur = this.data.categoryCur;
         let pageData = this.getCurrentData(currentCur);
@@ -171,98 +274,7 @@ Page({
     },
 
 
-    /**
-     * 生命周期函数--监听页面加载
-     */
-    onLoad: function (options) {
-        // wx.requestSubscribeMessage({
-        //     tmplIds: ['aasPBwm2xjII9E6K9Ee17ljHSYxQxwBWWDKxG0peDqc'],
-        //     success (res) { }
-        // })
 
-        let categoryData = [];
-        let categoryMenu; // 分类菜单数据
-        let categoryMenuS = ["全部", "未完成", "已完成"]; // 分类菜单数据,学生
-        let categoryMenuT = ["全部", "进行中", "草稿箱", "已关闭", "未完成", "已完成"]; // 分类菜单数据, 老师
-        if (wx.getStorageSync('usertype') === "1") {
-            categoryMenu = categoryMenuS
-        } else {
-            categoryMenu = categoryMenuT
-        }
-        let url, type, taskStatus;
-        categoryMenu.forEach((item, index) => {
-
-            if (wx.getStorageSync('usertype') === "1") {
-                url = "/api/v17/student/tasks/lists"
-                if (index == 0) {
-                    taskStatus = "-1"
-                    type = "1"
-                } else if (index == 1) {
-                    taskStatus = "0"
-                    type = "1"
-                } else if (index == 2) {
-                    taskStatus = "1"
-                    type = "1"
-                }
-                categoryData.push({
-                    categoryCur: index,
-                    requesting: false,
-                    end: false,
-                    lastid: null,
-                    listData: [],
-                    type: type,
-                    url: url,
-                    taskStatus: taskStatus
-                })
-            } else {
-                if (index == 0) {
-                    taskStatus = "-1"
-                    type = "1"
-                    url = "/api/v17/teacher/tasks/lists"
-                } else if (index == 1) {
-                    taskStatus = "1"
-                    type = "2"
-                    url = "/api/v17/teacher/tasks/tasklist"
-                } else if (index == 2) {
-                    taskStatus = "0"
-                    type = "2"
-                    url = "/api/v17/teacher/tasks/tasklist"
-                } else if (index == 3) {
-                    taskStatus = "3"
-                    type = "2"
-                    url = "/api/v17/teacher/tasks/tasklist"
-                } else if (index == 4) {
-                    taskStatus = "0"
-                    type = "1"
-                    url = "/api/v17/teacher/tasks/lists"
-                } else if (index == 5) {
-                    taskStatus = "1"
-                    type = "1"
-                    url = "/api/v17/teacher/tasks/lists"
-                }
-
-                categoryData.push({
-                    categoryCur: index,
-                    requesting: false,
-                    end: false,
-                    lastid: null,
-                    listData: [],
-                    type: type,
-                    url: url,
-                    taskStatus: taskStatus
-                })
-            }
-
-        })
-        this.setData({
-            categoryData,
-            categoryMenu
-        });
-
-        setTimeout(() => {
-            this.refresh();
-        }, 350);
-    },
 
     doTaskDetail(e){
         // wx.navigateTo({

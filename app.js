@@ -67,9 +67,18 @@ App({
 
                     if (code != '0000') {
                         if (code == '0004') {
-                            wx.redirectTo({
-                                url: '/packageA/pages/switch_role/switch_role',
-                            })
+                            wx.setStorageSync('token', null)
+                            if (wx.getStorageSync('environment')) {//企业微信环境
+                                wx.redirectTo({
+                                    url: '/pages/splash/splash',
+                                })
+                            } else {
+                                //非企业微信环境
+                                wx.redirectTo({
+                                    url: '/packageA/pages/switch_role/switch_role',
+                                })
+                            }
+
                             return
                         }
                         reject(res);

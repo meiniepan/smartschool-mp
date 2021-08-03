@@ -78,7 +78,7 @@ Page({
         } else if (app.checkRule2("teacher/attendances/sclists")) {
             this.getSchoolData()
         } else {
-            this.getStuData()
+            // this.getStuData()
         }
     },
     getDataMaster() {

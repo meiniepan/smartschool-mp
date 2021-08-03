@@ -23,7 +23,7 @@ Page({
     },
     doEdit(e) {
         let bean = this.data.bean
-        let url = '/pages/addSchedule/addSchedule?bean=' + JSON.stringify(bean) + '&isModify=1'
+        let url = '/packageA/pages/addSchedule/addSchedule?bean=' + JSON.stringify(bean) + '&isModify=1'
         wx.navigateTo({
             url: url,
         })

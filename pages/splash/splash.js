@@ -32,14 +32,20 @@ Page({
 
     },
     epassLogin() {
-        const epaasLogin = require('@tencent/miniapp-epaas-sdk');
-        // const appid = '800512'
-        const appid = '800497'
-        var redirect_uri = '/packageA/pages/thirdLogin/thirdLogin'
-        epaasLogin({
-            redirect_uri: encodeURIComponent(redirect_uri),
-            appid
-        })
+        let token = wx.getStorageSync('token')
+        if (util.isEmpty(token)) {
+            const epaasLogin = require('@tencent/miniapp-epaas-sdk');
+            // const appid = '800512'
+            const appid = '800497'
+            var redirect_uri = '/packageA/pages/thirdLogin/thirdLogin'
+            epaasLogin({
+                redirect_uri: encodeURIComponent(redirect_uri),
+                appid
+            })
+        } else {
+            this.goMain(token)
+        }
+
     },
 
     xnLogin() {
@@ -54,24 +60,27 @@ Page({
                         url: '/packageA/pages/switch_role/switch_role',
                     })
                 } else {
-                    let url;
-                    if (wx.getStorageSync('usertype') === "1") {
-                        url = "/api/v17/user/student/apps"
-                    } else {
-                        url = "/api/v17/user/teachers/apps"
-                    }
-                    let data = {
-                        token: token
-                    };
-                    app.httpPost(url, data, false).then((res) => {
-                        app.saveAppInfo(res.respResult)
-                        wx.switchTab({
-                            url: '/pages/circular/circular',
-                        })
-                    });
+                    this.goMain(token)
                 }
             }
             , 1000)
+    },
+    goMain(token){
+        let url;
+        if (wx.getStorageSync('usertype') === "1") {
+            url = "/api/v17/user/student/apps"
+        } else {
+            url = "/api/v17/user/teachers/apps"
+        }
+        let data = {
+            token: token
+        };
+        app.httpPost(url, data, false).then((res) => {
+            app.saveAppInfo(res.respResult)
+            wx.switchTab({
+                url: '/pages/circular/circular',
+            })
+        });
     },
     qyLogin() {
         var this_ = this

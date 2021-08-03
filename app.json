@@ -31,6 +31,8 @@
         "pages/addBookSite/addBookSite",
         "pages/roomBookRecords/roomBookRecords",
         "pages/task/task",
+        "pages/addTask/addTask",
+        "pages/addLog/addLog",
         "pages/taskDetail/taskDetail",
         "pages/mine_info/mine_info",
         "pages/security/security",

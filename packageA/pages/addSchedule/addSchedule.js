@@ -43,8 +43,7 @@ Page({
             let temp = new Date()
             let h = temp.getHours()
             let m = temp.getMinutes()
-            let s = temp.getSeconds()
-            chosenDay = options.chosenDay + " " + zero(h) + ":" + zero(m) + ":" + zero(s)
+            chosenDay = options.chosenDay + " " + zero(h) + ":" + zero(m)
             b = this.data.requestBody
             b.scheduletime = chosenDay
             b.scheduleover = chosenDay
