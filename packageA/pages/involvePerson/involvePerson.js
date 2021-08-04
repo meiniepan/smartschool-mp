@@ -44,6 +44,7 @@ Page({
             let data = [], mDataInvolve = [];
             if (type === 0) {
                 data = res.respResult;
+
                 data.forEach(bean => {
                     bean.data.forEach(it => {
                         it.parentId = this.data.bean.id
@@ -92,6 +93,7 @@ Page({
                 }
             })
         })
+        console.log('involve',involve)
         this.getOpenerEventChannel().emit('involvePerson', involve)
         wx.navigateBack({
             delta: 1,

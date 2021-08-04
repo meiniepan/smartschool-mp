@@ -1,5 +1,5 @@
 // pages/task/task.js
-import { isLogin, showToastWithoutIcon } from '../../../utils/util';
+import {isLogin, showToastWithoutIcon} from '../../../utils/util';
 
 let app = getApp();
 Page({
@@ -9,11 +9,16 @@ Page({
     data: {
         duration: 300,  // swiper-item 切换过渡时间
         categoryCur: 0, // 当前数据列索引
-        categoryMenu: [], // 分类菜单数据
+        categoryMenu: ['我发起的', '我参与的'], // 分类菜单数据
         categoryData: [], // 所有数据列
-        lastid: null,
-        completestatus: null,
-        status: null,
+        statusArr: [], // 状态数据列
+        statusStrArr: [], // 状态数据列
+        status: '-1',
+        statusStr: '任务状态',
+        stime: '',
+        etime: '',
+        stimeStr: '开始时间',
+        etimeStr: '结束时间',
         navigationHeight: app.globalData.navigationHeight,
     },
     /**
@@ -26,35 +31,32 @@ Page({
         // })
 
         let categoryData = [];
-        let categoryMenu; // 分类菜单数据
-        let categoryMenuS = ["全部", "未完成", "已完成"]; // 分类菜单数据,学生
-        let categoryMenuT = ["全部", "进行中", "草稿箱", "已关闭", "未完成", "已完成"]; // 分类菜单数据, 老师
+        let statusArr; // 分类菜单数据
+        let statusStrArr; // 分类菜单数据
+        let statusArrS = ['-1', "0", "1"]; // 分类菜单数据,学生
+        let statusStrArrS = ["全部", "未完成", "已完成"]; // 分类菜单数据,学生
+        let statusArrT = ['-1', "1", "0", "3"]; // 分类菜单数据, 老师
+        let statusStrArrT = ["全部", "进行中", "草稿箱", "已关闭"]; // 分类菜单数据, 老师
         if (wx.getStorageSync('usertype') === "1") {
-            categoryMenu = categoryMenuS
+            statusArr = statusArrS
+            statusStrArr = statusStrArrS
             this.setData({
-                mType:'1'
+                mType: '1'
             })
         } else {
-            categoryMenu = categoryMenuT
+            statusArr = statusArrT
+            statusStrArr = statusStrArrT
             this.setData({
-                mType:'2'
+                mType: '2'
             })
         }
         let url, type, taskStatus;
-        categoryMenu.forEach((item, index) => {
+        this.data.categoryMenu.forEach((item, index) => {
 
             if (wx.getStorageSync('usertype') === "1") {
                 url = "/api/v17/student/tasks/lists"
-                if (index == 0) {
-                    taskStatus = "-1"
-                    type = "1"
-                } else if (index == 1) {
-                    taskStatus = "0"
-                    type = "1"
-                } else if (index == 2) {
-                    taskStatus = "1"
-                    type = "1"
-                }
+                taskStatus = null
+                type = "1"
                 categoryData.push({
                     categoryCur: index,
                     requesting: false,
@@ -67,27 +69,11 @@ Page({
                 })
             } else {
                 if (index == 0) {
-                    taskStatus = "-1"
-                    type = "1"
-                    url = "/api/v17/teacher/tasks/lists"
+                    taskStatus = null
+                    type = "2"
+                    url = "/api/v17/teacher/tasks/tasklist"
                 } else if (index == 1) {
-                    taskStatus = "1"
-                    type = "2"
-                    url = "/api/v17/teacher/tasks/tasklist"
-                } else if (index == 2) {
-                    taskStatus = "0"
-                    type = "2"
-                    url = "/api/v17/teacher/tasks/tasklist"
-                } else if (index == 3) {
-                    taskStatus = "3"
-                    type = "2"
-                    url = "/api/v17/teacher/tasks/tasklist"
-                } else if (index == 4) {
-                    taskStatus = "0"
-                    type = "1"
-                    url = "/api/v17/teacher/tasks/lists"
-                } else if (index == 5) {
-                    taskStatus = "1"
+                    taskStatus = null
                     type = "1"
                     url = "/api/v17/teacher/tasks/lists"
                 }
@@ -107,17 +93,80 @@ Page({
         })
         this.setData({
             categoryData,
-            categoryMenu
+            statusArr,
+            statusStrArr,
         });
 
         setTimeout(() => {
             this.refresh();
-        }, 350);
+        }, 100);
     },
     doAdd() {
         wx.navigateTo({
             url: '/packageA/pages/addTask/addTask'
         })
+    },
+    checkPri() {
+        if (this.data.categoryCur !== 0) {
+            this.setData({
+                categoryCur: 0,
+                status: '-1',
+                statusStr: '任务状态',
+                stime: '',
+                etime: '',
+                stimeStr: '开始时间',
+                etimeStr: '结束时间',
+            });
+            let pageData = this.getCurrentData();
+            if (pageData.init != true) {
+                this.getList('refresh');
+            }
+        }
+    },
+    checkPub() {
+        if (this.data.categoryCur !== 1) {
+            this.setData({
+                categoryCur: 1,
+                status: '-1',
+                statusStr: '任务状态',
+                stime: '',
+                etime: '',
+                stimeStr: '开始时间',
+                etimeStr: '结束时间',
+            });
+            let pageData = this.getCurrentData();
+            if (pageData.init != true) {
+                this.getList('refresh');
+            }
+        }
+    },
+    doAct(e) {
+        let p = e.detail.value
+        let status = this.data.statusArr[p]
+        let statusStr = this.data.statusStrArr[p]
+        this.setData({
+            status,
+            statusStr,
+        })
+        this.refresh()
+    },
+    bindTimeS(e) {
+        let stime = e.detail.dateString
+        let stimeStr = e.detail.dateString.substr(5, e.detail.dateString.length - 1)
+        this.setData({
+            stime,
+            stimeStr,
+        })
+        this.refresh()
+    },
+    bindTimeE(e) {
+        let etime = e.detail.dateString
+        let etimeStr = e.detail.dateString.substr(5, e.detail.dateString.length - 1)
+        this.setData({
+            etime,
+            etimeStr,
+        })
+        this.refresh()
     },
     getList(type, lastid) {
         let currentCur = this.data.categoryCur;
@@ -128,30 +177,35 @@ Page({
         if (pageData.end) return;
 
         pageData.requesting = true;
+        let status = this.data.status
+        let stime = this.data.stime
+        let etime = this.data.etime
         this.setCurrentData(currentCur, pageData);
 
         let url = pageData.url;
         let data;
-        if (pageData.taskStatus == "-1") {
+        if (currentCur == 0) {
+            if (wx.getStorageSync('usertype') == '1') {
+                return;
+            }
             data = {
                 token: wx.getStorageSync('token'),
                 id: lastid,
+                status: status,
+                stime: stime,
+                etime: etime,
             }
-        }
-        else if (pageData.type == "1") {
+        } else if (currentCur == 1) {
             data = {
                 token: wx.getStorageSync('token'),
                 id: lastid,
-                completestatus: pageData.taskStatus,
+                completestatus: status,
+                stime: stime,
+                etime: etime,
             }
-        } else {
-            data = {
-                token: wx.getStorageSync('token'),
-                id: lastid,
-                status: pageData.taskStatus,
-            }
-        }
 
+        }
+        console.log('data', data)
         app.httpPost(url, data).then((res) => {
 
             let data = res.respResult || {
@@ -172,7 +226,7 @@ Page({
                 pageData.listData = pageData.listData.concat(listData);
             }
             this.initStr(pageData)
-
+            pageData.init = false
             this.setCurrentData(currentCur, pageData);
         })
     },
@@ -232,25 +286,25 @@ Page({
                 categoryCur: e.detail.index
             });
             let pageData = this.getCurrentData();
-            if (pageData.listData.length === 0) {
-                this.getList('refresh');
+            if (pageData.init != true) {
+                this.getList('refresh', null);
             }
         }, 0);
     },
     // 页面滑动切换事件
     animationFinish(e) {
         this.setData({
-			duration: 300
-		});
-		setTimeout(() => {
-			this.setData({
-				categoryCur: e.detail.current
-			});
-			let pageData = this.getCurrentData();
-			if (pageData.listData.length === 0) {
-				this.getList('refresh', null);
-			}
-		}, 0);
+            duration: 300
+        });
+        setTimeout(() => {
+            this.setData({
+                categoryCur: e.detail.current
+            });
+            let pageData = this.getCurrentData();
+            if (pageData.listData.length === 0) {
+                this.getList('refresh', null);
+            }
+        }, 0);
     },
     // 更新页面数据
     setCurrentData(currentCur, pageData) {
@@ -262,11 +316,10 @@ Page({
     },
     // 获取当前激活页面的数据
     getCurrentData() {
-
         return this.data.categoryData[this.data.categoryCur]
     },
     refresh() {
-        this.getList('refresh',null);
+        this.getList('refresh', null);
     },
 
     more() {
@@ -274,12 +327,18 @@ Page({
     },
 
 
+    doTaskDetail(e) {
+        let bean = e.currentTarget.dataset.bean
+        if (this.data.mType=='2'&&bean.status=='0') {
+            wx.navigateTo({
+                url: '/packageA/pages/addTask/addTask?id=' + bean.id + '&type=' + this.data.mType,
+            })
+        } else {
+            wx.navigateTo({
+                url: '/packageA/pages/taskDetail/taskDetail?id=' + bean.id + '&type=' + this.data.mType,
+            })
+        }
 
-
-    doTaskDetail(e){
-        // wx.navigateTo({
-        //     url: '/packageA/pages/taskDetail/taskDetail?id=' + e.currentTarget.dataset.url+'&type=' + this.data.categoryData[this.data.categoryCur].type,
-        // })
     },
 
     /**

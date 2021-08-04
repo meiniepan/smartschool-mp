@@ -10,7 +10,7 @@
             bindanimationfinish="animationFinish">
         <swiper-item wx:for="{{categoryData}}" wx:key="index">
             <scroll requesting="{{item.requesting}}" end="{{item.end}}" empty-show="{{item.emptyShow}}"
-                    list-count="{{item.listData.length}}" top-size="0" bottom-size="0" bind:refresh="refresh"
+                    list-count="{{item.listData.length}}" top-size="0" bottom-size="{{120}}" bind:refresh="refresh"
                     bind:more="more" style="padding-top: 0rpx">
                 <view class="cells">
                     <view class="cell" wx:for="{{item.listData}}" wx:key="index" bindtap="">

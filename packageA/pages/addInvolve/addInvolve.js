@@ -192,6 +192,7 @@ Page({
             var p = e.currentTarget.dataset.position
 
             this.data.mDataDepartment.forEach(it => {
+
                 if (it.id == this.data.mDataInvolve[p].parentId) {
                     if (it.num > 0) {
                         for (let i = 0; i < it.list.length; i++) {
@@ -235,12 +236,15 @@ Page({
         var receiveList = data
 
         for (let i = this.data.mDataInvolve.length - 1; i >= 0; i--) {
+
             if (this.data.mDataInvolve[i].parentId == this.data.currentItemId) {
                 this.data.mDataInvolve.splice(i, 1)
             }
         }
         if (this.data.mCurrent == '0') {
             this.data.mDataDepartment.forEach(it => {
+                console.log('curid',it.id)
+                console.log('currentItemId',this.data.currentItemId)
                 if (it.id == this.data.currentItemId) {
                     it.list = receiveList
                     it.num = receiveList.length
@@ -285,7 +289,9 @@ Page({
                 })
             }
         })
-
+        involves.forEach(it => {
+            it.label = it.realname[it.realname.length - 1]
+        })
         this.setData({
             mDataInvolve: involves,
         })
@@ -314,7 +320,7 @@ Page({
         let data = {}
         data.mDataDepartment = this.data.mDataDepartment
         data.mDataClasses = this.data.mDataClasses
-        console.log('data',data)
+        console.log('data', data)
         this.getOpenerEventChannel().emit('quantizeSpecial', data)
         wx.navigateBack({
             delta: 1,

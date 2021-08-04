@@ -6,7 +6,7 @@
             <view class="key text bold">任务名称</view>
             <view class="require bold">*</view>
         </view>
-        <input placeholder="请填写任务名称" maxlength="20" bindinput="doInput" data-type="title" value="{{requestBody.taskname}}"/>
+        <input placeholder="请填写任务名称" maxlength="20" bindinput="doInput" data-type="taskname" value="{{requestBody.taskname}}"/>
     </view>
     <dateTimePicker value="{{requestBody.plantime}}"
                     data-type="indexClass" bindchange="bindTimeS">

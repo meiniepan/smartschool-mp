@@ -33,47 +33,12 @@ Page({
      */
 
     onLoad: function (options) {
-        let b = {}, isModify = false
-        if (options.isModify == '1') {
-            isModify = true
-            b = JSON.parse(options.bean)
-            b.token = wx.getStorageSync('token')
-            this.setData({
-                requestBody: b,
-                isModify,
-            })
-            this.doResult(JSON.parse(b.involve))
-        } else {
-            let chosenDay = ''
-            let temp = new Date()
-            let year = temp.getFullYear()
-            let month = temp.getMonth() + 1
-            let date = temp.getDate()
-            let today = year + "-" + zero(month) + "-" + zero(date)
-            let h = temp.getHours()
-            let m = temp.getMinutes()
-            chosenDay = today + " " + zero(h) + ":" + zero(m)
-            b = this.data.requestBody
-            b.plantime = chosenDay
-            b.overtime = chosenDay
-            this.setData({
-                requestBody: b,
-                isModify,
-            })
+        let id = options.id
+        if (id != null) {
+            this.getTaskInfo(id)
         }
-        let showChooseStudent = false
-        if (wx.getStorageSync("usertype") == "1") {
 
-        } else {
-            if (this.data.isModify && this.data.bean.cuser_id != wx.getStorageSync("uid")) {
 
-            } else {
-                showChooseStudent = true
-            }
-        }
-        this.setData({
-            showChooseStudent,
-        })
     },
 
     doConfirm() {
@@ -97,6 +62,8 @@ Page({
     doConfirm2() {
 
         let bean = this.data.requestBody
+        bean.token = wx.getStorageSync('token')
+        bean.status = '1'
         let url = ''
         if (bean.plantime == "请选择开始时间" ||
             bean.overtime == "请选择结束时间" ||
@@ -104,7 +71,7 @@ Page({
             showToastWithoutIcon('请完善信息')
             return
         }
-        if (bean == null) {
+        if (bean.id == null) {
             url = '/api/v17/teacher/tasks/add'
         } else {
             url = '/api/v17/teacher/tasks/modifyTask'
@@ -120,12 +87,91 @@ Page({
             })
         });
     },
+    getTaskInfo(id) {
+        let url = ''
+
+        if (wx.getStorageSync('usertype') === "1") {
+            url = '/api/v17/student/tasks/info'
+        } else {
+            url = '/api/v17/teacher/tasks/info'
+        }
+
+
+        let data = {
+            token: wx.getStorageSync('token'),
+            id: id,
+            type: 'task',
+        }
+
+        app.httpPost(url, data).then((res) => {
+
+            let involve = res.respResult.involve
+console.log('involve',involve)
+            let departData = [];
+            let classData = [];
+            if (involve.length > 0) {
+                let mMap1 = new Map(), mMap2 = new Map();
+                involve.forEach(it => {
+                    if (it.topdepartid == "grade0") {
+                        it.secdepartid = '1_'+it.secdepartid
+                        it.parentId = it.secdepartid
+                        if (mMap2.get(it.secdepartid) == null) {
+                            var mList = []
+                            mList.push(it)
+                            if(it.secdepartid!=null){
+                                mMap2.set(it.secdepartid, mList)
+                            }
+
+                        } else {
+                            mList = mMap2.get(it.secdepartid)
+                            mList.push(it)
+                            if(it.secdepartid!=null){
+                                mMap2.set(it.secdepartid, mList)
+                            }
+                        }
+                    } else {
+                        it.topdepartid = '0_'+it.topdepartid
+                        it.parentId = it.topdepartid
+                        if (mMap1.get(it.topdepartid) == null) {
+                            var mList = []
+                            mList.push(it)
+                            if(it.topdepartid!=null){
+                                mMap1.set(it.topdepartid, mList)
+                            }
+
+                        } else {
+                            mList = mMap1.get(it.topdepartid)
+                                mList.push(it)
+                            if(it.topdepartid!=null){
+                                mMap1.set(it.topdepartid, mList)
+                            }
+                        }
+                    }
+                })
+                mMap1.forEach((value, key, map)=>{
+                    departData.push({id:key,list:value,num:value.length})
+                })
+                console.log('mMap1', mMap1)
+                mMap2.forEach((value, key, map)=>{
+                    classData.push({id:key,list:value,num:value.length})
+                })
+            }
+            let data = {mDataDepartment:departData,mDataClasses:classData}
+            console.log('data', data)
+            this.setData({
+                requestBody: res.respResult,
+                departData,
+                classData,
+            })
+            this.doResult(data)
+        });
+    },
     doChooseStudent() {
         let that = this
         let depart = that.data.departData
         let classes = that.data.classData
 
-        console.log('depart',depart)
+        console.log('depart', depart)
         wx.navigateTo({
             url: "../addInvolve/addInvolve?data=" + JSON.stringify(depart)
                 + '&data2=' + JSON.stringify(classes),
@@ -142,16 +188,16 @@ Page({
         let str = '', involves = []
 
         data.mDataDepartment.forEach(it => {
-            if (it.num>0){
-                it.list.forEach(it=>{
+            if (it.num > 0) {
+                it.list.forEach(it => {
                     str = str + it.realname + "、"
                     involves.push(it)
                 })
             }
         })
         data.mDataClasses.forEach(it => {
-            if (it.num>0){
-                it.list.forEach(it=>{
+            if (it.num > 0) {
+                it.list.forEach(it => {
                     str = str + it.realname + "、"
                     involves.push(it)
                 })

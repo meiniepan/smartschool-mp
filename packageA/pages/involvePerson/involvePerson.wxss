@@ -6,7 +6,8 @@
 .act{
     width: 20rpx;
     height: 20rpx;
-    margin-right: 20rpx;
+    padding: 20rpx;
+    margin-right: 40rpx;
 }
 .cells {
     display: flex;

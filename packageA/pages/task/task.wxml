@@ -1,30 +1,51 @@
 <!--pages/task/task.wxml-->
 <view class="out">
-<view class="top-wrap">
-    <tab id="category"
-         tab-data="{{categoryMenu}}"
-         tab-cur="{{categoryCur}}"
-         size="{{80}}"
-         scroll="{{true}}"
-         bindchange="toggleCategory">
-    </tab>
+    <view class="tabs">
+        <view class="{{categoryCur==0?'tab-self':'tab-share'}}" bindtap="checkPri">{{categoryMenu[0]}}</view>
+        <view class="{{categoryCur!=0?'tab-self':'tab-share'}}" style="margin-left: 34rpx" bindtap="checkPub">
+            {{categoryMenu[1]}}
+        </view>
+    </view>
+<view class="area" style="margin-top: 136rpx;">
+    <picker bindchange="doAct" bindtap=""
+            data-type="type" value="{{}}" range="{{statusStrArr}}" >
+        <view class="item">
+            <view >
+                {{statusStr}}
+            </view>
+            <image src="../../assets/images/ic_gray_triangle.png" style="margin-left: 4rpx;height: 10rpx"
+                   mode="heightFix" />
+        </view>
+    </picker>
+    <dateTimePicker value="{{stime}}"
+                    data-type="indexClass" bindchange="bindTimeS">
+        <view class="item">
+            <view >{{stimeStr}}</view>
+            <image src="../../assets/images/ic_gray_triangle.png" style="margin-left: 4rpx;height: 10rpx" mode="heightFix"></image>
+        </view>
+    </dateTimePicker>
+    <dateTimePicker value="{{etime}}"
+                    data-type="indexClass" bindchange="bindTimeE">
+        <view class="item">
+            <view >{{etimeStr}}</view>
+            <image  src="../../assets/images/ic_gray_triangle.png" style="margin-left: 4rpx;height: 10rpx" mode="heightFix"></image>
+        </view>
+    </dateTimePicker>
 </view>
-
-<swiper current="{{categoryCur}}" duration="{{duration}}" bindanimationfinish="animationFinish">
+<swiper style="height: 100%;" current="{{categoryCur}}" duration="{{duration}}" bindanimationfinish="animationFinish">
     <swiper-item wx:for="{{categoryData}}" wx:key="index">
         <scroll requesting="{{item.requesting}}"
                 end="{{item.end}}"
                 empty-show="{{item.emptyShow}}"
                 list-count="{{item.listData.length}}"
-                top-size="80"
-                bottom-size="{{bottomHeight}}"
+                bottom-size="{{120}}"
                 bind:refresh="refresh"
                 bind:more="more">
             <view class="cells">
                 <view class="cell"
                       wx:for="{{item.listData}}"
                       wx:key="index"
-                      data-url="{{item.id}}"
+                      data-bean="{{item}}"
                       bindtap="doTaskDetail">
                     <view class="titles">
                         <view class="title">{{item.taskname}}</view>

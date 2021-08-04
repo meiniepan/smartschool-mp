@@ -2,19 +2,53 @@
 page {
   background-color: var(--tintBac);
 }
-.top-wrap {
+.tabs {
+  border-top: var(--splitColor) 1rpx solid;
+  border-bottom: var(--splitColor) 1rpx solid;
+  padding: 24rpx var(--titlePadding);
+  display: flex;
+  align-content: space-between;
   position: fixed;
-  top: 0;
-  left: 0;
-  /* top: 0; */
   width: 100%;
-  background-color: var(--tintBac);
-  z-index: 99;
-  /* box-shadow: 0 0 20rpx -5rpx rgba(0, 0, 0, 0.1); */
+  box-sizing: border-box;
+  background: var(--white);
+  z-index: 9;
 }
 
+.tab-self{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: calc(100% - 2*var(--titlePadding) - 34rpx);
+  height: 88rpx;
+  background: var(--themeColor);
+  border-radius: 44rpx;
+  color: var(--white);
+}
+.tab-share{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: calc(100% - 2*var(--titlePadding) - 34rpx);
+  height: 88rpx;
+  background: var(--white);
+  border-radius: 44rpx;
+  border: var(--themeColor) 1rpx solid;
+  color: var(--themeColor);
+  box-sizing: border-box;
+}
+.area{
+  display: flex;
+  background: var(--white);
+  align-items: center;
+  padding: 20rpx var(--titlePadding);
+  justify-content: space-between;
+}
+.item{
+  display: flex;
+  align-items: center;
+}
 swiper {
-  height: 100vh;
 }
 
 .cells {
