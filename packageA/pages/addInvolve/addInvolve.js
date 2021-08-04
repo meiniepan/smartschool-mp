@@ -26,9 +26,7 @@ Page({
      */
     onLoad: function (options) {
         let init = options.init
-        if(init=='1'){
-            return
-        }
+
         let data = JSON.parse(options.data)
         let data2 = JSON.parse(options.data2)
         if (data.length > 0) {
@@ -84,15 +82,17 @@ Page({
                 let ii = this.data.mDataDepartment2
 
                 data.forEach(res => {
+
+                    res.id = '0_' + res.id
+                    res.list = []
                     if (ii.length > 0) {
                         ii.forEach(it => {
                             if (res.id == it.id) {
                                 res.list = it.list
-                                res.num = it.list.length
+                                res.num = it.list.length.toString()
                             }
                         })
                     }
-                    res.id = '0_' + res.id
                 })
             } else {
                 let ii = this.data.mDataClasses2
@@ -103,16 +103,17 @@ Page({
                     )
                 })
                 data.forEach(res => {
+
+                    res.id = '1_' + res.id
+                    res.list = []
                     if (ii.length > 0) {
                         ii.forEach(it => {
                             if (res.id == it.id) {
                                 res.list = it.list
-                                res.num = it.list.length
+                                res.num = it.list.length.toString()
                             }
                         })
                     }
-                    res.id = '1_' + res.id
-                    res.list = []
                 })
             }
 
@@ -313,6 +314,7 @@ Page({
         let data = {}
         data.mDataDepartment = this.data.mDataDepartment
         data.mDataClasses = this.data.mDataClasses
+        console.log('data',data)
         this.getOpenerEventChannel().emit('quantizeSpecial', data)
         wx.navigateBack({
             delta: 1,

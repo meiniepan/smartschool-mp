@@ -26,7 +26,6 @@ Page({
         departData: [],
         classData: [],
         bean: {},
-        hasB:'0',//是否进入过组织架构
     },
 
     /**
@@ -125,10 +124,11 @@ Page({
         let that = this
         let depart = that.data.departData
         let classes = that.data.classData
+
+        console.log('depart',depart)
         wx.navigateTo({
             url: "../addInvolve/addInvolve?data=" + JSON.stringify(depart)
-                + '&data2=' + JSON.stringify(classes)
-                + '&init=' + that.data.hasB,
+                + '&data2=' + JSON.stringify(classes),
             events: {
                 // 为指定事件添加一个监听器，获取被打开页面传送到当前页面的数据
                 quantizeSpecial: function (data) {
@@ -164,7 +164,6 @@ Page({
                 requestBody: this.data.requestBody,
                 departData: data.mDataDepartment,
                 classData: data.mDataClasses,
-            hasB:"1",
             }
         )
     },

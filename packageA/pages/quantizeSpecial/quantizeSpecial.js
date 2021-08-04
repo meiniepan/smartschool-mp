@@ -8,7 +8,7 @@ Page({
      * 页面的初始数据
      */
     data: {
-        quantizeBody: {
+        requestBody: {
             token: wx.getStorageSync('token'),
             stime: '请选择开始时间',
             etime: '请选择结束时间',
@@ -21,7 +21,8 @@ Page({
         },
         actArrays: ['病假', '事假', '外出考试', '学校活动', '其他'],
         ruleArrays: [],
-
+        departData: [],
+        classData: [],
     },
 
     /**
@@ -36,7 +37,7 @@ Page({
         this.getMoralTypeList()
     },
     doConfirm() {
-        let bean = this.data.quantizeBody
+        let bean = this.data.requestBody
 
         if (bean.involve.length == 0 || bean.stime=="请选择开始时间"||
             bean.etime=="请选择结束时间" || bean.actname=="请选择情况类型" ||
@@ -72,8 +73,13 @@ Page({
     },
     doChooseStudent() {
         let that = this
+        let depart = that.data.departData
+        let classes = that.data.classData
+
+        console.log('depart',depart)
         wx.navigateTo({
-            url: "../addInvolve/addInvolve?type=1",
+            url: "../addInvolve/addInvolve?data=" + JSON.stringify(depart)
+                + '&data2=' + JSON.stringify(classes),
             events: {
                 // 为指定事件添加一个监听器，获取被打开页面传送到当前页面的数据
                 quantizeSpecial: function (data) {
@@ -85,37 +91,52 @@ Page({
     },
     doResult(data) {
         let str = '', involves = []
-        data.forEach(it => {
-            str = str + it.realname + "、"
-            involves.push(it)
+
+        data.mDataDepartment.forEach(it => {
+            if (it.num>0){
+                it.list.forEach(it=>{
+                    str = str + it.realname + "、"
+                    involves.push(it)
+                })
+            }
+        })
+        data.mDataClasses.forEach(it => {
+            if (it.num>0){
+                it.list.forEach(it=>{
+                    str = str + it.realname + "、"
+                    involves.push(it)
+                })
+            }
         })
         str = str.substring(0, str.length - 1)
-        this.data.quantizeBody.involve = JSON.stringify(involves)
-        this.data.quantizeBody.stuStr = str
+        this.data.requestBody.involve = JSON.stringify(involves)
+        this.data.requestBody.stuStr = str
         this.setData({
-                quantizeBody: this.data.quantizeBody,
+                requestBody: this.data.requestBody,
+                departData: data.mDataDepartment,
+                classData: data.mDataClasses,
             }
         )
     },
     bindTimeS(e) {
-        let v = this.data.quantizeBody
+        let v = this.data.requestBody
         v.stime = e.detail.value
         this.setData({
-            quantizeBody: v,
+            requestBody: v,
         })
     },
     bindTimeE(e) {
-        let v = this.data.quantizeBody
+        let v = this.data.requestBody
         v.etime = e.detail.value
         this.setData({
-            quantizeBody: v,
+            requestBody: v,
         })
     },
     doAct(e) {
-        let v = this.data.quantizeBody
+        let v = this.data.requestBody
         v.actname = this.data.actArrays[e.detail.value]
         this.setData({
-            quantizeBody: v,
+            requestBody: v,
         })
     },
     doRule() {
@@ -136,7 +157,7 @@ Page({
             overlay: false,
         })
 
-        let bean = this.data.quantizeBody
+        let bean = this.data.requestBody
         let str = '',types = ''
         this.data.ruleArrays.forEach(it=>{
             if (it.checked){
@@ -149,7 +170,7 @@ Page({
             bean.rulename = str
             bean.types = types
             this.setData({
-                quantizeBody:bean
+                requestBody:bean
             })
         }
     },
@@ -162,10 +183,10 @@ Page({
         })
     },
     doInput: function (e) {
-        const v = this.data.quantizeBody;
+        const v = this.data.requestBody;
         v.remark = e.detail.value
         this.setData({
-            quantizeBody: v
+            requestBody: v
         });
     },
     /**

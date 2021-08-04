@@ -21,6 +21,8 @@ Page({
         showChooseStudent: false,
         isModify: false,
         bean: {},
+        departData: [],
+        classData: [],
     },
 
     /**
@@ -102,8 +104,13 @@ Page({
     },
     doChooseStudent() {
         let that = this
+        let depart = that.data.departData
+        let classes = that.data.classData
+
+        console.log('depart',depart)
         wx.navigateTo({
-            url: "../addInvolve/addInvolve",
+            url: "../addInvolve/addInvolve?data=" + JSON.stringify(depart)
+                + '&data2=' + JSON.stringify(classes),
             events: {
                 // 为指定事件添加一个监听器，获取被打开页面传送到当前页面的数据
                 quantizeSpecial: function (data) {
@@ -115,15 +122,30 @@ Page({
     },
     doResult(data) {
         let str = '', involves = []
-        data.forEach(it => {
-            str = str + it.realname + "、"
-            involves.push(it)
+
+        data.mDataDepartment.forEach(it => {
+            if (it.num>0){
+                it.list.forEach(it=>{
+                    str = str + it.realname + "、"
+                    involves.push(it)
+                })
+            }
+        })
+        data.mDataClasses.forEach(it => {
+            if (it.num>0){
+                it.list.forEach(it=>{
+                    str = str + it.realname + "、"
+                    involves.push(it)
+                })
+            }
         })
         str = str.substring(0, str.length - 1)
         this.data.requestBody.involve = JSON.stringify(involves)
         this.data.requestBody.stuStr = str
         this.setData({
                 requestBody: this.data.requestBody,
+                departData: data.mDataDepartment,
+                classData: data.mDataClasses,
             }
         )
     },
