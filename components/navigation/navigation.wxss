@@ -18,7 +18,6 @@
 }
 
 .action:first-child {
-	margin-left: 30rpx;
 	font-size: 30rpx;
 }
 

@@ -73,13 +73,25 @@ Page({
         cno: data.user_number
       };
       app.httpPost(url, data2,false).then((res) => {
-        app.saveAppInfo(res.respResult)
-        wx.switchTab({
-          url: '/pages/circular/circular',
-        })
-        wx.showToast({
-          title: "登陆成功",
-          icon: 'none'
+        app.saveUserInfo(res.respResult)
+        let url;
+        if (wx.getStorageSync('usertype') === "1") {
+          url = "/api/v17/user/student/apps"
+        } else {
+          url = "/api/v17/user/teachers/apps"
+        }
+        let data = {
+          token: wx.getStorageSync('token')
+        };
+        app.httpPost(url, data,false).then((res) => {
+          app.saveAppInfo(res.respResult)
+          wx.switchTab({
+            url: '/pages/circular/circular',
+          })
+          wx.showToast({
+            title: "登陆成功",
+            icon: 'none'
+          });
         });
       },res=>{
         console.log("reject", res)

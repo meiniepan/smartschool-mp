@@ -1,2 +1,8 @@
 <!--packageA/pages/addLog/addLog.wxml-->
-<text>packageA/pages/addLog/addLog.wxml</text>
+<view class="out">
+    <view class="split"></view>
+    <textarea class="remark" placeholder="请输入"  bindinput="doInput" data-type="addr" value="{{requestBody.feedback}}"/>
+<view class="bottom">
+    <view class="confirm" bindtap="doConfirm">提交</view>
+</view>
+</view>

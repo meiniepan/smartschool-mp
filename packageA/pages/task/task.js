@@ -329,13 +329,13 @@ Page({
 
     doTaskDetail(e) {
         let bean = e.currentTarget.dataset.bean
-        if (this.data.mType=='2'&&bean.status=='0') {
+        if (this.data.categoryCur=='0'&&bean.status=='0') {
             wx.navigateTo({
-                url: '/packageA/pages/addTask/addTask?id=' + bean.id + '&type=' + this.data.mType,
+                url: '/packageA/pages/addTask/addTask?id=' + bean.id + '&type=' + this.data.categoryCur,
             })
         } else {
             wx.navigateTo({
-                url: '/packageA/pages/taskDetail/taskDetail?id=' + bean.id + '&type=' + this.data.mType,
+                url: '/packageA/pages/taskDetail/taskDetail?id=' + bean.id + '&type=' + this.data.categoryCur,
             })
         }
 

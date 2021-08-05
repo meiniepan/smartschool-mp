@@ -6,59 +6,63 @@
             {{categoryMenu[1]}}
         </view>
     </view>
-<view class="area" style="margin-top: 136rpx;">
-    <picker bindchange="doAct" bindtap=""
-            data-type="type" value="{{}}" range="{{statusStrArr}}" >
-        <view class="item">
-            <view >
-                {{statusStr}}
-            </view>
-            <image src="../../assets/images/ic_gray_triangle.png" style="margin-left: 4rpx;height: 10rpx"
-                   mode="heightFix" />
-        </view>
-    </picker>
-    <dateTimePicker value="{{stime}}"
-                    data-type="indexClass" bindchange="bindTimeS">
-        <view class="item">
-            <view >{{stimeStr}}</view>
-            <image src="../../assets/images/ic_gray_triangle.png" style="margin-left: 4rpx;height: 10rpx" mode="heightFix"></image>
-        </view>
-    </dateTimePicker>
-    <dateTimePicker value="{{etime}}"
-                    data-type="indexClass" bindchange="bindTimeE">
-        <view class="item">
-            <view >{{etimeStr}}</view>
-            <image  src="../../assets/images/ic_gray_triangle.png" style="margin-left: 4rpx;height: 10rpx" mode="heightFix"></image>
-        </view>
-    </dateTimePicker>
-</view>
-<swiper style="height: 100%;" current="{{categoryCur}}" duration="{{duration}}" bindanimationfinish="animationFinish">
-    <swiper-item wx:for="{{categoryData}}" wx:key="index">
-        <scroll requesting="{{item.requesting}}"
-                end="{{item.end}}"
-                empty-show="{{item.emptyShow}}"
-                list-count="{{item.listData.length}}"
-                bottom-size="{{120}}"
-                bind:refresh="refresh"
-                bind:more="more">
-            <view class="cells">
-                <view class="cell"
-                      wx:for="{{item.listData}}"
-                      wx:key="index"
-                      data-bean="{{item}}"
-                      bindtap="doTaskDetail">
-                    <view class="titles">
-                        <view class="title">{{item.taskname}}</view>
-                        <view class="status">{{item.statusStr}}</view>
-                    </view>
-                    <text class="tag1">{{item.line2Str}}</text>
-                    <text class="tag">{{item.remark}}</text>
-                    <text class="tag">{{item.line4Str}}</text>
+    <view class="area" style="margin-top: 136rpx;">
+        <picker bindchange="doAct" bindtap=""
+                data-type="type" value="{{}}" range="{{statusStrArr}}">
+            <view class="item">
+                <view>
+                    {{statusStr}}
                 </view>
+                <image src="../../assets/images/ic_gray_triangle.png" style="margin-left: 4rpx;height: 10rpx"
+                       mode="heightFix"/>
             </view>
-        </scroll>
-    </swiper-item>
+        </picker>
+        <dateTimePicker value="{{stime}}"
+                        data-type="indexClass" bindchange="bindTimeS">
+            <view class="item">
+                <view>{{stimeStr}}</view>
+                <image src="../../assets/images/ic_gray_triangle.png" style="margin-left: 4rpx;height: 10rpx"
+                       mode="heightFix"></image>
+            </view>
+        </dateTimePicker>
+        <dateTimePicker value="{{etime}}"
+                        data-type="indexClass" bindchange="bindTimeE">
+            <view class="item">
+                <view>{{etimeStr}}</view>
+                <image src="../../assets/images/ic_gray_triangle.png" style="margin-left: 4rpx;height: 10rpx"
+                       mode="heightFix"></image>
+            </view>
+        </dateTimePicker>
+    </view>
+    <swiper style="height: 100vh" current="{{categoryCur}}" duration="{{duration}}"
+            bindanimationfinish="animationFinish">
+        <swiper-item wx:for="{{categoryData}}" wx:key="index">
+            <scroll requesting="{{item.requesting}}"
+                    end="{{item.end}}"
+                    empty-show="{{item.emptyShow}}"
+                    list-count="{{item.listData.length}}"
+                    bottom-size="{{200}}"
+                    bind:refresh="refresh"
+                    bind:more="more">
+                <view class="cells">
+                    <view class="cell"
+                          wx:for="{{item.listData}}"
+                          wx:key="index"
+                          data-bean="{{item}}"
+                          bindtap="doTaskDetail">
+                        <view class="titles">
+                            <view class="title">{{item.taskname}}</view>
+                            <view class="status">{{item.statusStr}}</view>
+                        </view>
+                        <text class="tag1">{{item.line2Str}}</text>
+                        <text class="tag">{{item.remark}}</text>
+                        <text class="tag">{{item.line4Str}}</text>
+                    </view>
+                </view>
+            </scroll>
+        </swiper-item>
 
-</swiper>
-    <image class="addBtn" wx:if="{{mType=='2'}}" bindtap="doAdd" src="../../assets/images/ic_add_common.png" mode="widthFix"></image>
+    </swiper>
+    <image class="addBtn" wx:if="{{mType=='2'}}" bindtap="doAdd" src="../../assets/images/ic_add_common.png"
+           mode="widthFix"></image>
 </view>

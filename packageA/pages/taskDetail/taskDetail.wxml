@@ -1,5 +1,82 @@
 <!--pages/taskDetail/taskDetail.wxml-->
 <view class="out">
-    <view class="split"></view>
-    <text class="title">{{mData.taskname}}</text>
+    <view class="split-line"></view>
+    <view class="item-remark" bindtap="">
+        <view class="horizontal">
+            <view class="key text bold">任务名称</view>
+        </view>
+        <view class="hint">{{requestBody.taskname}}</view>
+    </view>
+    <view class="item">
+        <view class="key text bold">开始时间</view>
+        <view class="value hint">{{requestBody.plantime}}</view>
+    </view>
+    <view class="item">
+        <view class="key text bold">结束时间</view>
+        <view class="value hint">{{requestBody.overtime}}</view>
+    </view>
+
+    <view class="item-remark" bindtap="">
+        <view class="horizontal">
+            <view class="key text bold">备注</view>
+        </view>
+        <view class="hint">{{requestBody.remark}}</view>
+    </view>
+
+    <view class="item" bindtap="">
+        <view class="horizontal">
+            <view class="key text bold">发布人</view>
+        </view>
+        <view class="value hint">{{requestBody.operatorname}}</view>
+    </view>
+    <view class="item" bindtap="">
+        <view class="horizontal">
+            <view class="key text bold">发布时间</view>
+        </view>
+        <view class="value hint">{{requestBody.createtime}}</view>
+    </view>
+    <view class="item" bindtap="">
+        <view class="horizontal">
+            <view class="key text bold">参与人</view>
+        </view>
+        <view class="value hint singleLine">{{requestBody.stuStr}}</view>
+    </view>
+    <view class="item-remark" wx:if="{{mFiles.length>0}}" bindtap="">
+        <view class="horizontal">
+            <view class="key text bold">相关附件</view>
+        </view>
+
+        <scroll-view class="scroll" enable-flex scroll-x="true">
+            <view class="file-cells">
+                <view class="file-cell" wx:for="{{mFiles}}" wx:key="index" data-url="{{item.url}}" bindtap="openFile">
+                    <image src="{{item.image}}" style="width: 50rpx;height: 50rpx"/>
+                    <view class="text3">{{item.name}}</view>
+                </view>
+            </view>
+        </scroll-view>
+    </view>
+    <view class="log-area" bindtap="">
+        <view class="item-log">
+            <view class="textBtn" wx:if="{{requestBody.addLog}}" style="margin-left: 20rpx" bindtap="doAddLog">参与任务</view>
+            <view class="textBtn">{{requestBody.finishStr}}</view>
+        </view>
+        <emptyView wx:if="{{requestBody.mDataLog.length==0}}"/>
+            <view wx:else class="log-cells">
+                <view class="log-cell" wx:for="{{requestBody.mDataLog}}" wx:key="index" data-bean="{{item}}" bindtap="openFile">
+                    <view class="horizontal">
+                        <view class="log-name">{{item.username}}</view>
+                        <view class="value hint" style="font-size: 24rpx">{{item.updatetime}}</view>
+                    </view>
+                    <view style="margin-top: 16rpx">{{item.feedback}}</view>
+                    <scroll-view wx:if="item.mFiles.length>0" class="scroll" enable-flex scroll-x="true">
+                        <view class="file-cells">
+                            <view class="file-cell" wx:for="{{item.mFiles}}" wx:for-index="idx" wx:for-item="bean" data-url="{{bean.url}}" bindtap="openFile">
+                                <image src="{{bean.image}}" style="width: 50rpx;height: 50rpx"/>
+                                <view class="text3">{{bean.name}}</view>
+                            </view>
+                        </view>
+                    </scroll-view>
+                </view>
+            </view>
+    </view>
 </view>

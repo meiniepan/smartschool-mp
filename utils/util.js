@@ -171,22 +171,22 @@ function getFileImage(path) {
     let type = ""
     path = path.toLocaleLowerCase()
     if (isImage(path)) {
-        type = "/assets/images/ic_type_image.png"
+        type = "/packageA/assets/images/ic_type_image.png"
     } else if (isVideo(path)) {
-        type = "/assets/images/ic_type_video.png"
+        type = "/packageA/assets/images/ic_type_video.png"
     } else if (path.endsWith(".doc") || path.endsWith(".docx")) {
-        type = "/assets/images/ic_type_word.png"
+        type = "/packageA/assets/images/ic_type_word.png"
     } else if (path.endsWith(".xls") || path.endsWith(".xlsx")) {
-        type = "/assets/images/ic_type_excel.png"
+        type = "/packageA/assets/images/ic_type_excel.png"
     } else if (path.endsWith(".pdf")) {
-        type = "/assets/images/ic_type_pdf.png"
+        type = "/packageA/assets/images/ic_type_pdf.png"
     } else if (path.endsWith(".zip") || path.endsWith(".rar") || path.endsWith(".tar") || path.endsWith(
         ".gz"
     )
     ) {
-        type = "/assets/images/ic_type_zip.png"
+        type = "/packageA/assets/images/ic_type_zip.png"
     } else {
-        type = "/assets/images/ic_type_unknow.png"
+        type = "/packageA/assets/images/ic_type_unknow.png"
     }
     return type
 }

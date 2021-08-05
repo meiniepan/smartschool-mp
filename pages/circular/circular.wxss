@@ -5,6 +5,7 @@ page {
   position: relative;
 }
 .act{
+  margin-left: 30rpx;
   width: 40rpx;
   height: 40rpx;
 }
