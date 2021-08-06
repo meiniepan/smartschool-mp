@@ -1,4 +1,7 @@
 {
-  "usingComponents": {},
+  "usingComponents": {
+    "navigation": "/components/navigation/navigation"
+  },
+  "navigationStyle":"custom",
   "navigationBarTitleText": "任务协作"
 }

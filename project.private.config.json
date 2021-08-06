@@ -25,8 +25,8 @@
           "scene": null
         },
         {
-          "name": "packageA/pages/task/task",
-          "pathName": "packageA/pages/task/task",
+          "name": "packageA/pages/quantize/quantize",
+          "pathName": "packageA/pages/quantize/quantize",
           "query": "",
           "scene": null
         },

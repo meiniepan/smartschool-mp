@@ -43,6 +43,7 @@
         "pages/systemMsg/systemMsg",
         "pages/protocol/protocol",
         "pages/quantize/quantize",
+        "pages/quantizeCommon/quantizeCommon",
         "pages/addInvolve/addInvolve",
         "pages/involvePerson/involvePerson",
         "pages/quantizeSpecialList/quantizeSpecialList",

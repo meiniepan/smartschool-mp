@@ -34,11 +34,23 @@ Page({
 
     onLoad: function (options) {
         let id = options.id
+        let temp = new Date()
+        let year = temp.getFullYear()
+        let month = temp.getMonth() + 1
+        let date = temp.getDate()
+        let today = year + "-" + zero(month) + "-" + zero(date)
+        let h = temp.getHours()
+        let m = temp.getMinutes()
+        let time = today + " " + zero(h) + ":" + zero(m)
+        let requestBody = this.data.requestBody
+        requestBody.plantime = time
+        requestBody.overtime = time
+        this.setData({
+            requestBody
+        })
         if (id != null) {
             this.getTaskInfo(id)
         }
-
-
     },
 
     doConfirm() {

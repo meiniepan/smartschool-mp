@@ -1,5 +1,9 @@
 <!--pages/taskDetail/taskDetail.wxml-->
 <view class="out">
+    <navigation title="任务协作">
+        <image class="act" src="../../assets/images/icon_back_black_a.png" mode="widthFix" bindtap="doFinish"></image>
+        <view wx:if="{{showClose}}" class="navi-1" bindtap="doClose">关闭任务</view>
+    </navigation>
     <view class="split-line"></view>
     <view class="item-remark" bindtap="">
         <view class="horizontal">

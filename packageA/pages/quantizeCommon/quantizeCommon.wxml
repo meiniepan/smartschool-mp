@@ -1,0 +1,113 @@
+<!--packageA/pages/quantizeCommon/quantizeCommon.wxml-->
+<view class="out">
+    <view class="split-line"></view>
+    <view class="cells0">
+        <view class="cell0"
+              wx:for="{{mData.template}}"
+              wx:key="index"
+              data-bean="{{item}}"
+        >
+            <view wx:if="{{item.name=='Input'}}" class="item" bindtap="">
+                <view class="key text bold">{{item.label}}</view>
+                <view wx:if="{{item.rules.required.required}}" class="require bold">*</view>
+                <input class="value input" placeholder="{{item.placeholder}}" data-position="{{index}}"
+                       bindinput="doInput"/>
+            </view>
+
+            <view wx:if="{{item.name=='Textarea'}}" class="item-remark" bindtap="">
+                <view class="horizontal">
+                    <view class="key text bold">{{item.label}}</view>
+                    <view wx:if="{{item.rules.required.required}}" class="require bold">*</view>
+                </view>
+                <input class="input" placeholder="{{item.placeholder}}" data-position="{{index}}"
+                       bindinput="doInput"/>
+            </view>
+
+            <view wx:if="{{item.name=='InputNumber'}}" class="item" bindtap="">
+                <view class="key text bold">{{item.label}}</view>
+                <view wx:if="{{item.rules.required.required}}" class="require bold">*</view>
+                <view class="value"></view>
+                <image class="" data-position="{{index}}" bindtap="doMinus" src="../../assets/images/ic_jian.png" style="width: 72rpx" mode="widthFix"></image>
+                <input value="{{item.value}}" class="number" type="number"  data-position="{{index}}"
+                       bindinput="doInputNum"/>
+                <image class="" data-position="{{index}}" bindtap="doPlus" src="../../assets/images/ic_jia.png" style="width: 72rpx;margin-left: 40rpx" mode="widthFix"></image>
+            </view>
+
+            <picker wx:if="{{item.name=='Radio'}}" data-position="{{index}}" bindchange="doAct"
+                    data-type="indexAct" value="" range="{{item.selections}}">
+            <view  class="item" bindtap="">
+                <view class="key text bold">{{item.label}}</view>
+                <view wx:if="{{item.rules.required.required}}" class="require bold">*</view>
+                <text class="value input" placeholder="{{item.placeholder}}" data-position="{{index}}"
+                       >{{item.value}}</text>
+                <image class="next" src="../../assets/images/ic_next.png" style="height: 28rpx" mode="widthFix"></image>
+            </view>
+            </picker>
+
+            <view wx:if="{{item.name=='Input'}}" class="item" bindtap="doChooseStudent">
+                <view class="key text bold">{{item.label}}</view>
+                <view wx:if="{{item.rules.required.required}}" class="require bold">*</view>
+                <input class="value input" placeholder="{{item.placeholder}}" data-position="{{index}}"
+                       bindinput="doInput">{{item.value}}</input>
+                <image class="next" src="../../assets/images/ic_next.png" style="height: 28rpx" mode="widthFix"></image>
+            </view>
+
+            <view wx:if="{{item.name=='Input'}}" class="item" bindtap="doChooseStudent">
+                <view class="key text bold">{{item.label}}</view>
+                <view wx:if="{{item.rules.required.required}}" class="require bold">*</view>
+                <input class="value input" placeholder="{{item.placeholder}}" data-position="{{index}}"
+                       bindinput="doInput">{{item.value}}</input>
+                <image class="next" src="../../assets/images/ic_next.png" style="height: 28rpx" mode="widthFix"></image>
+            </view>
+
+            <view wx:if="{{item.name=='Input'}}" class="item" bindtap="doChooseStudent">
+                <view class="key text bold">{{item.label}}</view>
+                <view wx:if="{{item.rules.required.required}}" class="require bold">*</view>
+                <input class="value input" placeholder="{{item.placeholder}}" data-position="{{index}}"
+                       bindinput="doInput">{{item.value}}</input>
+                <image class="next" src="../../assets/images/ic_next.png" style="height: 28rpx" mode="widthFix"></image>
+            </view>
+
+            <view wx:if="{{item.name=='Input'}}" class="item" bindtap="doChooseStudent">
+                <view class="key text bold">{{item.label}}</view>
+                <view wx:if="{{item.rules.required.required}}" class="require bold">*</view>
+                <input class="value input" placeholder="{{item.placeholder}}" data-position="{{index}}"
+                       bindinput="doInput">{{item.value}}</input>
+                <image class="next" src="../../assets/images/ic_next.png" style="height: 28rpx" mode="widthFix"></image>
+            </view>
+
+
+        </view>
+    </view>
+    <view class="bottom">
+        <view class="confirm" bindtap="doConfirm">提交</view>
+    </view>
+</view>
+<page-container
+        show="{{show}}"
+        overlay="{{overlay}}"
+        close-on-slide-down
+        duration="300"
+        position="bottom"
+        z-index="999"
+        round
+        bindclickoverlay="onClickOverlay"
+        overlayStyle='z-index:99'
+        customStyle='z-index:999'
+>
+    <view class="layout0">
+        <view class="cells">
+            <view class="cell" wx:for="{{ruleArrays}}" wx:key="index" data-index="{{index}}" bindtap="checkRule">
+                <view>
+                    {{item.typename}}
+                </view>
+                <image wx:if="{{item.checked}}" class="image" mode="heightFix"
+                       src="../../assets/images/ic_check_multi.png"/>
+            </view>
+        </view>
+        <view class="layout1">
+            <view class="btn1" bindtap="doBtn1">取消</view>
+            <view class="btn2" bindtap="doBtn2">确定</view>
+        </view>
+    </view>
+</page-container>

@@ -1,6 +1,12 @@
 <!--pages/quantize/quantize.wxml-->
 <view class="out">
-    <view class="item" bindtap="doJump">
-        <view class="title">特殊情况报备</view>
+    <view class="cells">
+        <view class="cell"
+              wx:for="{{mData}}"
+              wx:key="index"
+              data-bean="{{item}}"
+              bindtap="doJump">
+            <view class="title">{{item.typename}}</view>
+        </view>
     </view>
 </view>

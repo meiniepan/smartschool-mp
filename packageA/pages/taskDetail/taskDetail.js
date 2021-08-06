@@ -1,5 +1,5 @@
 // pages/taskDetail/taskDetail.js
-import {getFileImage, isImage, isVideo} from "../../../utils/util";
+import {getFileImage, isImage, isVideo, showToastWithoutIcon} from "../../../utils/util";
 
 let app = getApp();
 Page({
@@ -146,6 +146,20 @@ Page({
             this.doResult(mData.involve)
         });
     },
+    doClose() {
+        let url = '/api/v17/teacher/tasks/modifyTask'
+        let data = {
+            token: wx.getStorageSync('token'),
+            id: this.data.id,
+            status: '3'
+        }
+        app.httpPost(url, data).then((res) => {
+            showToastWithoutIcon('处理完成')
+            wx.navigateBack({
+                delta: 1
+            })
+        });
+    },
     doResult(data) {
         let str = '', involves = []
 
@@ -160,6 +174,11 @@ Page({
                 requestBody: this.data.requestBody,
             }
         )
+    },
+    doFinish() {
+        wx.navigateBack({
+            delta: 1,
+        })
     },
     openFile(e) {
         let url = e.currentTarget.dataset.url;
