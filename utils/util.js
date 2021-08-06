@@ -169,7 +169,7 @@ function formatShowTime(date) {
 
 function getFileImage(path) {
     let type = ""
-    path = path.toLocaleLowerCase()
+    path = path.toLowerCase()
     if (isImage(path)) {
         type = "/packageA/assets/images/ic_type_image.png"
     } else if (isVideo(path)) {
@@ -193,7 +193,7 @@ function getFileImage(path) {
 
 function isVideo(path) {
     let type = false
-    path = path.toLocaleLowerCase()
+    path = path.toLowerCase()
     wx.getSystemInfo({
         success: (result) => {
             if (result.system.indexOf('iOS') != -1) {
@@ -220,7 +220,7 @@ function isVideo(path) {
 
 function isImage(path) {
     let type = false
-    path = path.toLocaleLowerCase()
+    path = path.toLowerCase()
     if (path.endsWith(".jpg") || path.endsWith(".png")
         || path.endsWith(".jpeg")
         || path.endsWith(".gif")

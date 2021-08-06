@@ -70,7 +70,7 @@
                     <view style="margin-top: 16rpx">{{item.feedback}}</view>
                     <scroll-view wx:if="item.mFiles.length>0" class="scroll" enable-flex scroll-x="true">
                         <view class="file-cells">
-                            <view class="file-cell" wx:for="{{item.mFiles}}" wx:for-index="idx" wx:for-item="bean" data-url="{{bean.url}}" bindtap="openFile">
+                            <view class="file-cell" wx:for="{{item.mFiles}}" wx:for-index="idx" wx:for-item="bean" wx:key="idx" data-url="{{bean.url}}" bindtap="openFile">
                                 <image src="{{bean.image}}" style="width: 50rpx;height: 50rpx"/>
                                 <view class="text3">{{bean.name}}</view>
                             </view>

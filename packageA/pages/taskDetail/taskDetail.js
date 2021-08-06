@@ -162,8 +162,9 @@ Page({
         )
     },
     openFile(e) {
-        let url = encodeURIComponent(e.currentTarget.dataset.url);
-        console.log("url", e.currentTarget.dataset.url)
+        let url = e.currentTarget.dataset.url;
+        let url2 = encodeURIComponent(e.currentTarget.dataset.url);
+        console.log("url3", e.currentTarget.dataset.url)
 
         if (isVideo(url)) {
             wx.navigateTo({
@@ -178,7 +179,7 @@ Page({
             })
         } else {
             wx.navigateTo({
-                url: `../webDetail/webDetail?url=${url}`,
+                url: `../webDetail/webDetail?url=${url2}`,
             });
         }
     },

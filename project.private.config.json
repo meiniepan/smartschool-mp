@@ -25,8 +25,8 @@
           "scene": null
         },
         {
-          "name": "packageA/pages/salaryDetail/salaryDetail",
-          "pathName": "packageA/pages/salaryDetail/salaryDetail",
+          "name": "packageA/pages/task/task",
+          "pathName": "packageA/pages/task/task",
           "query": "",
           "scene": null
         },
