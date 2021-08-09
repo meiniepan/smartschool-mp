@@ -119,6 +119,10 @@
     position: absolute;
     right: 20rpx;
 }
+.stu-ad-area{
+    display: flex;
+    align-items: baseline;
+}
 .stu-data-cells{
     background: var(--white);
 }

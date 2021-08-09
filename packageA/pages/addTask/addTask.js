@@ -9,7 +9,7 @@ Page({
      */
     data: {
         requestBody: {
-            token: wx.getStorageSync('token'),
+            token: '',
             id: null,
             plantime: '请选择开始时间',
             overtime: '请选择结束时间',

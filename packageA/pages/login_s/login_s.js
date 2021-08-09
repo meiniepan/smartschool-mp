@@ -124,7 +124,7 @@ Page({
         app.httpPost(url, data,false).then((res) => {
           app.saveAppInfo(res.respResult)
           wx.switchTab({
-            url: '/packageA/pages/circular/circular',
+            url: '/pages/circular/circular',
           })
           wx.showToast({
             title: "登陆成功",

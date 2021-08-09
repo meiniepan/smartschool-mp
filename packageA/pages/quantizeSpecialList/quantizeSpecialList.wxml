@@ -1,29 +1,90 @@
 <!--pages/quantizeSpecialList/quantizeSpecialList.wxml-->
 <view class="out">
     <emptyView wx:if="{{isEmpty}}"/>
-    <view wx:else class="cells" >
-        <view class="cell" wx:for="{{mData}}" wx:key="index" data-id="{{item}}" bindtap="">
-            <view class="title-area">
-                <view class="key">开始时间</view>
-                <view class="value singleLine">{{item.stime}}</view>
-            </view>
-            <view class="title-area">
-                <view class="key">结束时间</view>
-                <view class="value singleLine">{{item.etime}}</view>
-            </view>
-            <view class="title-area">
-                <view class="key">情况类型</view>
-                <view class="value singleLine">{{item.actname}}</view>
-            </view>
-            <view class="title-area">
-                <view class="key">影响项目</view>
-                <view class="value singleLine">{{item.rulename}}</view>
-            </view>
-            <view class="remark-area">
-                <view class="key">情况说明</view>
-                <view class="value-remark ">{{item.remark}}</view>
-            </view>
+    <block wx:else>
+        <view wx:if="{{bean.typename=='特殊情况报备'}}" class="cells">
+            <view class="cell" wx:for="{{mData}}" wx:key="index" data-id="{{item}}" bindtap="">
+                <view class="title-area">
+                    <view class="key">开始时间</view>
+                    <view class="value singleLine">{{item.stime}}</view>
+                </view>
+                <view class="title-area">
+                    <view class="key">结束时间</view>
+                    <view class="value singleLine">{{item.etime}}</view>
+                </view>
+                <view class="title-area">
+                    <view class="key">情况类型</view>
+                    <view class="value singleLine">{{item.actname}}</view>
+                </view>
+                <view class="title-area">
+                    <view class="key">影响项目</view>
+                    <view class="value singleLine">{{item.rulename}}</view>
+                </view>
+                <view class="remark-area">
+                    <view class="key">情况说明</view>
+                    <view class="value-remark ">{{item.remark}}</view>
+                </view>
 
+            </view>
         </view>
-    </view>
+
+        <view wx:else class="cells">
+            <view class="cell" wx:for="{{mData}}" wx:key="index" wx:for-item="bean2" bindtap="">
+                <view class="cells0" wx:for="{{bean2.templatedata}}" wx:for-index="idx" wx:for-item="item" wx:key="idx"
+                      bindtap="">
+
+                    <view wx:if="{{item.name=='Input'}}" class="title-area" bindtap="">
+                        <view class="key text bold">{{item.label}}</view>
+                        <view class="value">{{item.value}}</view>
+                    </view>
+
+                    <view wx:if="{{item.name=='Textarea'}}" class="remark-area" bindtap="">
+                            <view class="key text bold">{{item.label}}</view>
+                            <view class="value">{{item.value}}</view>
+                    </view>
+
+                    <view wx:if="{{item.name=='InputNumber'}}" class="title-area" bindtap="">
+                        <view class="key text bold">{{item.label}}</view>
+                        <view class="value">{{item.value}}</view>
+                    </view>
+
+                    <view wx:if="{{item.name=='Radio'}}" class="title-area" bindtap="">
+                        <view class="key text bold">{{item.label}}</view>
+                        <view class="value">{{item.value}}</view>
+                    </view>
+
+                    <view wx:if="{{item.name=='Checkbox'}}" class="title-area" data-position="{{index}}" bindtap="doRule">
+                        <view class="key text bold">{{item.label}}</view>
+                        <view class="value">{{item.value}}</view>
+                    </view>
+
+                    <view wx:if="{{item.name=='DatePicker'}}" class="title-area" bindtap="">
+                        <view class="key text bold">{{item.label}}</view>
+                        <view class="value">{{item.value}}</view>
+                    </view>
+
+                    <view wx:if="{{item.name=='DateTimePicker'}}" class="title-area" bindtap="">
+                        <view class="key text bold">{{item.label}}</view>
+                        <view class="value">{{item.value}}</view>
+                    </view>
+
+                    <view wx:if="{{item.name=='DatePickerMultiple'}}" class="title-area" bindtap="">
+                        <view class="key text bold">{{item.label}}</view>
+                        <view class="value">{{item.value}}</view>
+                    </view>
+
+                    <view wx:if="{{item.name=='CascaderClass'}}" class="title-area" bindtap="">
+                        <view class="key text bold">{{item.label}}</view>
+                        <view class="value">{{item.value}}</view>
+                    </view>
+
+                    <view wx:if="{{item.name=='ChoseStudents'}}" class="title-area" bindtap="">
+                        <view class="key text bold">{{item.label}}</view>
+                        <view class="value">{{item.value}}</view>
+                    </view>
+                </view>
+
+            </view>
+        </view>
+    </block>
 </view>

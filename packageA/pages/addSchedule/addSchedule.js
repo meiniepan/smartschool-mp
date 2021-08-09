@@ -9,7 +9,7 @@ Page({
      */
     data: {
         requestBody: {
-            token: wx.getStorageSync('token'),
+            token: '',
             scheduletime: '请选择开始时间',
             scheduleover: '请选择结束时间',
             stuStr: '',

@@ -1,4 +1,6 @@
 {
-  "usingComponents": {},
+  "usingComponents": {
+    "dateTimePicker": "/components/dateTimePicker/dateTimePicker"
+  },
   "navigationBarTitleText": "量化评比"
 }

@@ -9,7 +9,7 @@ Page({
      */
     data: {
         requestBody: {
-            token: wx.getStorageSync('token'),
+            token: '',
             stime: '请选择开始时间',
             etime: '请选择结束时间',
             stuStr: '请选择学生',
@@ -38,7 +38,7 @@ Page({
     },
     doConfirm() {
         let bean = this.data.requestBody
-
+        bean.token= wx.getStorageSync('token')
         if (bean.involve.length == 0 || bean.stime=="请选择开始时间"||
             bean.etime=="请选择结束时间" || bean.actname=="请选择情况类型" ||
             bean.rulename=="请选择影响项目" || bean.remark==null|| bean.remark=='') {
@@ -79,7 +79,8 @@ Page({
         console.log('depart',depart)
         wx.navigateTo({
             url: "../addInvolve/addInvolve?data=" + JSON.stringify(depart)
-                + '&data2=' + JSON.stringify(classes),
+                + '&data2=' + JSON.stringify(classes)
+                + '&type=1' ,
             events: {
                 // 为指定事件添加一个监听器，获取被打开页面传送到当前页面的数据
                 quantizeSpecial: function (data) {

@@ -6,6 +6,7 @@ Page({
      * 页面的初始数据
      */
     data: {
+        bean: {},
         mData: [],
     },
 
@@ -13,22 +14,77 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
+        let bean = JSON.parse(options.bean)
+        this.setData({
+            bean,
+        })
         this.getData()
     },
     getData() {
-        let url = "/api/v17/moral/moralRuleSpecial/slists"
-        let data = {
-            token: wx.getStorageSync('token'),
+        let url = '', data = {};
+        if (this.data.bean.typename == '特殊情况报备') {
+            url = "/api/v17/moral/moralRuleSpecial/slists"
+            data = {
+                token: wx.getStorageSync('token'),
+            }
+            app.httpPost(url, data).then((res) => {
+                let data = res.respResult.data;
+
+                this.setData({
+                    mData: data,
+                    isEmpty: data.length == 0,
+
+                })
+            });
+        } else {
+            url = "/api/v17/moral/moralScore/slists"
+            data = {
+                token: wx.getStorageSync('token'),
+                typeid: this.data.bean.id,
+            }
+            app.httpPost(url, data).then((res) => {
+                let data = res.respResult.data;
+                console.log('mm', data)
+
+                data.forEach(data => {
+                    if (data.templatedata != null) {
+                        data.templatedata = JSON.parse(data.templatedata)
+                        data.templatedata.forEach(it => {
+                            if (it.name == 'ChoseStudents') {
+                                if (it.value != null) {
+                                    try {
+                                        it.value = JSON.parse(it.value)
+                                        it.value = this.doResult(it.value)
+                                    } catch (e) {
+
+                                    }
+                                }
+                            }
+                        })
+                    } else {
+                        data.templatedata = []
+                    }
+                })
+
+                this.setData({
+                    mData: data,
+                    isEmpty: data.length == 0,
+
+                })
+            });
         }
-        app.httpPost(url, data).then((res) => {
-            let data = res.respResult.data;
 
-            this.setData({
-                mData: data,
-                isEmpty :data.length==0,
 
-            })
-        });
+    },
+    doResult(data) {
+        let str = ''
+
+
+        data.forEach(it => {
+            str = str + it.realname + "、"
+        })
+        str = str.substring(0, str.length - 1)
+        return str
     },
     /**
      * 生命周期函数--监听页面初次渲染完成

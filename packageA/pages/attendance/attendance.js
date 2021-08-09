@@ -175,6 +175,7 @@ Page({
             if (data.length == 0) {
                 isEmpty = true
             }
+            console.log('data',data)
             this.setData({
                 isEmpty,
                 mData: data,

@@ -27,55 +27,100 @@
                 <view class="key text bold">{{item.label}}</view>
                 <view wx:if="{{item.rules.required.required}}" class="require bold">*</view>
                 <view class="value"></view>
-                <image class="" data-position="{{index}}" bindtap="doMinus" src="../../assets/images/ic_jian.png" style="width: 72rpx" mode="widthFix"></image>
-                <input value="{{item.value}}" class="number" type="number"  data-position="{{index}}"
+                <image class="" data-position="{{index}}" bindtap="doMinus" src="../../assets/images/ic_jian.png"
+                       style="width: 72rpx" mode="widthFix"></image>
+                <input value="{{item.value}}" class="number" type="number" data-position="{{index}}"
                        bindinput="doInputNum"/>
-                <image class="" data-position="{{index}}" bindtap="doPlus" src="../../assets/images/ic_jia.png" style="width: 72rpx;margin-left: 40rpx" mode="widthFix"></image>
+                <image class="" data-position="{{index}}" bindtap="doPlus" src="../../assets/images/ic_jia.png"
+                       style="width: 72rpx;margin-left: 40rpx" mode="widthFix"></image>
             </view>
 
             <picker wx:if="{{item.name=='Radio'}}" data-position="{{index}}" bindchange="doAct"
                     data-type="indexAct" value="" range="{{item.selections}}">
-            <view  class="item" bindtap="">
-                <view class="key text bold">{{item.label}}</view>
-                <view wx:if="{{item.rules.required.required}}" class="require bold">*</view>
-                <text class="value input" placeholder="{{item.placeholder}}" data-position="{{index}}"
-                       >{{item.value}}</text>
-                <image class="next" src="../../assets/images/ic_next.png" style="height: 28rpx" mode="widthFix"></image>
-            </view>
+                <view class="item" bindtap="">
+                    <view class="key text bold">{{item.label}}</view>
+                    <view wx:if="{{item.rules.required.required}}" class="require bold">*</view>
+                    <text class="value input" placeholder="{{item.placeholder}}" data-position="{{index}}"
+                    >{{item.value}}
+                    </text>
+                    <image class="next" src="../../assets/images/ic_next.png" style="height: 28rpx"
+                           mode="widthFix"></image>
+                </view>
             </picker>
 
-            <view wx:if="{{item.name=='Input'}}" class="item" bindtap="doChooseStudent">
+            <view wx:if="{{item.name=='Checkbox'}}" class="item" data-position="{{index}}" bindtap="doRule">
                 <view class="key text bold">{{item.label}}</view>
                 <view wx:if="{{item.rules.required.required}}" class="require bold">*</view>
-                <input class="value input" placeholder="{{item.placeholder}}" data-position="{{index}}"
-                       bindinput="doInput">{{item.value}}</input>
+                <view class="value">{{item.value}}</view>
                 <image class="next" src="../../assets/images/ic_next.png" style="height: 28rpx" mode="widthFix"></image>
             </view>
 
-            <view wx:if="{{item.name=='Input'}}" class="item" bindtap="doChooseStudent">
-                <view class="key text bold">{{item.label}}</view>
-                <view wx:if="{{item.rules.required.required}}" class="require bold">*</view>
-                <input class="value input" placeholder="{{item.placeholder}}" data-position="{{index}}"
-                       bindinput="doInput">{{item.value}}</input>
-                <image class="next" src="../../assets/images/ic_next.png" style="height: 28rpx" mode="widthFix"></image>
+            <picker wx:if="{{item.name=='DatePicker'}}" mode="date" value="" data-position="{{index}}"
+                    start="2020-09-01" end="2025-09-01"
+                    data-type="indexClass" bindchange="bindDate">
+                <view class="item" bindtap="">
+                    <view class="key text bold">{{item.label}}</view>
+                    <view wx:if="{{item.rules.required.required}}" class="require bold">*</view>
+                    <view class="value">{{item.value}}</view>
+                    <image class="next" src="../../assets/images/ic_next.png" style="height: 28rpx"
+                           mode="widthFix"></image>
+                </view>
+            </picker>
+
+            <dateTimePicker wx:if="{{item.name=='DateTimePicker'}}" value="" data-position="{{index}}"
+                            start="2020-09-01" end="2025-09-01"
+                            data-type="indexClass" bindchange="bindTime">
+                <view class="item" bindtap="">
+                    <view class="key text bold">{{item.label}}</view>
+                    <view wx:if="{{item.rules.required.required}}" class="require bold">*</view>
+                    <view class="value">{{item.value}}</view>
+                    <image class="next" src="../../assets/images/ic_next.png" style="height: 28rpx"
+                           mode="widthFix"></image>
+                </view>
+            </dateTimePicker>
+
+            <view wx:if="{{item.name=='DatePickerMultiple'}}">
+                <dateTimePicker value="" data-position="{{index}}"
+                                bindchange="bindTimeS">
+                    <view class="item" bindtap="">
+                        <view class="key text bold">选择开始时间</view>
+                        <view wx:if="{{item.rules.required.required}}" class="require bold">*</view>
+                        <view class="value">{{requestBody.stime}}</view>
+                        <image class="next" src="../../assets/images/ic_next.png" style="height: 28rpx"
+                               mode="widthFix"></image>
+                    </view>
+                </dateTimePicker>
+                <dateTimePicker value="" data-position="{{index}}"
+                                data-type="" bindchange="bindTimeE">
+                    <view class="item" bindtap="">
+                        <view class="key text bold">选择结束时间</view>
+                        <view wx:if="{{item.rules.required.required}}" class="require bold">*</view>
+                        <view class="value">{{requestBody.etime}}</view>
+                        <image class="next" src="../../assets/images/ic_next.png" style="height: 28rpx"
+                               mode="widthFix"></image>
+                    </view>
+                </dateTimePicker>
             </view>
 
-            <view wx:if="{{item.name=='Input'}}" class="item" bindtap="doChooseStudent">
+            <picker wx:if="{{item.name=='CascaderClass'}}" data-position="{{index}}" bindchange="doClass"
+                    data-type="indexAct" value="" range="{{mDataClasses}}" range-key="levelclass">
+                <view class="item" bindtap="">
+                    <view class="key text bold">{{item.label}}</view>
+                    <view wx:if="{{item.rules.required.required}}" class="require bold">*</view>
+                    <view class="value">{{item.value}}</view>
+                    <image class="next" src="../../assets/images/ic_next.png" style="height: 28rpx"
+                           mode="widthFix"></image>
+                </view>
+            </picker>
+
+
+            <view wx:if="{{item.name=='ChoseStudents'}}" class="item" data-position="{{index}}"
+                  bindtap="doChooseStudent">
                 <view class="key text bold">{{item.label}}</view>
                 <view wx:if="{{item.rules.required.required}}" class="require bold">*</view>
-                <input class="value input" placeholder="{{item.placeholder}}" data-position="{{index}}"
-                       bindinput="doInput">{{item.value}}</input>
+                <view class="value">{{item.value2}}</view>
                 <image class="next" src="../../assets/images/ic_next.png" style="height: 28rpx" mode="widthFix"></image>
             </view>
-
-            <view wx:if="{{item.name=='Input'}}" class="item" bindtap="doChooseStudent">
-                <view class="key text bold">{{item.label}}</view>
-                <view wx:if="{{item.rules.required.required}}" class="require bold">*</view>
-                <input class="value input" placeholder="{{item.placeholder}}" data-position="{{index}}"
-                       bindinput="doInput">{{item.value}}</input>
-                <image class="next" src="../../assets/images/ic_next.png" style="height: 28rpx" mode="widthFix"></image>
-            </view>
-
 
         </view>
     </view>
@@ -97,9 +142,10 @@
 >
     <view class="layout0">
         <view class="cells">
-            <view class="cell" wx:for="{{ruleArrays}}" wx:key="index" data-index="{{index}}" bindtap="checkRule">
+            <view class="cell" wx:for="{{mData.template[choosePosition].selections}}" wx:key="index"
+                  data-index="{{index}}" bindtap="checkRule">
                 <view>
-                    {{item.typename}}
+                    {{item.name}}
                 </view>
                 <image wx:if="{{item.checked}}" class="image" mode="heightFix"
                        src="../../assets/images/ic_check_multi.png"/>
