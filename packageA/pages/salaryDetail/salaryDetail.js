@@ -30,9 +30,11 @@ Page({
         app.httpPost('/api/v17/admin/wages/detail', data).then((res) => {
             console.log("data", res)
             let mData = res.respResult;
-            // mData.expand.remark.forEach(it => {
-            //     it.show = false
-            // })
+            if (mData.expand.remark.length>0){
+            mData.expand.remark.forEach(it => {
+                it.show = false
+            })
+            }
             let pp = -1
             mData.expand.keys.forEach((it, idx, arr) => {
                 if (it == '身份证号') {

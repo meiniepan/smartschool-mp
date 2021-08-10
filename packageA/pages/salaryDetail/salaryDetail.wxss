@@ -5,6 +5,8 @@ page{
 .act{
     width: 20rpx;
     height: 20rpx;
+    padding: 20rpx;
+    margin-right: 40rpx;
 }
 .out{
     width: 100vw;
