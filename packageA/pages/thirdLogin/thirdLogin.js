@@ -28,10 +28,10 @@ Page({
     let url = 'https://sso.qq.com/open/access_token';
 
     let data = {
-      appid: '800497',
-      secret: 'd9f84fc3c103464b80fc934a5b2710da',
-      // appid: '800512',
-      // secret: '442f96e404814854975d09d24b46007a',
+      // appid: '800497',//汇文云
+      // secret: 'd9f84fc3c103464b80fc934a5b2710da',//汇文云
+      appid: '800512',//校能云
+      secret: '442f96e404814854975d09d24b46007a',//校能云
       code: options.code,
       grant_type: 'authorization_code'
     }

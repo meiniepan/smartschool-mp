@@ -35,8 +35,8 @@ Page({
         let token = wx.getStorageSync('token')
         if (util.isEmpty(token)) {
             const epaasLogin = require('@tencent/miniapp-epaas-sdk');
-            // const appid = '800512'
-            const appid = '800497'//汇文云
+            const appid = '800512'//校能云
+            // const appid = '800497'//汇文云
             var redirect_uri = '/packageA/pages/thirdLogin/thirdLogin'
             epaasLogin({
                 redirect_uri: encodeURIComponent(redirect_uri),
