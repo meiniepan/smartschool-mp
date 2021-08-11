@@ -66,7 +66,7 @@ Page({
       let data = res.basic_profile;
       data = JSON.parse(data)
       console.log('info',data)
-      // showModal('教工号' + data.user_number)
+      showModal('教工号' + data.user_number)
       let url = "/api/v17/user/login/eCnologinin"
 
       let data2 = {
