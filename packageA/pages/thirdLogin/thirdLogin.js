@@ -118,13 +118,15 @@ Page({
         });
     },
     sendLog(num,name,msg) {
-        let url = 'http://api.huiwencloud.com:81/notify.php';
-        let remark = '汇文云小程序：教育号姓名'+name+'   教工号' + num + msg
+        let url = '/notify.php';
+        let remark = '汇文云小程序' + msg
         let data = {
             mpremark: remark,
+            name:name,
+            cno:num,
         }
-        console.log('data', JSON.stringify(data))
-        app.httpGet0(url, data).then((res) => {
+        console.log('data', data)
+        app.httpGet(url, data).then((res) => {
             let data = res;
         });
     },
