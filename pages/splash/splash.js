@@ -1,3 +1,5 @@
+import {showModal} from "../../utils/util";
+
 const util = require("../../utils/util")
 const app = getApp()
 
@@ -35,8 +37,8 @@ Page({
         let token = wx.getStorageSync('token')
         if (util.isEmpty(token)) {
             const epaasLogin = require('@tencent/miniapp-epaas-sdk');
-            const appid = '800512'//校能云
-            // const appid = '800497'//汇文云
+            // const appid = '800512'//校能云
+            const appid = '800497'//汇文云
             var redirect_uri = '/packageA/pages/thirdLogin/thirdLogin'
             epaasLogin({
                 redirect_uri: encodeURIComponent(redirect_uri),
@@ -103,11 +105,13 @@ Page({
             success: function () {
                 //session_key 未过期，并且在本生命周期一直有效
                 // this_.getQyUser(wx.getStorageSync('qy_uid'), wx.getStorageSync('qy_token'))
-                this_.getQyLogin0()
+                // this_.getQyLogin0()
+                this_.getQyName()
             },
             fail: function () {
                 // session_key 已经失效，需要重新执行登录流程
-                this_.getQyLogin0()
+                // this_.getQyLogin0()
+                this_.getQyName()
             }
         });
     },
@@ -138,6 +142,50 @@ Page({
                 })
             }
         })
+    },
+    getQyName: function (e) {
+        var this_ = this
+        wx.qy.login({
+            success: function (res_login) {
+                let url0 = "https://qyapi.weixin.qq.com/cgi-bin/gettoken"
+                let data0 = {
+                    corpid: 'wwba783cca7300d073',
+                    corpsecret: 'A0KOsyaxfRD-Wgb1MgzA6JBFxfaYpoTWwTZ2d0lEBcA',
+                }
+                app.httpGet0(url0, data0).then(res => {
+                    console.log("access_token", res)
+                    let url = "https://qyapi.weixin.qq.com/cgi-bin/miniprogram/jscode2session"
+                    let token = res.access_token
+                    wx.setStorageSync('qy_token', token)
+                    let data = {
+                        access_token: res.access_token,
+                        js_code: res_login.code,
+                        grant_type: 'authorization_code',
+                    }
+                    app.httpGet0(url, data).then(res => {
+                        console.log("code2session", res)
+                        wx.qy.getEnterpriseUserInfo ({
+                            success: function(res) {
+                                var userInfo = res.userInfo
+                                var name = userInfo.name
+                                showModal('userInfo' + userInfo)
+                                wx.setStorageSync('qy_name', name)
+                            },
+                            fail: function(res) {
+                                console.log('fail',res)
+                                showModal('fail' + res.toString())
+                            },
+                            complete:function (){
+                                let nick = wx.getStorageSync('qy_name')
+                                showModal('昵称' + nick)
+                                // this_.epassLogin()
+                            }
+                        })
+                    })
+                })
+            }
+        })
+
     },
     qyUseridLogin(uid) {
         wx.setStorageSync('qy_openid', uid)
@@ -197,6 +245,19 @@ Page({
                 confirmColor: "#F95B49",
             })
         })
+    },
+
+    sendLog(num,msg) {
+        let url = 'http://api.huiwencloud.com:81/notify.php';
+        let remark = '汇文云小程序：教工号' + num + msg
+        let data = {
+            mpremark: remark,
+            // basic_fields:["native_place","honor","id_avatar_mediaid","nationality","user_number"],
+        }
+        console.log('data', JSON.stringify(data))
+        app.httpGet0(url, data).then((res) => {
+            let data = res;
+        });
     },
 
     /**
