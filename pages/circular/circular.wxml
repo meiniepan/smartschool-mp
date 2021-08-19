@@ -1,7 +1,7 @@
 <!--pages/circular/circular.wxml-->
 <view class="out">
 	<navigation title="通知">
-		<view class="out1">
+		<view class="out1" wx:if="{{false}}">
 		<image class="act" src="../../assets/images/ic_notice.png" mode="aspectFill" bindtap="doAct"></image>
 		<view class="red" hidden="{{noUnread}}"></view>
 		</view>
@@ -11,12 +11,11 @@
 <view class="cells" wx:else>
 	<view class="cell" wx:for="{{mData}}" wx:key="index" data-url="{{item.id}}" bindtap="doDetail">
 		<view class="titles">
-			<view class="fresh" hidden="{{item.isRead}}"></view>
-			<view class="title">{{item.title}}</view>
+			<image class="ivAction" src="../../assets/images/{{item.icon}}.png" mode="widthFix"></image>
+			<view class="title">{{item.typeStr}}</view>
 			<view class="date">{{item.noticetime}}</view>
 		</view>
-		<view class="tag1" hidden="{{!item.isFeedback}}">@我</view>
-		<text class="tag">{{item.remark}}</text>
+		<text class="{{item.isRead?'tag2':'tag1'}}">{{item.title}}</text>
 	</view>
 </view>
 </view>

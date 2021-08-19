@@ -47,11 +47,9 @@ page {
   align-items: center;
 }
 
-.fresh {
-  width: 20rpx;
-  height: 20rpx;
-  border-radius: 10rpx;
-  background: var(--themeColor);
+.ivAction {
+  width: 50rpx;
+  height: 50rpx;
   margin-right: 10rpx;
 }
 
@@ -72,20 +70,14 @@ page {
   margin-left: 15rpx;
 }
 
-.tag1 {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 86rpx;
-  height: 28rpx;
-  color: var(--white);
-  background: var(--themeBac);
-  font-size: 20rpx;
-  margin-top: 12rpx;
-  border-radius: 12rpx;
-}
 
-.tag {
+.tag1 {
   margin-top: 12rpx;
   font-size: 24rpx;
+  color: var(--themeColor);
+}
+.tag2 {
+  margin-top: 12rpx;
+  font-size: 24rpx;
+  color: var(--commonHint);
 }

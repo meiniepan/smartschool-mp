@@ -1,5 +1,4 @@
 <!--pages/timetable/timetable.wxml-->
-<!--pages/achievement/achievement.wxml-->
 <view class="out">
     <view class="head-area">
         <view class="head-line">

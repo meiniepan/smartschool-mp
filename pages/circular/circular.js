@@ -24,15 +24,50 @@ Page({
         }
         let data = {
             token: wx.getStorageSync('token'),
-            id: this.data.lastId
-        }
-        let data2 = {
-            token: wx.getStorageSync('token'),
+            id: this.data.lastId,
             type: 'system'
         }
+
         app.httpPost(url, data).then((res) => {
 
             let data = res.respResult.data;
+            data.forEach(item => {
+                if (item.expand.action == "admin/spacebook/default") {
+                    item.typeStr = '场地预约'
+                    item.icon = 'ic_changdi'
+                } else if (item.expand.action == "admin/schedules/default") {
+                    item.typeStr = '日程安排'
+                    item.icon = 'ic_richeng'
+                } else if (item.expand.action == "moral/moral/default") {
+                    item.typeStr = '量化评比'
+                    item.icon = 'ic_quantize'
+                } else if (item.expand.action == "admin/wages/default") {
+                    item.typeStr = '工资条'
+                    item.icon = 'ic_gongzitiao'
+                } else if (item.expand.action == "admin/repair/default") {
+                    item.typeStr = '报修报送'
+                    item.icon = 'ic_baoxiu'
+                } else if (item.expand.action == "admin/tasks/default") {
+                    item.typeStr = '任务协作'
+                    item.icon = 'ic_renwu'
+                } else if (item.expand.action == "disk/folder/default") {
+                    item.typeStr = '教学云盘'
+                    item.icon = 'ic_yunpan'
+                } else if (item.expand.action == "admin/attendances/default") {
+                    item.typeStr = '学生考勤'
+                    item.icon = 'ic_kaoqin'
+                } else if (item.expand.action == "admin/achievements/default") {
+                    item.typeStr = '成绩汇总'
+                    item.icon = 'ic_chengji'
+                } else if (item.expand.action == "admin/courses/default") {
+                    item.typeStr = '我的课表'
+                    item.icon = 'ic_kebiao'
+                } else {
+                    item.typeStr = ''
+                    item.icon = 'ic_tonggao'
+                }
+            })
+
 
             if (type === 'more') {
                 if (data.length > 0) {
@@ -60,7 +95,6 @@ Page({
             var data2 = this.data.mData;
             data2.forEach(item => {
                 item.isRead = this.isRead(item)
-                item.isFeedback = this.isFeedback(item)
             });
             let unRead = res.respResult.unread
             wx.setNavigationBarTitle({
@@ -78,15 +112,30 @@ Page({
             });
         });
 
-        app.httpPost(url, data2).then((res) => {
 
-            let result = res.respResult;
-            let noUnread = result.unread != "1"
+    },
 
-            this.setData({
-                noUnread
-            });
+    doRead(id) {
+        let url;
+        if (wx.getStorageSync('usertype') === "1") {
+            url = "/api/v17/student/notices/modify"
+        } else {
+            url = "/api/v17/teacher/notices/modify"
+        }
+        let data = {
+            token: wx.getStorageSync('token'),
+            id: id,
+            status: '1'
+        }
+
+        app.httpPost(url, data).then((res) => {
+
+            let data = res.respResult.data;
+
+
         });
+
+
     },
     doAct() {
         wx.navigateTo({
@@ -104,8 +153,36 @@ Page({
         this.getList('more');
     },
     doDetail(e) {
+        this.doRead(e.currentTarget.dataset.url)
+        let page = ''
+        this.data.mData.forEach(item => {
+
+            if (item.expand.action == "admin/spacebook/default") {
+                page = 'bookSite'
+            } else if (item.expand.action == "admin/schedules/default") {
+                page = 'schedule'
+            } else if (item.expand.action == "moral/moral/default") {
+                page = 'quantize'
+            } else if (item.expand.action == "admin/wages/default") {
+                page = 'salary'
+            } else if (item.expand.action == "admin/repair/default") {
+                page = 'repair'
+            } else if (item.expand.action == "admin/tasks/default") {
+                page = 'task'
+            } else if (item.expand.action == "disk/folder/default") {
+                page = 'cloud'
+            } else if (item.expand.action == "admin/attendances/default") {
+                page = 'attendance'
+            } else if (item.expand.action == "admin/achievements/default") {
+                page = 'achievement'
+            } else if (item.expand.action == "admin/courses/default") {
+                page = 'timetable'
+            } else {
+                page = ''
+            }
+        })
         wx.navigateTo({
-            url: '/packageA/pages/noticeDetail/noticeDetail?id=' + e.currentTarget.dataset.url,
+            url: '/packageA/pages/' + page + '/' + page + '?id=' + e.currentTarget.dataset.url,
         })
     },
     //判断是否已读
