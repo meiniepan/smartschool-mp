@@ -128,7 +128,7 @@ Page({
             status: '1'
         }
 
-        app.httpPost(url, data).then((res) => {
+        app.httpPost(url, data,false).then((res) => {
 
             let data = res.respResult.data;
 
@@ -153,7 +153,10 @@ Page({
         this.getList('more');
     },
     doDetail(e) {
-        this.doRead(e.currentTarget.dataset.url)
+        let bean = e.currentTarget.dataset.bean
+        if (bean.status!='1'){
+        this.doRead(e.currentTarget.dataset.id)
+        }
         let page = ''
         this.data.mData.forEach(item => {
 
@@ -182,7 +185,7 @@ Page({
             }
         })
         wx.navigateTo({
-            url: '/packageA/pages/' + page + '/' + page + '?id=' + e.currentTarget.dataset.url,
+            url: '/packageA/pages/' + page + '/' + page + '?id=' + e.currentTarget.dataset.id,
         })
     },
     //判断是否已读
