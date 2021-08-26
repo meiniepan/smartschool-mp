@@ -19,7 +19,31 @@ App({
             }
         });
     },
+    checkUpdate() {
+        const updateManager = wx.getUpdateManager()
 
+        updateManager.onCheckForUpdate(function (res) {
+            // 请求完新版本信息的回调
+            console.log(res.hasUpdate)
+        })
+
+        updateManager.onUpdateReady(function () {
+            wx.showModal({
+                title: '更新提示',
+                content: '新版本已经准备好，是否重启应用？',
+                success: function (res) {
+                    if (res.confirm) {
+                        // 新的版本已经下载好，调用 applyUpdate 应用新版本并重启
+                        updateManager.applyUpdate()
+                    }
+                }
+            })
+        })
+
+        updateManager.onUpdateFailed(function () {
+            // 新版本下载失败
+        })
+    },
 
     /**
      * http请求封装
@@ -197,7 +221,7 @@ App({
     httpPost0: function (url, data, loading = true, loadingMsg, contentType) {
         return this.httpBase0('POST', url, data, loading, loadingMsg, contentType);
     },
-    ossUpload(objectKey, filePath,callback) {
+    ossUpload(objectKey, filePath, callback) {
         let url;
         if (wx.getStorageSync('usertype') === "1") {
             url = "/api/v17/user/student/osssts"
@@ -212,20 +236,20 @@ App({
 
             let data = res.respResult.Credentials;
             console.log("ststoken", data)
-            uploadImage(data,filePath, objectKey,callback
+            uploadImage(data, filePath, objectKey, callback
             )
         });
     },
-    ossUpload_(stsTokenBean, objectKey, filePath,callback) {
-       let aa = objectKey.split('/')
-        if (aa.length>0){
-            objectKey = aa[aa.length-1]
+    ossUpload_(stsTokenBean, objectKey, filePath, callback) {
+        let aa = objectKey.split('/')
+        if (aa.length > 0) {
+            objectKey = aa[aa.length - 1]
         }
         let uid = wx.getStorageSync('uid')
         if (wx.getStorageSync('usertype') === "1") {
-            objectKey = "student/"+uid+"/"+objectKey
+            objectKey = "student/" + uid + "/" + objectKey
         } else {
-            objectKey = "teacher/"+uid+"/"+objectKey
+            objectKey = "teacher/" + uid + "/" + objectKey
         }
         const OSS = require('ali-oss');
 
@@ -254,7 +278,7 @@ App({
                     try {
                         const result = await client.put(objectKey, data);
                         callback.success(result)
-                        console.log('ossresult',result);
+                        console.log('ossresult', result);
                     } catch (e) {
                         console.log(e);
                     }

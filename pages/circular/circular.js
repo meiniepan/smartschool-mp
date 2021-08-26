@@ -15,6 +15,26 @@ Page({
         lastId: null,
         noUnread: true,
     },
+    /**
+     * 生命周期函数--监听页面加载
+     */
+    onLoad: function (options) {
+        app.checkUpdate()
+    },
+
+    /**
+     * 生命周期函数--监听页面初次渲染完成
+     */
+    onReady: function () {
+
+    },
+
+    /**
+     * 生命周期函数--监听页面显示
+     */
+    onShow: function () {
+        this.refresh();
+    },
     getList(type) {
         let url;
         if (wx.getStorageSync('usertype') === "1") {
@@ -128,7 +148,7 @@ Page({
             status: '1'
         }
 
-        app.httpPost(url, data,false).then((res) => {
+        app.httpPost(url, data, false).then((res) => {
 
             let data = res.respResult.data;
 
@@ -143,7 +163,7 @@ Page({
         })
     },
     refresh() {
-        console.log('domain',wx.getStorageSync('domain'))
+        console.log('domain', wx.getStorageSync('domain'))
         this.setData({
             lastId: null
         });
@@ -155,8 +175,8 @@ Page({
     },
     doDetail(e) {
         let bean = e.currentTarget.dataset.bean
-        if (bean.status!='1'){
-        this.doRead(bean.id)
+        if (bean.status != '1') {
+            this.doRead(bean.id)
         }
         let page = ''
         this.data.mData.forEach(item => {
@@ -214,27 +234,7 @@ Page({
             }
         }
     },
-    /**
-     * 生命周期函数--监听页面加载
-     */
-    onLoad: function (options) {
 
-
-    },
-
-    /**
-     * 生命周期函数--监听页面初次渲染完成
-     */
-    onReady: function () {
-
-    },
-
-    /**
-     * 生命周期函数--监听页面显示
-     */
-    onShow: function () {
-        this.refresh();
-    },
 
     /**
      * 生命周期函数--监听页面隐藏
