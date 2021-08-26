@@ -1,5 +1,6 @@
 //app.js
 let host = require('/utils/host.js');
+let uploadImage = require('/ossjs/uploadImg/uploadImg.js');//地址换成你自己存放文件的位置
 App({
     onLaunch: function () {
         wx.getSystemInfo({
@@ -29,7 +30,7 @@ App({
      * @param loadingMsg 请求提示信息
      */
     httpBase: function (method, url, data, loading = false, loadingMsg) {
-        let requestUrl = host.BASE_URL + url;
+        let requestUrl = host.BASE_URL_DEV + url;
         console.log("url", requestUrl)
         if (loading) {
             wx.showLoading({
@@ -117,8 +118,8 @@ App({
 
         return new Promise(request);
     },
-    httpBase0: function (method, url, data, loading = false, loadingMsg,contentType='application/x-www-form-urlencoded') {
-        let requestUrl =  url;
+    httpBase0: function (method, url, data, loading = false, loadingMsg, contentType = 'application/x-www-form-urlencoded') {
+        let requestUrl = url;
         console.log("url", requestUrl)
         if (loading) {
             wx.showLoading({
@@ -155,7 +156,7 @@ App({
                     let errMsg = res.respMsg;
 
 
-                        resolve(res);
+                    resolve(res);
                 },
                 fail: function (res) {
                     reject(res);
@@ -193,8 +194,80 @@ App({
     httpPost: function (url, data, loading = true, loadingMsg) {
         return this.httpBase('POST', url, data, loading, loadingMsg);
     },
-    httpPost0: function (url, data, loading = true, loadingMsg,contentType ) {
-        return this.httpBase0('POST', url, data, loading, loadingMsg,contentType);
+    httpPost0: function (url, data, loading = true, loadingMsg, contentType) {
+        return this.httpBase0('POST', url, data, loading, loadingMsg, contentType);
+    },
+    ossUpload(objectKey, filePath,callback) {
+        let url;
+        if (wx.getStorageSync('usertype') === "1") {
+            url = "/api/v17/user/student/osssts"
+        } else {
+            url = "/api/v17/user/teachers/osssts"
+        }
+        let data = {
+            token: wx.getStorageSync('token'),
+        }
+
+        this.httpPost(url, data, false).then((res) => {
+
+            let data = res.respResult.Credentials;
+            console.log("ststoken", data)
+            uploadImage(data,filePath, objectKey,callback
+            )
+        });
+    },
+    ossUpload_(stsTokenBean, objectKey, filePath,callback) {
+       let aa = objectKey.split('/')
+        if (aa.length>0){
+            objectKey = aa[aa.length-1]
+        }
+        let uid = wx.getStorageSync('uid')
+        if (wx.getStorageSync('usertype') === "1") {
+            objectKey = "student/"+uid+"/"+objectKey
+        } else {
+            objectKey = "teacher/"+uid+"/"+objectKey
+        }
+        const OSS = require('ali-oss');
+
+        const client = new OSS({
+            // yourRegion填写Bucket所在地域。以华东1（杭州）为例，Region填写为oss-cn-hangzhou。
+            region: 'oss-cn-beijing',
+            // 从STS服务获取的临时访问密钥（AccessKey ID和AccessKey Secret）。
+            accessKeyId: stsTokenBean.AccessKeyId,
+            accessKeySecret: stsTokenBean.AccessKeySecret,
+            // 从STS服务获取的安全令牌（SecurityToken）。
+            stsToken: stsTokenBean.SecurityToken,
+            // 填写Bucket名称。
+            bucket: 'xiaoneng'
+        });
+
+        const fs = wx.getFileSystemManager()
+        fs.readFile({
+            filePath: filePath,
+            encoding: 'utf8',
+            position: 0,
+            success(res) {
+                let data = res.data
+                console.log(res.data)
+
+                async function putObject() {
+                    try {
+                        const result = await client.put(objectKey, data);
+                        callback.success(result)
+                        console.log('ossresult',result);
+                    } catch (e) {
+                        console.log(e);
+                    }
+                }
+
+                putObject();
+            },
+            fail(res) {
+                console.error(res)
+            }
+        })
+
+
     },
 
     logout() {

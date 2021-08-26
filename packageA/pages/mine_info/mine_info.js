@@ -1,4 +1,6 @@
 // pages/mine/mine.js
+import {showToastWithoutIcon} from "../../../utils/util";
+
 let app = getApp();
 Page({
     /**
@@ -41,17 +43,6 @@ Page({
             llMineItem3 = true, llMineItem4 = true, llMineItem5 = true, llMineItem6 = true, llMineItem7 = true,
             llMineItem8 = true
             , llMineItemEduId = true;
-        if (wx.getStorageSync("usertype") == "1" && wx.getStorageSync("usertype") == "1") {
-            name = wx.getStorageSync("parentname")
-            phone = wx.getStorageSync("parentphone")
-            llMineItem2 = false
-            llMineItem3 = false
-            llMineItem5 = false
-            llMineItem6 = false
-            llMineItem7 = false
-            llMineItemEduId = false
-            llMineItem8 = false
-        }
 
         if (wx.getStorageSync("usertype") == "1") {
             if (wx.getStorageSync("logintype") == "self") {
@@ -95,7 +86,86 @@ Page({
         })
     },
 
+    chooseAvatar: function () {
+        let that = this
+        // wx.chooseMessageFile({
+        //     count: 10,
+        //     type: 'all',
+        //     success: function (res) {
+        //         var tempFilePaths = res.tempFilePaths
+        //         console.log('chooseImage success, temp path is: ', tempFilePaths[0])
+        //         wx.uploadFile({
+        //             url: 'http://www.ieesee.cn',
+        //             filePath: tempFilePaths[0],
+        //             name: 'file',
+        //             formData: {
+        //                 name: tempFilePaths[0],
+        //                 key: "${filename}",
+        //                 policy: "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+        //                 OSSAccessKeyId: "xxxxxxxxxxxxxxxx",
+        //                 success_action_status: "200",
+        //                 signature: "xxxxxxxxxxxxxxxxxxxxxxxxxx",
+        //             },
+        //             success: function (res) {
+        //                 console.log('chooseImage success, temp path is: ', tempFilePaths[0])
+        //                 wx.showToast({
+        //                     title: "上传成功",
+        //                     icon: 'success',
+        //                     duration: 1000
+        //                 })
+        //             },
+        //             fail: function ({errMsg}) {
+        //                 console.log('upladImage fail, errMsg is: ', errMsg)
+        //                 wx.showToast({
+        //                     title: "上传失败",
+        //                     duration: 1000
+        //                 })
+        //             },
+        //         })
+        //     }
+        // })
 
+        wx.chooseImage({
+            success: function (res) {
+                var tempFilePaths = res.tempFilePaths
+                console.log('chooseImage success, temp path is: ', res)
+                app.ossUpload(tempFilePaths[0], tempFilePaths[0],{
+
+                    success (result) {
+                        console.log("======上传成功图片地址为：", result);
+                        that.modify(result)
+                        wx.hideLoading();
+                    }, fail (result) {
+                        console.log("======上传失败======", result);
+
+                        wx.hideLoading()
+                    }
+                })
+            }
+        })
+    },
+    modify(path) {
+        let url;
+        if (wx.getStorageSync('usertype') === "1") {
+            url = "/api/v17/user/student/modify"
+        } else {
+            url = "/api/v17/user/teachers/modify"
+        }
+        let data = {
+            token: wx.getStorageSync('token'),
+            portrait:path,
+        }
+
+        app.httpPost(url, data, false).then((res) => {
+
+            let data = res.respResult;
+            wx.setStorageSync('portrait',path)
+            this.setData({
+                img:wx.getStorageSync("domain") + path,
+            })
+            showToastWithoutIcon("处理完成")
+        });
+    },
     /**
      * 生命周期函数--监听页面初次渲染完成
      */

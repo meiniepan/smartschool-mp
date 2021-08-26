@@ -8,32 +8,32 @@ Page({
      * 页面的初始数据
      */
     data: {
-        chosenDay: '',
+        mDay: '',
     },
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-
+        let temp = new Date()
+        let year = temp.getFullYear()
+        let month = temp.getMonth() + 1
+        let date = temp.getDate()
+        let today = year + "/" + zero(month) + "/" + zero(date)
+        this.setData({
+            mDay: today,
+            mMonth:year + zero(month),
+        })
     },
     /**
      * 生命周期函数--监听页面显示
      */
     onShow: function () {
-        let temp = new Date()
-        let year = temp.getFullYear()
-        let month = temp.getMonth() + 1
-        let date = temp.getDate()
-        let today = year + "-" + zero(month) + "-" + zero(date)
-        this.setData({
-            chosenDay: today
-        })
-        this.getDataDay(today)
-        this.getDataMonth(year + zero(month))
+        this.getDataDay(this.data.mDay)
+        this.getDataMonth(this.data.mMonth)
     },
     doAdd() {
         wx.navigateTo({
-            url: '/packageA/pages/addSchedule/addSchedule?chosenDay=' + this.data.chosenDay
+            url: '/packageA/pages/addSchedule/addSchedule?chosenDay=' + this.data.mDay
         })
     },
     getDataDay(day) {
@@ -105,16 +105,22 @@ Page({
         });
     },
     nextMonth(e) {
+        this.setData({
+            mMonth:e.detail
+        })
         this.getDataMonth(e.detail)
         this.selectComponent(".c2").nextMonth(e)
     },
     lastMonth(e) {
+        this.setData({
+            mMonth:e.detail
+        })
         this.getDataMonth(e.detail)
         this.selectComponent(".c2").lastMonth(e)
     },
     doSelect(e) {
         this.setData({
-            chosenDay: e
+            mDay: e.detail
         })
         this.getDataDay(e.detail)
     },

@@ -38,7 +38,7 @@ Page({
         let year = temp.getFullYear()
         let month = temp.getMonth() + 1
         let date = temp.getDate()
-        let today = year + "-" + zero(month) + "-" + zero(date)
+        let today = year + '/' + zero(month) + '/' + zero(date)
         let h = temp.getHours()
         let m = temp.getMinutes()
         let time = today + " " + zero(h) + ":" + zero(m)

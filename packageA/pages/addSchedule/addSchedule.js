@@ -31,10 +31,10 @@ Page({
 
     onLoad: function (options) {
         let b = {}, isModify = false
-        if (options.isModify=='1') {
+        if (options.isModify == '1') {
             isModify = true
             b = JSON.parse(options.bean)
-            b.token= wx.getStorageSync('token')
+            b.token = wx.getStorageSync('token')
             this.setData({
                 requestBody: b,
                 isModify,
@@ -71,6 +71,7 @@ Page({
 
     doConfirm() {
         let bean = this.data.requestBody
+        bean.token = wx.getStorageSync('token')
         let isModify = this.data.isModify
         let url = ''
         if (bean.scheduletime == "请选择开始时间" ||
@@ -107,7 +108,7 @@ Page({
         let depart = that.data.departData
         let classes = that.data.classData
 
-        console.log('depart',depart)
+        console.log('depart', depart)
         wx.navigateTo({
             url: "../addInvolve/addInvolve?data=" + JSON.stringify(depart)
                 + '&data2=' + JSON.stringify(classes),
@@ -124,16 +125,16 @@ Page({
         let str = '', involves = []
 
         data.mDataDepartment.forEach(it => {
-            if (it.num>0){
-                it.list.forEach(it=>{
+            if (it.num > 0) {
+                it.list.forEach(it => {
                     str = str + it.realname + "、"
                     involves.push(it)
                 })
             }
         })
         data.mDataClasses.forEach(it => {
-            if (it.num>0){
-                it.list.forEach(it=>{
+            if (it.num > 0) {
+                it.list.forEach(it => {
                     str = str + it.realname + "、"
                     involves.push(it)
                 })

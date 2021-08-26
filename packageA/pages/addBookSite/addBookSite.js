@@ -107,12 +107,7 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-        let temp = new Date()
-        console.log("date", temp)
-        let year = temp.getFullYear()
-        let month = temp.getMonth() + 1
-        let date = temp.getDate()
-        let today = year + '-' + zero(month) + '-' + zero(date) + ' '
+        let today = options.chosenDay + ' '
         this.setData({
             today,
             etimeArr: this.data.timeArr
@@ -120,7 +115,7 @@ Page({
     },
     doConfirm() {
         let bean = this.data.requestBody
-
+        bean.token = wx.getStorageSync('token')
         if (bean.ostime == "请选择开始时间" ||
             bean.oetime == "请选择结束时间" || bean.roomname == "请选择可用会议室" ||
             bean.remark == null || bean.remark == '') {
@@ -165,7 +160,7 @@ Page({
                     roomDataArr,
                     roomArr,
                 })
-            }else {
+            } else {
                 showToastWithoutIcon('所选时段暂无可用会议室')
             }
         });

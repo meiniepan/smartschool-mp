@@ -143,6 +143,7 @@ Page({
         })
     },
     refresh() {
+        console.log('domain',wx.getStorageSync('domain'))
         this.setData({
             lastId: null
         });
