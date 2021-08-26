@@ -156,7 +156,7 @@ Page({
     doDetail(e) {
         let bean = e.currentTarget.dataset.bean
         if (bean.status!='1'){
-        this.doRead(e.currentTarget.dataset.id)
+        this.doRead(bean.id)
         }
         let page = ''
         this.data.mData.forEach(item => {
@@ -186,7 +186,7 @@ Page({
             }
         })
         wx.navigateTo({
-            url: '/packageA/pages/' + page + '/' + page + '?id=' + e.currentTarget.dataset.id,
+            url: '/packageA/pages/' + page + '/' + page + '?id=' + bean.id,
         })
     },
     //判断是否已读
