@@ -2,21 +2,17 @@ page {
   background-color: var(--tintBac);
 }
 .out1{
-  position: relative;
+  display: flex;
+  align-items: center;
 }
 .act{
   margin-left: 30rpx;
-  width: 40rpx;
-  height: 40rpx;
+  margin-right: 10rpx;
+  width: 30rpx;
+  height: 30rpx;
 }
 .red{
-  width: 16rpx;
-  height: 16rpx;
-  border-radius: 50%;
-  background: var(--orange);
-  position: absolute;
-  top: 0rpx;
-  right: 0rpx;
+  font-size: 28rpx;
 }
 .banner{
   width: calc(100% - 72rpx);

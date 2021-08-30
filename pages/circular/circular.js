@@ -49,7 +49,7 @@ Page({
         }
 
         app.httpPost(url, data).then((res) => {
-
+            console.log('res', res)
             let data = res.respResult.data;
             data.forEach(item => {
                 if (item.expand.action == "admin/spacebook/default") {
@@ -117,18 +117,20 @@ Page({
                 item.isRead = this.isRead(item)
             });
             let unRead = res.respResult.unread
-            wx.setNavigationBarTitle({
-                title: "通知"
-            })
+            let title = "通知"
+
             if (unRead.length > 0) {
                 if (parseInt(unRead) > 0) {
-                    wx.setNavigationBarTitle({
-                        title: "通知(" + unRead + ")"
-                    })
+                    if (parseInt(unRead) > 99) {
+                        title = "通知(99+)"
+                    } else {
+                        title = "通知(" + unRead + ")"
+                    }
                 }
             }
             this.setData({
-                mData: data2
+                mData: data2,
+                title
             });
         });
 
@@ -151,16 +153,31 @@ Page({
         app.httpPost(url, data, false).then((res) => {
 
             let data = res.respResult.data;
-
+            this.refresh();
 
         });
 
 
     },
     doAct() {
-        wx.navigateTo({
-            url: '/packageA/pages/systemMsg/systemMsg',
-        })
+        let url;
+        if (wx.getStorageSync('usertype') === "1") {
+            url = "/api/v17/student/notices/modifyAll"
+        } else {
+            url = "/api/v17/teacher/notices/modifyAll"
+        }
+        let data = {
+            token: wx.getStorageSync('token'),
+            type: 'system',
+            status: '1'
+        }
+
+        app.httpPost(url, data, false).then((res) => {
+
+            let data = res.respResult.data;
+            this.refresh()
+
+        });
     },
     refresh() {
         console.log('domain', wx.getStorageSync('domain'))

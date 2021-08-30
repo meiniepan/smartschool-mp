@@ -1,9 +1,9 @@
 <!--pages/circular/circular.wxml-->
 <view class="out">
-	<navigation title="通知">
-		<view class="out1" wx:if="{{false}}">
-		<image class="act" src="../../assets/images/ic_notice.png" mode="aspectFill" bindtap="doAct"></image>
-		<view class="red" hidden="{{noUnread}}"></view>
+	<navigation title="{{title}}">
+		<view class="out1" bindtap="doAct" wx:if="{{!isEmpty}}">
+		<image class="act" src="../../assets/images/ic_brush.png" mode="aspectFill" ></image>
+		<view class="red" >全部已读</view>
 		</view>
 	</navigation>
 	<image class="banner" src="../../assets/images/bac_banner1.png" mode="widthFix"></image>
