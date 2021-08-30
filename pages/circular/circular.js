@@ -191,12 +191,11 @@ Page({
         this.getList('more');
     },
     doDetail(e) {
-        let bean = e.currentTarget.dataset.bean
-        if (bean.status != '1') {
-            this.doRead(bean.id)
+        let item = e.currentTarget.dataset.bean
+        if (item.status != '1') {
+            this.doRead(item.id)
         }
         let page = ''
-        this.data.mData.forEach(item => {
 
             if (item.expand.action == "admin/spacebook/default") {
                 page = 'bookSite'
@@ -221,9 +220,8 @@ Page({
             } else {
                 page = ''
             }
-        })
         wx.navigateTo({
-            url: '/packageA/pages/' + page + '/' + page + '?id=' + bean.id,
+            url: '/packageA/pages/' + page + '/' + page + '?id=' + item.id,
         })
     },
     //判断是否已读
