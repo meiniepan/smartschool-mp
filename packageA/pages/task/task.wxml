@@ -17,22 +17,22 @@
                        mode="heightFix"/>
             </view>
         </picker>
-        <dateTimePicker value="{{stime}}"
+        <picker value="{{stime}}" mode="date"
                         data-type="indexClass" bindchange="bindTimeS">
             <view class="item">
                 <view>{{stimeStr}}</view>
                 <image src="../../assets/images/ic_gray_triangle.png" style="margin-left: 4rpx;height: 10rpx"
                        mode="heightFix"></image>
             </view>
-        </dateTimePicker>
-        <dateTimePicker value="{{etime}}"
+        </picker>
+        <picker value="{{etime}}" mode="date"
                         data-type="indexClass" bindchange="bindTimeE">
             <view class="item">
                 <view>{{etimeStr}}</view>
                 <image src="../../assets/images/ic_gray_triangle.png" style="margin-left: 4rpx;height: 10rpx"
                        mode="heightFix"></image>
             </view>
-        </dateTimePicker>
+        </picker>
     </view>
     <swiper style="height: 100vh" current="{{categoryCur}}" duration="{{duration}}"
             bindanimationfinish="animationFinish">

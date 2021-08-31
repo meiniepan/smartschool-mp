@@ -154,8 +154,8 @@ Page({
         this.refresh()
     },
     bindTimeS(e) {
-        let stime = e.detail.dateString
-        let stimeStr = e.detail.dateString.substr(5, e.detail.dateString.length - 1)
+        let stime = e.detail.value
+        let stimeStr = e.detail.value.substr(5, e.detail.value.length - 1)
         this.setData({
             stime,
             stimeStr,
@@ -163,8 +163,8 @@ Page({
         this.refresh()
     },
     bindTimeE(e) {
-        let etime = e.detail.dateString
-        let etimeStr = e.detail.dateString.substr(5, e.detail.dateString.length - 1)
+        let etime = e.detail.value
+        let etimeStr = e.detail.value.substr(5, e.detail.value.length - 1)
         this.setData({
             etime,
             etimeStr,
