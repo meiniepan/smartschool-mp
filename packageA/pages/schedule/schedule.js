@@ -18,9 +18,11 @@ Page({
         let year = temp.getFullYear()
         let month = temp.getMonth() + 1
         let date = temp.getDate()
-        let today = year + "/" + zero(month) + "/" + zero(date)
+        let today = year + "" + zero(month) + "" + zero(date)
+        let today2 = year + "/" + zero(month) + "/" + zero(date)
         this.setData({
             mDay: today,
+            today2,
             mMonth:year + zero(month),
         })
     },
@@ -33,7 +35,7 @@ Page({
     },
     doAdd() {
         wx.navigateTo({
-            url: '/packageA/pages/addSchedule/addSchedule?chosenDay=' + this.data.mDay
+            url: '/packageA/pages/addSchedule/addSchedule?chosenDay=' + this.data.today2
         })
     },
     getDataDay(day) {

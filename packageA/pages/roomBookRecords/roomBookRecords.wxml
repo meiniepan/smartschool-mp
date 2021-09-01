@@ -7,6 +7,10 @@
                     <view class="title">{{item.classroom.classroomname}}</view>
                 </view>
                 <view class="titles">
+                    <view class="title-name">预约人</view>
+                    <view class="title">{{item.operator.realname}}</view>
+                </view>
+                <view class="titles">
                     <view class="title-name">预约时间</view>
                     <view class="title">{{item.timeStr}}</view>
                 </view>
@@ -19,10 +23,7 @@
                     <view class="title-name">会议名称</view>
                     <view class="title">{{item.remark}}</view>
                 </view>
-                <view class="titles">
-                    <view class="title-name">会议室地点</view>
-                    <view class="title">{{item.classroom.addr}}</view>
-                </view>
+
                 <view wx:if="{{item.status=='0'&&admin}}" data-id="{{item.id}}" data-p="{{index}}" bindtap="doAction" class="action">占用会议室</view>
             </view>
         </view>

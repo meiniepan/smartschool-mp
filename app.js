@@ -56,6 +56,7 @@ App({
     httpBase: function (method, url, data, loading = false, loadingMsg) {
         let requestUrl = host.BASE_URL + url;
         console.log("url", requestUrl)
+        console.log("body", data)
         if (loading) {
             wx.showLoading({
                 title: loadingMsg || '加载中...',
