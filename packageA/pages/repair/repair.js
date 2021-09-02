@@ -260,6 +260,16 @@ Page({
             showToastWithoutIcon('处理完成')
         })
     },
+    preview(e){
+        let url = e.currentTarget.dataset.src
+        let u = []
+        u.push(url)
+        wx.previewImage({
+            current: url, // 当前显示图片的http链接
+            urls: u // 需要预览的图片http链接列表
+        })
+    },
+
     doBtnFinish() {
         let bean = this.data.requestBody
         if (this.data.showFinish){

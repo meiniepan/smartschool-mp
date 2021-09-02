@@ -39,7 +39,7 @@ Page({
                 item.type = type
                 item.isAdmin = (wx.getStorageSync('uid') == item.cuser_id && type == 1)
                 item.name = item.foldername
-                item.icon = '/assets/images/ic_file.png'
+                item.icon = '../../assets/images/ic_file.png'
                 item.updatetime = formatShowTime(item.updatetime)
                 item.isFolder = true
             })

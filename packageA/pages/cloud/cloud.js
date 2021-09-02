@@ -43,7 +43,7 @@ Page({
                 item.isAdmin = (wx.getStorageSync('uid') == item.cuser_id && type == 1)
                 item.type = type
                 item.name = item.foldername
-                item.icon = '/assets/images/ic_file.png'
+                item.icon = '../../assets/images/ic_file.png'
                 item.updatetime = formatShowTime(item.updatetime)
             })
             let mDataPriFolder, mDataPubFolder,mPath,isEmpty
