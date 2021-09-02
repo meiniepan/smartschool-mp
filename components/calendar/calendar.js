@@ -138,7 +138,7 @@ Component({
             let year = this.data.month === 1 ? this.data.year - 1 : this.data.year
             //初始化日历组件UI
             this.display(year, month, 0)
-            this.triggerEvent('lastMonth', year + this.zero(month))
+            this.triggerEvent('lastMonth', year.toString() + this.zero(month))
         },
 
         //下个月
@@ -147,7 +147,7 @@ Component({
             let year = this.data.month === 12 ? this.data.year + 1 : this.data.year
             //初始化日历组件UI
             this.display(year, month, 0)
-            this.triggerEvent('nextMonth', year + this.zero(month))
+            this.triggerEvent('nextMonth', year.toString() + this.zero(month))
         },
 
         //获取指定月天数
@@ -187,6 +187,7 @@ Component({
 
         checkEvent() {
             let thisDays = this.data.thisDays
+
             thisDays.forEach(it => {
                 let year = this.data.year,
                     monthFormat = it.monthFormat,

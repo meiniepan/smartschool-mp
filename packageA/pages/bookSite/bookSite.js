@@ -30,11 +30,22 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow: function () {
-        this.getDataDay(this.data.mDay)
-        this.getDataMonth(this.data.mMonth)
+        if(this.data.onReady){
+            this.getDataDay(this.data.mDay)
+            this.getDataMonth(this.data.mMonth)
+        }
     },
 
-
+    /**
+     * 生命周期函数--监听页面初次渲染完成
+     */
+    onReady: function () {
+        this.getDataDay(this.data.mDay)
+        this.getDataMonth(this.data.mMonth)
+        this.setData({
+            onReady:true,
+        })
+    },
     getDataDay(day) {
         console.log("day", day)
         let oldTime = (new Date(day)).getTime() + 24 * 3600 * 1000;
@@ -139,12 +150,7 @@ Page({
     },
 
 
-    /**
-     * 生命周期函数--监听页面初次渲染完成
-     */
-    onReady: function () {
 
-    },
 
         /**
      * 生命周期函数--监听页面隐藏

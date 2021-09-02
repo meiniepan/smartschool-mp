@@ -30,8 +30,20 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow: function () {
+        if(this.data.onReady){
+            this.getDataDay(this.data.mDay)
+            this.getDataMonth(this.data.mMonth)
+        }
+    },
+    /**
+     * 生命周期函数--监听页面初次渲染完成
+     */
+    onReady: function () {
         this.getDataDay(this.data.mDay)
         this.getDataMonth(this.data.mMonth)
+        this.setData({
+            onReady:true,
+        })
     },
     doAdd() {
         wx.navigateTo({
@@ -39,6 +51,8 @@ Page({
         })
     },
     getDataDay(day) {
+        day = day.replaceAll('/','')
+        day = day.replaceAll('-','')
         let url;
         if (wx.getStorageSync('usertype') === "1") {
             url = "/api/v17/student/schedules/listDWM"
@@ -52,7 +66,7 @@ Page({
         app.httpPost(url, data).then((res) => {
             let data = res.respResult.data;
             let semesters = res.respResult.semesters
-            console.log("data", data)
+            console.log("dataDay", res.respResult)
             data.forEach((item) => {
                 item.remarkStr = "备   注: " + item.remark
                 var timeB = ""
@@ -97,13 +111,16 @@ Page({
         }
         app.httpPost(url, data).then((res) => {
             let data = res.respResult.days;
+            console.log("dataMonth", res.respResult)
             let mDataMonth = []
             data.forEach((item) => {
                 mDataMonth.push(item)
             });
+            console.log("mDataMonth", mDataMonth)
             this.setData({
                 mDataMonth: mDataMonth,
             });
+            console.log("mDataMonth2", this.data.mDataMonth)
         });
     },
     nextMonth(e) {
@@ -133,12 +150,7 @@ Page({
             url: '/packageA/pages/scheduleDetail/scheduleDetail?bean=' + JSON.stringify(bean),
         })
     },
-    /**
-     * 生命周期函数--监听页面初次渲染完成
-     */
-    onReady: function () {
 
-    },
 
 
 
