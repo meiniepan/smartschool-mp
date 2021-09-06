@@ -17,7 +17,6 @@ page {
 
 .titles {
     display: flex;
-    align-items: center;
     justify-content: space-between;
     margin-bottom: 20rpx;
 }
@@ -25,16 +24,13 @@ page {
 .title-name {
     font-size: 30rpx;
     font-weight: bold;
+    min-width: 150rpx;
 }
 
 .title {
     color: var(--commonHint);
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 1;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    text-align: center;
+    margin-left: 50rpx;
+    word-break:break-all;
 }
 .action{
     display: flex;

@@ -97,6 +97,5 @@ page {
   font-size: 28rpx;
 }
 .text-right{
-  min-width: 150rpx;
   text-align: right;
 }

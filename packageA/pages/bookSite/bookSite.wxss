@@ -76,10 +76,16 @@ page{
 }
 
 .date {
-    max-width: 200rpx;
+}
+
+.realname {
+    min-width: 160rpx;
+    margin-left: 50rpx;
+    font-size: 28rpx;
 }
 
 .remark {
+    word-break:break-all;
 }
 .addBtn{
     position: fixed;

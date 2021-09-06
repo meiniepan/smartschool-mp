@@ -29,7 +29,7 @@
 
                 <view class="title-area" style="margin-top: 20rpx">
                     <view class="remark textc">{{item.remark}}</view>
-                    <view class="remark textc text-right" >{{item.operator.realname}}</view>
+                    <view class="remark realname text-right" >{{item.operator.realname}}</view>
                 </view>
             </view>
         </view>
