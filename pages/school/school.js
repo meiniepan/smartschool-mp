@@ -143,15 +143,15 @@ Page({
                     click: "/packageA/pages/task/task"
                 })
         }
-        // if (app.checkRule1("disk/folder/default")) {
-        //     bean1.items.push(
-        //         {
-        //             name: globalData.cloudTitle,
-        //             remark: "校本资源 协同备课",
-        //             icon: "/assets/images/ic_yunpan.png",
-        //             click: "/packageA/pages/cloud/cloud"
-        //         })
-        // }
+        if (app.checkRule1("disk/folder/default")) {
+            bean1.items.push(
+                {
+                    name: globalData.cloudTitle,
+                    remark: "校本资源 协同备课",
+                    icon: "/assets/images/ic_yunpan.png",
+                    click: "/packageA/pages/cloud/cloud"
+                })
+        }
 
         if (app.checkRule1("admin/attendances/default")) {
             bean1.items.push(

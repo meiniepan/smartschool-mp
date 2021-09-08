@@ -7,8 +7,9 @@
               bindtap="checkPub">我的班级
         </view>
     </view>
+    <view style="margin-top: 140rpx; "></view>
 
-    <view class="cells-label">
+    <view class="cells-label" hidden="{{hideLabel}}">
         <view class="cell-label" wx:for="{{mDataLabel}}" wx:key="index" data-position="{{index}}" bindtap="doCheck">
             <image class="check" bindtap="" mode="heightFix" data-position="{{index}}"
                    src="../../assets/images/{{item.checked?'ic_check_timetable_true':'ic_check_timetable_false'}}.png"></image>
@@ -37,9 +38,9 @@
             </view>
         </view>
     </view>
-<view style="display:flex;width: 100%;height: 84rpx">_</view>
+    <view style="padding-top: 84rpx;"></view>
 
-</view>
-<view class="bottom">
-    <view class="confirm" bindtap="doConfirm">{{confirmStr}}</view>
+    <view class="bottom">
+        <view class="confirm" bindtap="doConfirm">{{confirmStr}}</view>
+    </view>
 </view>

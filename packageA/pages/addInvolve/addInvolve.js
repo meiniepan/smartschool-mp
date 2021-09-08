@@ -49,6 +49,7 @@ Page({
         if (options.type == '1') {
             this.setData({
                 onlyStu: true,
+                hideLabel:true,
                 marginLeft: "0",
                 mCurrent: 1, // 当前tab
             })

@@ -78,7 +78,6 @@ page {
   display: flex;
   flex-direction: column;
   width: 100vw;
-  box-sizing: border-box;
   height: 100vh;
   font-size: 28rpx;
 }

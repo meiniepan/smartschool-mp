@@ -25,6 +25,7 @@ background: var(--tintBac);
     background: var(--themeColor);
     border-radius: 44rpx;
     color: var(--white);
+    box-sizing: border-box;
 }
 .tab-share{
     display: flex;
@@ -44,7 +45,6 @@ background: var(--tintBac);
     margin-right: 16rpx;
 }
 .cells-label {
-    margin-top: 140rpx;
     background: var(--white);
     padding: 20rpx 20rpx 20rpx var(--titlePadding);
     display: flex;
