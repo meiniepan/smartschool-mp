@@ -18,6 +18,7 @@ Page({
             taskname: '',
             remark: '',
             involve: '',
+            sendlabel: '',
             fileinfo: '',
         },
         chosenDay: '',
@@ -118,57 +119,57 @@ Page({
         app.httpPost(url, data).then((res) => {
 
             let involve = res.respResult.involve
-console.log('involve',involve)
+            console.log('involve', involve)
             let departData = [];
             let classData = [];
             if (involve.length > 0) {
                 let mMap1 = new Map(), mMap2 = new Map();
                 involve.forEach(it => {
                     if (it.topdepartid == "grade0") {
-                        it.secdepartid = '1_'+it.secdepartid
+                        it.secdepartid = '1_' + it.secdepartid
                         it.parentId = it.secdepartid
                         if (mMap2.get(it.secdepartid) == null) {
                             var mList = []
                             mList.push(it)
-                            if(it.secdepartid!=null){
+                            if (it.secdepartid != null) {
                                 mMap2.set(it.secdepartid, mList)
                             }
 
                         } else {
                             mList = mMap2.get(it.secdepartid)
                             mList.push(it)
-                            if(it.secdepartid!=null){
+                            if (it.secdepartid != null) {
                                 mMap2.set(it.secdepartid, mList)
                             }
                         }
                     } else {
-                        it.topdepartid = '0_'+it.topdepartid
+                        it.topdepartid = '0_' + it.topdepartid
                         it.parentId = it.topdepartid
                         if (mMap1.get(it.topdepartid) == null) {
                             var mList = []
                             mList.push(it)
-                            if(it.topdepartid!=null){
+                            if (it.topdepartid != null) {
                                 mMap1.set(it.topdepartid, mList)
                             }
 
                         } else {
                             mList = mMap1.get(it.topdepartid)
-                                mList.push(it)
-                            if(it.topdepartid!=null){
+                            mList.push(it)
+                            if (it.topdepartid != null) {
                                 mMap1.set(it.topdepartid, mList)
                             }
                         }
                     }
                 })
-                mMap1.forEach((value, key, map)=>{
-                    departData.push({id:key,list:value,num:value.length})
+                mMap1.forEach((value, key, map) => {
+                    departData.push({id: key, list: value, num: value.length})
                 })
                 console.log('mMap1', mMap1)
-                mMap2.forEach((value, key, map)=>{
-                    classData.push({id:key,list:value,num:value.length})
+                mMap2.forEach((value, key, map) => {
+                    classData.push({id: key, list: value, num: value.length})
                 })
             }
-            let data = {mDataDepartment:departData,mDataClasses:classData}
+            let data = {mDataDepartment: departData, mDataClasses: classData}
             console.log('data', data)
             this.setData({
                 requestBody: res.respResult,
@@ -218,6 +219,13 @@ console.log('involve',involve)
         str = str.substring(0, str.length - 1)
         this.data.requestBody.involve = JSON.stringify(involves)
         this.data.requestBody.stuStr = str
+        if (data.label&&data.label.length > 0) {
+            this.data.requestBody.sendlabel = data.label
+            this.data.requestBody.stuStr = data.labelStr
+        } else {
+            this.data.requestBody.involve = JSON.stringify(involves)
+            this.data.requestBody.stuStr = str
+        }
         this.setData({
                 requestBody: this.data.requestBody,
                 departData: data.mDataDepartment,

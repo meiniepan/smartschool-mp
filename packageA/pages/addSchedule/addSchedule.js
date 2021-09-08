@@ -15,6 +15,7 @@ Page({
             stuStr: '',
             title: '',
             involve: '',
+            sendlabel: '',
             remark: '',
         },
         chosenDay: '',
@@ -39,7 +40,9 @@ Page({
                 requestBody: b,
                 isModify,
             })
-            this.doResult(JSON.parse(b.involve))
+            if (b.involve.length > 0) {
+                this.doInvolve(JSON.parse(b.involve))
+            }
         } else {
             let chosenDay = ''
             let temp = new Date()
@@ -58,7 +61,7 @@ Page({
         if (wx.getStorageSync("usertype") == "1") {
 
         } else {
-            if (this.data.isModify && this.data.bean.cuser_id != wx.getStorageSync("uid")) {
+            if (this.data.isModify && this.data.requestBody.cuser_id != wx.getStorageSync("uid")) {
 
             } else {
                 showChooseStudent = true
@@ -121,6 +124,64 @@ Page({
             },
         });
     },
+    doInvolve(involve) {
+        let departData = [];
+        let classData = [];
+        if (involve.length > 0) {
+            let mMap1 = new Map(), mMap2 = new Map();
+            involve.forEach(it => {
+                if (it.topdepartid == "grade0") {
+                    it.secdepartid = '1_' + it.secdepartid
+                    it.parentId = it.secdepartid
+                    if (mMap2.get(it.secdepartid) == null) {
+                        var mList = []
+                        mList.push(it)
+                        if (it.secdepartid != null) {
+                            mMap2.set(it.secdepartid, mList)
+                        }
+
+                    } else {
+                        mList = mMap2.get(it.secdepartid)
+                        mList.push(it)
+                        if (it.secdepartid != null) {
+                            mMap2.set(it.secdepartid, mList)
+                        }
+                    }
+                } else {
+                    it.topdepartid = '0_' + it.topdepartid
+                    it.parentId = it.topdepartid
+                    if (mMap1.get(it.topdepartid) == null) {
+                        var mList = []
+                        mList.push(it)
+                        if (it.topdepartid != null) {
+                            mMap1.set(it.topdepartid, mList)
+                        }
+
+                    } else {
+                        mList = mMap1.get(it.topdepartid)
+                        mList.push(it)
+                        if (it.topdepartid != null) {
+                            mMap1.set(it.topdepartid, mList)
+                        }
+                    }
+                }
+            })
+            mMap1.forEach((value, key, map) => {
+                departData.push({id: key, list: value, num: value.length})
+            })
+            console.log('mMap1', mMap1)
+            mMap2.forEach((value, key, map) => {
+                classData.push({id: key, list: value, num: value.length})
+            })
+        }
+        let data = {mDataDepartment: departData, mDataClasses: classData}
+        console.log('data', data)
+        this.setData({
+            departData,
+            classData,
+        })
+        this.doResult(data)
+    },
     doResult(data) {
         let str = '', involves = []
 
@@ -141,8 +202,14 @@ Page({
             }
         })
         str = str.substring(0, str.length - 1)
-        this.data.requestBody.involve = JSON.stringify(involves)
-        this.data.requestBody.stuStr = str
+        if (data.label&&data.label.length > 0) {
+            this.data.requestBody.sendlabel = data.label
+            this.data.requestBody.stuStr = data.labelStr
+        } else {
+            this.data.requestBody.involve = JSON.stringify(involves)
+            this.data.requestBody.stuStr = str
+        }
+
         this.setData({
                 requestBody: this.data.requestBody,
                 departData: data.mDataDepartment,

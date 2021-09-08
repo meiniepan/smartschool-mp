@@ -41,6 +41,6 @@
         <input placeholder="请填写日程的具体信息" maxlength="20" bindinput="doInput" data-type="remark" value="{{requestBody.remark}}"/>
     </view>
     <view class="bottom">
-        <view class="confirm" bindtap="doConfirm">提交</view>
+        <view class="confirm" bindtap="doConfirm">确定</view>
     </view>
 </view>

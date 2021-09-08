@@ -2,16 +2,7 @@
 page {
 background: var(--tintBac);
 }
-.navi-1{
-    font-size: 28rpx;
-    color: var(--themeColor);
-}
-.act{
-    width: 20rpx;
-    height: 20rpx;
-    padding: 20rpx;
-    margin-right: 40rpx;
-}
+
 .tabs {
     border-top: var(--splitColor) 1rpx solid;
     border-bottom: var(--splitColor) 1rpx solid;
@@ -47,9 +38,30 @@ background: var(--tintBac);
     color: var(--themeColor);
     box-sizing: border-box;
 }
-
-.cells {
+.check {
+    width: 36rpx;
+    height: 36rpx;
+    margin-right: 16rpx;
+}
+.cells-label {
     margin-top: 140rpx;
+    background: var(--white);
+    padding: 20rpx 20rpx 20rpx var(--titlePadding);
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+    box-sizing: border-box;
+    border-bottom: var(--splitColor) 1rpx solid;
+}
+
+.cell-label {
+    display: flex;
+    margin-right: 20rpx;
+    width: calc((100% - 60rpx) / 3);
+    height: var(--textHeight);
+    align-items: center;
+}
+.cells {
     background: var(--white);
     padding: 40rpx calc(var(--titlePadding) - 20rpx) 20rpx var(--titlePadding);
     display: flex;
@@ -176,4 +188,22 @@ background: var(--tintBac);
     width: 100%;
     height: 20rpx;
     background: var(--tintBac);
+}
+.bottom{
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    display: flex;
+    flex-direction: row-reverse;
+    height: 84rpx;
+    background: var(--grayF6);
+}
+.confirm{
+    display: flex;
+    width: 172rpx;
+    height: 100%;
+    background: var(--themeBac);
+    color: var(--white);
+    align-items: center;
+    justify-content: center;
 }

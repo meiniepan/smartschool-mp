@@ -1,32 +1,45 @@
 <!--pages/addInvolve/addInvolve.wxml-->
 <view class="out">
-    <navigation title="组织架构" >
-        <image class="act" src="../../assets/images/icon_back_black_a.png" mode="widthFix" bindtap="doFinish"></image>
-        <view class="navi-1" bindtap="doConfirm">{{confirmStr}}</view>
-    </navigation>
-    <view class="tabs" style="margin-top: {{navigationHeight}}px">
+
+    <view class="tabs">
         <view wx:if="{{!onlyStu}}" class="{{mCurrent==0?'tab-self':'tab-share'}}" bindtap="checkPri">组织架构</view>
-        <view wx:if="{{!onlyDep}}" class="{{mCurrent!=0?'tab-self':'tab-share'}}" style="margin-left: {{marginLeft}}" bindtap="checkPub">我的班级</view>
+        <view wx:if="{{!onlyDep}}" class="{{mCurrent!=0?'tab-self':'tab-share'}}" style="margin-left: {{marginLeft}}"
+              bindtap="checkPub">我的班级
+        </view>
     </view>
+
+    <view class="cells-label">
+        <view class="cell-label" wx:for="{{mDataLabel}}" wx:key="index" data-position="{{index}}" bindtap="doCheck">
+            <image class="check" bindtap="" mode="heightFix" data-position="{{index}}"
+                   src="../../assets/images/{{item.checked?'ic_check_timetable_true':'ic_check_timetable_false'}}.png"></image>
+            <view class="text">{{item.name}}</view>
+        </view>
+    </view>
+
     <emptyView wx:if="{{isEmpty}}"/>
     <view class="cells" wx:else>
         <view class="cell" wx:for="{{mData}}" wx:key="index" data-position="{{index}}" bindtap="doDetail">
             <view class="title0">{{item.name}}</view>
-        <view wx:if="{{item.num>0}}" class="num">{{item.num}}</view>
+            <view wx:if="{{item.num>0}}" class="num">{{item.num}}</view>
         </view>
     </view>
     <view class="involve-area" wx:if="{{mDataInvolve.length>0}}">
-    <view class="manage-area">
-        <view class="title">参与人</view>
-        <view class="manage" bindtap="doManage">{{isManage?'完成':'管理'}}</view>
-    </view>
-    <view class="cells0">
-        <view class="cell0" wx:for="{{mDataInvolve}}" wx:for-index="idx" wx:for-item="bean" wx:key="idx"
-              data-position="{{idx}}" bindtap="doDelete">
-            <view class="label-c">{{bean.label}}</view>
-            <image wx:if="{{isManage}}" class="delete" src="../../assets/images/ic_no.png" mode="heightFix"/>
-            <view class="name singleLine">{{bean.realname}}</view>
+        <view class="manage-area">
+            <view class="title">参与人</view>
+            <view class="manage" bindtap="doManage">{{isManage?'完成':'管理'}}</view>
+        </view>
+        <view class="cells0">
+            <view class="cell0" wx:for="{{mDataInvolve}}" wx:for-index="idx" wx:for-item="bean" wx:key="idx"
+                  data-position="{{idx}}" bindtap="doDelete">
+                <view class="label-c">{{bean.label}}</view>
+                <image wx:if="{{isManage}}" class="delete" src="../../assets/images/ic_no.png" mode="heightFix"/>
+                <view class="name singleLine">{{bean.realname}}</view>
+            </view>
         </view>
     </view>
-    </view>
+<view style="display:flex;width: 100%;height: 84rpx">_</view>
+
+</view>
+<view class="bottom">
+    <view class="confirm" bindtap="doConfirm">{{confirmStr}}</view>
 </view>

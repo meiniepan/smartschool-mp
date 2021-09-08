@@ -10,6 +10,10 @@ Page({
         navigationHeight: app.globalData.navigationHeight,
         mCurrent: 0, // 当前tab
         mData: [],
+        mDataLabel: [{label: "all",name: "所有人",checked:false},
+            {label: "teacher",name: "所有老师",checked:false},
+            {label: "classmaster",name: "所有班主任",checked:false},
+            {label: "students",name: "所有学生",checked:false},],
         mDataDepartment: [],
         mDataClasses: [],
         mDataDepartment2: [],
@@ -62,6 +66,15 @@ Page({
         }
 
 
+    },
+    doCheck(e){
+        var p = e.currentTarget.dataset.position
+        var checked = this.data.mDataLabel[p].checked
+        this.data.mDataLabel[p].checked = !checked
+
+        this.setData({
+            mDataLabel:this.data.mDataLabel
+        })
     },
     getList(type, folderid, init) {
         let that = this, url = ""
@@ -317,9 +330,24 @@ Page({
         })
     },
     doConfirm() {
+        let label = ""
+        let labelStr = ""
+        this.data.mDataLabel.forEach(item=>{
+            if (item.checked){
+                label = label + item.label+","
+                labelStr = labelStr + item.name+","
+            }
+        })
+        if (label.length>0){
+            label = label.substring(0,label.length-1)
+            labelStr = labelStr.substring(0,labelStr.length-1)
+        }
+        console.log(label)
         let data = {}
         data.mDataDepartment = this.data.mDataDepartment
         data.mDataClasses = this.data.mDataClasses
+        data.label = label
+        data.labelStr = labelStr
         console.log('data', data)
         this.getOpenerEventChannel().emit('quantizeSpecial', data)
         wx.navigateBack({
