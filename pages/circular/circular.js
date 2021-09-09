@@ -20,6 +20,7 @@ Page({
      */
     onLoad: function (options) {
         app.checkUpdate()
+
     },
 
     /**
@@ -34,6 +35,7 @@ Page({
      */
     onShow: function () {
         this.refresh();
+        this.getSemester()
     },
     getList(type) {
         let url;
@@ -155,6 +157,21 @@ Page({
             let data = res.respResult.data;
             this.refresh();
 
+        });
+
+
+    },
+    getSemester() {
+        let url="/api/v17/global/setting/semesters";
+
+        let data = {
+            token: wx.getStorageSync('token'),
+        }
+
+        app.httpPost(url, data, false).then((res) => {
+            let data = res.respResult;
+            wx.setStorageSync('stime',data.starttime)
+            wx.setStorageSync('etime',data.endtime)
         });
 
 

@@ -90,17 +90,22 @@ Page({
         })
     },
     check2(){
-        let temp = new Date()
-        let year = temp.getFullYear()
-        let month = temp.getMonth() + 1
-        let date = temp.getDate()
-        if(month>8){
-
-        }else {
-            year = year-1
+        var stime = wx.getStorageSync('stime')
+        var etime = wx.getStorageSync('etime')
+        if (stime.length >= 8) {
+            stime = stime.substring(0, 4) + "-" + stime.substring(
+                4,
+                6
+            ) + "-" + stime.substring(6, 8)
         }
-        this.data.requestBody.stime = year+"-09-01"
-        this.data.requestBody.etime = year+1+"-08-31"
+        if (etime.length >= 8) {
+            etime = etime.substring(0, 4) + "-" + etime.substring(
+                4,
+                6
+            ) + "-" + etime.substring(6, 8)
+        }
+        this.data.requestBody.stime = stime
+        this.data.requestBody.etime = etime
         this.setData({
             checked1:false,
             checked2:true,
@@ -114,7 +119,7 @@ Page({
 
         console.log('depart',depart)
         wx.navigateTo({
-            url: "../addInvolve/addInvolve?data=" + JSON.stringify(depart)
+            url: "../addInvolve/addInvolvedata=" + JSON.stringify(depart)
                 + '&data2=' + JSON.stringify(classes)
                 + '&type=1' ,
             events: {
