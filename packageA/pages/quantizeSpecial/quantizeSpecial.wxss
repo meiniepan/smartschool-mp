@@ -13,6 +13,31 @@
     display: flex;
     white-space: nowrap;
 }
+.label{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50rpx;
+    height: 50rpx;
+    background: white;
+    border-radius: 50%;
+    border: 1rpx solid var(--themeColor);
+    color: var(--themeColor);
+    box-sizing: border-box;
+    margin-left: 40rpx;
+}
+.label-checked{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50rpx;
+    height: 50rpx;
+    background: var(--themeBac);
+    border-radius: 50%;
+    color: white;
+    box-sizing: border-box;
+    margin-left: 40rpx;
+}
 .item-remark{
     display: flex;
     flex-direction: column;
@@ -24,6 +49,14 @@
     text-align: right;
     margin-left: 20rpx;
     margin-right: 10rpx;
+}
+.value1{
+    margin-right: 10rpx;
+}
+.value0{
+    display: flex;
+    align-items: center;
+    flex-direction: row;
 }
 .next{
     width: 20rpx;

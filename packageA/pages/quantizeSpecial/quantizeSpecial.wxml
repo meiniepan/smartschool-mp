@@ -7,24 +7,35 @@
         <view class="value hint singleLine">{{requestBody.stuStr}}</view>
         <image class="next" src="../../assets/images/ic_next.png" style="height: 28rpx" mode="widthFix"></image>
     </view>
-    <picker mode="date" value="" start="2020-09-01" end="2025-09-01"
-            data-type="indexClass" bindchange="bindTimeS">
-        <view class="item">
-            <view class="key text bold">选择开始时间</view>
-            <view class="require bold">*</view>
-            <view class="value hint">{{requestBody.stime}}</view>
+
+    <view class="item">
+        <view class="key text bold">选择开始时间</view>
+        <view class="require bold">*</view>
+
+        <view class="{{checked1?'label-checked':'label'}}" bindtap="check1">期</view>
+        <view class="{{checked2?'label-checked':'label'}}" bindtap="check2">年</view>
+        <view style="flex-grow: 1"></view>
+        <picker mode="date" value=""
+                data-type="indexClass" bindchange="bindTimeS">
+            <view class="value0">
+            <view class="value1 hint">{{requestBody.stime}}</view>
             <image class="next" src="../../assets/images/ic_next.png" style="height: 28rpx" mode="widthFix"></image>
-        </view>
-    </picker>
-    <picker mode="date" value="" start="2020-09-01" end="2025-09-01"
-            data-type="indexClass" bindchange="bindTimeE">
-        <view class="item">
-            <view class="key text bold">选择结束时间</view>
-            <view class="require bold">*</view>
-            <view class="value hint">{{requestBody.etime}}</view>
+            </view>
+        </picker>
+    </view>
+
+    <view class="item">
+        <view class="key text bold">选择结束时间</view>
+        <view class="require bold">*</view>
+        <view style="flex-grow: 1"></view>
+        <picker mode="date" value=""
+                data-type="indexClass" bindchange="bindTimeE">
+            <view class="value0">
+            <view class="value1 hint">{{requestBody.etime}}</view>
             <image class="next" src="../../assets/images/ic_next.png" style="height: 28rpx" mode="widthFix"></image>
-        </view>
-    </picker>
+            </view>
+        </picker>
+    </view>
     <picker bindchange="doAct"
             data-type="indexAct" value="{{requestBody.actname}}" range="{{actArrays}}">
         <view class="item">
@@ -68,10 +79,11 @@
     <view class="layout0">
         <view class="cells">
             <view class="cell" wx:for="{{ruleArrays}}" wx:key="index" data-index="{{index}}" bindtap="checkRule">
-                <view >
+                <view>
                     {{item.typename}}
                 </view>
-                <image wx:if="{{item.checked}}" class="image" mode="heightFix" src="../../assets/images/ic_check_multi.png"/>
+                <image wx:if="{{item.checked}}" class="image" mode="heightFix"
+                       src="../../assets/images/ic_check_multi.png"/>
             </view>
         </view>
         <view class="layout1">

@@ -71,6 +71,42 @@ Page({
             })
         });
     },
+    check1(){
+        let temp = new Date()
+        let year = temp.getFullYear()
+        let month = temp.getMonth() + 1
+        let date = temp.getDate()
+        if(month>8){
+
+        }else {
+            year = year-1
+        }
+        this.data.requestBody.stime = year+"-09-01"
+        this.data.requestBody.etime = year+1+"-08-31"
+        this.setData({
+            checked1:true,
+            checked2:false,
+            requestBody:this.data.requestBody,
+        })
+    },
+    check2(){
+        let temp = new Date()
+        let year = temp.getFullYear()
+        let month = temp.getMonth() + 1
+        let date = temp.getDate()
+        if(month>8){
+
+        }else {
+            year = year-1
+        }
+        this.data.requestBody.stime = year+"-09-01"
+        this.data.requestBody.etime = year+1+"-08-31"
+        this.setData({
+            checked1:false,
+            checked2:true,
+            requestBody:this.data.requestBody,
+        })
+    },
     doChooseStudent() {
         let that = this
         let depart = that.data.departData
