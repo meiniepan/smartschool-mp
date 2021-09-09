@@ -24,7 +24,6 @@
         "pages/addRepair/addRepair",
         "pages/cloud/cloud",
         "pages/cloudFolder/cloudFolder",
-        "pages/videoPlayer/videoPlayer",
         "pages/repairList/repairList",
         "pages/bookSiteList/bookSiteList",
         "pages/bookSite/bookSite",

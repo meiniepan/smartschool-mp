@@ -185,11 +185,7 @@ Page({
         let url2 = encodeURIComponent(e.currentTarget.dataset.url);
         console.log("url3", e.currentTarget.dataset.url)
 
-        if (isVideo(url)) {
-            wx.navigateTo({
-                url: `../videoPlayer/videoPlayer?url=${url}`,
-            });
-        } else if (isImage(url)) {
+        if (isImage(url)) {
             let u = []
             u.push(url)
             wx.previewImage({

@@ -95,12 +95,13 @@ Page({
                 url: '/packageA/pages/cloudFolder/cloudFolder?bean=' + JSON.stringify(bean),
             })
         } else {
-            if (isVideo(bean.objectid)) {
-                let url = bean.objectid;
-                wx.navigateTo({
-                    url: `../videoPlayer/videoPlayer?url=${url}`,
-                });
-            } else if(isImage(bean.objectid)) {
+            // if (isVideo(bean.objectid)) {
+            //     let url = bean.objectid;
+            //     wx.navigateTo({
+            //         url: `../videoPlayer/videoPlayer?url=${url}`,
+            //     });
+            // } else
+             if(isImage(bean.objectid)) {
                 let u = []
                 u.push(bean.objectid)
                 wx.previewImage({
