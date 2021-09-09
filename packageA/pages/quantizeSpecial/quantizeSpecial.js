@@ -44,7 +44,7 @@ Page({
         const hour = date.getHours()
         const minute = date.getMinutes()
         const second = date.getSeconds()
-        if (hour>7&&minute>30){
+        if (hour > 7 || (hour == 7 && minute > 30)){
 
         }else {
             this.setData({
@@ -198,11 +198,7 @@ Page({
         })
     },
     doRule() {
-        let canCheck = false
-        let time0 = this.data.requestBody.etime
-        if (time0 != "请选择结束时间"){
 
-        }
         this.setData({
             show: true,
             overlay: true,
