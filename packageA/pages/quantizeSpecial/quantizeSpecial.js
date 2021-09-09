@@ -23,6 +23,7 @@ Page({
         ruleArrays: [],
         departData: [],
         classData: [],
+        canCheck: false,
     },
 
     /**
@@ -35,13 +36,28 @@ Page({
         })
 
         this.getMoralTypeList()
+
+        let date = new Date()
+        const year = date.getFullYear()
+        const month = date.getMonth() + 1
+        const day = date.getDate()
+        const hour = date.getHours()
+        const minute = date.getMinutes()
+        const second = date.getSeconds()
+        if (hour>7&&minute>30){
+
+        }else {
+            this.setData({
+                canCheck:true,
+            })
+        }
     },
     doConfirm() {
         let bean = this.data.requestBody
-        bean.token= wx.getStorageSync('token')
-        if (bean.involve.length == 0 || bean.stime=="请选择开始时间"||
-            bean.etime=="请选择结束时间" || bean.actname=="请选择情况类型" ||
-            bean.rulename=="请选择影响项目" || bean.remark==null|| bean.remark=='') {
+        bean.token = wx.getStorageSync('token')
+        if (bean.involve.length == 0 || bean.stime == "请选择开始时间" ||
+            bean.etime == "请选择结束时间" || bean.actname == "请选择情况类型" ||
+            bean.rulename == "请选择影响项目" || bean.remark == null || bean.remark == '') {
             showToastWithoutIcon('请完善信息')
             return
         }
@@ -51,7 +67,7 @@ Page({
         app.httpPost(url, data).then((res) => {
             showToastWithoutIcon('处理完成')
             wx.navigateBack({
-                delta:1
+                delta: 1
             })
         });
     },
@@ -71,25 +87,25 @@ Page({
             })
         });
     },
-    check1(){
+    check1() {
         let temp = new Date()
         let year = temp.getFullYear()
         let month = temp.getMonth() + 1
         let date = temp.getDate()
-        if(month>8){
+        if (month > 8) {
 
-        }else {
-            year = year-1
+        } else {
+            year = year - 1
         }
-        this.data.requestBody.stime = year+"-09-01"
-        this.data.requestBody.etime = year+1+"-08-31"
+        this.data.requestBody.stime = year + "-09-01"
+        this.data.requestBody.etime = year + 1 + "-08-31"
         this.setData({
-            checked1:true,
-            checked2:false,
-            requestBody:this.data.requestBody,
+            checked1: true,
+            checked2: false,
+            requestBody: this.data.requestBody,
         })
     },
-    check2(){
+    check2() {
         var stime = wx.getStorageSync('stime')
         var etime = wx.getStorageSync('etime')
         if (stime.length >= 8) {
@@ -107,9 +123,9 @@ Page({
         this.data.requestBody.stime = stime
         this.data.requestBody.etime = etime
         this.setData({
-            checked1:false,
-            checked2:true,
-            requestBody:this.data.requestBody,
+            checked1: false,
+            checked2: true,
+            requestBody: this.data.requestBody,
         })
     },
     doChooseStudent() {
@@ -117,11 +133,11 @@ Page({
         let depart = that.data.departData
         let classes = that.data.classData
 
-        console.log('depart',depart)
+        console.log('depart', depart)
         wx.navigateTo({
             url: "../addInvolve/addInvolvedata=" + JSON.stringify(depart)
                 + '&data2=' + JSON.stringify(classes)
-                + '&type=1' ,
+                + '&type=1',
             events: {
                 // 为指定事件添加一个监听器，获取被打开页面传送到当前页面的数据
                 quantizeSpecial: function (data) {
@@ -135,16 +151,16 @@ Page({
         let str = '', involves = []
 
         data.mDataDepartment.forEach(it => {
-            if (it.num>0){
-                it.list.forEach(it=>{
+            if (it.num > 0) {
+                it.list.forEach(it => {
                     str = str + it.realname + "、"
                     involves.push(it)
                 })
             }
         })
         data.mDataClasses.forEach(it => {
-            if (it.num>0){
-                it.list.forEach(it=>{
+            if (it.num > 0) {
+                it.list.forEach(it => {
                     str = str + it.realname + "、"
                     involves.push(it)
                 })
@@ -182,6 +198,11 @@ Page({
         })
     },
     doRule() {
+        let canCheck = false
+        let time0 = this.data.requestBody.etime
+        if (time0 != "请选择结束时间"){
+
+        }
         this.setData({
             show: true,
             overlay: true,
@@ -200,26 +221,32 @@ Page({
         })
 
         let bean = this.data.requestBody
-        let str = '',types = ''
-        this.data.ruleArrays.forEach(it=>{
-            if (it.checked){
+        let str = '', types = ''
+        this.data.ruleArrays.forEach(it => {
+            if (it.checked) {
                 str = str + it.typename + ","
                 types = types + it.id + ","
             }
         })
-        if (str.length>1){
+        if (str.length > 1) {
             str = str.substring(0, str.length - 1)
             bean.rulename = str
             bean.types = types
             this.setData({
-                requestBody:bean
+                requestBody: bean
             })
         }
     },
     checkRule(e) {
         var v = this.data.ruleArrays
         console.log("idx", e.currentTarget.dataset)
-        v[e.currentTarget.dataset.index].checked = !v[e.currentTarget.dataset.index].checked
+        if (v[e.currentTarget.dataset.index].typename=='入校迟到') {
+            if(this.data.canCheck){
+                v[e.currentTarget.dataset.index].checked = !v[e.currentTarget.dataset.index].checked
+            }
+        } else {
+            v[e.currentTarget.dataset.index].checked = !v[e.currentTarget.dataset.index].checked
+        }
         this.setData({
             ruleArrays: v,
         })
