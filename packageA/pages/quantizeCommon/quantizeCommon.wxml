@@ -28,11 +28,11 @@
                 <view wx:if="{{item.rules.required.required}}" class="require bold">*</view>
                 <view class="value"></view>
                 <image class="" data-position="{{index}}" bindtap="doMinus" src="../../assets/images/ic_jian.png"
-                       style="width: 72rpx" mode="widthFix"></image>
+                       style="height:72rpx;width: 72rpx" mode="widthFix"></image>
                 <input value="{{item.value}}" class="number" type="number" data-position="{{index}}"
                        bindinput="doInputNum"/>
                 <image class="" data-position="{{index}}" bindtap="doPlus" src="../../assets/images/ic_jia.png"
-                       style="width: 72rpx;margin-left: 40rpx" mode="widthFix"></image>
+                       style="height:72rpx;width: 72rpx;margin-left: 40rpx" mode="widthFix"></image>
             </view>
 
             <picker wx:if="{{item.name=='Radio'}}" data-position="{{index}}" bindchange="doAct"
