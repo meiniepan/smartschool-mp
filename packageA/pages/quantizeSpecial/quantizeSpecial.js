@@ -208,7 +208,7 @@ Page({
         const minute = date.getMinutes()
         const second = date.getSeconds()
 
-        let mill1 = new Date(year,month,day).getTime()
+        let mill1 = new Date(year,month-1,day).getTime()
         let stime = this.data.requestBody.stime
         if(stime!="请选择开始时间"){
             let mill2 = new Date(stime.replace(/-/g,  "/")).getTime()
