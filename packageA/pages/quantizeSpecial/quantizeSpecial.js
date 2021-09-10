@@ -44,6 +44,8 @@ Page({
         const hour = date.getHours()
         const minute = date.getMinutes()
         const second = date.getSeconds()
+
+        let mill1 = new Date(year,month,day).getTime()
         if (hour > 7 || (hour == 7 && minute > 30)){
 
         }else {
@@ -198,10 +200,28 @@ Page({
         })
     },
     doRule() {
+        let date = new Date()
+        const year = date.getFullYear()
+        const month = date.getMonth() + 1
+        const day = date.getDate()
+        const hour = date.getHours()
+        const minute = date.getMinutes()
+        const second = date.getSeconds()
 
+        let mill1 = new Date(year,month,day).getTime()
+        let stime = this.data.requestBody.stime
+        if(stime!="请选择开始时间"){
+            let mill2 = new Date(stime.replace(/-/g,  "/")).getTime()
+            console.log("mill1",mill1)
+            console.log("mill2",mill2)
+            if (mill2>mill1){
+                this.data.canCheck = true
+            }
+        }
         this.setData({
             show: true,
             overlay: true,
+            canCheck:this.data.canCheck,
         })
     },
     doBtn1() {
