@@ -19,14 +19,14 @@
           "scene": null
         },
         {
-          "name": "pages/cloud/cloud",
-          "pathName": "pages/cloud/cloud",
+          "name": "pages/addSchedule/addSchedule",
+          "pathName": "pages/addSchedule/addSchedule",
           "query": "",
           "scene": null
         },
         {
-          "name": "packageA/pages/quantize/quantize",
-          "pathName": "packageA/pages/quantize/quantize",
+          "name": "packageA/pages/addSchedule/addSchedule",
+          "pathName": "packageA/pages/addSchedule/addSchedule",
           "query": "",
           "scene": null
         },

@@ -42,10 +42,11 @@ Page({
 
         app.httpPost(url, data).then((res) => {
             let mData = res.respResult
+            console.log("data",mData)
             if (mData.template.length > 0) {
                 mData.template = JSON.parse(mData.template)
                 mData.template.forEach(it => {
-                    it.mNumber = 0
+                    it.mNumber = parseInt(it.value)
                 })
             } else {
                 mData.template = []
@@ -115,11 +116,13 @@ Page({
     },
     doMinus(e) {
         const p = e.currentTarget.dataset.position;
-        console.log('template', this.data.mData.template[p])
 
         let mNumber = this.data.mData.template[p].mNumber
-        if (mNumber > 0) {
-            mNumber -= 1
+        if (mNumber > this.data.mData.template[p].setting.min) {
+            mNumber -= this.data.mData.template[p].setting.step
+            if(mNumber < this.data.mData.template[p].setting.min){
+                mNumber = this.data.mData.template[p].setting.min
+            }
             this.data.mData.template[p].value = mNumber.toString()
             this.data.mData.template[p].mNumber = mNumber
             this.data.mData.template[p].rules.required.hasValue = mNumber == null
@@ -135,11 +138,18 @@ Page({
         const p = e.currentTarget.dataset.position;
 
         let mNumber = this.data.mData.template[p].mNumber
-        mNumber += 1
-        this.data.mData.template[p].value = mNumber.toString()
-        this.data.mData.template[p].mNumber = mNumber
-        this.data.mData.template[p].rules.required.hasValue = mNumber == null
-        this.data.requestBody.score = mNumber.toString()
+        if (mNumber < this.data.mData.template[p].setting.max) {
+            mNumber += this.data.mData.template[p].setting.step
+            if(mNumber > this.data.mData.template[p].setting.max){
+                mNumber = this.data.mData.template[p].setting.max
+            }
+            this.data.mData.template[p].value = mNumber.toString()
+            this.data.mData.template[p].mNumber = mNumber
+            this.data.mData.template[p].rules.required.hasValue = mNumber == null
+            this.data.requestBody.score = mNumber.toString()
+        } else {
+            showToastWithoutIcon("不能再加了~")
+        }
 
         this.setData({
             mData: this.data.mData
