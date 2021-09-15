@@ -9,11 +9,14 @@ Page({
    * Page initial data
    */
   data: {
-    name: "",
-    classCode: "",
+    realname: "",
+    invitecode: "",
     phone: "",
+    cno: "",
+    sno: "",
+    eduid: "",
     vcode: "",
-    pwd: "",
+    spassword: "",
     vcodeStr: "发送验证码",
     count: 60,   // 倒计时的秒数
     countConst: 60,
@@ -75,19 +78,25 @@ Page({
     });
 },
   login: function () {
-    let name = this.data.name
-    let classCode = this.data.classCode
+    let realname = this.data.realname
+    let invitecode = this.data.invitecode
     let phone = this.data.phone
+    let cno = this.data.cno
+    let sno = this.data.sno
+    let eduid = this.data.eduid
     let vcode = this.data.vcode
-    let pwd = this.data.pwd
+    let spassword = this.data.spassword
 
-    if (phone.length > 0 && classCode.length > 0 && name.length > 0 && vcode.length > 0) {
+    if (phone.length > 0 && invitecode.length > 0 && realname.length > 0 && vcode.length > 0) {
       let data = {
         phone: phone,
+        sno,
+        cno,
+        eduid,
         vcode: vcode,
-        invitecode: vcode,
-        realname: vcode,
-        spassword: vcode,
+        invitecode,
+        realname,
+        spassword,
       }
       app.httpPost('/api/v17/user/login/register', data).then((res) => {
           wx.redirectTo({

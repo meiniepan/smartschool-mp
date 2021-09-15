@@ -5,20 +5,29 @@
         <view>填写下面信息进行注册吧！</view>
     </view>
     <view class="name-area">
-        <input placeholder="输入真实姓名" bindinput="doInput" data-type="name"></input>
+        <input placeholder="输入真实姓名" bindinput="doInput" data-type="realname"></input>
     </view>
     <view class="phone-area">
-        <input placeholder="输入班级邀请码" bindinput="doInput" data-type="classCode"></input>
+        <input placeholder="输入班级邀请码" bindinput="doInput" data-type="invitecode"></input>
     </view>
     <view class="phone-area">
         <input type="number" placeholder="输入手机号" bindinput="doInput" data-type="phone" value="{{phone}}"></input>
+    </view>
+    <view class="phone-area">
+        <input type="number" placeholder="输入学号" bindinput="doInput" data-type="cno" value="{{cno}}"></input>
+    </view>
+    <view class="phone-area">
+        <input type="number" placeholder="输入教育号" bindinput="doInput" data-type="sno" value="{{sno}}"></input>
+    </view>
+    <view class="phone-area">
+        <input type="number" placeholder="输入教育ID" bindinput="doInput" data-type="eduid" value="{{eduid}}"></input>
     </view>
     <view class="vcode-area">
         <input type="number" placeholder="输入验证码" bindinput="doInput" data-type="vcode" value="{{vcode}}"></input>
         <text class="vcode" bindtap="doSend">{{vcodeStr}}</text>
     </view>
     <view class="vcode-area">
-        <input placeholder="请设置8位密码" bindinput="doInput" password="{{!isShowPassword}}" data-type="pwd"></input>
+        <input placeholder="请设置8位密码" bindinput="doInput" password="{{!isShowPassword}}" data-type="spassword"></input>
         <image class="showPwd" src="../../assets/images/{{isShowPassword ? 'ic_eye_no' : 'ic_eye'}}.png"
             bindtap="showPassword"></image>
     </view>

@@ -73,6 +73,7 @@ page {
   justify-content: space-between;
   padding: 200rpx 0;
   box-sizing: border-box;
+
 }
 .out{
   display: flex;
@@ -80,6 +81,7 @@ page {
   width: 100vw;
   height: 100vh;
   font-size: 28rpx;
+  box-sizing: border-box;
 }
 .split{
   display: flex;

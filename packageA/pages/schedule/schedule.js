@@ -51,8 +51,9 @@ Page({
         })
     },
     getDataDay(day) {
-        day = day.replaceAll('/','')
-        day = day.replaceAll('-','')
+        let s = "/"
+            day = day.replace(new RegExp(s,'g'),'')
+            day = day.replace(/-/g,"")
         let url;
         if (wx.getStorageSync('usertype') === "1") {
             url = "/api/v17/student/schedules/listDWM"
@@ -116,11 +117,9 @@ Page({
             data.forEach((item) => {
                 mDataMonth.push(item)
             });
-            console.log("mDataMonth", mDataMonth)
             this.setData({
                 mDataMonth: mDataMonth,
             });
-            console.log("mDataMonth2", this.data.mDataMonth)
         });
     },
     nextMonth(e) {

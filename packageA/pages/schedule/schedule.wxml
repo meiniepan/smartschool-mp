@@ -24,7 +24,7 @@
                 </view>
 
 
-                <view class="remark">{{item.remarkStr}}</view>
+                <view class="remark" wx:if="{{item.remark.length>0}}">{{item.remarkStr}}</view>
             </view>
         </view>
     </view>
