@@ -14,13 +14,13 @@
         <input type="number" placeholder="输入手机号" bindinput="doInput" data-type="phone" value="{{phone}}"></input>
     </view>
     <view class="phone-area">
-        <input type="number" placeholder="输入学号" bindinput="doInput" data-type="cno" value="{{cno}}"></input>
+        <input type="number" placeholder="输入学号（选填）" bindinput="doInput" data-type="cno" value="{{cno}}"></input>
     </view>
     <view class="phone-area">
-        <input type="number" placeholder="输入教育号" bindinput="doInput" data-type="sno" value="{{sno}}"></input>
+        <input type="number" placeholder="输入教育号（选填）" bindinput="doInput" data-type="sno" value="{{sno}}"></input>
     </view>
     <view class="phone-area">
-        <input type="number" placeholder="输入教育ID" bindinput="doInput" data-type="eduid" value="{{eduid}}"></input>
+        <input type="number" placeholder="输入教育ID（选填）" bindinput="doInput" data-type="eduid" value="{{eduid}}"></input>
     </view>
     <view class="vcode-area">
         <input type="number" placeholder="输入验证码" bindinput="doInput" data-type="vcode" value="{{vcode}}"></input>
