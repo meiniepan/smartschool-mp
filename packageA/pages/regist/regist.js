@@ -24,11 +24,6 @@ Page({
     interval: "",
     isShowPassword: false
   },
-  doRegist() {
-    wx.navigateTo({
-      url: '/packageA/pages/regist/regist',
-    })
-  },
 
   doSend() {
     if (this.data.isDisabled) {

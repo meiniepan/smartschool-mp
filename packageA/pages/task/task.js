@@ -43,6 +43,7 @@ Page({
         let statusStrArrS = ["全部", "未完成", "已完成"]; // 分类菜单数据,学生
         let statusArrT = ['-1', "1", "0", "3"]; // 分类菜单数据, 老师
         let statusStrArrT = ["全部", "进行中", "草稿箱", "已关闭"]; // 分类菜单数据, 老师
+        console.log("type",wx.getStorageSync('usertype'))
         if (wx.getStorageSync('usertype') === "1") {
             statusArr = statusArrS
             statusStrArr = statusStrArrS
@@ -183,14 +184,16 @@ Page({
         let status = this.data.status
         let stime = this.data.stime
         let etime = this.data.etime
-        this.setCurrentData(currentCur, pageData);
+
 
         let url = pageData.url;
         let data;
         if (currentCur == 0) {
-            if (wx.getStorageSync('usertype') == '1') {
-                return;
-            }
+            // if (wx.getStorageSync('usertype') == '1') {
+            //     pageData.requesting = false;
+            //     this.setCurrentData(currentCur, pageData);
+            //     return;
+            // }
             data = {
                 token: wx.getStorageSync('token'),
                 id: lastid,
@@ -208,6 +211,7 @@ Page({
             }
 
         }
+        this.setCurrentData(currentCur, pageData);
         console.log('data', data)
         app.httpPost(url, data).then((res) => {
 

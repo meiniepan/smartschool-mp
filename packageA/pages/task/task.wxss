@@ -3,13 +3,13 @@ page {
   background-color: var(--tintBac);
 }
 .tabs {
-  border-top: var(--splitColor) 1rpx solid;
   border-bottom: var(--splitColor) 1rpx solid;
   padding: 24rpx var(--titlePadding);
   display: flex;
   align-content: space-between;
   position: fixed;
   width: 100%;
+  margin-top: 1rpx;
   box-sizing: border-box;
   background: var(--white);
   z-index: 9;
@@ -48,7 +48,10 @@ page {
   display: flex;
   align-items: center;
 }
-
+.label{
+  display: flex;
+  white-space:nowrap ;
+}
 
 .cells {
   padding-top: 20rpx;
