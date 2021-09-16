@@ -189,11 +189,7 @@ Page({
         let url = pageData.url;
         let data;
         if (currentCur == 0) {
-            // if (wx.getStorageSync('usertype') == '1') {
-            //     pageData.requesting = false;
-            //     this.setCurrentData(currentCur, pageData);
-            //     return;
-            // }
+
             data = {
                 token: wx.getStorageSync('token'),
                 id: lastid,
@@ -210,6 +206,15 @@ Page({
                 etime: etime,
             }
 
+        }
+        if (wx.getStorageSync('usertype') == '1') {
+            data = {
+                token: wx.getStorageSync('token'),
+                id: lastid,
+                completestatus: status,
+                stime: stime,
+                etime: etime,
+            }
         }
         this.setCurrentData(currentCur, pageData);
         console.log('data', data)
