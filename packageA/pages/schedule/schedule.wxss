@@ -67,6 +67,8 @@ page {
 }
 
 .title {
+    font-size: 30rpx;
+    font-weight: bold;
     display: -webkit-box;
     flex-grow: 1;
     -webkit-box-orient: vertical;

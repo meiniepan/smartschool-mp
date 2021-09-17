@@ -197,7 +197,7 @@ Page({
         });
     },
     refresh() {
-        console.log('domain', wx.getStorageSync('domain'))
+        console.log('uid', wx.getStorageSync('uid'))
         this.setData({
             lastId: null
         });

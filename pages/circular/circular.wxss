@@ -39,7 +39,7 @@ page {
 
 .titles {
   display: flex;
-  font-size: 28rpx;
+
   align-items: center;
 }
 
@@ -50,7 +50,8 @@ page {
 }
 
 .title {
-
+  font-size: 30rpx;
+  font-weight: bold;
   flex-grow: 1;
   display: -webkit-box;
   -webkit-box-orient: vertical;
@@ -69,11 +70,9 @@ page {
 
 .tag1 {
   margin-top: 12rpx;
-  font-size: 24rpx;
   color: var(--themeColor);
 }
 .tag2 {
   margin-top: 12rpx;
-  font-size: 24rpx;
   color: var(--commonHint);
 }

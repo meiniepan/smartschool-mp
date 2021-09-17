@@ -72,12 +72,12 @@ page {
 
 .titles {
   display: flex;
-  font-size: 28rpx;
   align-items: center;
   justify-content: space-between;
 }
 .title {
   font-weight: bold;
+  font-size: 30rpx;
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 1;
@@ -92,11 +92,9 @@ page {
 
 .tag {
   margin-top: 12rpx;
-  font-size: 24rpx;
 }
 .tag1 {
   margin-top: 22rpx;
-  font-size: 24rpx;
 }
 .addBtn{
   position: fixed;
