@@ -21,7 +21,7 @@ Page({
         let date = temp.getDate()
         let today = year + '/' + zero(month) + '/' + zero(date)
         this.setData({
-            mMonth:year + zero(month),
+            mMonth:year.toString() + zero(month),
             mDay:today,
         })
 
@@ -51,7 +51,7 @@ Page({
         let oldTime = (new Date(day)).getTime() + 24 * 3600 * 1000;
         console.log("oldTime", (new Date(day)).getTime())
         let temp = new Date(oldTime);
-        let nextDay = temp.getFullYear() +
+        let nextDay = temp.getFullYear().toString() +
             zero(temp.getMonth() + 1) +
             zero(temp.getDate())
         console.log("day+next", day + "==" + nextDay)
@@ -59,7 +59,7 @@ Page({
         let data = {
             token: wx.getStorageSync('token'),
             starttime: day,
-            endtime: nextDay
+            endtime: day
         }
         app.httpPost(url, data).then((res) => {
             let data = res.respResult.data;
@@ -78,6 +78,7 @@ Page({
                         timeE.length - 5,
                         timeE.length
                     )
+                    item.timeStr2 = item.oetime + "~" + (timeE)
                 }
 
                 item.timeStr = timeB + "~" + (timeE)

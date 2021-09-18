@@ -96,7 +96,7 @@ Component({
             year = temp.getFullYear()
             month = temp.getMonth() + 1
             date = temp.getDate()
-            today = year + this.zero(month) + this.zero(date)
+            today = year.toString() + this.zero(month) + this.zero(date)
             select = today
             this.setData({
                 year,
@@ -115,7 +115,7 @@ Component({
         select: function (e) {
             let day = e.currentTarget.dataset.index
             let select =
-                this.data.year +
+                this.data.year.toString() +
                 day.monthFormat +
                 day.dateFormat
             let select2 =
@@ -167,7 +167,7 @@ Component({
                     dateFormat = this.zero(i)
                 //是否特殊
 
-                if (this.data.today === year + monthFormat + dateFormat) {
+                if (this.data.today === year.toString() + monthFormat + dateFormat) {
                     color = "#FBB347";
                 }
                 thisDays.push({

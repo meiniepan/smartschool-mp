@@ -23,7 +23,7 @@ Page({
         this.setData({
             mDay: today,
             today2,
-            mMonth:year + zero(month),
+            mMonth:year.toString() + zero(month),
         })
     },
     /**

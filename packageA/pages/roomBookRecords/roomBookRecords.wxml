@@ -12,7 +12,7 @@
                 </view>
                 <view class="titles">
                     <view class="title-name">预约时间</view>
-                    <view class="title">{{item.timeStr}}</view>
+                    <view class="title">{{item.timeStr2}}</view>
                 </view>
 
                 <view class="titles">
