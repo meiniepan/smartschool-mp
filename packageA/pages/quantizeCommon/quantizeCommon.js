@@ -42,7 +42,7 @@ Page({
 
         app.httpPost(url, data).then((res) => {
             let mData = res.respResult
-            console.log("data",mData)
+            console.log("data", mData)
             if (mData.template.length > 0) {
                 mData.template = JSON.parse(mData.template)
                 mData.template.forEach(it => {
@@ -72,9 +72,9 @@ Page({
 
     doConfirm() {
         let bean = this.data.requestBody
-        bean.token= wx.getStorageSync('token')
+        bean.token = wx.getStorageSync('token')
         let cc = this.data.mData.template
-        for (let i = 0; i <cc.length ; i++) {
+        for (let i = 0; i < cc.length; i++) {
             if (cc[i].rules.required.required == true) {
                 if (cc[i].rules.required.hasValue != true) {
                     showToastWithoutIcon('请完善信息')
@@ -87,7 +87,7 @@ Page({
         bean.typeid = this.data.bean.id
         let url = "/api/v17/moral/moralScore/add"
         let data = bean
-        console.log('body',data)
+        console.log('body', data)
         app.httpPost(url, data).then((res) => {
             showToastWithoutIcon('处理完成')
             wx.navigateBack({
@@ -106,9 +106,17 @@ Page({
     },
     doInputNum: function (e) {
         const p = e.currentTarget.dataset.position;
-        this.data.mData.template[p].value = e.detail.value
-        this.data.mData.template[p].mNumber = e.detail.value
-        this.data.mData.template[p].rules.required.hasValue = e.detail.value.length > 0
+        let ss = e.detail.value
+        if (ss < this.data.mData.template[p].setting.min) {
+            ss = this.data.mData.template[p].setting.min
+            showToastWithoutIcon("注意最小值~")
+        } else if (ss > this.data.mData.template[p].setting.max) {
+            ss = this.data.mData.template[p].setting.max
+            showToastWithoutIcon("注意最大值~")
+        }
+        this.data.mData.template[p].value = ss
+        this.data.mData.template[p].mNumber = ss
+        this.data.mData.template[p].rules.required.hasValue = ss.length > 0
 
         this.setData({
             mData: this.data.mData
@@ -120,7 +128,7 @@ Page({
         let mNumber = this.data.mData.template[p].mNumber
         if (mNumber > this.data.mData.template[p].setting.min) {
             mNumber -= this.data.mData.template[p].setting.step
-            if(mNumber < this.data.mData.template[p].setting.min){
+            if (mNumber < this.data.mData.template[p].setting.min) {
                 mNumber = this.data.mData.template[p].setting.min
             }
             this.data.mData.template[p].value = mNumber.toString()
@@ -140,7 +148,7 @@ Page({
         let mNumber = this.data.mData.template[p].mNumber
         if (mNumber < this.data.mData.template[p].setting.max) {
             mNumber += this.data.mData.template[p].setting.step
-            if(mNumber > this.data.mData.template[p].setting.max){
+            if (mNumber > this.data.mData.template[p].setting.max) {
                 mNumber = this.data.mData.template[p].setting.max
             }
             this.data.mData.template[p].value = mNumber.toString()
@@ -263,9 +271,9 @@ Page({
         let v = this.data.requestBody
         v.etime = e.detail.value
         const p = e.currentTarget.dataset.position;
-        this.data.mData.template[p].value = v.stime+'至'+v.etime
+        this.data.mData.template[p].value = v.stime + '至' + v.etime
         this.setData({
-            mData:this.data.mData,
+            mData: this.data.mData,
             requestBody: v,
         })
     },
