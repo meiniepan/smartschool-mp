@@ -3,7 +3,7 @@
   <view class="viewItem">
     <view class="viewItem1">
       <image class="img1" src="{{icon}}"></image>
-      <text>{{text}}</text>
+      <text class="text">{{text}}</text>
     </view>
     <image class="img2" mode="heightFix" src="../../assets/images/ic_next.png" />
   </view>

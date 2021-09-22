@@ -1,8 +1,31 @@
 /* pages/bind_parent/bind_parent.wxss */
 .cell{
+    display: flex;
     margin-left: var(--titlePadding);
     padding-right: var(--titlePadding);
+    align-items: center;
     padding-top: 30rpx;
     padding-bottom: 30rpx;
     border-bottom: var(--splitColor) solid 1rpx;
+}
+.title{
+    display: flex;
+    flex-grow: 1;
+}
+.act0{
+    display: flex;
+    width: 100rpx;
+    height: 44rpx;
+    align-items: center;
+    justify-content: center;
+    border-radius: 22rpx;
+    border: 1rpx solid var(--themeColor);
+    color: var(--themeColor);
+}
+.bottom{
+    width: 100%;
+    padding: 0 var(--titlePadding);
+    box-sizing: border-box;
+    position: absolute;
+    bottom: 200rpx;
 }

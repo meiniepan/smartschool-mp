@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "commonButton": "/components/commonButton/commonButton"
+  },
+  "navigationBarTitleText": "添加家长",
+  "disableScroll": true,
+  "backgroundTextStyle": "dark"
+}

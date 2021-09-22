@@ -38,6 +38,7 @@
         "pages/choose_child/choose_child",
         "pages/my_code/my_code",
         "pages/bind_parent/bind_parent",
+        "pages/bind_parent_2/bind_parent_2",
         "pages/setting/setting",
         "pages/systemMsg/systemMsg",
         "pages/protocol/protocol",

@@ -1,0 +1,9 @@
+<!--packageA/pages/bind_parent_2/bind_parent_2.wxml-->
+<view class="out">
+    <input type="number" class="phone" placeholder="请输入家长手机号" data-type="phone" bindinput="doInput"/>
+    <view class="ovcode">
+        <input type="number" class="vcode" placeholder="输入验证码" data-type="vcode" bindinput="doInput"></input>
+        <text class="send" bindtap="doSend">{{vcodeStr}}</text>
+    </view>
+    <commonButton class="bottom" bindtap="doConfirm"></commonButton>
+</view>

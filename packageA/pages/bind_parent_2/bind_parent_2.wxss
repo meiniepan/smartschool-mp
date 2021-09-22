@@ -1,0 +1,33 @@
+/* packageA/pages/bind_parent_2/bind_parent_2.wxss */
+page{
+    background: var(--tintBac);
+}
+.phone {
+    margin-top: 244rpx;
+    font-size: 32rpx;
+    padding: 28rpx var(--titlePadding);
+    border-bottom: var(--splitColor) solid 1rpx;
+}
+
+.ovcode {
+    display: flex;
+    justify-content: space-between;
+    padding: 28rpx var(--titlePadding);
+    border-bottom: var(--splitColor) solid 1rpx;
+}
+
+.vcode {
+    font-size: 32rpx;
+}
+
+.send {
+    color: var(--themeColor);
+}
+
+.bottom{
+    width: 100%;
+    padding: 0 var(--titlePadding);
+    box-sizing: border-box;
+    position: absolute;
+    bottom: 200rpx;
+}

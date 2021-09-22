@@ -5,6 +5,10 @@
     <view class="cells" wx:else>
         <view class="cell" wx:for="{{mData}}" wx:key="index">
             <text class="title">{{item.phone}}</text>
+            <view class="act0" bindtap="act0" data-phone="{{item.phone}}">解绑</view>
         </view>
+    </view>
+    <view class="bottom">
+        <commonButton class="btn-confirm" bindtap="confirm" text="添加家长" />
     </view>
 </view>

@@ -1,5 +1,6 @@
 {
   "usingComponents": {
+    "commonButton": "/components/commonButton/commonButton",
     "emptyView": "/components/emptyView/emptyView"
   },
   "navigationBarTitleText": "绑定家长"
