@@ -78,7 +78,7 @@ Page({
                         timeE.length - 5,
                         timeE.length
                     )
-                    item.timeStr2 = item.oetime + "~" + (timeE)
+                    item.timeStr2 = item.ostime + "~" + (timeE)
                 }
 
                 item.timeStr = timeB + "~" + (timeE)
