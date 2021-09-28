@@ -47,7 +47,7 @@ Page({
                     }
                     let timeStr = ""
                     if (item.oetime.length > 5) {
-                        timeStr = item.ostime + "-" + item.oetime.substring(item.oetime.length - 5, item.oetime.length)
+                        timeStr = item.ostime + "~" + item.oetime.substring(item.oetime.length - 5, item.oetime.length)
                     }
                     item.statusStr = statusStr;
                     item.timeStr = timeStr;
