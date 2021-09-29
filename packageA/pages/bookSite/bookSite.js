@@ -20,9 +20,14 @@ Page({
         let month = temp.getMonth() + 1
         let date = temp.getDate()
         let today = year + '/' + zero(month) + '/' + zero(date)
+        let canAdd = false
+        if (app.checkRule2("admin/spacebook/add")) {
+            canAdd = true
+        }
         this.setData({
-            mMonth:year.toString() + zero(month),
-            mDay:today,
+            mMonth: year.toString() + zero(month),
+            mDay: today,
+            canAdd,
         })
 
     },
@@ -30,7 +35,7 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow: function () {
-        if(this.data.onReady){
+        if (this.data.onReady) {
             this.getDataDay(this.data.mDay)
             this.getDataMonth(this.data.mMonth)
         }
@@ -43,7 +48,7 @@ Page({
         this.getDataDay(this.data.mDay)
         this.getDataMonth(this.data.mMonth)
         this.setData({
-            onReady:true,
+            onReady: true,
         })
     },
     getDataDay(day) {
@@ -126,21 +131,21 @@ Page({
     },
     nextMonth(e) {
         this.setData({
-            mMonth:e.detail
+            mMonth: e.detail
         })
         this.getDataMonth(e.detail)
         this.selectComponent(".c2").nextMonth(e)
     },
     lastMonth(e) {
         this.setData({
-            mMonth:e.detail
+            mMonth: e.detail
         })
         this.getDataMonth(e.detail)
         this.selectComponent(".c2").lastMonth(e)
     },
     doSelect(e) {
         this.setData({
-            mDay:e.detail
+            mDay: e.detail
         })
         this.getDataDay(e.detail)
     },
@@ -151,9 +156,7 @@ Page({
     },
 
 
-
-
-        /**
+    /**
      * 生命周期函数--监听页面隐藏
      */
     onHide: function () {

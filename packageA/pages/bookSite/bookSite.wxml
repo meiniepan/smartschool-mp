@@ -34,5 +34,5 @@
             </view>
         </view>
     </view>
-    <image class="addBtn" bindtap="doAdd" src="../../assets/images/ic_add_common.png" mode="widthFix"></image>
+    <image wx:if="{{canAdd}}" class="addBtn" bindtap="doAdd" src="../../assets/images/ic_add_common.png" mode="widthFix"></image>
 </view>

@@ -64,7 +64,9 @@ Page({
             if (this.data.isModify && this.data.requestBody.cuser_id != wx.getStorageSync("uid")) {
 
             } else {
-                showChooseStudent = true
+                if (app.checkRule2("admin/schedules/add")){
+                    showChooseStudent = true
+                }
             }
         }
         this.setData({
