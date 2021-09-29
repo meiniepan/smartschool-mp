@@ -137,7 +137,7 @@ Page({
 
         console.log('depart', depart)
         wx.navigateTo({
-            url: "../addInvolve/addInvolvedata=" + JSON.stringify(depart)
+            url: "../addInvolve/addInvolve?data=" + JSON.stringify(depart)
                 + '&data2=' + JSON.stringify(classes)
                 + '&type=1',
             events: {
