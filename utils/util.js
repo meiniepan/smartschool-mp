@@ -61,13 +61,9 @@ function showModal(content,title='温馨提示') {
         content: content,
         success(res) {
             if (res.confirm) {
-                wx.navigateBack({
-                    delta: 1,
-                })
+
             } else if (res.cancel) {
-                wx.navigateBack({
-                    delta: 1,
-                })
+
             }
         },
         confirmColor: "#F95B49",

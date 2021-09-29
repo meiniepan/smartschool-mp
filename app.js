@@ -377,6 +377,8 @@ App({
         siteTitle: "场地预约",
         attendanceTitle: "学生考勤",
         achievementTitle: "成绩汇总",
-        timetableTitle: "我的课表"
+        timetableTitle: "我的课表",
+
+        deleteSure: "确定删除？",
     }
 })

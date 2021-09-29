@@ -2,6 +2,7 @@
 import {showToastWithoutIcon} from "../../../utils/util";
 
 let app = getApp()
+const globalData = getApp().globalData;
 Page({
 
     /**
@@ -29,21 +30,34 @@ Page({
         })
     },
     doDelete() {
-        let bean = this.data.bean
-        let url = ''
+        wx.showModal({
+            title: '温馨提示',
+            content: globalData.deleteSure,
+            success:(res)=> {
+                if (res.confirm) {
+                    let bean = this.data.bean
+                    let url = ''
 
-        if (wx.getStorageSync("usertype") == "1") {
-            url = '/api/v17/student/schedules/del'
-        } else {
-            url = '/api/v17/teacher/schedules/del'
-        }
-        let data = bean
-        app.httpPost(url, data).then((res) => {
-            showToastWithoutIcon('处理完成')
-            wx.navigateBack({
-                delta: 1
-            })
-        });
+                    if (wx.getStorageSync("usertype") == "1") {
+                        url = '/api/v17/student/schedules/del'
+                    } else {
+                        url = '/api/v17/teacher/schedules/del'
+                    }
+                    let data = bean
+                    app.httpPost(url, data).then((res) => {
+                        showToastWithoutIcon('处理完成')
+                        wx.navigateBack({
+                            delta: 1
+                        })
+                    });
+                } else if (res.cancel) {
+
+                }
+            },
+            confirmColor: "#F95B49",
+        })
+
+
     },
     /**
      * 生命周期函数--监听页面初次渲染完成
