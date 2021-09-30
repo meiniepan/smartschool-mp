@@ -10,7 +10,8 @@ Page({
     data: {
         requestBody: {
             token: '',
-
+            score: "",
+            correctscore: "",
             remark: null,
         },
         bean: {},
@@ -46,7 +47,17 @@ Page({
             if (mData.template.length > 0) {
                 mData.template = JSON.parse(mData.template)
                 mData.template.forEach(it => {
-                    it.mNumber = parseInt(it.value)
+                    if (it.name == "InputNumber") {
+                        if (it.label == "扣分") {
+                            this.data.requestBody.score = it.value
+                        } else if (it.label == "综合加分") {
+                            this.data.requestBody.correctscore = it.value
+                        }
+                        it.mNumber = parseInt(it.value)
+                    }
+                    if (it.value != null && it.value.length > 0) {
+                        it.rules.required.hasValue = true
+                    }
                 })
             } else {
                 mData.template = []
@@ -64,6 +75,7 @@ Page({
                 this.setData({
                     mData,
                     mDataClasses,
+                    requestBody: this.data.requestBody,
                 })
             })
 
@@ -77,7 +89,12 @@ Page({
         for (let i = 0; i < cc.length; i++) {
             if (cc[i].rules.required.required == true) {
                 if (cc[i].rules.required.hasValue != true) {
-                    showToastWithoutIcon('请完善信息')
+                    let s = '请完善信息'
+                    let message = cc[i].rules.required.message
+                    if (message != null&&message.length>0) {
+                        s = message
+                    }
+                    showToastWithoutIcon(s)
                     return
                 }
             }
@@ -87,7 +104,6 @@ Page({
         bean.typeid = this.data.bean.id
         let url = "/api/v17/moral/moralScore/add"
         let data = bean
-        console.log('body', data)
         app.httpPost(url, data).then((res) => {
             showToastWithoutIcon('处理完成')
             wx.navigateBack({
@@ -98,10 +114,12 @@ Page({
     doInput: function (e) {
         const p = e.currentTarget.dataset.position;
         this.data.mData.template[p].value = e.detail.value
+
         this.data.mData.template[p].rules.required.hasValue = e.detail.value.length > 0
 
         this.setData({
-            mData: this.data.mData
+            mData: this.data.mData,
+            requestBody: this.data.requestBody,
         });
     },
     doInputNum: function (e) {
@@ -116,10 +134,16 @@ Page({
         }
         this.data.mData.template[p].value = ss
         this.data.mData.template[p].mNumber = ss
+        if (this.data.mData.template[p].label == "扣分") {
+            this.data.requestBody.score = ss
+        } else if (this.data.mData.template[p].label == "综合加分") {
+            this.data.requestBody.correctscore = ss
+        }
         this.data.mData.template[p].rules.required.hasValue = ss.length > 0
 
         this.setData({
-            mData: this.data.mData
+            mData: this.data.mData,
+            requestBody: this.data.requestBody,
         });
     },
     doMinus(e) {
@@ -134,12 +158,17 @@ Page({
             this.data.mData.template[p].value = mNumber.toString()
             this.data.mData.template[p].mNumber = mNumber
             this.data.mData.template[p].rules.required.hasValue = mNumber == null
-            this.data.requestBody.score = mNumber.toString()
+            if (this.data.mData.template[p].label == "扣分") {
+                this.data.requestBody.score = mNumber.toString()
+            } else if (this.data.mData.template[p].label == "综合加分") {
+                this.data.requestBody.correctscore = mNumber.toString()
+            }
         } else {
             showToastWithoutIcon("不能再减了~")
         }
         this.setData({
-            mData: this.data.mData
+            mData: this.data.mData,
+            requestBody: this.data.requestBody,
         });
     },
     doPlus(e) {
@@ -154,13 +183,18 @@ Page({
             this.data.mData.template[p].value = mNumber.toString()
             this.data.mData.template[p].mNumber = mNumber
             this.data.mData.template[p].rules.required.hasValue = mNumber == null
-            this.data.requestBody.score = mNumber.toString()
+            if (this.data.mData.template[p].label == "扣分") {
+                this.data.requestBody.score = mNumber.toString()
+            } else if (this.data.mData.template[p].label == "综合加分") {
+                this.data.requestBody.correctscore = mNumber.toString()
+            }
         } else {
             showToastWithoutIcon("不能再加了~")
         }
 
         this.setData({
-            mData: this.data.mData
+            mData: this.data.mData,
+            requestBody: this.data.requestBody,
         });
     },
     doAct(e) {
@@ -184,13 +218,14 @@ Page({
         })
     },
     doRule(e) {
-        let cc = this.data.mData.template[e.currentTarget.dataset.position].selections
+        let p = e.currentTarget.dataset.position
+        let cc = this.data.mData.template[p].selections
         if (cc.length > 0 && cc[0].name == null) {
             cc.forEach((it, index, arr) => {
                 arr[index] = {name: it, checked: false}
             })
         }
-
+        this.data.mData.template[p].rules.required.hasValue = true
         this.setData({
             choosePosition: e.currentTarget.dataset.position,
             mData: this.data.mData,
