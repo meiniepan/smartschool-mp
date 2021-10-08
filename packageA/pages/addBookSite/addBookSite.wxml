@@ -20,7 +20,7 @@
             <image class="next" src="../../assets/images/ic_next.png" style="height: 28rpx" mode="widthFix"></image>
         </view>
     </picker>
-    <picker bindchange="doAct" bindtap=""
+    <picker bindchange="doAct" bindtap="doAct2"
             data-type="indexAct" value="{{requestBody.roomname}}" range="{{roomArr}}">
         <view class="item">
             <view class="key text bold">会议室</view>

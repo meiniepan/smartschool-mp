@@ -19,6 +19,7 @@ Page({
             os_position: '',
             oe_position: '',
         },
+        isEnd:false,
         basePosition: 0,
         stimeArr: [],
         etimeArr: [],
@@ -168,6 +169,7 @@ Page({
 
     bindTimeS(e) {
         let v = this.data.requestBody
+        v.roomname = "请选择可用会议室"
         let p = parseInt(e.detail.value)
         console.log('basePosition', p + 1)
         v.ostime = this.data.today + this.data.time24Arr[p]
@@ -181,16 +183,20 @@ Page({
             requestBody: v,
             etimeArr: arr,
             basePosition: p + 1,
+            roomArr: [],
+            isEnd: false,
         })
     },
     bindTimeE(e) {
         let v = this.data.requestBody
+        v.roomname = "请选择可用会议室"
         let p = parseInt(e.detail.value)
         let p2 = this.data.basePosition + p
         console.log('p..p2', p + ".." + p2)
         v.oetime = this.data.today + this.data.time24Arr[p2]
         this.setData({
             requestBody: v,
+            isEnd: true,
         })
         this.getRoomList()
     },
@@ -201,6 +207,13 @@ Page({
         this.setData({
             requestBody: v,
         })
+    },
+    doAct2(e) {
+        if (!this.data.isEnd) {
+            showToastWithoutIcon('请重新选择结束时间')
+            return
+        }
+
     },
     doInput: function (e) {
         const v = this.data.requestBody;
