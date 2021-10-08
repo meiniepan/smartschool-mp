@@ -54,6 +54,7 @@
         "pages/achievement/achievement",
         "pages/attendance/attendance",
         "pages/attendance2/attendance2",
+        "pages/test/test",
         "pages/webDetail/webDetail"
       ]
 
