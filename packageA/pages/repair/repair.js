@@ -269,7 +269,15 @@ Page({
             urls: u // 需要预览的图片http链接列表
         })
     },
-
+    makeCall(event) {
+        let number = event.currentTarget.dataset.src
+        wx.makePhoneCall({
+            phoneNumber: number,
+            success: function () {
+                console.log("成功拨打电话")
+            },
+        })
+    },
     doBtnFinish() {
         let bean = this.data.requestBody
         if (this.data.showFinish){

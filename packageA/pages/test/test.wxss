@@ -9,3 +9,8 @@
     height: 500rpx;
     background-color: #FFFFFF;
 }
+.charts2 {
+    width: 1000rpx;
+    height: 500rpx;
+    background-color: #FFFFFF;
+}

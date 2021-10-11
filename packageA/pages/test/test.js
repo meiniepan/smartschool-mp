@@ -38,8 +38,8 @@ Page({
         Candle.categories = res.data.data.Candle.categories;
         Candle.series = res.data.data.Candle.series;
         _self.showColumn("canvasColumn", Column);
-        // _self.showLineA("canvasLineA", LineA);
-        // _self.showCandle("canvasCandle", Candle);
+        _self.showLineA("canvasLineA", LineA);
+        _self.showCandle("canvasCandle", Candle);
 
         let data3 = {
           "categories": [
