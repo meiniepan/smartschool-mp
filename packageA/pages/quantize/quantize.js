@@ -33,7 +33,9 @@ Page({
             let data = res.respResult.data
             let mData = [], mDataType = []
             mData.push({typename: '特殊情况报备'})
-            mData = mData.concat(data)
+            if (app.checkRule2("moral/moralScore/add")) {
+                mData = mData.concat(data)
+            }
             mDataType = data
             this.setData({
                 mData,
