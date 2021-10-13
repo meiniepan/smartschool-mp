@@ -45,12 +45,12 @@ Page({
         const minute = date.getMinutes()
         const second = date.getSeconds()
 
-        let mill1 = new Date(year,month,day).getTime()
-        if (hour > 7 || (hour == 7 && minute > 30)){
+        let mill1 = new Date(year, month, day).getTime()
+        if (hour > 7 || (hour == 7 && minute > 30)) {
 
-        }else {
+        } else {
             this.setData({
-                canCheck:true,
+                canCheck: true,
             })
         }
     },
@@ -208,20 +208,20 @@ Page({
         const minute = date.getMinutes()
         const second = date.getSeconds()
 
-        let mill1 = new Date(year,month-1,day).getTime()
+        let mill1 = new Date(year, month - 1, day).getTime()
         let stime = this.data.requestBody.stime
-        if(stime!="请选择开始时间"){
-            let mill2 = new Date(stime.replace(/-/g,  "/")).getTime()
-            console.log("mill1",mill1)
-            console.log("mill2",mill2)
-            if (mill2>mill1){
+        if (stime != "请选择开始时间") {
+            let mill2 = new Date(stime.replace(/-/g, "/")).getTime()
+            console.log("mill1", mill1)
+            console.log("mill2", mill2)
+            if (mill2 > mill1) {
                 this.data.canCheck = true
             }
         }
         this.setData({
             show: true,
             overlay: true,
-            canCheck:this.data.canCheck,
+            canCheck: this.data.canCheck,
         })
     },
     doBtn1() {
@@ -256,8 +256,8 @@ Page({
     checkRule(e) {
         var v = this.data.ruleArrays
         console.log("idx", e.currentTarget.dataset)
-        if (v[e.currentTarget.dataset.index].typename=='入校迟到') {
-            if(this.data.canCheck){
+        if (v[e.currentTarget.dataset.index].typename == '入校迟到') {
+            if (this.data.canCheck) {
                 v[e.currentTarget.dataset.index].checked = !v[e.currentTarget.dataset.index].checked
             }
         } else {
