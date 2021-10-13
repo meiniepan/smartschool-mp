@@ -89,7 +89,7 @@ Page({
             })
         });
     },
-    check1() {
+    check2() {
         let temp = new Date()
         let year = temp.getFullYear()
         let month = temp.getMonth() + 1
@@ -102,12 +102,12 @@ Page({
         this.data.requestBody.stime = year + "-09-01"
         this.data.requestBody.etime = year + 1 + "-08-31"
         this.setData({
-            checked1: true,
-            checked2: false,
+            checked1: false,
+            checked2: true,
             requestBody: this.data.requestBody,
         })
     },
-    check2() {
+    check1() {
         var stime = wx.getStorageSync('stime')
         var etime = wx.getStorageSync('etime')
         if (stime.length >= 8) {
@@ -125,8 +125,8 @@ Page({
         this.data.requestBody.stime = stime
         this.data.requestBody.etime = etime
         this.setData({
-            checked1: false,
-            checked2: true,
+            checked1: true,
+            checked2: false,
             requestBody: this.data.requestBody,
         })
     },
