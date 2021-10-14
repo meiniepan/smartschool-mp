@@ -139,7 +139,8 @@ Page({
         wx.navigateTo({
             url: "../addInvolve/addInvolve?data=" + JSON.stringify(depart)
                 + '&data2=' + JSON.stringify(classes)
-                + '&type=1',
+                + '&type=1'
+                + '&all=0',
             events: {
                 // 为指定事件添加一个监听器，获取被打开页面传送到当前页面的数据
                 quantizeSpecial: function (data) {

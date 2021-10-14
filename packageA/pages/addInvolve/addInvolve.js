@@ -46,6 +46,9 @@ Page({
         }
         this.doInit()
 
+        this.setData({
+            fromType: options.all
+        })
         if (options.type == '1') {
             this.setData({
                 onlyStu: true,
@@ -81,14 +84,23 @@ Page({
         let that = this, url = ""
         let urlLeft = "/api/v17/teacher/departments/treeDep"
         let urlRight = "/api/v17/teacher/classs/treeClass"
-        if (type === 0) {
-            url = urlLeft
-        } else {
-            url = urlRight
-        }
         let data = {
             token: wx.getStorageSync('token'),
         }
+        if (type === 0) {
+            url = urlLeft
+        } else {
+            if (this.data.fromType=="0"){
+
+            }else {
+                data = {
+                    token: wx.getStorageSync('token'),
+                    isall:"all",
+                }
+            }
+            url = urlRight
+        }
+
         app.httpPost(url, data).then((res) => {
             let data = [];
             if (type === 0) {
@@ -132,9 +144,9 @@ Page({
             }
 
             let mDataDepartment, mDataClasses, isEmpty
+            isEmpty = data.length == 0
             if (type === 0) {
                 mDataDepartment = data
-                isEmpty = data.length == 0
             } else {
                 mDataClasses = data
             }
@@ -153,6 +165,7 @@ Page({
                     this.setData({
                         mData: data,
                         mDataClasses,
+                        isEmpty
                     });
                 }
 
