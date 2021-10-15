@@ -91,7 +91,7 @@ Page({
         // wx.chooseMessageFile({
         //     count: 10,
         //     type: 'all',
-        //     success: function (res) {
+        //     success: res=> {
         //         var tempFilePaths = res.tempFilePaths
         //         console.log('chooseImage success, temp path is: ', tempFilePaths[0])
         //         wx.uploadFile({
@@ -106,7 +106,7 @@ Page({
         //                 success_action_status: "200",
         //                 signature: "xxxxxxxxxxxxxxxxxxxxxxxxxx",
         //             },
-        //             success: function (res) {
+        //             success: res=> {
         //                 console.log('chooseImage success, temp path is: ', tempFilePaths[0])
         //                 wx.showToast({
         //                     title: "上传成功",
@@ -126,7 +126,7 @@ Page({
         // })
 
         wx.chooseImage({
-            success: function (res) {
+            success: res=> {
                 var tempFilePaths = res.tempFilePaths
                 console.log('chooseImage success, temp path is: ', res)
                 app.ossUpload(tempFilePaths[0], tempFilePaths[0],{

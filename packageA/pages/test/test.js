@@ -21,7 +21,7 @@ Page({
       url: 'https://www.ucharts.cn/data.json',
       data: {
       },
-      success: function (res) {
+      success: res=> {
         console.log(res.data.data)
         let Column = { categories: [], series: [] };
         Column.categories = res.data.data.ColumnB.categories;

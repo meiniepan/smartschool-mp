@@ -1,13 +1,32 @@
 <!--pages/addInvolve/addInvolve.wxml-->
 <view class="out">
-
-    <view class="tabs">
-        <view wx:if="{{!onlyStu}}" class="{{mCurrent==0?'tab-self':'tab-share'}}" bindtap="checkPri">组织架构</view>
-        <view wx:if="{{!onlyDep}}" class="{{mCurrent!=0?'tab-self':'tab-share'}}" style="margin-left: {{marginLeft}}"
-              bindtap="checkPub">我的班级
+    <view class="top">
+        <view class="search-area">
+            <image style="width: 28rpx;height: 28rpx" mode="heightFix" src="../../assets/images/ic_search.png"></image>
+            <input class="search hint singleLine" maxlength="20" placeholder="搜索姓名查找信息" bindinput="doInput"
+                   bindconfirm="doSearch" confirm-type="search" data-type="realname"/>
+            <image wx:if="{{b0}}" style="width: 28rpx;height: 28rpx;margin-left: 10rpx" mode="heightFix"
+                   src="../../assets/images/ic_search_clear.png" bindtap="doClear"></image>
+        </view>
+        <view class="search-result" wx:if="{{b0}}">
+        <emptyView wx:if="{{isEmpty0}}"/>
+        <view class="cells2" wx:else>
+            <view class="cell2" wx:for="{{mData0}}" wx:key="index" data-bean="{{item}}" bindtap="doDetail0">
+                <view class="search2">{{item.realname}}</view>
+                <view class="search2">{{item.d}}</view>
+            </view>
+        </view>
+        </view>
+        <view wx:if="{{!b0}}" class="tabs">
+            <view wx:if="{{!onlyStu}}" class="{{mCurrent==0?'tab-self':'tab-share'}}" bindtap="checkPri">组织架构</view>
+            <view wx:if="{{!onlyDep}}" class="{{mCurrent!=0?'tab-self':'tab-share'}}"
+                  style="margin-left: {{marginLeft}}"
+                  bindtap="checkPub">我的班级
+            </view>
         </view>
     </view>
-    <view style="margin-top: 140rpx; "></view>
+    <view wx:if="{{!b0}}" class="other">
+    <view style="margin-top: 260rpx; "></view>
 
     <view class="cells-label" hidden="{{hideLabel}}">
         <view class="cell-label" wx:for="{{mDataLabel}}" wx:key="index" data-position="{{index}}" bindtap="doCheck">
@@ -43,4 +62,5 @@
     <view class="bottom">
         <view class="confirm" bindtap="doConfirm">{{confirmStr}}</view>
     </view>
+</view>
 </view>

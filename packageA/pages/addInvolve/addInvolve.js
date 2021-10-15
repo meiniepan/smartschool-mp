@@ -10,10 +10,10 @@ Page({
         navigationHeight: app.globalData.navigationHeight,
         mCurrent: 0, // 当前tab
         mData: [],
-        mDataLabel: [{label: "all",name: "所有人",checked:false},
-            {label: "teacher",name: "所有老师",checked:false},
-            {label: "classmaster",name: "所有班主任",checked:false},
-            {label: "students",name: "所有学生",checked:false},],
+        mDataLabel: [{label: "all", name: "所有人", checked: false},
+            {label: "teacher", name: "所有老师", checked: false},
+            {label: "classmaster", name: "所有班主任", checked: false},
+            {label: "students", name: "所有学生", checked: false},],
         mDataDepartment: [],
         mDataClasses: [],
         mDataDepartment2: [],
@@ -24,6 +24,8 @@ Page({
         marginLeft: "34rpx",
         onlyDep: false,
         onlyStu: false,
+        b0: false,
+        mData0: [],
     },
     /**
      * 生命周期函数--监听页面加载
@@ -52,7 +54,7 @@ Page({
         if (options.type == '1') {
             this.setData({
                 onlyStu: true,
-                hideLabel:true,
+                hideLabel: true,
                 marginLeft: "0",
                 mCurrent: 1, // 当前tab
             })
@@ -71,13 +73,167 @@ Page({
 
 
     },
-    doCheck(e){
+    doSearch(e) {
+        let key = e.detail.value
+        console.log("key", key)
+        if (key.length > 0) {
+            let url = "/api/v17/teacher/teacher/listByDep"
+            let data = {
+                token: wx.getStorageSync('token'),
+                realname: key,
+            }
+
+
+            app.httpPost(url, data).then((res) => {
+                let data = res.respResult.data;
+                data.forEach(res => {
+                    res.d = res.dep_name
+                })
+
+
+                let url2 = "/api/v17/teacher/student/listByClass"
+                let data2 = {
+                    token: wx.getStorageSync('token'),
+                    realname: key,
+                }
+
+                if (this.data.fromType == "0") {
+
+                } else {
+                    data2 = {
+                        token: wx.getStorageSync('token'),
+                        realname: key,
+                        isall: "all",
+                    }
+                }
+
+                app.httpPost(url2, data2).then((res) => {
+                    let data2 = res.respResult.data;
+                    data2.forEach(res => {
+                        res.d = res.levelclass
+                    })
+                    data = data.concat(data2)
+                    let isEmpty0
+                    isEmpty0 = data.length == 0
+                    this.setData({
+                        isEmpty0,
+                        mData0: data,
+                        b0: true,
+                    })
+                })
+            })
+        }
+    },
+    doClear() {
+        this.setData({
+            b0: false,
+        })
+    },
+    doDetail0(e) {
+        let bean = e.currentTarget.dataset.bean
+        var pId = ""
+        var tab1 = "0"
+        var tab2 = "1"
+        var studentBean = {
+            uid: bean.uid,
+            realname: bean.realname,
+            label: bean.realname[bean.realname.length - 1],
+            usertype: bean.usertype,
+            topdepartid: bean.deps[0].topdepartid,
+            secdepartid: bean.deps[0].secdepartid,
+            choice: "1",
+            parentId: pId
+        }
+        var msg = bean.realname + ""
+        wx.showModal({
+            title: '请确认身份',
+            content: msg,
+            success: res => {
+                if (res.confirm) {
+                    console.log("mm", this.data.mDataDepartment)
+                    if (!studentBean.topdepartid.length > 0) {
+                        //学生
+                        studentBean.parentId = tab2 + "_" + bean.classid
+                        console.log("par", studentBean.parentId)
+                        this.data.mDataClasses.forEach(it => {
+                            if (studentBean.parentId == it.id) {
+                                var bb = false
+                                it.list.forEach(it => {
+                                    if (it.uid == studentBean.uid) {
+                                        bb = true
+                                    }
+                                })
+                                if (!bb) {
+                                    if (it.num == "0") {
+                                        it.list = []
+                                        it.list.push(studentBean)
+                                    } else {
+                                        it.list.push(studentBean)
+                                    }
+                                    it.num = (parseInt(it.num) + 1).toString()
+                                }
+                            }
+                        })
+                    } else {
+                        studentBean.parentId = tab1 + "_" + studentBean.topdepartid
+                        console.log("par", studentBean.parentId)
+                        this.data.mDataDepartment.forEach(it => {
+                            if (studentBean.parentId == it.id) {
+                                var bb = false
+                                it.list.forEach
+                                {
+                                    if (it.uid == studentBean.uid) {
+                                        bb = true
+                                    }
+                                }
+                                if (!bb) {
+                                    if (it.num == "0") {
+                                        it.list = []
+                                        it.list.push(studentBean)
+                                    } else {
+                                        it.list.push(studentBean)
+                                    }
+                                    it.num = (
+                                        parseInt(it.num) + 1
+                                    ).toString()
+                                }
+                            }
+                        })
+                    }
+                    var bb = false
+                    this.data.mDataInvolve.forEach(it => {
+                        if (it.uid == studentBean.uid && it.parentId == studentBean.parentId) {
+                            bb = true
+                        }
+                    })
+                    if (!bb) {
+
+                        this.data.mDataInvolve.push(
+                            studentBean
+                        )
+                        this.setData({
+                            mDataDepartment: this.data.mDataDepartment,
+                            mDataClasses: this.data.mDataClasses,
+                            mData: this.data.mData,
+                            mDataInvolve: this.data.mDataInvolve
+                        })
+                        this.setPersonNum()
+                    }
+
+                    this.setData({
+                        b0: false
+                    })
+                }
+            }
+        })
+    },
+    doCheck(e) {
         var p = e.currentTarget.dataset.position
         var checked = this.data.mDataLabel[p].checked
         this.data.mDataLabel[p].checked = !checked
 
         this.setData({
-            mDataLabel:this.data.mDataLabel
+            mDataLabel: this.data.mDataLabel
         })
     },
     getList(type, folderid, init) {
@@ -90,12 +246,12 @@ Page({
         if (type === 0) {
             url = urlLeft
         } else {
-            if (this.data.fromType=="0"){
+            if (this.data.fromType == "0") {
 
-            }else {
+            } else {
                 data = {
                     token: wx.getStorageSync('token'),
-                    isall:"all",
+                    isall: "all",
                 }
             }
             url = urlRight
@@ -111,6 +267,7 @@ Page({
 
                     res.id = '0_' + res.id
                     res.list = []
+                    res.num = "0"
                     if (ii.length > 0) {
                         ii.forEach(it => {
                             if (res.id == it.id) {
@@ -132,6 +289,7 @@ Page({
 
                     res.id = '1_' + res.id
                     res.list = []
+                    res.num = "0"
                     if (ii.length > 0) {
                         ii.forEach(it => {
                             if (res.id == it.id) {
@@ -170,7 +328,7 @@ Page({
                 }
 
             }
-
+            console.log("mm", this.data.mDataDepartment)
         });
 
     },
@@ -270,8 +428,8 @@ Page({
         }
         if (this.data.mCurrent == '0') {
             this.data.mDataDepartment.forEach(it => {
-                console.log('curid',it.id)
-                console.log('currentItemId',this.data.currentItemId)
+                console.log('curid', it.id)
+                console.log('currentItemId', this.data.currentItemId)
                 if (it.id == this.data.currentItemId) {
                     it.list = receiveList
                     it.num = receiveList.length
@@ -346,15 +504,15 @@ Page({
     doConfirm() {
         let label = ""
         let labelStr = ""
-        this.data.mDataLabel.forEach(item=>{
-            if (item.checked){
-                label = label + item.label+","
-                labelStr = labelStr + item.name+","
+        this.data.mDataLabel.forEach(item => {
+            if (item.checked) {
+                label = label + item.label + ","
+                labelStr = labelStr + item.name + ","
             }
         })
-        if (label.length>0){
-            label = label.substring(0,label.length-1)
-            labelStr = labelStr.substring(0,labelStr.length-1)
+        if (label.length > 0) {
+            label = label.substring(0, label.length - 1)
+            labelStr = labelStr.substring(0, labelStr.length - 1)
         }
         console.log(label)
         let data = {}

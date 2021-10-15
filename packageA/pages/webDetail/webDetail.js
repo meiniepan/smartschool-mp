@@ -39,7 +39,7 @@ Page({
                 }
               })
             },
-            fail: function (res) {
+            fail: res=> {
               console.log(res);
             },
           })

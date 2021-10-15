@@ -26,7 +26,7 @@ Page({
     doCopy(e) {
         wx.setClipboardData({
             data: e.currentTarget.dataset.id,
-            success: function (res) {
+            success: res=> {
                 showToastWithoutIcon("复制成功")
             }
         })
