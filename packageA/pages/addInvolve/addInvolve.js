@@ -328,7 +328,6 @@ Page({
                 }
 
             }
-            console.log("mm", this.data.mDataDepartment)
         });
 
     },
