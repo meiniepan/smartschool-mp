@@ -49,7 +49,8 @@ Page({
         this.doInit()
 
         this.setData({
-            fromType: options.all
+            fromType: options.all,
+            type: options.type,
         })
         if (options.type == '1') {
             this.setData({
@@ -83,14 +84,23 @@ Page({
                 realname: key,
             }
 
-
-            app.httpPost(url, data).then((res) => {
-                let data = res.respResult.data;
-                data.forEach(res => {
-                    res.d = res.dep_name
+            if (this.data.type == "0") {
+                //只有老师
+                app.httpPost(url, data).then((res) => {
+                    let data = res.respResult.data;
+                    data.forEach(res => {
+                        res.d = res.dep_name
+                    })
+                    let isEmpty0
+                    isEmpty0 = data.length == 0
+                    this.setData({
+                        isEmpty0,
+                        mData0: data,
+                        b0: true,
+                    })
                 })
-
-
+            } else if (this.data.type == "1") {
+                //只有学生
                 let url2 = "/api/v17/teacher/student/listByClass"
                 let data2 = {
                     token: wx.getStorageSync('token'),
@@ -112,16 +122,57 @@ Page({
                     data2.forEach(res => {
                         res.d = res.levelclass
                     })
-                    data = data.concat(data2)
                     let isEmpty0
-                    isEmpty0 = data.length == 0
+                    isEmpty0 = data2.length == 0
+
                     this.setData({
                         isEmpty0,
-                        mData0: data,
+                        mData0: data2,
                         b0: true,
                     })
+
                 })
-            })
+            } else {
+                app.httpPost(url, data).then((res) => {
+                    let data = res.respResult.data;
+                    data.forEach(res => {
+                        res.d = res.dep_name
+                    })
+
+
+                    let url2 = "/api/v17/teacher/student/listByClass"
+                    let data2 = {
+                        token: wx.getStorageSync('token'),
+                        realname: key,
+                    }
+
+                    if (this.data.fromType == "0") {
+
+                    } else {
+                        data2 = {
+                            token: wx.getStorageSync('token'),
+                            realname: key,
+                            isall: "all",
+                        }
+                    }
+
+                    app.httpPost(url2, data2).then((res) => {
+                        let data2 = res.respResult.data;
+                        console.log("data2", data2)
+                        data2.forEach(res => {
+                            res.d = res.levelclass
+                        })
+                        data = data.concat(data2)
+                        let isEmpty0
+                        isEmpty0 = data.length == 0
+                        this.setData({
+                            isEmpty0,
+                            mData0: data,
+                            b0: true,
+                        })
+                    })
+                })
+            }
         }
     },
     doClear() {
@@ -134,13 +185,18 @@ Page({
         var pId = ""
         var tab1 = "0"
         var tab2 = "1"
+        let top, sec = null
+        if (bean.deps != null && bean.deps.length > 0) {
+            top = bean.deps[0].topdepartid
+            sec = bean.deps[0].secdepartid
+        }
         var studentBean = {
             uid: bean.uid,
             realname: bean.realname,
             label: bean.realname[bean.realname.length - 1],
             usertype: bean.usertype,
-            topdepartid: bean.deps[0].topdepartid,
-            secdepartid: bean.deps[0].secdepartid,
+            topdepartid: top,
+            secdepartid: sec,
             choice: "1",
             parentId: pId
         }
@@ -151,7 +207,7 @@ Page({
             success: res => {
                 if (res.confirm) {
                     console.log("mm", this.data.mDataDepartment)
-                    if (!studentBean.topdepartid.length > 0) {
+                    if (studentBean.topdepartid == null || !studentBean.topdepartid.length > 0) {
                         //学生
                         studentBean.parentId = tab2 + "_" + bean.classid
                         console.log("par", studentBean.parentId)
