@@ -11,11 +11,11 @@
 </view>
     <view class="cells">
         <view class="cell" wx:for="{{mData.expand.keys}}" wx:key="index" >
-            <view class="item" hidden="{{mData.expand.remark[index].isShow=='0'}}">
+            <view class="item" wx:if="{{mData.expand.remark[index].isShow=='1'}}">
             <view class="ext" >
                 <view class="ext-key">{{mData.expand.keys[index]}}</view>
                 <view class="ext-value">{{mData.expand.vals[index]}}</view>
-                <image class="img" mode="widthFix" src="../../assets/images/{{mData.expand.remark[index].show?'ic_up':'ic_down'}}.png" hidden="{{mData.expand.remark[index].remark==''}}" bindtap="doRemark" data-index="{{index}}"/>
+                <image class="img" mode="widthFix" src="../../assets/images/{{mData.expand.remark[index].show?'ic_up':'ic_down'}}.png" wx:if="{{mData.expand.remark[index].remark!=''&&mData.expand.remark[index].remark!=null}}" bindtap="doRemark" data-index="{{index}}"/>
             </view>
             <view class="remark" hidden="{{!mData.expand.remark[index].show}}">{{mData.expand.remark[index].remark}}</view>
             </view>
