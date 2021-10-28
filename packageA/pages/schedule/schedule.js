@@ -146,7 +146,7 @@ Page({
     doDetail(e) {
         const bean = e.currentTarget.dataset.id
         wx.navigateTo({
-            url: '/packageA/pages/scheduleDetail/scheduleDetail?bean=' + JSON.stringify(bean),
+            url: '/packageA/pages/scheduleDetail/scheduleDetail?bean=' + encodeURIComponent(JSON.stringify(bean)),
         })
     },
 

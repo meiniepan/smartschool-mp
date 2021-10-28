@@ -9,9 +9,18 @@
     </view>
 
         <view class="item">
-            <view class="key text bold">开始时间</view>
-            <view class="value hint">{{bean.scheduletime}}</view>
+            <view class="key text bold">发布人</view>
+            <view class="value hint">{{bean.cuser_realname}}</view>
         </view>
+    <view class="item" bindtap="doReceive" data-bean="{{bean.involve}}">
+        <view class="key text bold">收件人</view>
+        <view class="value"></view>
+        <image src="../../assets/images/ic_next.png" style="height: 28rpx;width: 28rpx" mode="heightFix"></image>
+    </view>
+    <view class="item">
+        <view class="key text bold">开始时间</view>
+        <view class="value hint">{{bean.scheduletime}}</view>
+    </view>
 
         <view class="item">
             <view class="key text bold">结束时间</view>

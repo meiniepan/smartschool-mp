@@ -16,7 +16,7 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-        let bean = JSON.parse(options.bean)
+        let bean = JSON.parse(decodeURIComponent(options.bean))
         bean.token = wx.getStorageSync("token")
         this.setData({
             bean: bean
@@ -29,11 +29,31 @@ Page({
             url: url,
         })
     },
+    doReceive(e) {
+        let ss = e.currentTarget.dataset.bean
+        let str = ""
+        try {
+            ss = JSON.parse(ss)
+            if (ss.length > 0) {
+                ss.forEach(it => {
+                        str = str + it.realname + "、"
+                    }
+                )
+                str = str.substring(0, str.length - 1)
+            }
+        } catch (e) {
+
+        }
+        let url = '/packageA/pages/persons/persons?str=' + str
+        wx.navigateTo({
+            url: url,
+        })
+    },
     doDelete() {
         wx.showModal({
             title: '温馨提示',
             content: globalData.deleteSure,
-            success:(res)=> {
+            success: (res) => {
                 if (res.confirm) {
                     let bean = this.data.bean
                     let url = ''

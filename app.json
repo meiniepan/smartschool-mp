@@ -55,6 +55,7 @@
         "pages/attendance/attendance",
         "pages/attendance2/attendance2",
         "pages/test/test",
+        "pages/persons/persons",
         "pages/webDetail/webDetail"
       ]
 

@@ -1,0 +1,4 @@
+<!--packageA/pages/persons/persons.wxml-->
+<view class="out">
+    <text class="text">{{str}}</text>
+</view>

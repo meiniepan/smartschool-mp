@@ -1,0 +1,4 @@
+/* packageA/pages/persons/persons.wxss */
+.text{
+    padding: 20rpx var(--titlePadding);
+}
