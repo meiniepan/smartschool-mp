@@ -378,6 +378,7 @@ App({
         attendanceTitle: "学生考勤",
         achievementTitle: "成绩汇总",
         timetableTitle: "我的课表",
+        eduAttendance: "教学考勤",
 
         deleteSure: "确定删除？",
     }

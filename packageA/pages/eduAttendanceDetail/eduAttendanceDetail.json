@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "scroll": "/components/scroll/scroll"
+  },
+  "navigationBarTitleText": "教学考勤",
+  "disableScroll": true,
+  "backgroundTextStyle": "dark"
+}

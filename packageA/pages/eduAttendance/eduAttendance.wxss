@@ -1,0 +1,105 @@
+/* packageA/pages/eduAttendance/eduAttendance.wxss */
+page{
+    background: var(--tintBac);
+}
+.top-area{
+    display: flex;
+    width: 100%;
+    position: fixed;
+    flex-direction: column;
+    border-top: var(--splitColor) 1rpx solid;
+    border-bottom: var(--splitColor) 1rpx solid;
+    padding: 24rpx var(--titlePadding);
+    box-sizing: border-box;
+    background: var(--white);
+    z-index: 9;
+
+}
+.tabs {
+    display: flex;
+    align-content: space-between;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.tab-self{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: calc(100% - 2*var(--titlePadding) - 34rpx);
+    height: 88rpx;
+    background: var(--themeColor);
+    border-radius: 44rpx;
+    color: var(--white);
+}
+.tab-share{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: calc(100% - 2*var(--titlePadding) - 34rpx);
+    height: 88rpx;
+    background: var(--white);
+    border-radius: 44rpx;
+    border: var(--themeColor) 1rpx solid;
+    color: var(--themeColor);
+    box-sizing: border-box;
+}
+.time-area{
+    display: flex;
+    margin-top: 40rpx;
+    height: 40rpx;
+}
+.head-block {
+    display: flex;
+    align-items: center;
+}
+.picker{
+    display: flex;
+    white-space: nowrap;
+}
+.cells {
+    padding: 40rpx var(--titlePadding) 0rpx;
+}
+
+.cell {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    padding: 40rpx ;
+    border-radius: 12rpx;
+    margin-bottom: 20rpx;
+}
+
+.titles {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.title-name {
+
+}
+
+.title {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+.under-line {
+    border-bottom: var(--themeColor) solid 1rpx;
+}
+
+.remark {
+    color: var(--commonHint);
+}
+
+
+.addBtn{
+    position: fixed;
+    bottom: 128rpx;
+    right: var(--titlePadding);
+    width: 136rpx;
+    height: 136rpx;
+}

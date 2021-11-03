@@ -2,7 +2,7 @@
   "usingComponents": {
     "scroll": "/components/scroll/scroll"
   },
-  "navigationBarTitleText": "报修报送",
+  "navigationBarTitleText": "教学考勤",
   "disableScroll": true,
   "backgroundTextStyle": "dark"
 }

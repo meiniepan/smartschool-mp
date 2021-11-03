@@ -1,0 +1,63 @@
+<!--packageA/pages/eduAttendance/eduAttendance.wxml-->
+<view class="out">
+    <view class="top-area">
+    <view class="tabs">
+        <view class="{{categoryCur==0?'tab-self':'tab-share'}}" bindtap="checkPri">{{categoryMenu[0]}}</view>
+        <view class="{{categoryCur!=0?'tab-self':'tab-share'}}" style="margin-left: 34rpx" bindtap="checkPub">
+            {{categoryMenu[1]}}
+        </view>
+    </view>
+        <view class="time-area">
+            <picker mode="date"
+                    data-type="indexClass" bindchange="bindDateChange">
+                <view class="head-block">
+                    <view class="picker">
+                        {{date}}
+                    </view>
+                    <image src="../../assets/images/ic_gray_triangle.png" style="margin-left: 4rpx;height: 10rpx"
+                           mode="heightFix" />
+                </view>
+            </picker>
+
+            <picker wx:if="{{choseMaster}}" bindchange="bindPickerChange" data-type="indexClass" value="{{index}}"
+                    range="{{classArrays}}">
+                <view class="head-block">
+                    <view class="picker">
+                        {{classArrays[indexClass]}}
+                    </view>
+                    <image src="../../assets/images/ic_gray_triangle.png" style="margin-left: 4rpx;height: 10rpx"
+                           mode="heightFix" />
+                </view>
+            </picker>
+        </view>
+    </view>
+    <swiper style="margin-top: 216rpx;height: 100%" current="{{categoryCur}}" duration="{{duration}}"
+            bindanimationfinish="animationFinish">
+        <swiper-item wx:for="{{categoryData}}" wx:key="index">
+            <scroll requesting="{{item.requesting}}" end="{{item.end}}" empty-show="{{item.emptyShow}}"
+                    list-count="{{item.listData.length}}" top-size="0" bottom-size="{{216}}" bind:refresh="refresh"
+                    bind:more="more" style="padding-top: 0rpx">
+                <view class="cells">
+                    <view class="cell" wx:for="{{item.listData}}" wx:key="index" bindtap="doDetail">
+                        <view class="titles">
+                            <view class="title-name">报修时间</view>
+                            <view class="title">{{item.reporttime}}</view>
+                        </view>
+                        <view class="titles" style="margin-top: 20rpx">
+                            <view class="title-name">工单编号</view>
+                            <view class="title">{{item.id}}</view>
+                        </view>
+
+                    </view>
+                </view>
+            </scroll>
+        </swiper-item>
+    </swiper>
+    <picker bindchange="doAdd" bindtap=""
+            data-type="indexAct" value="{{}}" range="{{types}}" range-key="name">
+        <image class="addBtn" bindtap="" src="../../assets/images/ic_add_common.png" mode="widthFix"></image>
+    </picker>
+</view>
+
+
+

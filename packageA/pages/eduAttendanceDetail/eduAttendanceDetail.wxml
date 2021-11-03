@@ -1,0 +1,45 @@
+<!--packageA/pages/eduAttendanceDetail/eduAttendanceDetail.wxml-->
+<view class="out">
+    <view class="top-area">
+        <view class="head-line" style="margin-bottom: 10rpx">
+            <view class="text">{{date}}</view>
+            <view class="text">{{date}}</view>
+        </view>
+        <view class="head-line" style="margin-bottom: 10rpx">
+            <view class="text">{{date}}</view>
+        </view>
+        <view class="head-line" style="margin-bottom: 10rpx">
+            <view class="text">{{date}}</view>
+            <view class="text">{{date}}</view>
+            <view class="text">{{date}}</view>
+        </view>
+        <view class="head-line">
+            <view class="text">{{date}}</view>
+            <view class="text">{{date}}</view>
+            <view class="text">{{date}}</view>
+        </view>
+    </view>
+
+    <scroll requesting="{{item.requesting}}" end="{{item.end}}" empty-show="{{item.emptyShow}}"
+            list-count="{{item.listData.length}}" top-size="0" bottom-size="{{216}}" bind:refresh="refresh"
+            bind:more="more" style="padding-top: 0rpx">
+        <view class="cells">
+            <view class="cell" wx:for="{{item.listData}}" wx:key="index" bindtap="">
+                <view class="titles">
+                    <view class="title-name">报修时间</view>
+                    <view class="title">{{item.reporttime}}</view>
+                </view>
+                <view class="titles" style="margin-top: 20rpx">
+                    <view class="title-name">工单编号</view>
+                    <view class="title">{{item.id}}</view>
+                </view>
+
+            </view>
+        </view>
+    </scroll>
+
+</view>
+
+
+
+
