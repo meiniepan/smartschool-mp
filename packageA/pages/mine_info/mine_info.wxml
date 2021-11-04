@@ -22,6 +22,10 @@
             <text>学号</text>
             <text class="text">{{cno}}</text>
         </view>
+        <view class="info-line" wx:if="{{llMineItem5}}">
+            <text>我的班级</text>
+            <text class="text">{{levelclass}}</text>
+        </view>
         <view class="info-line" wx:if="{{llMineItem6}}">
             <text>身份证号</text>
             <text class="text">{{idcard}}</text>

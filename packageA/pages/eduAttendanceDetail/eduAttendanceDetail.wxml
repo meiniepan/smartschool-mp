@@ -37,7 +37,7 @@
 <view class="split-line"></view>
 
         <view class="cells0">
-            <view class="cell0 {{index%2==0?'bac0':'bac1'}}" wx:for="{{mData}}" wx:key="index" bindtap="">
+            <view class="cell0 {{index%2==0?'bac0':'bac1'}}" wx:for="{{mData}}" wx:key="index" data-bean="item" bindtap="do1">
                <view class="text">aa</view>
                <view class="text">aa</view>
                <view class="text">aa</view>
@@ -46,6 +46,33 @@
 
 </view>
 
-
+<page-container
+        show="{{show}}"
+        overlay="{{overlay}}"
+        close-on-slide-down
+        duration="300"
+        position="bottom"
+        z-index="999"
+        round
+        bindclickoverlay="onClickOverlay"
+        overlayStyle='z-index:99'
+        customStyle='z-index:999'
+>
+    <view class="layout0">
+        <view class="cells">
+            <view class="cell" wx:for="{{ruleArrays}}" wx:key="index" data-index="{{index}}" bindtap="checkRule">
+                <view>
+                    {{item.typename}}
+                </view>
+                <image wx:if="{{item.checked}}" class="image" mode="heightFix"
+                       src="../../assets/images/ic_check_multi.png"/>
+            </view>
+        </view>
+        <view class="layout1">
+            <view class="btn1" bindtap="doBtn1">取消</view>
+            <view class="btn2" bindtap="doBtn2">确定</view>
+        </view>
+    </view>
+</page-container>
 
 

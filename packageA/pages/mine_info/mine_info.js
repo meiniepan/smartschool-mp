@@ -33,10 +33,12 @@ Page({
         }
         let name = wx.getStorageSync("realname");
         let phone = wx.getStorageSync("phone");
+        let levelclass = wx.getStorageSync("levelclass");
         let sex = wx.getStorageSync("sex") == "1" ? "男" : wx.getStorageSync("sex") == "2" ? "女" : "未知";
         let birthday = wx.getStorageSync("birthday");
         let idcard = wx.getStorageSync("idcard");
         let sno = wx.getStorageSync("sno");
+        let cno = wx.getStorageSync("cno");
         let eduid = wx.getStorageSync("eduid");
         let wxname = wx.getStorageSync("wxname");
         let llMineItem2 = true,
@@ -71,6 +73,8 @@ Page({
             phone,
             sex,
             birthday,
+            cno,
+            levelclass,
             idcard,
             sno,
             eduid,

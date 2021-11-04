@@ -61,7 +61,26 @@ Page({
     }
     this.refresh()
   },
+  do1() {
 
+    this.setData({
+      show: true,
+      overlay: true,
+    })
+  },
+  doBtn1() {
+    this.setData({
+      show: false,
+      overlay: false,
+    })
+  },
+  doBtn2() {
+    this.setData({
+      show: false,
+      overlay: false,
+    })
+
+  },
   refresh() {
     this.getList('refresh', null);
   },

@@ -300,10 +300,12 @@ App({
     },
 
     saveUserInfo: function (data) {
+        console.log("info",data)
         wx.setStorageSync('token', data.token)
         wx.setStorageSync('uid', data.uid)
         wx.setStorageSync('idcard', data.idcard)
         wx.setStorageSync('sno', data.sno)
+        wx.setStorageSync('cno', data.cno)
         wx.setStorageSync('eduid', data.eduid)
         wx.setStorageSync('realname', data.realname)
         wx.setStorageSync('sex', data.sex)
@@ -326,6 +328,7 @@ App({
         wx.setStorageSync('isad', data.isad)
         wx.setStorageSync('roleid', data.roleid)
         wx.setStorageSync('usertype', data.usertype)
+        wx.setStorageSync('levelclass', data.levelclass)
         wx.setStorageSync('logintype', data.logintype)
         wx.setStorageSync('parents', JSON.stringify(data.parents))
         wx.setStorageSync('students', JSON.stringify(data.students))

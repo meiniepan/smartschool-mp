@@ -85,7 +85,7 @@ Page({
                     item.typeStr = '我的课表'
                     item.icon = 'ic_kebiao'
                 } else {
-                    item.typeStr = ''
+                    item.typeStr = '通知公告'
                     item.icon = 'ic_tonggao'
                 }
             })
@@ -235,7 +235,7 @@ Page({
             } else if (item.expand.action == "admin/courses/default") {
                 page = 'timetable'
             } else {
-                page = ''
+                page = 'noticeDetail'
             }
         wx.navigateTo({
             url: '/packageA/pages/' + page + '/' + page + '?id=' + item.id,
