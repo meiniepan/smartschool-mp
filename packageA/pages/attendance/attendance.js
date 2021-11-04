@@ -175,7 +175,7 @@ Page({
             if (data.length == 0) {
                 isEmpty = true
             }
-            console.log('data',data)
+            console.log('data', data)
             this.setData({
                 isEmpty,
                 mData: data,
@@ -192,36 +192,37 @@ Page({
         let type = e.currentTarget.dataset.type;
         let isMaster;
         if (type == "indexType") {
-           let typeStr = this.data.typeArrays[e.detail.value]
-            console.log("type",typeStr)
-            isMaster = typeStr=="班级考勤";
-           if(this.data.modeMaster){
-               if (isMaster) {
-                   this.setData({
-                       mode: "master",
-                       isMaster,
-                   })
-               }else{
-                   this.setData({
-                       mode: "tea",
-                       isMaster,
-                   })
-               }
-           }
+            let typeStr = this.data.typeArrays[e.detail.value]
+            console.log("type", typeStr)
+            isMaster = typeStr == "班级考勤";
 
-                this.setData({
-                    [type]: e.detail.value,
 
-                })
-                if (typeStr=="课堂考勤"){
-                    this.getTimetable()
-                }else if(typeStr=="我的考勤"){
-                    this.getStuData()
-                }else if(typeStr=="班级考勤"){
-                    this.getDataMaster()
-                }else if(typeStr=="校级考勤"){
-                    this.getSchoolData()
+            this.setData({
+                [type]: e.detail.value,
+
+            })
+            if (typeStr == "课堂考勤") {
+                let mode = "tea"
+                if (app.checkRule2("student/attendances/privateAtts")) {
+                    mode = "stu-ad"
                 }
+                this.setData({
+                    mode: mode,
+                    isMaster,
+                })
+                this.getTimetable()
+            } else if (typeStr == "我的考勤") {
+                this.setData({
+                    mode: "stu",
+                })
+                this.getStuData()
+            } else if (typeStr == "班级考勤") {
+                this.setData({
+                    mode: "master",
+                    isMaster,
+                })
+                this.getDataMaster()
+            }
 
         } else {
             this.setData({

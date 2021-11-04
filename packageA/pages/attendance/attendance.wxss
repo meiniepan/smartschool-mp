@@ -44,7 +44,6 @@
 
 .cells-master {
     margin-top: 140rpx;
-    background: var(--white);
 }
 
 .title-area {
