@@ -18,7 +18,7 @@
 <block wx:else>
     <view class="vcode-area">
         <input placeholder="输入密码" bindinput="doInput" password="{{!isShowPassword}}" data-type="pwd"></input>
-        <image class="showPwd" src="../../assets/images/{{isShowPassword ? 'ic_eye_no' : 'ic_eye'}}.png"
+        <image class="showPwd" src="../../assets/images/{{isShowPassword ? 'ic_eye' : 'ic_eye_no'}}.png"
             bindtap="showPassword"></image>
     </view>
 </block>

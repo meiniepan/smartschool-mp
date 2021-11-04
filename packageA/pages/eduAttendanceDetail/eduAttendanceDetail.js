@@ -9,6 +9,8 @@ Page({
   data: {
     date: getTodayMD(),
     dateStr: getTodayStr(),
+    typeArrays:["点名簿","座位图"],
+    indexType:0,
   },
 
   /**
@@ -24,23 +26,9 @@ Page({
 
   getList(type, lastid) {
 
-    let currentCur = this.data.categoryCur;
 
-    let pageData = this.getCurrentData(currentCur);
-    if (type === 'refresh') {
-      pageData.end = false
-    }
-    if (pageData.end) return;
+    let typeStr= "repairer";
 
-    pageData.requesting = true;
-    this.setCurrentData(currentCur, pageData);
-
-    let typeStr;
-    if (currentCur == 0) {
-      typeStr = "repairer"
-    } else {
-      typeStr = "report"
-    }
     let url = "/api/v17/teacher/repair/listsByID"
     let data = {
       token: wx.getStorageSync('token'),
@@ -49,27 +37,17 @@ Page({
     }
 
     app.httpPost(url, data).then((res) => {
-      pageData.requesting = false;
-      let listData = res.respResult.data
-      if (listData.length > 0) {
-        listData.forEach(item => {
+      let mData = res.respResult.data
+      if (mData.length > 0) {
+        mData.forEach(item => {
 
         })
       } else {
-        pageData.emptyShow = true
+        mData.emptyShow = true
       }
-      if (listData.length > 0) {
-        pageData.lastid = listData[listData.length - 1].id
-      } else {
-        pageData.end = true;
-        pageData.lastid = null
-      }
-      if (type === 'refresh') {
-        pageData.listData = listData;
-      } else {
-        pageData.listData = pageData.listData.concat(listData);
-      }
-      this.setCurrentData(currentCur, pageData);
+      this.setData({
+        mData,
+      })
 
     })
   },

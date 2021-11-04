@@ -19,24 +19,30 @@
             <view class="text">{{date}}</view>
         </view>
     </view>
-
-    <scroll requesting="{{item.requesting}}" end="{{item.end}}" empty-show="{{item.emptyShow}}"
-            list-count="{{item.listData.length}}" top-size="0" bottom-size="{{216}}" bind:refresh="refresh"
-            bind:more="more" style="padding-top: 0rpx">
-        <view class="cells">
-            <view class="cell" wx:for="{{item.listData}}" wx:key="index" bindtap="">
-                <view class="titles">
-                    <view class="title-name">报修时间</view>
-                    <view class="title">{{item.reporttime}}</view>
+    <view class="label-area">
+        <picker bindchange="changeType"
+                range="{{typeArrays}}">
+            <view class="head-block">
+                <view class="picker">
+                    {{typeArrays[indexType]}}
                 </view>
-                <view class="titles" style="margin-top: 20rpx">
-                    <view class="title-name">工单编号</view>
-                    <view class="title">{{item.id}}</view>
-                </view>
+                <image src="../../assets/images/ic_gray_triangle.png" style="margin-left: 4rpx;height: 10rpx"
+                       mode="heightFix" />
+            </view>
+        </picker>
+        <view class="text">
+            批量处理
+        </view>
+    </view>
+<view class="split-line"></view>
 
+        <view class="cells0">
+            <view class="cell0 {{index%2==0?'bac0':'bac1'}}" wx:for="{{mData}}" wx:key="index" bindtap="">
+               <view class="text">aa</view>
+               <view class="text">aa</view>
+               <view class="text">aa</view>
             </view>
         </view>
-    </scroll>
 
 </view>
 
