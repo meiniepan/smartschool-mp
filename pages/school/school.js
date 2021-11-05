@@ -182,15 +182,15 @@ Page({
                 })
         }
 
-        if (true) {
-            bean1.items.push(
-                {
-                    name: globalData.eduAttendance,
-                    remark: "班级课表 教学课表",
-                    icon: "/assets/images/ic_kebiao.png",
-                    click: "/packageA/pages/eduAttendance/eduAttendance"
-                })
-        }
+        // if (true) {
+        //     bean1.items.push(
+        //         {
+        //             name: globalData.eduAttendance,
+        //             remark: "班级课表 教学课表",
+        //             icon: "/assets/images/ic_kebiao.png",
+        //             click: "/packageA/pages/eduAttendance/eduAttendance"
+        //         })
+        // }
         if (bean1.items.length > 0) {
             mData.push(bean1)
         }

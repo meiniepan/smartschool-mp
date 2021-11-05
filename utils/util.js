@@ -117,6 +117,18 @@ function getToday() {
     return today
 }
 
+function toIntSafe(s) {
+     try {
+         let result = parseInt(s)
+         if (isNaN(result)){
+             result = 0
+         }
+       return result
+    } catch (e) {
+        return 0
+    }
+}
+
 function isSameDay(date) {
     if (date.length >= 10) {
         let temp = new Date();
@@ -241,6 +253,7 @@ module.exports = {
     getDayInWeek: getDayInWeek,
     getTodayMD: getTodayMD,
     getToday: getToday,
+    toIntSafe: toIntSafe,
     getTodayStr: getTodayStr,
     getFileImage: getFileImage,
     formatShowTime: formatShowTime,

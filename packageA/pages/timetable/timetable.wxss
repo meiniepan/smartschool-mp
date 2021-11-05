@@ -118,7 +118,6 @@ scroll-out {}
     border-radius: 10rpx;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     padding: 10rpx;
     box-sizing: border-box;
 }

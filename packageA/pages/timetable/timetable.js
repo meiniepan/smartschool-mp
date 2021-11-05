@@ -1,5 +1,5 @@
 // pages/achievement/achievement.js
-import { getDayInWeek } from "../../../utils/util";
+import { toIntSafe,getDayInWeek } from "../../../utils/util";
 let app = getApp()
 Page({
 
@@ -63,18 +63,18 @@ Page({
                 let mLessonData = [];
                 let mRealLessonData = [];
                 mLessonData = data[i].list
-                console.log("lesson1", mLessonData)
                 if (total > 0) {
                     for (let i = 0; i < total; i++) {
                         mRealLessonData.push({})
                     }
                     mLessonData.forEach(it3 => {
-                        if (parseInt(it3.position) >= 0 && parseInt(it3.position) < total) {
-                            mRealLessonData[parseInt(it3.position)] = it3
+                        console.log("total", toIntSafe(it3.position))
+                        if (toIntSafe(it3.position) >= 0 && toIntSafe(it3.position) < total) {
+                            mRealLessonData[toIntSafe(it3.position)] = it3
+                            console.log("mRealLessonData", mRealLessonData)
                         }
                     })
                 }
-                console.log("lesson2", mRealLessonData)
                 data[i].list = mRealLessonData;
                 data[i].id = "item" + i
             }

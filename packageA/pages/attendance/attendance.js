@@ -25,7 +25,10 @@ Page({
         let typeArrays = [];
         let mode = "";
         let indexType = 0;
-        if (app.checkRule2("student/attendances/privateAtts")) {
+        if (app.checkRule2("teacher/attendances/sclists")) {
+            typeArrays.push("校级考勤")
+            mode = "school"
+        } else if (app.checkRule2("student/attendances/privateAtts")) {
 
             //学生管理员权限
             if (app.checkRule2("student/attendances/lists")) {
@@ -46,9 +49,6 @@ Page({
                 mode = "tea"
             }
             typeArrays.push("课堂考勤")
-        } else if (app.checkRule2("teacher/attendances/sclists")) {
-            typeArrays.push("校级考勤")
-            mode = "school"
         } else {
 
         }
@@ -62,8 +62,9 @@ Page({
             typeArrays,
             indexType,
         })
-
-        if (app.checkRule2("student/attendances/privateAtts")) {
+        if (app.checkRule2("teacher/attendances/sclists")) {
+            this.getSchoolData()
+        } else if (app.checkRule2("student/attendances/privateAtts")) {
             if (app.checkRule2("student/attendances/lists")) {
                 this.getTimetable()
             } else {
@@ -75,8 +76,6 @@ Page({
             } else {
                 this.getTimetable()
             }
-        } else if (app.checkRule2("teacher/attendances/sclists")) {
-            this.getSchoolData()
         } else {
             // this.getStuData()
         }
