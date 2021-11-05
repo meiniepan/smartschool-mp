@@ -9,7 +9,7 @@
                     <view class="picker">
                         {{typeArrays[indexType]}}
                     </view>
-                    <image src="../../assets/images/ic_gray_triangle.png" style="margin-left: 4rpx;height: 10rpx"
+                    <image src="../../assets/images/ic_gray_triangle.png" style="margin-left: 4rpx;height: 10rpx;width:10rpx"
                            mode="heightFix"/>
                 </view>
             </picker>
@@ -19,7 +19,7 @@
                     <view class="picker">
                         {{classArrays[indexClass]}}
                     </view>
-                    <image src="../../assets/images/ic_gray_triangle.png" style="margin-left: 4rpx;height: 10rpx"
+                    <image src="../../assets/images/ic_gray_triangle.png" style="margin-left: 4rpx;height: 10rpx;width:10rpx"
                            mode="heightFix"/>
                 </view>
             </picker>
@@ -29,7 +29,7 @@
                     <view class="picker">
                         {{date}}
                     </view>
-                    <image src="../../assets/images/ic_gray_triangle.png" style="margin-left: 4rpx;height: 10rpx"
+                    <image src="../../assets/images/ic_gray_triangle.png" style="margin-left: 4rpx;height: 10rpx;width:10rpx"
                            mode="heightFix"/>
                 </view>
             </picker>

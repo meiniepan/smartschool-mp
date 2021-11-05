@@ -191,7 +191,7 @@ Page({
         let type = e.currentTarget.dataset.type;
         let isMaster;
         if (type == "indexType") {
-            let typeStr = this.data.typeArrays[e.detail.value]
+            let typeStr = this.data.typeArray[e.detail.value]
             console.log("type", typeStr)
             isMaster = typeStr == "班级考勤";
 

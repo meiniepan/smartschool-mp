@@ -67,9 +67,11 @@ page{
     background-color: white;
     padding: 40rpx ;
     border-radius: 12rpx;
+
+}
+.cell:not(:last-child) {
     margin-bottom: 20rpx;
 }
-
 .titles {
     display: flex;
     align-items: center;

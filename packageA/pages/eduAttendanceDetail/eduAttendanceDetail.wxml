@@ -21,28 +21,53 @@
     </view>
     <view class="label-area">
         <picker bindchange="changeType"
-                range="{{typeArrays}}">
+                range="{{typeArray}}">
             <view class="head-block">
                 <view class="picker">
-                    {{typeArrays[indexType]}}
+                    {{typeArray[indexType]}}
                 </view>
-                <image src="../../assets/images/ic_gray_triangle.png" style="margin-left: 4rpx;height: 10rpx"
-                       mode="heightFix" />
+                <image src="../../assets/images/ic_gray_triangle.png"
+                       style="margin-left: 4rpx;height: 10rpx;width: 10rpx"
+                       mode="heightFix"/>
             </view>
         </picker>
         <view class="text">
             批量处理
         </view>
     </view>
-<view class="split-line"></view>
+    <view class="split-line"></view>
 
-        <view class="cells0">
-            <view class="cell0 {{index%2==0?'bac0':'bac1'}}" wx:for="{{mData}}" wx:key="index" data-bean="item" bindtap="do1">
-               <view class="text">aa</view>
-               <view class="text">aa</view>
-               <view class="text">aa</view>
-            </view>
+    <view class="cells0" wx:if="{{indexType==0}}">
+        <view class="cell0 {{index%2==0?'bac0':'bac1'}}" wx:for="{{mData}}" wx:key="index" data-bean="item"
+              bindtap="do1">
+            <view class="text">aa</view>
+            <view class="text">aa</view>
+            <view class="text">aa</view>
         </view>
+    </view>
+    <view class="seat" wx:if="{{indexType!=0}}">
+        <scroll-view class="scroll" enable-flex scroll-x="true">
+            <view class="row-cells">
+                <view class="row-cell" wx:for="{{rowArray}}" wx:key="index" data-index="{{index}}" bindtap="doRow">
+                    <view class="file-cell {{(item.checked)==true?'bac3':'bac2'}}">{{item.name}}</view>
+                </view>
+                <view class="file-cell bac2" bindtap="addRow">+</view>
+            </view>
+        </scroll-view>
+        <view class="bar">讲台</view>
+        <view class="split-line"></view>
+        <scroll-view class="scroll-col" enable-flex scroll-y="true">
+            <view class="col-cells">
+                <view class="col-cell" wx:for="{{stuArray[indexRow]}}" wx:key="index" data-index="{{index}}" bindtap="doColumn">
+                    <view class="file-cell {{(item.checked)==true?'bac3':'bac2'}}">{{item.name}}</view>
+                    <view class="col-name">ssssss</view>
+                    <view class="col-add" bindtap="addStu">+</view>
+                </view>
+                <view class="file-cell bac2" bindtap="addColumn">+</view>
+            </view>
+        </scroll-view>
+
+    </view>
 
 </view>
 
@@ -59,12 +84,12 @@
         customStyle='z-index:999'
 >
     <view class="layout0">
-        <view class="cells">
-            <view class="cell" wx:for="{{ruleArrays}}" wx:key="index" data-index="{{index}}" bindtap="checkRule">
+        <view class="cells-0">
+            <view class="cell-0" wx:for="{{ruleArrays}}" wx:key="index" data-index="{{index}}" bindtap="checkRule">
                 <view>
-                    {{item.typename}}
+                    {{item.name}}
                 </view>
-                <image wx:if="{{item.checked}}" class="image" mode="heightFix"
+                <image wx:if="{{item.checked}}" class="image-0" mode="heightFix"
                        src="../../assets/images/ic_check_multi.png"/>
             </view>
         </view>

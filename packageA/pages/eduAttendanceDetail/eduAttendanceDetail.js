@@ -9,8 +9,14 @@ Page({
   data: {
     date: getTodayMD(),
     dateStr: getTodayStr(),
-    typeArrays:["点名簿","座位图"],
-    indexType:0,
+    typeArray:["点名簿","座位图"],
+    rowArray:[{name:"A",checked:false},{name:"B",checked:false},{name:"C",checked:false},],
+    stuArray:[[],[],[]],
+    indexType:1,
+    indexRow:0,
+    ss:["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"],
+    ruleArrays: [{name:"签到",checked:false},{name:"病假",checked:false},{name:"事假",checked:false},
+      {name:"旷课",checked:false},{name:"迟到",checked:false},{name:"早退",checked:false},],
   },
 
   /**
@@ -61,6 +67,11 @@ Page({
     }
     this.refresh()
   },
+  changeType(e){
+    this.setData({
+      indexType: e.detail.value,
+    })
+  },
   do1() {
 
     this.setData({
@@ -80,6 +91,75 @@ Page({
       overlay: false,
     })
 
+  },
+  addRow(){
+    let ss = this.data.ss
+      let len = this.data.rowArray.length
+      if (len >= ss.length) {
+        len = ss.length - 1
+      }
+      let s = ss[len]
+      this.data.rowArray.push({name:s,checked: false})
+      this.data.stuArray.push([])
+      this.setData({
+        rowArray: this.data.rowArray,
+        stuArray: this.data.stuArray,
+      })
+  },
+  doRow(e){
+    let p = e.currentTarget.dataset.index
+    this.data.rowArray.forEach(it=>{
+      it.checked = false
+    })
+    this.data.rowArray[p].checked = true
+    this.setData({
+      indexRow:p,
+      rowArray: this.data.rowArray,
+    })
+
+  },
+  addColumn(){
+      let ss = this.data.ss
+      let data = this.data.stuArray[this.data.indexRow]
+    let len = data.length
+      if (len >= ss.length) {
+        len = ss.length - 1
+      }
+      let s = ss[this.data.indexRow]+(len+1)
+      data.push({name:s,checked: false})
+    this.data.stuArray[this.data.indexRow] = data
+      this.setData({
+        rowArray: this.data.rowArray,
+        stuArray: this.data.stuArray,
+      })
+  },
+  doColumn(e){
+    let p = e.currentTarget.dataset.index
+    this.data.stuArray[this.data.indexRow].forEach(it=>{
+      it.checked = false
+    })
+    this.data.stuArray[this.data.indexRow][p].checked = true
+    this.setData({
+      stuArray: this.data.stuArray,
+    })
+
+  },
+  addStu(e){
+    let p = e.currentTarget.dataset.index
+    this.setData({
+      show: true,
+      overlay: true,
+      rowArray: this.data.rowArray,
+    })
+
+  },
+  checkRule(e) {
+    var v = this.data.ruleArrays
+    console.log("idx", e.currentTarget.dataset)
+      v[e.currentTarget.dataset.index].checked = !v[e.currentTarget.dataset.index].checked
+    this.setData({
+      ruleArrays: v,
+    })
   },
   refresh() {
     this.getList('refresh', null);

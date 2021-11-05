@@ -40,7 +40,10 @@
     display: flex;
     align-items: center;
 }
-
+.picker{
+    display: flex;
+    white-space: nowrap;
+}
 .cells-master {
     margin-top: 140rpx;
 }
@@ -103,6 +106,8 @@
 }
 
 .tea-course-name {
+    display: flex;
+    white-space: nowrap;
     font-size: 36rpx;
 }
 
