@@ -31,9 +31,11 @@
                        mode="heightFix"/>
             </view>
         </picker>
-        <view class="text">
-            批量处理
+        <view class="deal-area">
+            <view wx:if="{{indexType==1}}" class="text" bindtap="doSeat" bindtap="rankSeat">{{rankText}}</view>
+            <view class="text" style="margin-left: 40rpx"  bindtap="doBatch">批量处理</view>
         </view>
+
     </view>
     <view class="split-line"></view>
 
@@ -51,19 +53,23 @@
                 <view class="row-cell" wx:for="{{rowArray}}" wx:key="index" data-index="{{index}}" bindtap="doRow">
                     <view class="file-cell {{(item.checked)==true?'bac3':'bac2'}}">{{item.name}}</view>
                 </view>
-                <view class="file-cell bac2" bindtap="addRow">+</view>
+                <view wx:if="{{isRank}}" class="file-cell bac2" bindtap="addRow">+</view>
             </view>
         </scroll-view>
         <view class="bar">讲台</view>
         <view class="split-line"></view>
         <scroll-view class="scroll-col" enable-flex scroll-y="true">
             <view class="col-cells">
-                <view class="col-cell" wx:for="{{stuArray[indexRow]}}" wx:key="index" data-index="{{index}}" bindtap="doColumn">
+                <view class="col-cell" wx:for="{{stuArray[indexRow]}}" wx:key="index" data-index="{{index}}"
+                      bindtap="doColumn">
                     <view class="file-cell {{(item.checked)==true?'bac3':'bac2'}}">{{item.name}}</view>
                     <view class="col-name">ssssss</view>
-                    <view class="col-add" bindtap="addStu">+</view>
+                    <view class="edit-area">
+                    <view class="col-add" bindtap="addStu" data-index="{{index}}" style="margin-right: 40rpx">+</view>
+                    <view class="col-add" bindtap="deleteStu" data-index="{{index}}">-</view>
+                    </view>
                 </view>
-                <view class="file-cell bac2" bindtap="addColumn">+</view>
+                <view wx:if="{{isRank}}" class="file-cell bac2" bindtap="addColumn">+</view>
             </view>
         </scroll-view>
 
@@ -83,7 +89,7 @@
         overlayStyle='z-index:99'
         customStyle='z-index:999'
 >
-    <view class="layout0">
+    <view class="layout0" wx:if="{{!isSearch}}">
         <view class="cells-0">
             <view class="cell-0" wx:for="{{ruleArrays}}" wx:key="index" data-index="{{index}}" bindtap="checkRule">
                 <view>
@@ -98,6 +104,23 @@
             <view class="btn2" bindtap="doBtn2">确定</view>
         </view>
     </view>
+
+    <view class="layout2" wx:else>
+        <view class="search-area">
+            <image style="width: 28rpx;height: 28rpx" mode="heightFix" src="../../assets/images/ic_search.png"></image>
+            <input class="search hint singleLine" maxlength="20" placeholder="搜索姓名查找信息" bindinput="doInput"
+                   bindconfirm="doSearch" confirm-type="search" data-type="realname"/>
+        </view>
+        <view class="cells-s">
+            <view class="cell-s" wx:for="{{mData}}" wx:key="index" data-index="{{index}}" bindtap="checkSearch">
+                <view>
+                    {{item.name}}
+                </view>
+            </view>
+        </view>
+
+    </view>
+
 </page-container>
 
 

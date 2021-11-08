@@ -13,8 +13,8 @@
     "miniprogram": {
       "list": [
         {
-          "name": "packageA/pages/quantizeSpecial/quantizeSpecial",
-          "pathName": "packageA/pages/quantizeSpecial/quantizeSpecial",
+          "name": "packageA/pages/eduAttendance/eduAttendance",
+          "pathName": "packageA/pages/eduAttendance/eduAttendance",
           "query": "",
           "scene": null
         },
