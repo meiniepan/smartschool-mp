@@ -382,6 +382,7 @@ App({
         achievementTitle: "成绩汇总",
         timetableTitle: "我的课表",
         eduAttendance: "教学考勤",
+        teaTitle: "教师档案",
 
         deleteSure: "确定删除？",
     }

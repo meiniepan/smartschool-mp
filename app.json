@@ -57,6 +57,7 @@
         "pages/persons/persons",
         "pages/eduAttendance/eduAttendance",
         "pages/eduAttendanceDetail/eduAttendanceDetail",
+        "pages/archives/archives",
         "pages/webDetail/webDetail"
       ]
 
