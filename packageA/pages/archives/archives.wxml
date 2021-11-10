@@ -1,44 +1,43 @@
 <!--packageA/pages/archives/archives.wxml-->
-<view class="out">
-    <image class="img" src="{{img}}" mode="aspectFill" binderror="binderror" bindtap="chooseAvatar"></image>
-    <view class="info-area">
-        <view class="info-line">
-            <text>姓名</text>
-            <text class="text">{{name}}</text>
+<view class="out0">
+    <image class="bac" src="{{bac}}" mode="widthFix"></image>
+    <view class="out">
+        <navigation title="{{title}}" titleColor="#ffffff" bgColor="transparent">
+            <image class="act" src="../../assets/images/icon_back_white_a.png" mode="widthFix"
+                   bindtap="doFinish"></image>
+        </navigation>
+        <view class="out2">
+            <view class="tri"></view>
+            <view class="img-area">
+            <image class="img" src="{{img}}" mode="aspectFill" binderror="binderror" bindtap="chooseAvatar"></image>
+                <text class="text2">小喵</text>
+            </view>
+            <view class="info-area">
+                <view class="info-line">
+                    <text>姓名</text>
+                    <text class="text">{{name}}</text>
+                </view>
+                <view class="info-line" style="margin-top: 40rpx">
+                    <text>姓名</text>
+                    <text class="text">{{name}}</text>
+                </view>
+                <view class="info-line" style="margin-top: 40rpx">
+                    <text>姓名</text>
+                    <text class="text">{{name}}</text>
+                </view>
+                <view class="info-line" style="margin-top: 40rpx">
+                    <text>姓名</text>
+                    <text class="text">{{name}}</text>
+                </view>
+                <view class="info-line" style="margin-top: 40rpx">
+                    <text>姓名</text>
+                    <text class="text">{{name}}</text>
+                </view>
+                <view class="info-line" style="margin-top: 40rpx">
+                    <text>姓名</text>
+                    <text class="text">{{name}}</text>
+                </view>
+            </view>
         </view>
-        <view class="info-line" wx:if="{{llMineItem2}}">
-            <text>性别</text>
-            <text class="text">{{sex}}</text>
-        </view>
-        <view class="info-line" wx:if="{{llMineItem3}}">
-            <text>出生年月</text>
-            <text class="text">{{birthday}}</text>
-        </view>
-        <view class="info-line" wx:if="{{llMineItem4}}">
-            <text>手机号码</text>
-            <text class="text">{{phone}}</text>
-        </view>
-        <view class="info-line" wx:if="{{llMineItem5}}">
-            <text>学号</text>
-            <text class="text">{{cno}}</text>
-        </view>
-        <view class="info-line" wx:if="{{llMineItem5}}">
-            <text>我的班级</text>
-            <text class="text">{{levelclass}}</text>
-        </view>
-        <view class="info-line" wx:if="{{llMineItem6}}">
-            <text>身份证号</text>
-            <text class="text">{{idcard}}</text>
-        </view>
-        <view class="info-line" wx:if="{{llMineItem7}}">
-            <text>学籍号</text>
-            <text class="text">{{sno}}</text>
-        </view>
-        <view class="info-line" wx:if="{{llMineItemEduId}}">
-            <text>教育ID</text>
-            <text class="text">{{eduid}}</text>
-        </view>
-
     </view>
-
 </view>

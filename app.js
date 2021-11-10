@@ -1,8 +1,13 @@
 //app.js
 let host = require('/utils/host.js');
 let uploadImage = require('/ossjs/uploadImg/uploadImg.js');//地址换成你自己存放文件的位置
+
 App({
     onLaunch: function () {
+        wx.cloud.init({
+            env: "env-4gwafyi0129f4b02"
+        })
+
         wx.getSystemInfo({
             success: (res) => {
                 this.globalData.systemInfo = res;

@@ -1,6 +1,8 @@
 {
   "usingComponents": {
+    "navigation": "/components/navigation/navigation"
   },
   "navigationBarTitleText": "教师成长档案",
+  "navigationStyle": "custom",
   "backgroundTextStyle": "dark"
 }

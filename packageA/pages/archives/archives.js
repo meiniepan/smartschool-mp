@@ -5,12 +5,37 @@ Page({
     /**
      * 页面的初始数据
      */
-    data: {},
+    data: {
+        img:"/assets/images/ic_avatar_default.png",
+        title:"教师成长档案",
+        bac:"",
+    },
 
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
+        wx.cloud.downloadFile({
+            fileID: 'cloud://env-4gwafyi0129f4b02.656e-env-4gwafyi0129f4b02-1308234288/bac_archives.png',
+            success: res => {
+                // get temp file path
+                this.setData({
+                    bac:res.tempFilePath,
+                })
+            },
+            fail: err => {
+                // handle error
+            }
+        })
+        let img = ""
+        if (wx.getStorageSync("portrait") == "") {
+            img = "/assets/images/ic_avatar_default.png"
+        } else {
+            img = wx.getStorageSync("domain") + wx.getStorageSync("portrait");
+        }
+        this.setData({
+            img,
+        })
         // this.getData()
     },
 
@@ -26,6 +51,17 @@ Page({
      */
     onShow: function () {
 
+    },
+    doFinish() {
+        wx.navigateBack({
+            delta: 1,
+        })
+    },
+    binderror(e) {
+        let img = "/assets/images/ic_avatar_default.png"
+        this.setData({
+            img
+        })
     },
     getData() {
         let url = "/api/v17/teacher/repair/listsByID"
