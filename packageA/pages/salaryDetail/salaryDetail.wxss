@@ -6,6 +6,7 @@ page{
     width: 20rpx;
     height: 20rpx;
     padding: 20rpx;
+    margin-left: 20rpx;
     margin-right: 40rpx;
 }
 .out{

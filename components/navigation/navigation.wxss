@@ -38,7 +38,7 @@
 	top: 0;
 	margin: auto;
 	height: 60rpx;
-	font-size: 28rpx;
+	font-size: 36rpx;
 	line-height: 60rpx;
 	cursor: none;
 	pointer-events: none;

@@ -1,6 +1,6 @@
 <!--packageA/pages/archives/archives.wxml-->
 <view class="out0">
-    <image class="bac" src="{{bac}}" mode="widthFix"></image>
+    <image class="bac" src="{{bac}}" mode="heightFix"></image>
     <view class="out">
         <navigation title="{{title}}" titleColor="#ffffff" bgColor="transparent">
             <image class="act" src="../../assets/images/icon_back_white_a.png" mode="widthFix"
