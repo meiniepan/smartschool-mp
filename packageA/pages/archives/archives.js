@@ -6,9 +6,10 @@ Page({
      * 页面的初始数据
      */
     data: {
-        img:"/assets/images/ic_avatar_default.png",
-        title:"教师成长档案",
-        bac:"",
+        img: "/assets/images/ic_avatar_default.png",
+        name: wx.getStorageSync('realname'),
+        title: "教师成长档案",
+        bac: "",
     },
 
     /**
@@ -20,7 +21,7 @@ Page({
             success: res => {
                 // get temp file path
                 this.setData({
-                    bac:res.tempFilePath,
+                    bac: res.tempFilePath,
                 })
             },
             fail: err => {
@@ -36,7 +37,7 @@ Page({
         this.setData({
             img,
         })
-        // this.getData()
+        this.getData()
     },
 
     /**
@@ -64,16 +65,15 @@ Page({
         })
     },
     getData() {
-        let url = "/api/v17/teacher/repair/listsByID"
+        let url = "/api/index.php?c=develop&a=teachers&do=info"
         let data = {
             token: wx.getStorageSync('token'),
-            lastid: lastid,
-            type: typeStr,
+            uid: wx.getStorageSync('uid'),
         }
 
         app.httpPost(url, data).then((res) => {
-            let mData = res.respResult.data
-
+            console.log("data", res)
+            let mData = res.respResult
             this.setData({
                 mData,
             })
