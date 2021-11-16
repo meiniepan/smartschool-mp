@@ -65,7 +65,7 @@ Page({
         })
     },
     getData() {
-        let url = "/api/index.php?c=develop&a=teachers&do=info"
+        let url = "/api/v17/develop/teachers/info"
         let data = {
             token: wx.getStorageSync('token'),
             uid: wx.getStorageSync('uid'),

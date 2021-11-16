@@ -192,15 +192,16 @@ Page({
         //         })
         // }
 
-        if (true) {
-            bean1.items.push(
-                {
-                    name: globalData.teaTitle,
-                    remark: "个人成长 长期维护",
-                    icon: "/assets/images/ic_teacher.png",
-                    click: "/packageA/pages/archives/archives"
-                })
-        }
+        // if (app.checkRule1("admin/archives/default")) {
+        //     bean1.items.push(
+        //         {
+        //             name: globalData.teaTitle,
+        //             remark: "个人成长 长期维护",
+        //             icon: "/assets/images/ic_teacher.png",
+        //             click: "/packageA/pages/archives/archives"
+        //         })
+        // }
+
         if (bean1.items.length > 0) {
             mData.push(bean1)
         }

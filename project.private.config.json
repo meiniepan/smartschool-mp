@@ -19,14 +19,8 @@
           "scene": null
         },
         {
-          "name": "pages/addSchedule/addSchedule",
-          "pathName": "pages/addSchedule/addSchedule",
-          "query": "",
-          "scene": null
-        },
-        {
-          "name": "packageA/pages/test/test",
-          "pathName": "packageA/pages/test/test",
+          "name": "packageA/pages/archives/archives",
+          "pathName": "packageA/pages/archives/archives",
           "query": "",
           "scene": null
         },
