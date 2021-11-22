@@ -230,8 +230,9 @@ Page({
         }else if (item.expand.action == "admin/notices/default") {
             page = 'notice'
         } else {
-            showToastWithoutIcon("未知类型")
-            return
+            page = 'notice'
+            // showToastWithoutIcon("未知类型")
+            // return
         }
         wx.navigateTo({
             url: '/packageA/pages/' + page + '/' + page + '?id=' + item.id,
