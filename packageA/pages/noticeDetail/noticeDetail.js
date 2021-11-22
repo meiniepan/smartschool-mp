@@ -37,11 +37,10 @@ Page({
         app.httpPost(url, data).then((res) => {
 
             let data = res.respResult.data;
+            console.log("data",res.respResult)
             let mImages = [];
             let mFiles = [];
-            if (data.status == "0") {
-                this.doRead()
-            }
+
             JSON.parse(data.fileinfo).forEach((it) => {
                 if (it.type.indexOf("image/") >= 0) {
                     mImages.push(wx.getStorageSync("domain") + it.url)
@@ -75,22 +74,7 @@ Page({
             url: `../webDetail/webDetail?url=${url}`,
         });
     },
-    doRead() {
-        let url;
-        if (wx.getStorageSync('usertype') === "1") {
-            url = "/api/v17/student/notices/modify"
-        } else {
-            url = "/api/v17/teacher/notices/modify"
-        }
-        let data = {
-            token: wx.getStorageSync('token'),
-            id: this.data.id,
-            status: "1"
-        }
-        app.httpPost(url, data).then((res) => {
 
-        })
-    },
     doReadFeedback() {
         if (this.data.isDisabled) {
             return

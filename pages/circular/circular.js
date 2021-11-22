@@ -153,12 +153,8 @@ Page({
         }
 
         app.httpPost(url, data, false).then((res) => {
-
-            let data = res.respResult.data;
-            this.refresh();
-
+            this.doJump(this.data.curItem)
         });
-
 
     },
     getSemester() {
@@ -208,39 +204,45 @@ Page({
     more() {
         this.getList('more');
     },
-    doDetail(e) {
-        let item = e.currentTarget.dataset.bean
-        if (item.status != '1') {
-            this.doRead(item.id)
-        }
+    doJump: function (item) {
         let page = ''
 
-            if (item.expand.action == "admin/spacebook/default") {
-                page = 'bookSite'
-            } else if (item.expand.action == "admin/schedules/default") {
-                page = 'schedule'
-            } else if (item.expand.action == "moral/moral/default") {
-                page = 'quantize'
-            } else if (item.expand.action == "admin/wages/default") {
-                page = 'salary'
-            } else if (item.expand.action == "admin/repair/default") {
-                page = 'repair'
-            } else if (item.expand.action == "admin/tasks/default") {
-                page = 'task'
-            } else if (item.expand.action == "disk/folder/default") {
-                page = 'cloud'
-            } else if (item.expand.action == "admin/attendances/default") {
-                page = 'attendance'
-            } else if (item.expand.action == "admin/achievements/default") {
-                page = 'achievement'
-            } else if (item.expand.action == "admin/courses/default") {
-                page = 'timetable'
-            } else {
-                page = 'noticeDetail'
-            }
+        if (item.expand.action == "admin/spacebook/default") {
+            page = 'bookSite'
+        } else if (item.expand.action == "admin/schedules/default") {
+            page = 'schedule'
+        } else if (item.expand.action == "moral/moral/default") {
+            page = 'quantize'
+        } else if (item.expand.action == "admin/wages/default") {
+            page = 'salary'
+        } else if (item.expand.action == "admin/repair/default") {
+            page = 'repair'
+        } else if (item.expand.action == "admin/tasks/default") {
+            page = 'task'
+        } else if (item.expand.action == "disk/folder/default") {
+            page = 'cloud'
+        } else if (item.expand.action == "admin/attendances/default") {
+            page = 'attendance'
+        } else if (item.expand.action == "admin/achievements/default") {
+            page = 'achievement'
+        } else if (item.expand.action == "admin/courses/default") {
+            page = 'timetable'
+        } else {
+            page = 'noticeDetail'
+        }
         wx.navigateTo({
             url: '/packageA/pages/' + page + '/' + page + '?id=' + item.id,
         })
+    }, doDetail(e) {
+        let item = e.currentTarget.dataset.bean
+        this.setData({
+            curItem:item,
+        })
+        if (item.status != '1') {
+            this.doRead(item.id)
+        }else {
+        this.doJump(item);
+        }
     },
     //判断是否已读
     isFeedback(item) {
