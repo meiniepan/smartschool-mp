@@ -3,7 +3,7 @@
 <image class="banner" src="../../assets/images/bac_banner1.png" mode="widthFix"></image>
 	<emptyView wx:if="{{isEmpty}}" />
 	<view class="cells" wx:else>
-	<view class="cell" wx:for="{{mData}}" wx:key="index" data-url="{{item.id}}" bindtap="doDetail">
+	<view class="cell" wx:for="{{mData}}" wx:key="index" data-bean="{{item}}" bindtap="doDetail">
 		<view class="titles">
 			<view class="fresh" hidden="{{item.isRead}}"></view>
 			<view class="title">{{item.title}}</view>

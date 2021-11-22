@@ -227,13 +227,18 @@ Page({
             page = 'achievement'
         } else if (item.expand.action == "admin/courses/default") {
             page = 'timetable'
+        }else if (item.expand.action == "admin/notices/default") {
+            page = 'notice'
         } else {
-            page = 'noticeDetail'
+            showToastWithoutIcon("未知类型")
+            return
         }
         wx.navigateTo({
             url: '/packageA/pages/' + page + '/' + page + '?id=' + item.id,
         })
-    }, doDetail(e) {
+    },
+
+    doDetail(e) {
         let item = e.currentTarget.dataset.bean
         this.setData({
             curItem:item,

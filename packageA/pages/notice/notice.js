@@ -65,12 +65,12 @@ Page({
             });
             let unRead = res.respResult.unread
             wx.setNavigationBarTitle({
-                title: "通知"
+                title: "通知公告"
             })
             if (unRead.length > 0) {
                 if (parseInt(unRead) > 0) {
                     wx.setNavigationBarTitle({
-                        title: "通知(" + unRead + ")"
+                        title: "通知公告(" + unRead + ")"
                     })
                 }
             }
@@ -91,8 +91,38 @@ Page({
         this.getList('more');
     },
     doDetail(e) {
+        let item = e.currentTarget.dataset.bean
+        this.setData({
+            curItem:item,
+        })
+        if (item.status != '1') {
+            this.doRead(item.id)
+        }else {
+            this.doJump(item);
+        }
+
+    },
+    doRead(id) {
+        let url;
+        if (wx.getStorageSync('usertype') === "1") {
+            url = "/api/v17/student/notices/modify"
+        } else {
+            url = "/api/v17/teacher/notices/modify"
+        }
+        let data = {
+            token: wx.getStorageSync('token'),
+            id: id,
+            status: '1'
+        }
+
+        app.httpPost(url, data, false).then((res) => {
+            this.doJump(this.data.curItem)
+        });
+
+    },
+    doJump: function (item) {
         wx.navigateTo({
-            url: '/packageA/pages/noticeDetail/noticeDetail?id=' + e.currentTarget.dataset.url,
+            url: '/packageA/pages/noticeDetail/noticeDetail?id=' + item.id,
         })
     },
     //判断是否已读
