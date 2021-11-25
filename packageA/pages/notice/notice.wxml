@@ -1,29 +1,25 @@
 <!--pages/circular/circular.wxml-->
 <view class="out">
     <image class="banner" src="../../assets/images/bac_banner1.png" mode="aspectFill"></image>
-    <swiper style="height: 100%">
-    <swiper-item>
-        <scroll
-                requesting="{{mRequest.requesting}}"
-                end="{{mRequest.end}}"
-                empty-show="{{mRequest.emptyShow}}"
-                list-count="{{mData.length}}"
-                top-size="0"
-                bottom-size="198"
-                bind:refresh="refresh"
-                bind:more="more">
-            <view class="cells">
-                <view class="cell" wx:for="{{mData}}" wx:key="index" data-bean="{{item}}" bindtap="doDetail">
-                    <view class="titles">
-                        <view class="fresh" hidden="{{item.isRead}}"></view>
-                        <view class="title">{{item.title}}</view>
-                        <text class="date">{{item.noticetime}}</text>
-                    </view>
-                    <view class="tag1" hidden="{{!item.isFeedback}}">@我</view>
-                    <text class="tag">{{item.remark}}</text>
+    <scroll
+            requesting="{{mRequest.requesting}}"
+            end="{{mRequest.end}}"
+            empty-show="{{mRequest.emptyShow}}"
+            list-count="{{mData.length}}"
+            top-size="0"
+            bottom-size="198"
+            bind:refresh="refresh"
+            bind:more="more">
+        <view class="cells">
+            <view class="cell" wx:for="{{mData}}" wx:key="index" data-bean="{{item}}" bindtap="doDetail">
+                <view class="titles">
+                    <view class="fresh" hidden="{{item.isRead}}"></view>
+                    <view class="title">{{item.title}}</view>
+                    <text class="date">{{item.noticetime}}</text>
                 </view>
+                <view class="tag1" hidden="{{!item.isFeedback}}">@我</view>
+                <text class="tag">{{item.remark}}</text>
             </view>
-        </scroll>
-    </swiper-item>
-    </swiper>
+        </view>
+    </scroll>
 </view>

@@ -7,8 +7,7 @@
         </view>
     </navigation>
     <image class="banner" src="../../assets/images/bac_banner1.png" mode="aspectFill"></image>
-    <swiper style="height: 100%">
-        <swiper-item>
+
             <scroll requesting="{{mRequest.requesting}}"
                     end="{{mRequest.end}}"
                     empty-show="{{mRequest.emptyShow}}"
@@ -27,6 +26,4 @@
                     </view>
                 </view>
             </scroll>
-        </swiper-item>
-    </swiper>
 </view>

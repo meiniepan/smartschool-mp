@@ -1,25 +1,21 @@
 <!--pages/systemMsg/systemMsg.wxml-->
 <view class="out">
-<swiper style="height: 100%">
-    <swiper-item>
-        <scroll
-                requesting="{{mRequest.requesting}}"
-                end="{{mRequest.end}}"
-                empty-show="{{mRequest.emptyShow}}"
-                list-count="{{mData.length}}"
-                top-size="0"
-                bottom-size="0"
-                bind:refresh="refresh"
-                bind:more="more">
-            <view class="cells">
-                <view class="cell" wx:for="{{mData}}" wx:key="index" data-url="{{item.id}}" bindtap="doDetail">
-                    <view class="titles">
-                        <view class="title">{{item.title}}</view>
-                        <view class="date">{{item.noticetime}}</view>
-                    </view>
+    <scroll
+            requesting="{{mRequest.requesting}}"
+            end="{{mRequest.end}}"
+            empty-show="{{mRequest.emptyShow}}"
+            list-count="{{mData.length}}"
+            top-size="0"
+            bottom-size="0"
+            bind:refresh="refresh"
+            bind:more="more">
+        <view class="cells">
+            <view class="cell" wx:for="{{mData}}" wx:key="index" data-url="{{item.id}}" bindtap="doDetail">
+                <view class="titles">
+                    <view class="title">{{item.title}}</view>
+                    <view class="date">{{item.noticetime}}</view>
                 </view>
             </view>
-        </scroll>
-    </swiper-item>
-</swiper>
+        </view>
+    </scroll>
 </view>
