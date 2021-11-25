@@ -11,7 +11,7 @@
                       bindtap="salaryDetail">
                     <view class="{{index%2==0?'dataTitles':'dataTitles background'}}">
                     <view class="fresh" hidden="{{item.read=='1'}}"></view>
-                    <view class="dataTitle">{{item.title}}</view>
+                    <view class="dataTitle singleLine">{{item.title}}</view>
                     <view class="date">{{item.createtime}}</view>
                 </view>
             </view>

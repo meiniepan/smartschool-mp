@@ -11,7 +11,7 @@
 </view>
     <view class="cells">
         <view class="cell" wx:for="{{mData.expand.keys}}" wx:key="index" >
-            <view class="item" wx:if="{{mData.expand.remark[index].isShow=='1'}}">
+            <view class="item" wx:if="{{(mData.expand.vals[index]!=null && mData.expand.vals[index]!='' && mData.expand.vals[index]!='0') || mData.expand.remark[index].isShow=='1'}}">
             <view class="ext" >
                 <view class="ext-key">{{mData.expand.keys[index]}}</view>
                 <view class="ext-value">{{mData.expand.vals[index]}}</view>

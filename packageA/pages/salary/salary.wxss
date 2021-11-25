@@ -78,5 +78,7 @@ page{
 }
 
 .date {
+  margin-left: 10rpx;
+  white-space: nowrap;
   font-size: 28rpx;
 }

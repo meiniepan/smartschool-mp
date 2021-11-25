@@ -19,7 +19,7 @@ Page({
         isDisabled: false,// 按钮是否禁用
         interval: "",
         hiddenPage2: true,
-        mData: {requesting: false, end: true, listData: [], lastid: null},
+        mData: {requesting: false, end: true, listData: [], lastid: ""},
     },
 
     /**
@@ -68,9 +68,10 @@ Page({
             this.countdown()
         });
     },
-    getList(type, lastid) {
+    getList(type) {
         let pageData = this.data.mData
         if (type === 'refresh') {
+            pageData.lastid = ""
             pageData.end = false
         }
         if (pageData.end) return;
@@ -81,7 +82,8 @@ Page({
         })
         let data = {
             token: wx.getStorageSync('token'),
-            lastid
+            type:"nopage",
+            lastid:pageData.lastid
         };
         app.httpPost('/api/v17/admin/wages/mywdlists', data).then((res) => {
             this.showPage2()
@@ -92,7 +94,6 @@ Page({
                 pageData.lastid = listData[listData.length - 1].id
             } else {
                 pageData.end = true;
-                pageData.lastid = null
 
             }
             if (type === 'refresh') {
@@ -117,11 +118,11 @@ Page({
         });
     },
     refresh() {
-        this.getList('refresh', null);
+        this.getList('refresh');
     },
 
     more() {
-        this.getList('more', this.data.lastid);
+        this.getList('more');
     },
     doConfirm() {
         let v = this.data.vcode
