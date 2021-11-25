@@ -71,7 +71,7 @@ Page({
                     categoryCur: index,
                     requesting: false,
                     end: false,
-                    lastid: null,
+                    lastid: "",
                     listData: [],
                     type: type,
                     url: url,
@@ -236,7 +236,7 @@ Page({
             }
             if (type === 'refresh') {
                 pageData.listData = listData;
-                pageData.emptyShow = data.length==0
+                pageData.emptyShow = listData.length==0
             } else {
                 pageData.listData = pageData.listData.concat(listData);
             }
@@ -334,7 +334,7 @@ Page({
         return this.data.categoryData[this.data.categoryCur]
     },
     refresh() {
-        this.getList('refresh', null);
+        this.getList('refresh', "");
     },
 
     more() {

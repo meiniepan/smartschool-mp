@@ -211,8 +211,6 @@ Page({
                         }
                     }
                 })
-            } else {
-                pageData.emptyShow = true
             }
             if (listData.length > 0) {
                 pageData.lastid = listData[listData.length - 1].id
@@ -222,6 +220,7 @@ Page({
             }
             if (type === 'refresh') {
                 pageData.listData = listData;
+                pageData.emptyShow = listData.length==0
             } else {
                 pageData.listData = pageData.listData.concat(listData);
             }
