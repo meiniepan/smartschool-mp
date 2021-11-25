@@ -5,14 +5,14 @@
     justify-content: center;
     height: 500rpx;
 }
-.empty image{
+.image{
     margin-top: 50rpx;
     width: 200rpx;
     height: 200rpx;
     margin-left: auto;
     margin-right: auto;
 }
-.empty text{
+.text{
     margin-top: 20rpx;
-text-align: center;
+    text-align: center;
 }

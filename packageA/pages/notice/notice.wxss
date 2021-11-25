@@ -1,14 +1,14 @@
 page {
   background-color: var(--tintBac);
 }
+
 .banner{
   width: calc(100% - 72rpx);
+  height: 174rpx;
   margin: 24rpx 36rpx;
-  box-sizing: border-box;
 }
 .cells {
   margin-top: 20rpx;
-  height: 0rpx;
 }
 
 .cell {

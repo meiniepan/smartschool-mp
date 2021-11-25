@@ -230,10 +230,10 @@ Page({
             } else {
                 pageData.end = true;
                 pageData.lastid = null
-                pageData.emptyShow = true
             }
             if (type === 'refresh') {
                 pageData.listData = listData;
+                pageData.emptyShow = data.length==0
             } else {
                 pageData.listData = pageData.listData.concat(listData);
             }

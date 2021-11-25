@@ -1,8 +1,8 @@
 {
   "usingComponents": {
-    "emptyView": "../../../components/emptyView/emptyView"
+    "scroll": "/components/scroll/scroll"
   },
   "navigationBarTitleText": "通知公告",
-  "enablePullDownRefresh": true,
-  "backgroundTextStyle": "dark"
+  "backgroundTextStyle": "dark",
+  "disableScroll": true
 }

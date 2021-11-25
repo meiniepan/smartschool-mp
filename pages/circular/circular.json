@@ -2,11 +2,12 @@
   "usingComponents": {
     "tab": "/components/tab/tab",
     "emptyView": "/components/emptyView/emptyView",
-    "navigation": "/components/navigation/navigation"
+    "navigation": "/components/navigation/navigation",
+    "scroll": "/components/scroll/scroll"
   },
   "navigationBarTitleText": "通知",
   "navigationStyle":"custom",
-  "enablePullDownRefresh": true,
+  "disableScroll": true,
   "backgroundTextStyle": "dark"
   
 }

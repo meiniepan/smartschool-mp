@@ -8,9 +8,21 @@ Page({
      */
     data: {
         mData: [],
+        mRequest: {},
         lastId: null,
     },
     getList(type) {
+        let mRequest = this.data.mRequest
+        let lastId = ""
+        if (type === 'refresh') {
+            mRequest.end = false
+        }
+        if (mRequest.end) return;
+
+        mRequest.requesting = true;
+        this.setData({
+            mRequest,
+        })
         let url;
         if (wx.getStorageSync('usertype') === "1") {
             url = "/api/v17/student/notices/lists"
@@ -20,39 +32,28 @@ Page({
         let data = {
             token: wx.getStorageSync('token'),
             id: this.data.lastId,
-        type: 'system'
+            type: 'system'
         }
 
         app.httpPost(url, data).then((res) => {
-
+            mRequest.requesting = false;
             let data = res.respResult.data;
-
-            if (type === 'more') {
-                if (data.length > 0) {
-                    let lastId = data[data.length - 1].id
-                    this.setData({
-                        mData: this.data.mData.concat(data),
-                        lastId: lastId
-                    });
-                } else {
-                    showToastWithoutIcon('无更多数据');
-                }
+            if (data.length > 0) {
+                lastId = data[data.length - 1].id
             } else {
-                let isEmpty = data.length == 0
-                wx.stopPullDownRefresh();
-                let lastId = ""
-                if (data.length > 0) {
-                    lastId = data[data.length - 1].id
-                }
-                this.setData({
-                    mData: data,
-                    lastId: lastId,
-                    isEmpty
-                });
+                mRequest.end = true;
             }
-
+            if (type === 'more') {
+                data = this.data.mData.concat(data)
+            } else {
+                mRequest.emptyShow = data.length == 0
+            }
+            this.setData({
+                mData: data,
+                lastId: lastId,
+                mRequest,
+            });
         });
-
     },
 
     refresh() {
@@ -104,19 +105,6 @@ Page({
 
     },
 
-    /**
-     * 页面相关事件处理函数--监听用户下拉动作
-     */
-    onPullDownRefresh: function () {
-        this.refresh()
-    },
-
-    /**
-     * 页面上拉触底事件的处理函数
-     */
-    onReachBottom: function () {
-        this.more()
-    },
 
     /**
      * 用户点击右上角分享

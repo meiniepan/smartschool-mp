@@ -12,6 +12,7 @@ Page({
         categoryMenu: ["1", "2"], // 分类菜单数据, 字符串数组格式
         navigationHeight: app.globalData.navigationHeight,
         mData: [],
+        mRequest: {},
         lastId: null,
         noUnread: true,
     },
@@ -38,6 +39,17 @@ Page({
         this.getSemester()
     },
     getList(type) {
+        let mRequest = this.data.mRequest
+        let lastId = null
+        if (type === 'refresh') {
+            mRequest.end = false
+        }
+        if (mRequest.end) return;
+
+        mRequest.requesting = true;
+        this.setData({
+            mRequest,
+        })
         let url;
         if (wx.getStorageSync('usertype') === "1") {
             url = "/api/v17/student/notices/lists"
@@ -51,7 +63,7 @@ Page({
         }
 
         app.httpPost(url, data).then((res) => {
-            console.log('res', res)
+            mRequest.requesting = false;
             let data = res.respResult.data;
             data.forEach(item => {
                 if (item.expand.action == "admin/spacebook/default") {
@@ -84,38 +96,26 @@ Page({
                 } else if (item.expand.action == "admin/courses/default") {
                     item.typeStr = '我的课表'
                     item.icon = 'ic_kebiao'
+                } else if (item.expand.action == "admin/notices/default") {
+                    item.typeStr = '通知公告'
+                    item.icon = 'ic_tonggao'
                 } else {
                     item.typeStr = '通知公告'
                     item.icon = 'ic_tonggao'
                 }
             })
 
-
-            if (type === 'more') {
-                if (data.length > 0) {
-                    let lastId = data[data.length - 1].id
-                    this.setData({
-                        mData: this.data.mData.concat(data),
-                        lastId: lastId
-                    });
-                } else {
-                    showToastWithoutIcon('无更多数据');
-                }
+            if (data.length > 0) {
+                lastId = data[data.length - 1].id
             } else {
-                let isEmpty = data.length == 0
-                wx.stopPullDownRefresh();
-                let lastId = ""
-                if (data.length > 0) {
-                    lastId = data[data.length - 1].id
-                }
-                this.setData({
-                    mData: data,
-                    lastId: lastId,
-                    isEmpty
-                });
+                mRequest.end = true;
             }
-            var data2 = this.data.mData;
-            data2.forEach(item => {
+            if (type === 'more') {
+                data = this.data.mData.concat(data)
+            } else {
+                mRequest.emptyShow = data.length == 0
+            }
+            data.forEach(item => {
                 item.isRead = this.isRead(item)
             });
             let unRead = res.respResult.unread
@@ -130,8 +130,11 @@ Page({
                     }
                 }
             }
+            console.log("request", data)
             this.setData({
-                mData: data2,
+                mData: data,
+                lastId: lastId,
+                mRequest,
                 title
             });
         });
@@ -158,7 +161,7 @@ Page({
 
     },
     getSemester() {
-        let url="/api/v17/global/setting/semesters";
+        let url = "/api/v17/global/setting/semesters";
 
         let data = {
             token: wx.getStorageSync('token'),
@@ -166,8 +169,8 @@ Page({
 
         app.httpPost(url, data, false).then((res) => {
             let data = res.respResult;
-            wx.setStorageSync('stime',data.starttime)
-            wx.setStorageSync('etime',data.endtime)
+            wx.setStorageSync('stime', data.starttime)
+            wx.setStorageSync('etime', data.endtime)
         });
 
 
@@ -227,7 +230,7 @@ Page({
             page = 'achievement'
         } else if (item.expand.action == "admin/courses/default") {
             page = 'timetable'
-        }else if (item.expand.action == "admin/notices/default") {
+        } else if (item.expand.action == "admin/notices/default") {
             page = 'notice'
         } else {
             page = 'notice'
@@ -242,12 +245,12 @@ Page({
     doDetail(e) {
         let item = e.currentTarget.dataset.bean
         this.setData({
-            curItem:item,
+            curItem: item,
         })
         if (item.status != '1') {
             this.doRead(item.id)
-        }else {
-        this.doJump(item);
+        } else {
+            this.doJump(item);
         }
     },
     //判断是否已读
@@ -289,20 +292,6 @@ Page({
      */
     onUnload: function () {
 
-    },
-
-    /**
-     * 页面相关事件处理函数--监听用户下拉动作
-     */
-    onPullDownRefresh: function () {
-        this.refresh()
-    },
-
-    /**
-     * 页面上拉触底事件的处理函数
-     */
-    onReachBottom: function () {
-        this.more()
     },
 
     /**
