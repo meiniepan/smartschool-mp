@@ -15,13 +15,13 @@ Page({
         mRequest: {},
         lastId: null,
         noUnread: true,
+        scrollTop:0,
     },
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
         app.checkUpdate()
-
     },
 
     /**
@@ -35,6 +35,9 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow: function () {
+        this.setData({
+            scrollTop:0
+        })
         this.refresh();
         this.getSemester()
     },

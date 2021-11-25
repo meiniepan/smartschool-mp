@@ -2,12 +2,12 @@
 
 .movable-area {
   width: 100%;
-  height: 100vh;
+  height: 100%;
 }
 
 .scroll {
   width: 100%;
-  height: calc(100vh + 90rpx);
+  height: calc(100% + 90rpx);
 }
 
 .scroll__view {

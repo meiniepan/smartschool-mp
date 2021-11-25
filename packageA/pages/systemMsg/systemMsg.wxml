@@ -1,7 +1,7 @@
 <!--pages/systemMsg/systemMsg.wxml-->
 <view class="out">
-    <scroll
-            requesting="{{mRequest.requesting}}"
+    <scroll requesting="{{mRequest.requesting}}"
+            scrollTop="{{scrollTop}}"
             end="{{mRequest.end}}"
             empty-show="{{mRequest.emptyShow}}"
             list-count="{{mData.length}}"

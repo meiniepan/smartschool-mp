@@ -21,6 +21,15 @@ Page({
         // const redirect_uri = '/pages/result/result' // 登录成功后的回跳页面
 
     },
+    /**
+     * 生命周期函数--监听页面显示
+     */
+    onShow: function () {
+        this.setData({
+            scrollTop:0
+        })
+        this.refresh();
+    },
     getList(type) {
         let mRequest = this.data.mRequest
         let lastId = null
@@ -157,12 +166,6 @@ Page({
 
     },
 
-    /**
-     * 生命周期函数--监听页面显示
-     */
-    onShow: function () {
-        this.refresh();
-    },
 
     /**
      * 生命周期函数--监听页面隐藏

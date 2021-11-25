@@ -9,7 +9,29 @@ Page({
     data: {
         mData: { lastid: null, listData: [] },
     },
+    /**
+     * 生命周期函数--监听页面加载
+     */
+    onLoad: function (options) {
 
+    },
+
+    /**
+     * 生命周期函数--监听页面初次渲染完成
+     */
+    onReady: function () {
+
+    },
+
+    /**
+     * 生命周期函数--监听页面显示
+     */
+    onShow: function () {
+        this.setData({
+            scrollTop:0
+        })
+        this.refresh()
+    },
     getList(type, lastid) {
         let mData = this.data.mData;
         //todo
@@ -89,27 +111,6 @@ Page({
             showToastWithoutIcon('处理完成')
             this.refresh()
         });
-    },
-    /**
-     * 生命周期函数--监听页面加载
-     */
-    onLoad: function (options) {
-
-        this.refresh()
-    },
-
-    /**
-     * 生命周期函数--监听页面初次渲染完成
-     */
-    onReady: function () {
-
-    },
-
-    /**
-     * 生命周期函数--监听页面显示
-     */
-    onShow: function () {
-
     },
 
     /**

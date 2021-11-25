@@ -7,23 +7,23 @@
         </view>
     </navigation>
     <image class="banner" src="../../assets/images/bac_banner1.png" mode="aspectFill"></image>
-
-            <scroll requesting="{{mRequest.requesting}}"
-                    end="{{mRequest.end}}"
-                    empty-show="{{mRequest.emptyShow}}"
-                    list-count="{{mData.length}}"
-                    bottom-size="{{navigationHeight+198+40}}"
-                    bind:refresh="refresh"
-                    bind:more="more">
-                <view class="cells">
-                    <view class="cell" wx:for="{{mData}}" wx:key="index" data-bean="{{item}}" bindtap="doDetail">
-                        <view class="titles">
-                            <image class="ivAction" src="../../assets/images/{{item.icon}}.png" mode="widthFix"></image>
-                            <view class="title">{{item.typeStr}}</view>
-                            <view class="date">{{item.noticetime}}</view>
-                        </view>
-                        <text class="{{item.isRead?'tag2':'tag1'}}">{{item.title}}</text>
-                    </view>
+    <scroll requesting="{{mRequest.requesting}}"
+            scrollTop="{{scrollTop}}"
+            end="{{mRequest.end}}"
+            empty-show="{{mRequest.emptyShow}}"
+            list-count="{{mData.length}}"
+            bottom-size="{{navigationHeight+198+80}}"
+            bind:refresh="refresh"
+            bind:more="more">
+        <view class="cells">
+            <view class="cell" wx:for="{{mData}}" wx:key="index" data-bean="{{item}}" bindtap="doDetail">
+                <view class="titles">
+                    <image class="ivAction" src="../../assets/images/{{item.icon}}.png" mode="widthFix"></image>
+                    <view class="title">{{item.typeStr}}</view>
+                    <view class="date">{{item.noticetime}}</view>
                 </view>
-            </scroll>
+                <text class="{{item.isRead?'tag2':'tag1'}}">{{item.title}}</text>
+            </view>
+        </view>
+    </scroll>
 </view>

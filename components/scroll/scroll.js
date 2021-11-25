@@ -49,6 +49,11 @@ Component({
             type: Number,
             value: 0,
         },
+        // 滚动距离
+        scrollTop: {
+            type: Number,
+            value: 0,
+        },
         // 底部高度
         bottomSize: {
             type: Number,

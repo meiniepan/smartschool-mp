@@ -1,8 +1,8 @@
 <!--pages/circular/circular.wxml-->
 <view class="out">
     <image class="banner" src="../../assets/images/bac_banner1.png" mode="aspectFill"></image>
-    <scroll
-            requesting="{{mRequest.requesting}}"
+    <scroll requesting="{{mRequest.requesting}}"
+            scrollTop="{{scrollTop}}"
             end="{{mRequest.end}}"
             empty-show="{{mRequest.emptyShow}}"
             list-count="{{mData.length}}"
