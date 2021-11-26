@@ -135,6 +135,8 @@ Page({
             } else {
                 app.httpPost(url, data).then((res) => {
                     let data = res.respResult.data;
+                    console.log("res",data)
+
                     data.forEach(res => {
                         res.d = res.dep_name
                     })
