@@ -123,17 +123,19 @@ Page({
     },
     nextMonth(e) {
         this.setData({
-            mMonth: e.detail
-        })
+            mMonth: e.detail,
+                scrollHeight: 0
+            }, () => this.getHeight(),
+        )
         this.getDataMonth(e.detail)
-        this.getHeight()
     },
     lastMonth(e) {
         this.setData({
-            mMonth: e.detail
-        })
+            mMonth: e.detail,
+                scrollHeight: 0
+            }, () => this.getHeight(),
+        )
         this.getDataMonth(e.detail)
-        this.getHeight()
     },
     getHeight() {
         var query = wx.createSelectorQuery();

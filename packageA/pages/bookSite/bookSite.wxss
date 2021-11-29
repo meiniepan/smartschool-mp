@@ -45,6 +45,7 @@ page{
     flex-direction: column;
     padding-left: var(--titlePadding);
     padding-right: var(--titlePadding);
+    overflow: hidden;
     box-sizing: border-box;
 }
 

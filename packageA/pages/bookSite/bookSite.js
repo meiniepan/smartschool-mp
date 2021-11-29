@@ -93,6 +93,7 @@ Page({
             let isEmpty = data.length == 0
             this.setData({
                 mDataDay: data,
+                mDataDay2: data,
                 isEmpty,
                 semesters
             });
@@ -133,24 +134,26 @@ Page({
     },
     nextMonth(e) {
         this.setData({
-            mMonth: e.detail
-        })
+                mMonth: e.detail,
+                scrollHeight: 0
+            }, () => this.getHeight(),
+        )
         this.getDataMonth(e.detail)
-        this.getHeight()
     },
     lastMonth(e) {
         this.setData({
-            mMonth: e.detail
-        })
+                mMonth: e.detail,
+                scrollHeight: 0
+            }, () => this.getHeight(),
+        )
         this.getDataMonth(e.detail)
-        this.getHeight()
     },
     getHeight() {
         var query = wx.createSelectorQuery();
         query.select('.list').boundingClientRect((rect) => {
             console.log("rrr", rect.height)
             this.setData({
-                scrollHeight: rect.height
+                scrollHeight: rect.height,
             })
         }).exec();
     },

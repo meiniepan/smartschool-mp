@@ -134,8 +134,8 @@ Component({
 
         //上个月
         lastMonth: function () {
-            let month = this.data.month === 1 ? 12 : parseInt(this.data.month) - 1
-            let year = this.data.month === 1 ? this.data.year - 1 : this.data.year
+            let month = (this.data.month == 1 || this.data.month == '01') ? 12 : parseInt(this.data.month) - 1
+            let year = (this.data.month == 1 || this.data.month == '01') ? this.data.year - 1 : this.data.year
             //初始化日历组件UI
             this.display(year, month, 0)
             this.triggerEvent('lastMonth', year.toString() + this.zero(month))
