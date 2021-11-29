@@ -2,5 +2,7 @@
   "usingComponents": {
     "emptyView": "/components/emptyView/emptyView"
   },
-  "navigationBarTitleText": "学生考勤"
+  "navigationBarTitleText": "学生考勤",
+  "disableScroll": true,
+  "backgroundTextStyle": "dark"
 }

@@ -44,8 +44,17 @@
     display: flex;
     white-space: nowrap;
 }
+.list{
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    box-sizing: border-box;
+}
 .cells-master {
     margin-top: 140rpx;
+    display: flex;
+    flex-grow: 1;
+    flex-direction: column;
 }
 
 .title-area {

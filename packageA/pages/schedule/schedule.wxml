@@ -6,12 +6,8 @@
         <text class="list-title">日程安排</text>
     </view>
     <view class="list">
-        <view class="top2">
-            <calendar class="c2" specialDays="{{mDataMonth}}"/>
-            <text class="list-title">日程安排</text>
-        </view>
         <emptyView wx:if="{{isEmpty}}" />
-        <view wx:else class="cells" >
+        <scroll-view wx:else class="cells" style="height: {{scrollHeight}}px" enable-flex scroll-y>
             <view class="cell" wx:for="{{mDataDay}}" wx:key="index" data-id="{{item}}" bindtap="doDetail">
                 <view class="title-area">
                     <view class="share" style="background: {{item.color}}"></view>
@@ -22,11 +18,9 @@
                         {{item.timeStr}}
                     </view>
                 </view>
-
-
                 <view class="remark" wx:if="{{item.remark.length>0}}">{{item.remarkStr}}</view>
             </view>
-        </view>
+        </scroll-view>
     </view>
     <image class="addBtn" bindtap="doAdd" src="../../assets/images/ic_add_common.png" mode="widthFix"></image>
 </view>

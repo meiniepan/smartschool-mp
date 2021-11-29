@@ -4,5 +4,7 @@
     "calendar": "/components/calendar/calendar",
     "navigation": "/components/navigation/navigation"
   },
-  "navigationStyle":"custom"
+  "navigationStyle":"custom",
+  "disableScroll": true,
+  "backgroundTextStyle": "dark"
 }

@@ -13,8 +13,6 @@ page {
     background: var(--commonBlack);
     display: flex;
     flex-direction: column;
-    position: fixed;
-    z-index: 999;
 }
 
 .list-title {
@@ -29,22 +27,19 @@ page {
     padding-right: var(--titlePadding);
 }
 
-.list {
+.list{
     display: flex;
     flex-direction: column;
-    background: var(--tintBac);
+    flex-grow: 1;
+    box-sizing: border-box;
+}
+.cells {
+    display: flex;
+    flex-direction: column;
     padding-left: var(--titlePadding);
     padding-right: var(--titlePadding);
-}
-
-.top2 {
-    background: var(--commonBlack);
-    display: flex;
-    flex-direction: column;
-}
-
-.cells {
-
+    overflow: hidden;
+    box-sizing: border-box;
 }
 
 .cell {

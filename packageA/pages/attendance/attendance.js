@@ -15,7 +15,12 @@ Page({
         classData: [],
         indexClass: 0,
     },
-
+    /**
+     * 生命周期函数--监听页面初次渲染完成
+     */
+    onReady: function () {
+        this.getHeight()
+    },
     /**
      * 生命周期函数--监听页面加载
      */
@@ -79,6 +84,15 @@ Page({
         } else {
             // this.getStuData()
         }
+    },
+    getHeight() {
+        var query = wx.createSelectorQuery();
+        query.select('.list').boundingClientRect((rect) => {
+            console.log("rrr", rect.height)
+            this.setData({
+                scrollHeight: rect.height
+            })
+        }).exec();
     },
     getDataMaster() {
         let url;
@@ -149,6 +163,7 @@ Page({
             data2.push({name: "早间迟到", value: data.morninglate + "人", list: data.morninglatelist});
             data2.push({name: "课堂迟到", value: data.courselate + "人", list: data.courselatelist});
             data2.push({name: "旷课", value: data.truant + "人", list: data.truantlist});
+
             console.log("data2", data2)
             this.setData({
                 mData: data2,
@@ -240,12 +255,7 @@ Page({
         }
         this.getDataMaster()
     },
-    /**
-     * 生命周期函数--监听页面初次渲染完成
-     */
-    onReady: function () {
 
-    },
 
     /**
      * 生命周期函数--监听页面显示

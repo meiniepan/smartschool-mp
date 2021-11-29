@@ -19,10 +19,8 @@ Page({
         let month = temp.getMonth() + 1
         let date = temp.getDate()
         let today = year + "" + zero(month) + "" + zero(date)
-        let today2 = year + "/" + zero(month) + "/" + zero(date)
         this.setData({
             mDay: today,
-            today2,
             mMonth:year.toString() + zero(month),
         })
     },
@@ -44,10 +42,11 @@ Page({
         this.setData({
             onReady:true,
         })
+        this.getHeight()
     },
     doAdd() {
         wx.navigateTo({
-            url: '/packageA/pages/addSchedule/addSchedule?chosenDay=' + this.data.today2
+            url: '/packageA/pages/addSchedule/addSchedule?chosenDay=' + this.data.mDay
         })
     },
     getDataDay(day) {
@@ -124,21 +123,30 @@ Page({
     },
     nextMonth(e) {
         this.setData({
-            mMonth:e.detail
+            mMonth: e.detail
         })
         this.getDataMonth(e.detail)
-        this.selectComponent(".c2").nextMonth(e)
+        this.getHeight()
     },
     lastMonth(e) {
         this.setData({
-            mMonth:e.detail
+            mMonth: e.detail
         })
         this.getDataMonth(e.detail)
-        this.selectComponent(".c2").lastMonth(e)
+        this.getHeight()
+    },
+    getHeight() {
+        var query = wx.createSelectorQuery();
+        query.select('.list').boundingClientRect((rect) => {
+            console.log("rrr", rect.height)
+            this.setData({
+                scrollHeight: rect.height
+            })
+        }).exec();
     },
     doSelect(e) {
         this.setData({
-            mDay: e.detail
+            mDay: e.detail,
         })
         this.getDataDay(e.detail)
     },

@@ -35,6 +35,7 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow: function () {
+
         if (this.data.onReady) {
             this.getDataDay(this.data.mDay)
             this.getDataMonth(this.data.mMonth)
@@ -50,6 +51,7 @@ Page({
         this.setData({
             onReady: true,
         })
+        this.getHeight()
     },
     getDataDay(day) {
         console.log("day", day)
@@ -134,14 +136,23 @@ Page({
             mMonth: e.detail
         })
         this.getDataMonth(e.detail)
-        this.selectComponent(".c2").nextMonth(e)
+        this.getHeight()
     },
     lastMonth(e) {
         this.setData({
             mMonth: e.detail
         })
         this.getDataMonth(e.detail)
-        this.selectComponent(".c2").lastMonth(e)
+        this.getHeight()
+    },
+    getHeight() {
+        var query = wx.createSelectorQuery();
+        query.select('.list').boundingClientRect((rect) => {
+            console.log("rrr", rect.height)
+            this.setData({
+                scrollHeight: rect.height
+            })
+        }).exec();
     },
     doSelect(e) {
         this.setData({

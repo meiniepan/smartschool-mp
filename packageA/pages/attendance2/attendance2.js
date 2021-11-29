@@ -8,6 +8,22 @@ Page({
   data: {
 
   },
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad: function (options) {
+    this.setData({
+      bean: JSON.parse(options.data),
+    })
+    this.getData()
+  },
+
+  /**
+   * 生命周期函数--监听页面初次渲染完成
+   */
+  onReady: function () {
+    this.getHeight()
+  },
   getData() {
     let url;
     let data = {
@@ -31,23 +47,16 @@ Page({
 
     });
   },
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-    this.setData({
-      bean: JSON.parse(options.data),
-    })
-    this.getData()
+  getHeight() {
+    var query = wx.createSelectorQuery();
+    query.select('.list').boundingClientRect((rect) => {
+      console.log("rrr", rect.height)
+      this.setData({
+        scrollHeight: rect.height
+      })
+    }).exec();
   },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
 
   /**
    * 生命周期函数--监听页面显示

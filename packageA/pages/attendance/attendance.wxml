@@ -35,9 +35,9 @@
             </picker>
         </view>
     </view>
+    <view  class="list">
     <emptyView wx:if="{{isEmpty}}"/>
-
-    <scroll-view wx:else class="cells-master" enable-flex scroll-y>
+    <scroll-view wx:else class="cells-master" style="height: {{scrollHeight}}px" enable-flex scroll-y>
         <block wx:if="{{mode=='master'}}">
             <view class="cell" wx:for="{{mData}}" wx:key="index" bindtap="doDetail">
                 <view class="title-area">
@@ -140,6 +140,6 @@
             </view>
         </view>
     </scroll-view>
-
+    </view>
 
 </view>

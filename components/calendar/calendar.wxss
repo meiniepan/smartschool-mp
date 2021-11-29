@@ -5,8 +5,11 @@
   font-size: 30rpx;
   background: var(--commonBlack);
   padding-bottom: 20rpx;
+  box-sizing: border-box;
 }
-
+.image{
+  padding: 20rpx;
+}
 /* 标题 */
 .calendar-title {
   text-align: left;
