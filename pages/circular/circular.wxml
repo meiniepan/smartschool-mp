@@ -16,7 +16,7 @@
             bind:refresh="refresh"
             bind:more="more">
         <view class="cells">
-            <view class="cell" wx:for="{{mData}}" wx:key="index" data-bean="{{item}}" bindtap="doDetail">
+            <view class="cell" wx:for="{{mData}}" wx:key="index" data-index="{{index}}" data-bean="{{item}}" bindtap="doDetail">
                 <view class="titles">
                     <image class="ivAction" src="../../assets/images/{{item.icon}}.png" mode="widthFix"></image>
                     <view class="title">{{item.typeStr}}</view>

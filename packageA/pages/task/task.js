@@ -25,9 +25,6 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow: function () {
-        this.setData({
-            scrollTop:0
-        })
         this.refresh();
     },
     /**
@@ -334,6 +331,9 @@ Page({
         return this.data.categoryData[this.data.categoryCur]
     },
     refresh() {
+        this.setData({
+            scrollTop:0
+        })
         this.getList('refresh', "");
     },
 

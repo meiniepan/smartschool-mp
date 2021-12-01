@@ -1,5 +1,5 @@
 // pages/circular/circular.js
-import {isLogin, showToastWithoutIcon} from '../../utils/util';
+import {toIntSafe,isLogin, showToastWithoutIcon} from '../../utils/util';
 
 let app = getApp();
 Page({
@@ -22,6 +22,8 @@ Page({
      */
     onLoad: function (options) {
         app.checkUpdate()
+        this.refresh();
+        this.getSemester()
     },
 
     /**
@@ -35,12 +37,21 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow: function () {
-        this.setData({
-            scrollTop:0
-        })
-        this.refresh();
-        this.getSemester()
+
     },
+    doTitle: function (unRead) {
+        let title = "通知"
+
+            if (unRead > 0) {
+                if (unRead > 99) {
+                    title = "通知(99+)"
+                } else {
+                    title = "通知(" + unRead + ")"
+                }
+        }
+        return title;
+    },
+
     getList(type) {
         let mRequest = this.data.mRequest
         let lastId = null
@@ -121,23 +132,14 @@ Page({
             data.forEach(item => {
                 item.isRead = this.isRead(item)
             });
-            let unRead = res.respResult.unread
-            let title = "通知"
-
-            if (unRead.length > 0) {
-                if (parseInt(unRead) > 0) {
-                    if (parseInt(unRead) > 99) {
-                        title = "通知(99+)"
-                    } else {
-                        title = "通知(" + unRead + ")"
-                    }
-                }
-            }
+            let unRead = toIntSafe(res.respResult.unread)
+            let title = this.doTitle(unRead);
             console.log("request", data)
             this.setData({
                 mData: data,
                 lastId: lastId,
                 mRequest,
+                unRead,
                 title
             });
         });
@@ -145,24 +147,6 @@ Page({
 
     },
 
-    doRead(id) {
-        let url;
-        if (wx.getStorageSync('usertype') === "1") {
-            url = "/api/v17/student/notices/modify"
-        } else {
-            url = "/api/v17/teacher/notices/modify"
-        }
-        let data = {
-            token: wx.getStorageSync('token'),
-            id: id,
-            status: '1'
-        }
-
-        app.httpPost(url, data, false).then((res) => {
-            this.doJump(this.data.curItem)
-        });
-
-    },
     getSemester() {
         let url = "/api/v17/global/setting/semesters";
 
@@ -201,8 +185,10 @@ Page({
     refresh() {
         console.log('uid', wx.getStorageSync('uid'))
         console.log('domain', wx.getStorageSync('domain'))
+
         this.setData({
-            lastId: null
+            lastId: null,
+            scrollTop:0
         });
         this.getList('refresh');
     },
@@ -247,14 +233,40 @@ Page({
 
     doDetail(e) {
         let item = e.currentTarget.dataset.bean
+        let index = e.currentTarget.dataset.index
         this.setData({
             curItem: item,
         })
         if (item.status != '1') {
-            this.doRead(item.id)
+            this.doRead(item.id,index)
         } else {
             this.doJump(item);
         }
+    },
+    doRead(id,index) {
+        let url;
+        if (wx.getStorageSync('usertype') === "1") {
+            url = "/api/v17/student/notices/modify"
+        } else {
+            url = "/api/v17/teacher/notices/modify"
+        }
+        let data = {
+            token: wx.getStorageSync('token'),
+            id: id,
+            status: '1'
+        }
+
+        app.httpPost(url, data, false).then((res) => {
+            this.data.mData[index].isRead = true
+            this.setData({
+                mData:this.data.mData,
+                unRead:this.data.unRead-1,
+                title:this.doTitle(this.data.unRead-1)
+            })
+
+            this.doJump(this.data.curItem)
+        });
+
     },
     //判断是否已读
     isFeedback(item) {
