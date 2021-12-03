@@ -35,7 +35,7 @@
             <view class="key text bold">会议主题</view>
             <view class="require bold">*</view>
         </view>
-        <input placeholder="请描述会议主题" maxlength="40" bindinput="doInput" data-type="remark" value="{{}}"/>
+        <textarea style="height: 80rpx" placeholder="请描述会议主题" maxlength="40" bindinput="doInput" data-type="remark" value="{{}}"/>
     </view>
     <view class="bottom">
         <view class="confirm" bindtap="doConfirm">提交</view>
