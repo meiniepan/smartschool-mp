@@ -16,16 +16,24 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
+        wx.showLoading({
+            title: '加载中...',
+            mask: true
+        });
         wx.cloud.downloadFile({
             fileID: 'cloud://env-4gwafyi0129f4b02.656e-env-4gwafyi0129f4b02-1308234288/bac_archives.png',
             success: res => {
                 // get temp file path
                 this.setData({
                     bac: res.tempFilePath,
+                },()=>{
+                    this.getData()
                 })
+
             },
             fail: err => {
                 // handle error
+
             }
         })
         let img = ""
@@ -37,7 +45,7 @@ Page({
         this.setData({
             img,
         })
-        this.getData()
+
     },
 
     /**
