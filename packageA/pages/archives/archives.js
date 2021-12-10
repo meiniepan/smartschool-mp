@@ -82,6 +82,8 @@ Page({
         app.httpPost(url, data).then((res) => {
             console.log("data", res)
             let mData = res.respResult
+            let sex = mData.sex == "1" ? "男" : mData.sex == "2" ? "女" : "未知";
+            mData.sex = sex
             this.setData({
                 mData,
             })

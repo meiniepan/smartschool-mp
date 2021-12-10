@@ -17,25 +17,39 @@
                     <text>出生日期</text>
                     <text class="text">{{mData.birthday}}</text>
                 </view>
+
+                <view class="info-line" style="margin-top: 40rpx">
+                    <text>性别</text>
+                    <text class="text">{{mData.sex}}</text>
+                </view>
                 <view class="info-line" style="margin-top: 40rpx">
                     <text>最高学历</text>
                     <text class="text">{{mData.highest_education_str}}</text>
                 </view>
                 <view class="info-line" style="margin-top: 40rpx">
-                    <text>学科</text>
-                    <text class="text">{{mData.speciality}}</text>
+                    <text>政治面貌</text>
+                    <text class="text">{{mData.political_str}}</text>
                 </view>
                 <view class="info-line" style="margin-top: 40rpx">
-                    <text>职称</text>
-                    <text class="text">{{mData.professional}}</text>
+                    <text>初高中任教学科</text>
+                    <text class="text">{{mData.teach_subject_str}}</text>
                 </view>
+                <view class="info-line" style="margin-top: 40rpx">
+                    <text>人事关系所在校区</text>
+                    <text class="text">{{mData.relation_school_str}}</text>
+                </view>
+                <view class="info-line" style="margin-top: 40rpx">
+                    <text>工龄</text>
+                    <text class="text">{{mData.work_year}}年</text>
+                </view>
+
                 <view class="info-line" style="margin-top: 40rpx">
                     <text>教龄</text>
-                    <text class="text">{{mData.teach_year}}</text>
+                    <text class="text">{{mData.teach_year}}年</text>
                 </view>
                 <view class="info-line" style="margin-top: 40rpx">
-                    <text>骨干级别</text>
-                    <text class="text">{{mData.backbone}}</text>
+                    <text>入本集团时间</text>
+                    <text class="text">{{mData.join_time}}</text>
                 </view>
             </view>
         </view>
