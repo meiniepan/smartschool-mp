@@ -7,7 +7,6 @@ Page({
      */
     data: {
         img: "/assets/images/ic_avatar_default.png",
-        name: wx.getStorageSync('realname'),
         title: "教师成长档案",
         bac: "",
     },
