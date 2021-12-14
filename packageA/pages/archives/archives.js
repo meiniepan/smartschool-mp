@@ -82,6 +82,12 @@ Page({
             console.log("data", res)
             let mData = res.respResult
             let sex = mData.sex == "1" ? "男" : mData.sex == "2" ? "女" : "未知";
+            if(mData.work_year.length>0){
+                mData.work_year = mData.work_year+"年"
+            }
+            if(mData.teach_year.length>0){
+                mData.teach_year = mData.teach_year+"年"
+            }
             mData.sex = sex
             this.setData({
                 mData,
