@@ -34,6 +34,7 @@ page{
 }
 .cell1 .text1{
     font-size: 32rpx;
+    font-weight: bold;
     margin-top: 40rpx;
 }
 .cell1 .text2{
