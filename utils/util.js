@@ -186,6 +186,8 @@ function getFileImage(path) {
         type = "/packageA/assets/images/ic_type_word.png"
     } else if (path.endsWith(".xls") || path.endsWith(".xlsx")) {
         type = "/packageA/assets/images/ic_type_excel.png"
+    } else if (path.endsWith(".ppt") || path.endsWith(".pptx")) {
+        type = "/packageA/assets/images/ic_type_ppt.png"
     } else if (path.endsWith(".pdf")) {
         type = "/packageA/assets/images/ic_type_pdf.png"
     } else if (path.endsWith(".zip") || path.endsWith(".rar") || path.endsWith(".tar") || path.endsWith(
