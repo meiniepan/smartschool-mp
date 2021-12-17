@@ -1,5 +1,5 @@
 // pages/addBookSite/addBookSite.js
-import {showToastWithoutIcon, zero} from "../../../utils/util";
+import {clickBlock, showToastWithoutIcon, zero} from "../../../utils/util";
 
 let app = getApp();
 Page({
@@ -8,6 +8,7 @@ Page({
      * 页面的初始数据
      */
     data: {
+        oldTime:0,
         requestBody: {
             token: wx.getStorageSync('token'),
             ostime: '请选择开始时间',
@@ -115,6 +116,9 @@ Page({
         })
     },
     doConfirm() {
+        if (clickBlock()){
+            return;
+        }
         let bean = this.data.requestBody
         bean.token = wx.getStorageSync('token')
         if (bean.ostime == "请选择开始时间" ||

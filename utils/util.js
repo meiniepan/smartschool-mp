@@ -1,3 +1,15 @@
+let oldTime = 0
+function clickBlock() {
+    let newTime = Date.parse(new Date())
+    if (newTime - oldTime<3000){
+        oldTime = newTime
+        return true;
+    }else {
+        oldTime = newTime
+        return false
+    }
+}
+
 const formatTime = date => {
     const year = date.getFullYear()
     const month = date.getMonth() + 1
@@ -261,4 +273,5 @@ module.exports = {
     formatShowTime: formatShowTime,
     isVideo: isVideo,
     isImage: isImage,
+    clickBlock: clickBlock,
 }
