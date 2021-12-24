@@ -18,7 +18,7 @@ Page({
         let year = temp.getFullYear()
         let month = temp.getMonth() + 1
         let date = temp.getDate()
-        let today = year + "" + zero(month) + "" + zero(date)
+        let today = year + "/" + zero(month) + "/" + zero(date)
         this.setData({
             mDay: today,
             mMonth:year.toString() + zero(month),

@@ -22,7 +22,7 @@ const isLeapYear = function(year) {
 const now = new Date();
 const years = [];
 const beginYear = 1990;
-for (var i = beginYear; i <= now.getFullYear(); i++) {
+for (var i = beginYear; i <= now.getFullYear()+1; i++) {
   years.push(i + "年");
 }
 const months = [];
@@ -141,7 +141,7 @@ Component({
         let v = this.data.rangeValues[i][e.detail.value[i]];
         dateArr.push(v.toString().substr(0, v.length - 1))
       }
-      let dateString = dateArr[0] + "-" + dateArr[1] + "-" + dateArr[2] + " " + dateArr[3] + ":" + dateArr[4] ;
+      let dateString = dateArr[0] + "/" + dateArr[1] + "/" + dateArr[2] + " " + dateArr[3] + ":" + dateArr[4] ;
       this.triggerEvent('change', {
         date: stringToDate(dateString),
         dateString
