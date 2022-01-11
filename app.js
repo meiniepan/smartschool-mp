@@ -59,6 +59,7 @@ App({
      * @param loadingMsg 请求提示信息
      */
     httpBase: function (method, url, data, loading = false, loadingMsg) {
+        let that = this
         let requestUrl = host.BASE_URL + url;
         console.log("url", requestUrl)
         console.log("body", data)
@@ -91,26 +92,14 @@ App({
                             },
                         });
                     }
-
+                    console.log("result", result)
                     let res = result.data || {};
                     let code = res.respCode;
                     let errMsg = res.respMsg;
 
                     if (code != '0000') {
                         if (code == '0004') {
-                            wx.setStorageSync('token', null)
-                            if (wx.getStorageSync('environment')) {//企业微信环境
-                                wx.redirectTo({
-                                    url: '/pages/splash/splash',
-                                })
-                            } else {
-                                //非企业微信环境
-                                wx.redirectTo({
-                                    url: '/packageA/pages/switch_role/switch_role',
-                                })
-                            }
-
-                            return
+                            that.reLogin()
                         }
                         reject(res);
                         if (errMsg) {
@@ -125,7 +114,7 @@ App({
                 },
                 fail: res=> {
                     reject(res);
-
+                    console.log("fail", res)
                     if (loading) {
                         wx.hideLoading({
                             complete: (res) => {
@@ -147,6 +136,21 @@ App({
         }
 
         return new Promise(request);
+    },
+    reLogin(){
+        wx.setStorageSync('token', null)
+        if (wx.getStorageSync('environment')) {//企业微信环境
+            wx.redirectTo({
+                url: '/pages/splash/splash',
+            })
+        } else {
+            //非企业微信环境
+            wx.redirectTo({
+                url: '/packageA/pages/switch_role/switch_role',
+            })
+        }
+
+        return
     },
     httpBase0: function (method, url, data, loading = false, loadingMsg, contentType = 'application/x-www-form-urlencoded') {
         let requestUrl = url;
