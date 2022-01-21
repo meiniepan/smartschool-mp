@@ -21,7 +21,7 @@ const formatTime = date => {
     return [year, month, day].map(formatNumber).join('/') + ' ' + [hour, minute, second].map(formatNumber).join(':')
 }
 
-const formateDate = (date) => {
+const formatDate = (date) => {
     const year = date.getFullYear()
     const month = date.getMonth() + 1
     const day = date.getDate()
@@ -153,6 +153,15 @@ function isSameDay(date) {
     }
 }
 
+function formatStarPhoneNum(num) {
+    if (num.length > 10) {
+
+        let s = num.substring(0, 3),
+            e = num.substring(7, 11);
+        return s+"****"+e
+    }
+}
+
 function isSameYear(date) {
     if (date.length >= 10) {
         let temp = new Date();
@@ -256,7 +265,7 @@ function isImage(path) {
 
 module.exports = {
     formatTime: formatTime,
-    formateDate: formateDate,
+    formatDate: formatDate,
     isEmpty: isEmpty,
     isLogin: isLogin,
     clearLoginInfo: clearLoginInfo,
@@ -274,4 +283,5 @@ module.exports = {
     isVideo: isVideo,
     isImage: isImage,
     clickBlock: clickBlock,
+    formatStarPhoneNum: formatStarPhoneNum,
 }

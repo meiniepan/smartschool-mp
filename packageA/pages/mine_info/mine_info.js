@@ -1,5 +1,5 @@
 // pages/mine/mine.js
-import {showToastWithoutIcon} from "../../../utils/util";
+import {showToastWithoutIcon,formatStarPhoneNum} from "../../../utils/util";
 
 let app = getApp();
 Page({
@@ -32,7 +32,7 @@ Page({
             img = wx.getStorageSync("domain") + wx.getStorageSync("portrait");
         }
         let name = wx.getStorageSync("realname");
-        let phone = wx.getStorageSync("phone");
+        let phone = formatStarPhoneNum(wx.getStorageSync("phone"));
         let levelclass = wx.getStorageSync("levelclass");
         let sex = wx.getStorageSync("sex") == "1" ? "男" : wx.getStorageSync("sex") == "2" ? "女" : "未知";
         let birthday = wx.getStorageSync("birthday");

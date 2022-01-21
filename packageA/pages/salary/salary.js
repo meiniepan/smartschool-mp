@@ -1,5 +1,5 @@
 // pages/salary/salary.js
-import {showToastWithoutIcon} from '../../../utils/util';
+import {showToastWithoutIcon,formatStarPhoneNum} from '../../../utils/util';
 
 const app = getApp();
 const globalData = getApp().globalData;
@@ -34,7 +34,7 @@ Page({
         this.setData({
             hiddenPage1: false,
             hiddenPage2: true,
-            phone: wx.getStorageSync('phone')
+            phone: formatStarPhoneNum(wx.getStorageSync("phone"))
         })
     },
     //显示数据页面
