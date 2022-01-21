@@ -1,5 +1,5 @@
 // packageA/pages/addTask/addTask.js
-import {showToastWithoutIcon, zero} from "../../../utils/util";
+import {showModal, showToastWithoutIcon, zero} from "../../../utils/util";
 
 const app = getApp()
 Page({
@@ -56,10 +56,10 @@ Page({
 
     doConfirm() {
         let this_ = this
-        wx.showModal({
-            title: '温馨提示',
-            content: '确定发布任务？',
-            success(res) {
+        showModal(
+            '确定发布任务？',
+            '温馨提示',
+            (res)=> {
                 if (res.confirm) {
                     this_.doConfirm2()
                 } else if (res.cancel) {
@@ -68,8 +68,7 @@ Page({
                     })
                 }
             },
-            confirmColor: "#F95B49",
-        })
+        )
 
     },
     doConfirm2() {

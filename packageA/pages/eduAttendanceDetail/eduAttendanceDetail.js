@@ -1,5 +1,5 @@
 // packageA/pages/eduAttendanceDetail/eduAttendanceDetail.js
-import {getTodayMD, getTodayStr, showToastWithoutIcon} from '../../../utils/util';
+import {getTodayMD, getTodayStr, showModal, showToastWithoutIcon} from '../../../utils/util';
 
 let app = getApp();
 Page({
@@ -161,10 +161,10 @@ Page({
     deleteStu(e) {
         let p = e.currentTarget.dataset.index
         let ss = this.data.stuArray[this.data.indexRow][p].name
-        wx.showModal({
-            title: '是否要移除学生？',
-            content: ss,
-            success: res => {
+        showModal(
+            ss,
+            '是否要移除学生？',
+            (res) => {
                 if (res.confirm) {
                     // 新的版本已经下载好，调用 applyUpdate 应用新版本并重启
                     this.setData({
@@ -172,7 +172,7 @@ Page({
                     })
                 }
             }
-        })
+        )
 
 
     },

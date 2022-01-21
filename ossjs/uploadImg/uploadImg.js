@@ -1,3 +1,5 @@
+import {showModal} from "../../utils/util";
+
 const env = require('config.js');
 
 const base64 = require('base64.js');
@@ -14,11 +16,10 @@ const Crypto = require('crypto.js');
  */
 const uploadFile = function(stsTokenBean,filePath, path, callback) {
   if (!filePath || filePath.length < 9) {
-    wx.showModal({
-      title: '图片错误',
-      content: '请重试',
-      showCancel: false,
-    })
+    showModal(
+      '请重试',
+      '图片错误',
+    )
     return;
   }
   //存放图片命名格式：自定义时间戳给图片名字(可以自己改)

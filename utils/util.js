@@ -1,10 +1,11 @@
 let oldTime = 0
+
 function clickBlock() {
     let newTime = Date.parse(new Date())
-    if (newTime - oldTime<3000){
+    if (newTime - oldTime < 3000) {
         oldTime = newTime
         return true;
-    }else {
+    } else {
         oldTime = newTime
         return false
     }
@@ -67,16 +68,13 @@ function showToastWithoutIcon(content) {
     });
 }
 
-function showModal(content,title='温馨提示') {
+function showModal(content, title = '温馨提示', suc = () => {
+}) {
     wx.showModal({
-        title:title ,
+        title: title,
         content: content,
         success(res) {
-            if (res.confirm) {
-
-            } else if (res.cancel) {
-
-            }
+            suc(res)
         },
         confirmColor: "#F95B49",
     })
@@ -130,12 +128,12 @@ function getToday() {
 }
 
 function toIntSafe(s) {
-     try {
-         let result = parseInt(s)
-         if (isNaN(result)){
-             result = 0
-         }
-       return result
+    try {
+        let result = parseInt(s)
+        if (isNaN(result)) {
+            result = 0
+        }
+        return result
     } catch (e) {
         return 0
     }
@@ -158,7 +156,7 @@ function formatStarPhoneNum(num) {
 
         let s = num.substring(0, 3),
             e = num.substring(7, 11);
-        return s+"****"+e
+        return s + "****" + e
     }
 }
 
@@ -190,7 +188,7 @@ function formatShowTime(date) {
             )
         }
 
-    }else {
+    } else {
         result = date
     }
     return result

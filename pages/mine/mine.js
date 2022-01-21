@@ -1,4 +1,6 @@
 // pages/mine/mine.js
+import {showModal} from "../../utils/util";
+
 let app = getApp();
 Page({
     /**
@@ -82,21 +84,17 @@ Page({
         })
     },
     doSwitch() {
-        wx.showModal({
-            title: '是否确认切换身份',
-            content: '切换身份后将改变您的操作权限',
-            success(res) {
+        showModal('切换身份后将改变您的操作权限',
+            '是否确认切换身份',
+            (res) => {
                 if (res.confirm) {
                     app.logout()
                     wx.reLaunch({
                         url: '/packageA/pages/switch_role/switch_role',
                     })
                 } else if (res.cancel) {
-
                 }
-            },
-            confirmColor: "#F95B49",
-        })
+            })
     },
 
 

@@ -1,4 +1,6 @@
 // pages/achievement/achievement.js
+import {showModal} from "../../../utils/util";
+
 let app = getApp()
 Page({
 
@@ -32,10 +34,10 @@ Page({
                 currentTest = data.testname[0]
                 testArrays = data.testname
             } else {
-                wx.showModal({
-                    title: '温馨提示',
-                    content: '查询不到考试信息',
-                    success(res) {
+                showModal(
+                    '查询不到考试信息',
+                    '温馨提示',
+                    (res)=>{
                         if (res.confirm) {
                             wx.navigateBack({
                                 delta: 1,
@@ -45,9 +47,8 @@ Page({
                                 delta: 1,
                             })
                         }
-                    },
-                    confirmColor: "#F95B49",
-                })
+                    }
+                )
                 return;
             }
             if (data.classs.length > 0) {

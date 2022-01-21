@@ -1,5 +1,5 @@
 // pages/addInvolve/addInvolve.js
-import {formatShowTime} from "../../../utils/util";
+import {formatShowTime, showModal} from "../../../utils/util";
 
 let app = getApp();
 Page({
@@ -135,7 +135,7 @@ Page({
             } else {
                 app.httpPost(url, data).then((res) => {
                     let data = res.respResult.data;
-                    console.log("res",data)
+                    console.log("res", data)
 
                     data.forEach(res => {
                         res.d = res.dep_name
@@ -203,10 +203,10 @@ Page({
             parentId: pId
         }
         var msg = bean.realname + ""
-        wx.showModal({
-            title: '请确认身份',
-            content: msg,
-            success: res => {
+        showModal(
+            msg,
+            '请确认身份',
+            (res) => {
                 if (res.confirm) {
                     console.log("mm", this.data.mDataDepartment)
                     if (studentBean.topdepartid == null || !studentBean.topdepartid.length > 0) {
@@ -283,7 +283,7 @@ Page({
                     })
                 }
             }
-        })
+        )
     },
     doCheck(e) {
         var p = e.currentTarget.dataset.position

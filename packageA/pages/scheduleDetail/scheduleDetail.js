@@ -1,5 +1,5 @@
 // pages/scheduleDetail/scheduleDetail.js
-import {showToastWithoutIcon} from "../../../utils/util";
+import {showModal, showToastWithoutIcon} from "../../../utils/util";
 
 let app = getApp()
 const globalData = getApp().globalData;
@@ -50,10 +50,10 @@ Page({
         })
     },
     doDelete() {
-        wx.showModal({
-            title: '温馨提示',
-            content: globalData.deleteSure,
-            success: (res) => {
+        showModal(
+            globalData.deleteSure,
+            '温馨提示',
+            (res) => {
                 if (res.confirm) {
                     let bean = this.data.bean
                     let url = ''
@@ -73,9 +73,8 @@ Page({
                 } else if (res.cancel) {
 
                 }
-            },
-            confirmColor: "#F95B49",
-        })
+            }
+        )
 
 
     },

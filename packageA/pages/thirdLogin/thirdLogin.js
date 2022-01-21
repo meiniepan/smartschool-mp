@@ -97,10 +97,10 @@ Page({
             }, res => {
                 console.log("reject", res)
                 this.sendLog(cno,name,'登录失败')
-                wx.showModal({
-                    title: '温馨提示',
-                    content: '教工号不存在,是否手动登录',
-                    success(res) {
+                showModal(
+                    '教工号不存在,是否手动登录',
+                    '校能云温馨提示',
+                    (res)=> {
                         if (res.confirm) {
                             wx.redirectTo({
                                 url: '/packageA/pages/switch_role/switch_role',
@@ -110,9 +110,8 @@ Page({
                                 delta: 1,
                             })
                         }
-                    },
-                    confirmColor: "#F95B49",
-                })
+                    }
+                )
 
             });
         });

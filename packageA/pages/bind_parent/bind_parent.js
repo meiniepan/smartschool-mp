@@ -1,5 +1,5 @@
 // pages/bind_parent/bind_parent.js
-import {showToastWithoutIcon} from "../../../utils/util";
+import {showModal, showToastWithoutIcon} from "../../../utils/util";
 const app = getApp();
 Page({
 
@@ -35,10 +35,10 @@ Page({
         })
     },
     act0(e) {
-        wx.showModal({
-            title: '是否确定解除该家长',
-            content: '解除后不可恢复请慎重选择是否解除与该家长的绑定',
-            success: res=> {
+        showModal(
+            '解除后不可恢复请慎重选择是否解除与该家长的绑定',
+            '是否确定解除该家长',
+            (res)=> {
                 if (res.confirm) {
                     let p = e.currentTarget.dataset.phone
                     if (p.length > 0) {
@@ -57,7 +57,7 @@ Page({
                     }
                 }
             }
-        })
+        )
 
     },
     confirm() {

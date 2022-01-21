@@ -232,18 +232,10 @@ Page({
         }
         app.httpGet0(url, data).then(res => {
             console.log("userinfo", res)
-            wx.showModal({
-                title: '企业成员手机号',
-                content: "姓名：" + res.data.name + "\n手机：" + res.data.mobile + "\n职务：" + res.data.position,
-                success(res) {
-                    if (res.confirm) {
-
-                    } else if (res.cancel) {
-
-                    }
-                },
-                confirmColor: "#F95B49",
-            })
+            showModal(
+                "姓名：" + res.data.name + "\n手机：" + res.data.mobile + "\n职务：" + res.data.position,
+                 '企业成员手机号'
+            )
         })
     },
 
