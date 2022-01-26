@@ -11,30 +11,19 @@ Page({
         bac: "",
     },
 
+
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-        wx.showLoading({
-            title: '加载中...',
-            mask: true
-        });
-        wx.cloud.downloadFile({
-            fileID: 'cloud://env-4gwafyi0129f4b02.656e-env-4gwafyi0129f4b02-1308234288/bac_archives.png',
-            success: res => {
-                // get temp file path
-                this.setData({
-                    bac: res.tempFilePath,
-                },()=>{
-                    this.getData()
-                })
-
-            },
-            fail: err => {
-                // handle error
-
-            }
-        })
+        let bac = wx.getStorageSync("archives_bac")
+        if (bac.length > 0) {
+            this.setData({
+                bac,
+            })
+        } else {
+            this.getBac();
+        }
         let img = ""
         if (wx.getStorageSync("portrait") == "") {
             img = "/assets/images/ic_avatar_default.png"
@@ -44,7 +33,7 @@ Page({
         this.setData({
             img,
         })
-
+        this.getData()
     },
 
     /**
@@ -65,6 +54,29 @@ Page({
             delta: 1,
         })
     },
+
+    getBac: function () {
+        wx.showLoading({
+            title: '加载中...',
+            mask: true
+        });
+        wx.cloud.downloadFile({
+            fileID: 'cloud://env-4gwafyi0129f4b02.656e-env-4gwafyi0129f4b02-1308234288/bac_archives.png',
+            success: res => {
+                // get temp file path
+                wx.setStorageSync("archives_bac", res.tempFilePath)
+                this.setData({
+                    bac: res.tempFilePath,
+                })
+
+            },
+            fail: err => {
+                // handle error
+
+            }
+        })
+    },
+
     binderror(e) {
         let img = "/assets/images/ic_avatar_default.png"
         this.setData({
@@ -82,11 +94,11 @@ Page({
             console.log("data", res)
             let mData = res.respResult
             let sex = mData.sex == "1" ? "男" : mData.sex == "2" ? "女" : "未知";
-            if(mData.work_year.length>0){
-                mData.work_year = mData.work_year+"年"
+            if (mData.work_year.length > 0) {
+                mData.work_year = mData.work_year + "年"
             }
-            if(mData.teach_year.length>0){
-                mData.teach_year = mData.teach_year+"年"
+            if (mData.teach_year.length > 0) {
+                mData.teach_year = mData.teach_year + "年"
             }
             mData.sex = sex
             this.setData({
