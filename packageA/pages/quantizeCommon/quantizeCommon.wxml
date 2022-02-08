@@ -1,5 +1,5 @@
 <!--packageA/pages/quantizeCommon/quantizeCommon.wxml-->
-<view class="out">
+<view class="out" style="margin-bottom: 84rpx">
     <view class="split-line"></view>
     <view class="cells0">
         <view class="cell0"

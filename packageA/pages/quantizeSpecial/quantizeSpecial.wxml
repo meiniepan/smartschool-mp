@@ -1,5 +1,5 @@
 <!--pages/quantizeSpecial/quantizeSpecial.wxml-->
-<view class="out">
+<view class="out" style="margin-bottom: 84rpx">
     <view class="split-line"></view>
     <view class="item" bindtap="doChooseStudent">
         <view class="key text bold">选择学生</view>
