@@ -17,7 +17,7 @@
         <input type="number" placeholder="输入学号（选填）" bindinput="doInput" data-type="cno" value="{{cno}}"></input>
     </view>
     <view class="phone-area">
-        <input type="number" placeholder="输入教育号（选填）" bindinput="doInput" data-type="sno" value="{{sno}}"></input>
+        <input type="number" placeholder="输入学籍号（选填）" bindinput="doInput" data-type="sno" value="{{sno}}"></input>
     </view>
     <view class="phone-area">
         <input type="number" placeholder="输入教育ID（选填）" bindinput="doInput" data-type="eduid" value="{{eduid}}"></input>
