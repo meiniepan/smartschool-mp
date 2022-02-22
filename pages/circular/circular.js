@@ -22,8 +22,13 @@ Page({
      */
     onLoad: function (options) {
         app.checkUpdate()
-        this.refresh();
+        this.refresh()
         this.getSemester()
+        // wx.requestSubscribeMessage({
+        //     tmplIds: ['VN4xTaeh19AMTMPDrOrj317lchn9If2o4vpFCCkSQPU'],
+        //     success (res) { },
+        //     fail(err) {console.log("fail",err)}
+        // })
     },
 
     /**

@@ -1,4 +1,4 @@
-import {showModal} from "../../utils/util";
+import {isEmpty, showModal} from "../../utils/util";
 
 const util = require("../../utils/util")
 const app = getApp()
@@ -52,15 +52,9 @@ Page({
 
     xnLogin() {
         setTimeout(() => {
-
-                // wx.redirectTo({
-                //     url: '/packageA/pages/notice/notice',
-                // })
                 let token = wx.getStorageSync('token')
                 if (util.isEmpty(token)) {
-                    wx.redirectTo({
-                        url: '/packageA/pages/switch_role/switch_role',
-                    })
+                    app.openidLogin()
                 } else {
                     this.goMain(token)
                 }
@@ -84,6 +78,9 @@ Page({
             })
         });
     },
+
+
+
     qyLogin() {
         var this_ = this
         wx.getSystemInfo({

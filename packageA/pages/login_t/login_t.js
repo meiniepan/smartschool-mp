@@ -1,5 +1,6 @@
 // pages/login/login.js
-import { showToastWithoutIcon } from '../../../utils/util';
+import {isEmpty, showToastWithoutIcon} from '../../../utils/util';
+
 let utils = require('../../../utils/util.js');
 let app = getApp()
 
@@ -31,9 +32,9 @@ Page({
         app.httpPost(this.data.urlCaptcha, data).then((res) => {
 
             wx.showToast({
-                title: "验证码已发送",
-                icon: 'none'
-            }
+                    title: "验证码已发送",
+                    icon: 'none'
+                }
             );
             this.countdown()
         });
@@ -66,40 +67,72 @@ Page({
     login: function () {
         let phone = this.data.phone
         let vcode = this.data.vcode
-        console.log('openid',wx.getStorageSync('qy_openid'))
+
         if (phone.length > 0 && vcode.length > 0) {
             let data = {
                 phone: phone,
                 vcode: vcode,
-                openid:wx.getStorageSync('qy_openid'),
+                openid: wx.getStorageSync('qy_openid'),
             };
             app.httpPost(this.data.urlLogin, data).then((res) => {
                 app.saveUserInfo(res.respResult)
-                let url;
-                if (wx.getStorageSync('usertype') === "1") {
-                    url = "/api/v17/user/student/apps"
-                } else {
-                    url = "/api/v17/user/teachers/apps"
-                }
-                let data = {
-                    token: wx.getStorageSync('token')
-                };
-                app.httpPost(url, data,false).then((res) => {
-                    app.saveAppInfo(res.respResult)
-                    wx.switchTab({
-                        url: '/pages/circular/circular',
-                    })
-                    wx.showToast({
-                        title: "登陆成功",
-                        icon: 'none'
-                    });
-                });
+                this.modify()
 
             });
         } else {
             showToastWithoutIcon("请输入完整信息")
             return
         }
+    },
+
+    /**
+     登录成功后绑定openid
+     */
+    async modify() {
+        let openid = wx.getStorageSync("openid")
+        if (isEmpty(openid)) {
+            openid = await app.getOpenid()
+        }
+        console.log('====openid', wx.getStorageSync('openid'))
+        let url;
+
+        if (wx.getStorageSync('usertype') === "1") {
+            if (wx.getStorageSync('logintype') === "self") {
+                url = "/api/v17/user/student/modify"
+            } else {
+                url = "/api/v17/user/student/modifyParents"
+            }
+        } else {
+            url = "/api/v17/user/teachers/modify"
+        }
+        let data = {
+            token: wx.getStorageSync('token'),
+            openid: openid,
+        }
+
+        app.httpPost(url, data, false).then((res) => {
+
+            console.log("bind_openid", res)
+            let url;
+            if (wx.getStorageSync('usertype') === "1") {
+                url = "/api/v17/user/student/apps"
+            } else {
+                url = "/api/v17/user/teachers/apps"
+            }
+            let data = {
+                token: wx.getStorageSync('token')
+            };
+            app.httpPost(url, data, false).then((res) => {
+                app.saveAppInfo(res.respResult)
+                wx.switchTab({
+                    url: '/pages/circular/circular',
+                })
+                wx.showToast({
+                    title: "登陆成功",
+                    icon: 'none'
+                });
+            });
+        });
     },
 
     doSwitch() {

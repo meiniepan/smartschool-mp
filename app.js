@@ -1,5 +1,5 @@
 //app.js
-import {showModal} from "./utils/util";
+import {isEmpty, showModal} from "./utils/util";
 
 let host = require('/utils/host.js');
 let uploadImage = require('/ossjs/uploadImg/uploadImg.js');//地址换成你自己存放文件的位置
@@ -50,6 +50,22 @@ App({
         updateManager.onUpdateFailed(function () {
             // 新版本下载失败
         })
+    },
+
+    // 定义调用云函数获取openid
+    getOpenid() {
+
+        return new Promise(resolve=>{
+            wx.cloud.callFunction({
+                name: 'get',
+                complete: res => {
+                    var openid = res.result.openid
+                    resolve(openid)
+                    console.log("openid", openid)
+                    wx.setStorageSync("openid", openid)
+                }
+            })
+        });
     },
 
     /**
@@ -147,13 +163,53 @@ App({
             })
         } else {
             //非企业微信环境
-            wx.redirectTo({
-                url: '/packageA/pages/switch_role/switch_role',
-            })
+            this.openidLogin()
         }
 
         return
     },
+
+     async openidLogin() {
+         let openid = wx.getStorageSync("openid")
+         if (isEmpty(openid)) {
+             openid = await this.getOpenid()
+         }
+
+         let url = "/api/v17/user/login/Wxloginin"
+         let data = {
+             openid: openid
+         }
+         this.httpPost(url, data).then((res) => {
+             console.log("loginres", res)
+             this.saveUserInfo(res.respResult)
+             let url;
+             if (wx.getStorageSync('usertype') === "1") {
+                 url = "/api/v17/user/student/apps"
+             } else {
+                 url = "/api/v17/user/teachers/apps"
+             }
+             let data = {
+                 token: wx.getStorageSync('token')
+             };
+             this.httpPost(url, data, false).then((res) => {
+                 this.saveAppInfo(res.respResult)
+                 wx.switchTab({
+                     url: '/pages/circular/circular',
+                 })
+                 wx.showToast({
+                     title: "登陆成功",
+                     icon: 'none'
+                 });
+             });
+
+         }, (res) => {
+             wx.redirectTo({
+                 url: '/packageA/pages/switch_role/switch_role',
+             })
+         });
+
+     },
+
     httpBase0: function (method, url, data, loading = false, loadingMsg, contentType = 'application/x-www-form-urlencoded') {
         let requestUrl = url;
         console.log("url", requestUrl)
@@ -327,7 +383,7 @@ App({
         wx.setStorageSync('schoolid', data.schoolid)
         wx.setStorageSync('classname', data.classname)
         wx.setStorageSync('companyid', data.companyid)
-        wx.setStorageSync('openid', data.openid)
+        // wx.setStorageSync('openid', data.openid)
         wx.setStorageSync('wxname', data.wxname)
         wx.setStorageSync('remark', data.remark)
         wx.setStorageSync('isactive', data.isactive)
