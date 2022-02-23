@@ -42,6 +42,9 @@ Page({
     },
 
     requestPermission() {
+        if (wx.getStorageSync('environment')) {//企业微信环境下无法发起申请
+            return
+        }
         if (wx.getStorageSync("request_accept") !== true) {
             showModal('为了及时收到消息推送，请先允许小程序发送消息',
                 '温馨提示',
