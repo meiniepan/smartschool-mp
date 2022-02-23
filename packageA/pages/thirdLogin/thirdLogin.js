@@ -1,5 +1,5 @@
 // packageA/pages/thirdLogin/thirdLogin.js
-import {showModal} from "../../../utils/util";
+import {isEmpty, showModal} from "../../../utils/util";
 
 const app = getApp()
 
@@ -52,7 +52,7 @@ Page({
             this.getUserInfo(token, uid,name)
         });
     },
-    getUserInfo(token, uid,name) {
+    async getUserInfo(token, uid, name) {
         let url = 'https://oapi.epaas.qq.com/user/get_info?access_token=' + token;
 
         let data = {
@@ -61,19 +61,25 @@ Page({
             basic_fields: ["native_place", "honor", "id_avatar_mediaid", "nationality", "user_number"],
         }
         console.log('data', JSON.stringify(data))
+        let openid = wx.getStorageSync("openid")
+        if (isEmpty(openid)) {
+            openid = await app.getOpenid()
+        }
         app.httpPost0(url, data, true, '', 'application/json').then((res) => {
             let data = res.basic_profile;
             data = JSON.parse(data)
             console.log('info', data)
             let cno = data.user_number
+
             // showModal('教工号' + cno)
             let url = "/api/v17/user/login/eCnologinin"
-            this.sendLog(cno,name,'准备登录')
+            this.sendLog(cno, name, '准备登录')
             let data2 = {
-                cno: cno
+                cno: cno,
+                openid:openid
             };
             app.httpPost(url, data2, false).then((res) => {
-                this.sendLog(cno,name,'已登录')
+                this.sendLog(cno, name, '已登录')
                 app.saveUserInfo(res.respResult)
                 let url;
                 if (wx.getStorageSync('usertype') === "1") {
@@ -96,11 +102,11 @@ Page({
                 });
             }, res => {
                 console.log("reject", res)
-                this.sendLog(cno,name,'登录失败')
+                this.sendLog(cno, name, '登录失败')
                 showModal(
                     '教工号不存在,是否手动登录',
                     '校能云温馨提示',
-                    (res)=> {
+                    (res) => {
                         if (res.confirm) {
                             wx.redirectTo({
                                 url: '/packageA/pages/switch_role/switch_role',

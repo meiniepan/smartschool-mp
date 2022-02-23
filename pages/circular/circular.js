@@ -43,7 +43,7 @@ Page({
 
     requestPermission() {
         if (wx.getStorageSync("request_accept") !== true) {
-            showModal('为了不影响使用，请先允许小程序发送消息',
+            showModal('为了及时收到消息推送，请先允许小程序发送消息',
                 '温馨提示',
                 (res) => {
                     if (res.confirm) {
