@@ -24,7 +24,7 @@ Page({
         app.checkUpdate()
         this.refresh()
         this.getSemester()
-        // this.requestPermission()
+        this.requestPermission()
     },
 
     /**
