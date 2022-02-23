@@ -1,5 +1,5 @@
 // pages/circular/circular.js
-import {toIntSafe,isLogin, showToastWithoutIcon} from '../../utils/util';
+import {toIntSafe, isLogin, showToastWithoutIcon, showModal} from '../../utils/util';
 
 let app = getApp();
 Page({
@@ -15,7 +15,7 @@ Page({
         mRequest: {},
         lastId: null,
         noUnread: true,
-        scrollTop:0,
+        scrollTop: 0,
     },
     /**
      * 生命周期函数--监听页面加载
@@ -24,20 +24,7 @@ Page({
         app.checkUpdate()
         this.refresh()
         this.getSemester()
-
-        wx.requestSubscribeMessage({
-            tmplIds: ['8O3SBuJ0AKqpTgt3oA2I65MYMRWhv0fMjq3MOBqSivw'],
-            success (res) {
-                let request = res.['8O3SBuJ0AKqpTgt3oA2I65MYMRWhv0fMjq3MOBqSivw']
-                if (request=="accept"){
-                    wx.setStorageSync("request_result",true)
-                }else {
-                    wx.setStorageSync("request_result",false)
-                }
-                console.log("suc",res.['8O3SBuJ0AKqpTgt3oA2I65MYMRWhv0fMjq3MOBqSivw'])
-            },
-            fail(err) {console.log("fail",err)}
-        })
+        // this.requestPermission()
     },
 
     /**
@@ -53,15 +40,42 @@ Page({
     onShow: function () {
 
     },
+
+    requestPermission() {
+        if (wx.getStorageSync("request_accept") !== true) {
+            showModal('为了不影响使用，请先允许小程序发送消息',
+                '温馨提示',
+                (res) => {
+                    if (res.confirm) {
+                        wx.requestSubscribeMessage({
+                            tmplIds: ['8O3SBuJ0AKqpTgt3oA2I65MYMRWhv0fMjq3MOBqSivw'],
+                            success(res) {
+                                let request = res.['8O3SBuJ0AKqpTgt3oA2I65MYMRWhv0fMjq3MOBqSivw']
+                                if (request == "accept") {
+                                    wx.setStorageSync("request_accept", true)
+                                } else {
+                                    wx.setStorageSync("request_accept", false)
+                                }
+                                console.log("suc", res.['8O3SBuJ0AKqpTgt3oA2I65MYMRWhv0fMjq3MOBqSivw'])
+                            },
+                            fail(err) {
+                                console.log("fail", err)
+                            }
+                        })
+                    }
+                })
+        }
+    },
+
     doTitle: function (unRead) {
         let title = "通知"
 
-            if (unRead > 0) {
-                if (unRead > 99) {
-                    title = "通知(99+)"
-                } else {
-                    title = "通知(" + unRead + ")"
-                }
+        if (unRead > 0) {
+            if (unRead > 99) {
+                title = "通知(99+)"
+            } else {
+                title = "通知(" + unRead + ")"
+            }
         }
         return title;
     },
@@ -202,7 +216,7 @@ Page({
 
         this.setData({
             lastId: null,
-            scrollTop:0
+            scrollTop: 0
         });
         this.getList('refresh');
     },
@@ -252,12 +266,12 @@ Page({
             curItem: item,
         })
         if (item.status != '1') {
-            this.doRead(item.id,index)
+            this.doRead(item.id, index)
         } else {
             this.doJump(item);
         }
     },
-    doRead(id,index) {
+    doRead(id, index) {
         let url;
         if (wx.getStorageSync('usertype') === "1") {
             url = "/api/v17/student/notices/modify"
@@ -273,9 +287,9 @@ Page({
         app.httpPost(url, data, false).then((res) => {
             this.data.mData[index].isRead = true
             this.setData({
-                mData:this.data.mData,
-                unRead:this.data.unRead-1,
-                title:this.doTitle(this.data.unRead-1)
+                mData: this.data.mData,
+                unRead: this.data.unRead - 1,
+                title: this.doTitle(this.data.unRead - 1)
             })
 
             this.doJump(this.data.curItem)
