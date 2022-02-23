@@ -47,11 +47,12 @@ Page({
                 '温馨提示',
                 (res) => {
                     if (res.confirm) {
-                        let id = '8O3SBuJ0AKqpTgt3oA2I65MYMRWhv0fMjq3MOBqSivw'
+                        let template_id = "kZHak-g9etu5s55hiWTQy5L8GoqoDiMA7lyOJo4c-N4"//汇文云
+                        // let template_id = "JQwCCBkWHFveipdddNnDrKVEOATJCwQtxcoMQaZZRc0"//校能云
                         wx.requestSubscribeMessage({
-                            tmplIds: [id],
+                            tmplIds: [template_id],
                             success(res) {
-                                let request = res.[id]
+                                let request = res.[template_id]
                                 if (request == "accept") {
                                     wx.setStorageSync("request_accept", true)
                                 } else {
