@@ -47,16 +47,16 @@ Page({
                 '温馨提示',
                 (res) => {
                     if (res.confirm) {
+                        let id = '8O3SBuJ0AKqpTgt3oA2I65MYMRWhv0fMjq3MOBqSivw'
                         wx.requestSubscribeMessage({
-                            tmplIds: ['8O3SBuJ0AKqpTgt3oA2I65MYMRWhv0fMjq3MOBqSivw'],
+                            tmplIds: [id],
                             success(res) {
-                                let request = res.['8O3SBuJ0AKqpTgt3oA2I65MYMRWhv0fMjq3MOBqSivw']
+                                let request = res.[id]
                                 if (request == "accept") {
                                     wx.setStorageSync("request_accept", true)
                                 } else {
                                     wx.setStorageSync("request_accept", false)
                                 }
-                                console.log("suc", res.['8O3SBuJ0AKqpTgt3oA2I65MYMRWhv0fMjq3MOBqSivw'])
                             },
                             fail(err) {
                                 console.log("fail", err)
