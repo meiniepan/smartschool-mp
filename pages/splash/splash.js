@@ -15,16 +15,18 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-        let this_ = this
         wx.getSystemInfo({
-            success(res) {
+            success:(res)=> {
                 if (res.environment != null) {//企业微信环境
                     wx.setStorageSync('environment', true)
-                    this_.epassLogin()//教育号插件登录
+                    this.epassLogin()//教育号插件登录
                 } else {
                     //非企业微信环境
                     wx.setStorageSync('environment', false)
-                    this_.xnLogin()//校能登录
+                    this.requestPermission(() => {
+                        this.xnLogin()//校能登录
+                    })
+
                 }
             }
         })
@@ -33,6 +35,39 @@ Page({
         // this.qyLogin()//企业微信登录
 
     },
+
+    requestPermission(func) {
+        if (wx.getStorageSync('environment')) {//企业微信环境下无法发起申请
+            return
+        }
+        if (wx.getStorageSync("request_accept") !== true) {
+            showModal('为了及时收到消息推送，请先允许小程序发送消息',
+                '温馨提示',
+                (res) => {
+                    if (res.confirm) {
+                        let template_id = "kZHak-g9etu5s55hiWTQy5L8GoqoDiMA7lyOJo4c-N4"//汇文云
+                        // let template_id = "JQwCCBkWHFveipdddNnDrKVEOATJCwQtxcoMQaZZRc0"//校能云
+                        wx.requestSubscribeMessage({
+                            tmplIds: [template_id],
+                            success(res) {
+                                let request = res.[template_id]
+                                wx.setStorageSync("request_accept", request === "accept")
+                                func()
+                            },
+                            fail(err) {
+                                func()
+                                console.log("fail", err)
+                            }
+                        })
+                    } else {
+                        func()
+                    }
+                })
+        }else {
+            func()
+        }
+    },
+
     epassLogin() {
         let token = wx.getStorageSync('token')
         if (util.isEmpty(token)) {
@@ -61,7 +96,7 @@ Page({
             }
             , 1000)
     },
-    goMain(token){
+    goMain(token) {
         let url;
         if (wx.getStorageSync('usertype') === "1") {
             url = "/api/v17/user/student/apps"
@@ -78,7 +113,6 @@ Page({
             })
         });
     },
-
 
 
     qyLogin() {
@@ -161,18 +195,18 @@ Page({
                     }
                     app.httpGet0(url, data).then(res => {
                         console.log("code2session", res)
-                        wx.qy.getEnterpriseUserInfo ({
-                            success: function(res) {
+                        wx.qy.getEnterpriseUserInfo({
+                            success: function (res) {
                                 var userInfo = res.userInfo
                                 var name = userInfo.name
                                 showModal('userInfo' + userInfo)
                                 wx.setStorageSync('qy_name', name)
                             },
-                            fail: function(res) {
-                                console.log('fail',res)
+                            fail: function (res) {
+                                console.log('fail', res)
                                 showModal('fail' + res.toString())
                             },
-                            complete:function (){
+                            complete: function () {
                                 let nick = wx.getStorageSync('qy_name')
                                 showModal('昵称' + nick)
                                 // this_.epassLogin()
@@ -203,7 +237,7 @@ Page({
             let data = {
                 token: wx.getStorageSync('token')
             };
-            app.httpPost(url, data,false).then((res) => {
+            app.httpPost(url, data, false).then((res) => {
                 app.saveAppInfo(res.respResult)
                 wx.switchTab({
                     url: '/pages/circular/circular',
@@ -214,7 +248,7 @@ Page({
                 });
             });
 
-        },res=>{
+        }, res => {
             console.log("reject", res)
             wx.redirectTo({
                 url: '/packageA/pages/switch_role/switch_role',
@@ -231,12 +265,12 @@ Page({
             console.log("userinfo", res)
             showModal(
                 "姓名：" + res.data.name + "\n手机：" + res.data.mobile + "\n职务：" + res.data.position,
-                 '企业成员手机号'
+                '企业成员手机号'
             )
         })
     },
 
-    sendLog(num,msg) {
+    sendLog(num, msg) {
         let url = 'http://api.huiwencloud.com:81/notify.php';
         let remark = '汇文云小程序：教工号' + num + msg
         let data = {

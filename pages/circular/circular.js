@@ -24,7 +24,6 @@ Page({
         app.checkUpdate()
         this.refresh()
         this.getSemester()
-        this.requestPermission()
     },
 
     /**
@@ -41,35 +40,7 @@ Page({
 
     },
 
-    requestPermission() {
-        if (wx.getStorageSync('environment')) {//企业微信环境下无法发起申请
-            return
-        }
-        if (wx.getStorageSync("request_accept") !== true) {
-            showModal('为了及时收到消息推送，请先允许小程序发送消息',
-                '温馨提示',
-                (res) => {
-                    if (res.confirm) {
-                        let template_id = "kZHak-g9etu5s55hiWTQy5L8GoqoDiMA7lyOJo4c-N4"//汇文云
-                        // let template_id = "JQwCCBkWHFveipdddNnDrKVEOATJCwQtxcoMQaZZRc0"//校能云
-                        wx.requestSubscribeMessage({
-                            tmplIds: [template_id],
-                            success(res) {
-                                let request = res.[template_id]
-                                if (request == "accept") {
-                                    wx.setStorageSync("request_accept", true)
-                                } else {
-                                    wx.setStorageSync("request_accept", false)
-                                }
-                            },
-                            fail(err) {
-                                console.log("fail", err)
-                            }
-                        })
-                    }
-                })
-        }
-    },
+
 
     doTitle: function (unRead) {
         let title = "通知"
