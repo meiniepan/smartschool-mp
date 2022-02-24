@@ -58,7 +58,10 @@ App({
 
     // 定义调用云函数获取openid
     getOpenid() {
-
+        let openid = wx.getStorageSync("openid")
+        if (!isEmpty(openid)) {
+            return openid
+        }
         return new Promise(resolve=>{
             wx.cloud.callFunction({
                 name: 'get',
