@@ -16,7 +16,7 @@ Page({
      */
     onLoad: function (options) {
         wx.getSystemInfo({
-            success:(res)=> {
+            success: (res) => {
                 if (res.environment != null) {//企业微信环境
                     wx.setStorageSync('environment', true)
                     this.epassLogin()//教育号插件登录
@@ -63,7 +63,7 @@ Page({
                         func()
                     }
                 })
-        }else {
+        } else {
             func()
         }
     },
