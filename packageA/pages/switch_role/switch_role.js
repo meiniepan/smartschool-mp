@@ -59,18 +59,30 @@ Page({
 
     },
     btn1() {
-        wx.setStorageSync("usertype","1")
-        wx.setStorageSync("logintype","self")
-        app.openidLogin()
+        // wx.setStorageSync("usertype","1")
+        // wx.setStorageSync("logintype","self")
+        // app.openidLogin()
+
+        wx.redirectTo({
+            url: '/packageA/pages/login_s/login_s',
+        })
     },
     btn2() {
-        wx.setStorageSync("usertype","2")
-        app.openidLogin()
+        // wx.setStorageSync("usertype","2")
+        // app.openidLogin()
+
+        wx.redirectTo({
+            url: '/packageA/pages/login_t/login_t?id=2',
+        })
     },
     btn3() {
-        wx.setStorageSync("usertype","1")
-        wx.setStorageSync("logintype","parents")
-        app.openidLogin()
+        // wx.setStorageSync("usertype","1")
+        // wx.setStorageSync("logintype","parents")
+        // app.openidLogin()
+
+        wx.redirectTo({
+            url: '/packageA/pages/login_t/login_t?id=3',
+        })
     },
     /**
      * 用户点击右上角分享
