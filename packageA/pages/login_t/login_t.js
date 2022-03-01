@@ -22,6 +22,22 @@ Page({
         interval: "",
         isShowPassword: false
     },
+
+    /**
+     * Lifecycle function--Called when page load
+     */
+    onLoad: function (options) {
+        if (options.id == "3") { //家长
+            this.setData({
+                type: "我的身份是家长",
+                urlCaptcha: '/api/v17/user/login/pSmsCode',
+                urlLogin: '/api/v17/user/login/ploginin',
+            })
+        } else {
+
+        }
+    },
+
     doSend() {
         if (this.data.isDisabled) {
             return
@@ -153,21 +169,6 @@ Page({
         this.setData({
             [type]: e.detail.value
         });
-    },
-
-    /**
-     * Lifecycle function--Called when page load
-     */
-    onLoad: function (options) {
-        if (options.id == "3") { //家长
-            this.setData({
-                type: "我的身份是家长",
-                urlCaptcha: '/api/v17/user/login/pSmsCode',
-                urlLogin: '/api/v17/user/login/ploginin',
-            })
-        } else {
-
-        }
     },
 
     /**

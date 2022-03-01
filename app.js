@@ -33,16 +33,16 @@ App({
     checkUpdate() {
         const updateManager = wx.getUpdateManager()
 
-        updateManager.onCheckForUpdate(res=> {
+        updateManager.onCheckForUpdate(res => {
             // 请求完新版本信息的回调
-            console.log("hasUpdate",res.hasUpdate)
+            console.log("hasUpdate", res.hasUpdate)
         })
 
         updateManager.onUpdateReady(function () {
             showModal(
                 '新版本已经准备好，是否重启应用？',
                 '更新提示',
-                (res)=> {
+                (res) => {
                     if (res.confirm) {
                         // 新的版本已经下载好，调用 applyUpdate 应用新版本并重启
                         updateManager.applyUpdate()
@@ -62,7 +62,7 @@ App({
         if (!isEmpty(openid)) {
             return openid
         }
-        return new Promise(resolve=>{
+        return new Promise(resolve => {
             wx.cloud.callFunction({
                 name: 'get',
                 complete: res => {
@@ -137,7 +137,7 @@ App({
                         resolve(res);
                     }
                 },
-                fail: res=> {
+                fail: res => {
                     reject(res);
                     console.log("fail", res)
                     if (loading) {
@@ -162,7 +162,7 @@ App({
 
         return new Promise(request);
     },
-    reLogin(){
+    reLogin() {
         wx.setStorageSync('token', null)
         if (wx.getStorageSync('environment')) {//企业微信环境
             wx.redirectTo({
@@ -176,46 +176,73 @@ App({
         return
     },
 
-     async openidLogin() {
-         let openid = wx.getStorageSync("openid")
-         if (isEmpty(openid)) {
-             openid = await this.getOpenid()
-         }
+    async openidLogin() {
+        let openid = wx.getStorageSync("openid")
+        if (isEmpty(openid)) {
+            openid = await this.getOpenid()
+        }
+        let usertype = wx.getStorageSync('usertype')
+        if (isEmpty(usertype)) {
+            wx.redirectTo({
+                url: '/packageA/pages/switch_role/switch_role',
+            })
+            return
+        }
+        let url = "/api/v17/user/login/Wxloginin"
+        if (wx.getStorageSync('usertype') === "1") {
+            if (wx.getStorageSync('logintype') === "self") {
+                url = "/api/v17/user/login/sWxloginin"
+            } else {
+                url = "/api/v17/user/login/pWxloginin"
+            }
+        } else {
+            url = "/api/v17/user/login/eWxloginin"
+        }
+        let data = {
+            openid: openid
+        }
+        this.httpPost(url, data).then((res) => {
+            console.log("loginres", res)
+            this.saveUserInfo(res.respResult)
+            let url;
+            if (wx.getStorageSync('usertype') === "1") {
+                url = "/api/v17/user/student/apps"
+            } else {
+                url = "/api/v17/user/teachers/apps"
+            }
+            let data = {
+                token: wx.getStorageSync('token')
+            };
+            this.httpPost(url, data, false).then((res) => {
+                this.saveAppInfo(res.respResult)
+                wx.switchTab({
+                    url: '/pages/circular/circular',
+                })
+                wx.showToast({
+                    title: "登陆成功",
+                    icon: 'none'
+                });
+            });
 
-         let url = "/api/v17/user/login/Wxloginin"
-         let data = {
-             openid: openid
-         }
-         this.httpPost(url, data).then((res) => {
-             console.log("loginres", res)
-             this.saveUserInfo(res.respResult)
-             let url;
-             if (wx.getStorageSync('usertype') === "1") {
-                 url = "/api/v17/user/student/apps"
-             } else {
-                 url = "/api/v17/user/teachers/apps"
-             }
-             let data = {
-                 token: wx.getStorageSync('token')
-             };
-             this.httpPost(url, data, false).then((res) => {
-                 this.saveAppInfo(res.respResult)
-                 wx.switchTab({
-                     url: '/pages/circular/circular',
-                 })
-                 wx.showToast({
-                     title: "登陆成功",
-                     icon: 'none'
-                 });
-             });
+        }, (res) => {
+            if (wx.getStorageSync('usertype') === "1") {
+                if (wx.getStorageSync('logintype') === "self") {
+                    wx.redirectTo({
+                        url: '/packageA/pages/login_s/login_s',
+                    })
+                } else {
+                    wx.redirectTo({
+                        url: '/packageA/pages/login_t/login_t?id=3',
+                    })
+                }
+            } else {
+                wx.redirectTo({
+                    url: '/packageA/pages/login_t/login_t?id=2',
+                })
+            }
+        });
 
-         }, (res) => {
-             wx.redirectTo({
-                 url: '/packageA/pages/switch_role/switch_role',
-             })
-         });
-
-     },
+    },
 
     httpBase0: function (method, url, data, loading = false, loadingMsg, contentType = 'application/x-www-form-urlencoded') {
         let requestUrl = url;
@@ -257,7 +284,7 @@ App({
 
                     resolve(res);
                 },
-                fail: res=> {
+                fail: res => {
                     reject(res);
 
                     if (loading) {
@@ -374,7 +401,7 @@ App({
     },
 
     saveUserInfo: function (data) {
-        console.log("info",data)
+        console.log("info", data)
         wx.setStorageSync('token', data.token)
         wx.setStorageSync('uid', data.uid)
         wx.setStorageSync('idcard', data.idcard)

@@ -59,19 +59,18 @@ Page({
 
     },
     btn1() {
-        wx.redirectTo({
-            url: '/packageA/pages/login_s/login_s',
-        })
+        wx.setStorageSync("usertype","1")
+        wx.setStorageSync("logintype","self")
+        app.openidLogin()
     },
     btn2() {
-        wx.redirectTo({
-            url: '/packageA/pages/login_t/login_t?id=2',
-        })
+        wx.setStorageSync("usertype","2")
+        app.openidLogin()
     },
     btn3() {
-        wx.redirectTo({
-            url: '/packageA/pages/login_t/login_t?id=3',
-        })
+        wx.setStorageSync("usertype","1")
+        wx.setStorageSync("logintype","parents")
+        app.openidLogin()
     },
     /**
      * 用户点击右上角分享
