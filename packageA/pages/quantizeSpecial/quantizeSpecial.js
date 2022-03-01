@@ -19,7 +19,7 @@ Page({
             types: null,
             remark: null,
         },
-        actArrays: ['病假', '事假', '外出考试', '学校活动', '其他'],
+        actArrays: ['病假', '事假','住宿生外出','课外活动', '外出考试', '个人培训', '其他'],
         ruleArrays: [],
         departData: [],
         classData: [],
