@@ -76,7 +76,7 @@ Page({
             this.sendLog(cno, name, '准备登录')
             let data2 = {
                 cno: cno,
-                openid:openid
+                tx_userid:uid
             };
             app.httpPost(url, data2, false).then((res) => {
                 this.sendLog(cno, name, '已登录')

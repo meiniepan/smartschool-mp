@@ -15,10 +15,10 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: async function (options) {
-        let openid = await app.getOpenid()
-        console.log("==openid", openid)
         wx.getSystemInfo({
             success: (res) => {
+                console.log("==environment", res)
+
                 if (res.environment != null) {//企业微信环境
                     wx.setStorageSync('environment', true)
                     this.epassLogin()//教育号插件登录

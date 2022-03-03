@@ -18,6 +18,8 @@ Page({
         choosePosition: 0,
         departData: [],
         classData: [],
+        scoreMap:new Map(),
+        totalScore:0,
     },
 
     /**
@@ -42,11 +44,12 @@ Page({
         }
 
         app.httpPost(url, data).then((res) => {
+            let scoreMap = new Map()
             let mData = res.respResult
             console.log("data", mData)
             if (mData.template.length > 0) {
                 mData.template = JSON.parse(mData.template)
-                mData.template.forEach(it => {
+                mData.template.forEach((it,index) => {
                     if (it.name == "InputNumber") {
                         if (it.label == "扣分") {
                             this.data.requestBody.score = it.value
@@ -54,6 +57,9 @@ Page({
                             this.data.requestBody.correctscore = it.value
                         }
                         it.mNumber = parseInt(it.value)
+                    }else  if (it.name == "InputScore"){
+                        it.mNumber = parseInt(it.value)
+                        scoreMap.set(index,it.mNumber)
                     }
                     if (it.value != null && it.value.length > 0) {
                         it.rules.required.hasValue = true
@@ -76,6 +82,7 @@ Page({
                     mData,
                     mDataClasses,
                     requestBody: this.data.requestBody,
+                    scoreMap,
                 })
             })
 
@@ -122,6 +129,22 @@ Page({
             requestBody: this.data.requestBody,
         });
     },
+
+    setTotalScore(){
+        let totalScore = 0
+        this.data.scoreMap.forEach((value => {
+            if (typeof (value)=="number"){
+
+            totalScore+=value
+            }
+        }))
+        this.data.requestBody.score = totalScore.toString()
+        this.setData({
+            requestBody: this.data.requestBody,
+            totalScore,
+        })
+    },
+
     doInputNum: function (e) {
         const p = e.currentTarget.dataset.position;
         let ss = e.detail.value
@@ -133,17 +156,26 @@ Page({
             showToastWithoutIcon("注意最大值~")
         }
         this.data.mData.template[p].value = ss
-        this.data.mData.template[p].mNumber = ss
+        this.data.mData.template[p].mNumber = parseInt(ss)
         if (this.data.mData.template[p].label == "扣分") {
             this.data.requestBody.score = ss
+            this.data.totalScore = parseInt(ss)
         } else if (this.data.mData.template[p].label == "综合加分") {
             this.data.requestBody.correctscore = ss
+        } else {
+            this.data.scoreMap.set(p,parseInt(ss))
+            this.setData({
+                scoreMap: this.data.scoreMap,
+            },()=>{
+                this.setTotalScore()
+            });
         }
         this.data.mData.template[p].rules.required.hasValue = ss.length > 0
 
         this.setData({
             mData: this.data.mData,
             requestBody: this.data.requestBody,
+            totalScore: this.data.totalScore,
         });
     },
     doMinus(e) {
@@ -152,6 +184,7 @@ Page({
         let mNumber = this.data.mData.template[p].mNumber
         if (mNumber > this.data.mData.template[p].setting.min) {
             mNumber -= this.data.mData.template[p].setting.step
+
             if (mNumber < this.data.mData.template[p].setting.min) {
                 mNumber = this.data.mData.template[p].setting.min
             }
@@ -160,8 +193,16 @@ Page({
             this.data.mData.template[p].rules.required.hasValue = mNumber == null
             if (this.data.mData.template[p].label == "扣分") {
                 this.data.requestBody.score = mNumber.toString()
+                this.data.totalScore = mNumber
             } else if (this.data.mData.template[p].label == "综合加分") {
                 this.data.requestBody.correctscore = mNumber.toString()
+            }else {
+                this.data.scoreMap.set(p,mNumber)
+                this.setData({
+                    scoreMap: this.data.scoreMap,
+                },()=>{
+                    this.setTotalScore()
+                });
             }
         } else {
             showToastWithoutIcon("不能再减了~")
@@ -169,12 +210,17 @@ Page({
         this.setData({
             mData: this.data.mData,
             requestBody: this.data.requestBody,
+            totalScore: this.data.totalScore,
         });
     },
     doPlus(e) {
         const p = e.currentTarget.dataset.position;
 
         let mNumber = this.data.mData.template[p].mNumber
+        console.log("num",mNumber)
+        console.log("max",this.data.mData.template[p].setting.max)
+        console.log("min",this.data.mData.template[p].setting.min)
+        console.log("score",this.data.requestBody.score)
         if (mNumber < this.data.mData.template[p].setting.max) {
             mNumber += this.data.mData.template[p].setting.step
             if (mNumber > this.data.mData.template[p].setting.max) {
@@ -185,8 +231,16 @@ Page({
             this.data.mData.template[p].rules.required.hasValue = mNumber == null
             if (this.data.mData.template[p].label == "扣分") {
                 this.data.requestBody.score = mNumber.toString()
+                this.data.totalScore = mNumber
             } else if (this.data.mData.template[p].label == "综合加分") {
                 this.data.requestBody.correctscore = mNumber.toString()
+            }else {
+                this.data.scoreMap.set(p,mNumber)
+                this.setData({
+                    scoreMap: this.data.scoreMap,
+                },()=>{
+                this.setTotalScore()
+                });
             }
         } else {
             showToastWithoutIcon("不能再加了~")
@@ -195,6 +249,7 @@ Page({
         this.setData({
             mData: this.data.mData,
             requestBody: this.data.requestBody,
+            totalScore: this.data.totalScore,
         });
     },
     doAct(e) {
