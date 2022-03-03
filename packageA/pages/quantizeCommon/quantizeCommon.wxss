@@ -1,9 +1,11 @@
 /* packageA/pages/quantizeCommon/quantizeCommon.wxss */
+
 .cells0{
     display: flex;
     width: 100%;
     flex-direction: column;
     box-sizing: border-box;
+    margin-bottom: 84rpx
 }
 .require{
     color: var(--commonRed2);

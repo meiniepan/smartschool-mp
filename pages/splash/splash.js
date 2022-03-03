@@ -25,9 +25,10 @@ Page({
                 } else {
                     //非企业微信环境
                     wx.setStorageSync('environment', false)
-                    this.requestPermission(() => {
-                        this.xnLogin()//校能登录
-                    })
+                    this.xnLogin()//校能登录
+                    // this.requestPermission(() => {
+                    //     this.xnLogin()//校能登录
+                    // })
 
                 }
             }
