@@ -76,7 +76,7 @@
         overlayStyle='z-index:99'
         customStyle='z-index:999'
 >
-    <view class="layout0">
+    <view wx:if="{{show}}" class="layout0">
         <view class="cells">
             <view class="cell" wx:for="{{ruleArrays}}" wx:key="index" data-index="{{index}}" bindtap="checkRule">
                 <view>

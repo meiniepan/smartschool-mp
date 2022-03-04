@@ -162,6 +162,12 @@ background: var(--tintBac);
 
     background: var(--white);
 }
+.layout00{
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    box-sizing:border-box;
+}
 .layout0{
     display: flex;
     width: 100%;

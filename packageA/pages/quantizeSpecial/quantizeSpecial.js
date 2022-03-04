@@ -25,6 +25,7 @@ Page({
         departData: [],
         classData: [],
         canCheck: false,
+        show: false,
     },
 
     /**

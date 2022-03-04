@@ -122,7 +122,7 @@
         overlayStyle='z-index:99'
         customStyle='z-index:999'
 >
-    <view class="layout0">
+    <view wx:if="{{show}}" class="layout0">
         <view class="bRemark">{{dialogTitle}}</view>
         <view wx:if="{{showShift||showDelay}}" class="cells-shift">
             <view class="{{item.checked?'shift0':'shift1'}}" wx:for="{{types2}}" wx:key="index" data-index="{{index}}" bindtap="checkType">

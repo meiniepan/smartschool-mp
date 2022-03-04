@@ -1,4 +1,4 @@
-// pages/detail/detail.js
+// pages/webDetail/webDetail.js
 Page({
 
   /**
