@@ -319,7 +319,7 @@ Page({
         return {
             title: '汇文云',
             path: 'pages/splash/splash',
-            imageUrl:"../../assets/images/bac_banner1.png",
+            imageUrl:"../../assets/images/bac_share.png",
         }
     }
 })

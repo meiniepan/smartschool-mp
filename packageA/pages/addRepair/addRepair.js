@@ -161,7 +161,8 @@ Page({
     onShareAppMessage: function () {
         return {
             title: '汇文云',
-            path: 'pages/splash/splash'
+            path: 'pages/splash/splash',
+            imageUrl:"../../assets/images/bac_share.png",
         }
     }
 })

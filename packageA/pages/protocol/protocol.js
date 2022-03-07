@@ -167,7 +167,8 @@ text:"【北京校能科技有限公司】（以下简称“我们”）深知�
   onShareAppMessage: function () {
         return {
             title: '汇文云',
-            path: 'pages/splash/splash'
+            path: 'pages/splash/splash',
+            imageUrl:"../../assets/images/bac_share.png",
         }
     }
 })

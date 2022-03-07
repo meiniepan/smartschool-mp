@@ -39,7 +39,7 @@
     "showES6CompileOption": false
   },
   "compileType": "miniprogram",
-  "libVersion": "2.22.0",
+  "libVersion": "2.22.1",
   "appid": "wx5b0b2787cbd3cbe9",
   "projectname": "SmartSchool-mp",
   "debugOptions": {
@@ -49,7 +49,7 @@
   "isGameTourist": false,
   "simulatorType": "wechat",
   "simulatorPluginLibVersion": {
-    "qywx_simulator_plugin": "2.12.3"
+    "qywx_simulator_plugin": "2.17.0"
   },
   "condition": {
     "plugin": {
