@@ -1,6 +1,6 @@
 <!--pages/mine_info/mine_info.wxml-->
 <view class="out">
-    <image class="img" src="{{img}}" mode="aspectFill" binderror="binderror" bindtap="chooseAvatar"></image>
+    <image class="img" src="{{img}}" mode="aspectFill" binderror="binderror" bindtap=""></image>
     <view class="info-area">
         <view class="info-line">
             <text>姓名</text>

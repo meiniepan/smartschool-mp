@@ -92,42 +92,6 @@ Page({
 
     chooseAvatar: function () {
         let that = this
-        // wx.chooseMessageFile({
-        //     count: 10,
-        //     type: 'all',
-        //     success: res=> {
-        //         var tempFilePaths = res.tempFilePaths
-        //         console.log('chooseImage success, temp path is: ', tempFilePaths[0])
-        //         wx.uploadFile({
-        //             url: 'http://www.ieesee.cn',
-        //             filePath: tempFilePaths[0],
-        //             name: 'file',
-        //             formData: {
-        //                 name: tempFilePaths[0],
-        //                 key: "${filename}",
-        //                 policy: "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
-        //                 OSSAccessKeyId: "xxxxxxxxxxxxxxxx",
-        //                 success_action_status: "200",
-        //                 signature: "xxxxxxxxxxxxxxxxxxxxxxxxxx",
-        //             },
-        //             success: res=> {
-        //                 console.log('chooseImage success, temp path is: ', tempFilePaths[0])
-        //                 wx.showToast({
-        //                     title: "上传成功",
-        //                     icon: 'success',
-        //                     duration: 1000
-        //                 })
-        //             },
-        //             fail: function ({errMsg}) {
-        //                 console.log('upladImage fail, errMsg is: ', errMsg)
-        //                 wx.showToast({
-        //                     title: "上传失败",
-        //                     duration: 1000
-        //                 })
-        //             },
-        //         })
-        //     }
-        // })
 
         wx.chooseImage({
             success: res=> {
