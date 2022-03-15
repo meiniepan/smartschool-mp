@@ -396,6 +396,172 @@ App({
 
     },
 
+    nfcRead(func) {
+
+        let nfcBody = {nfc: null, handler: null}
+
+        const nfc = wx.getNFCAdapter()
+
+        nfcBody.nfc = nfc
+
+        let _this = this
+
+
+        function discoverHandler(res) {
+
+            console.log('discoverHandler', res)
+
+            const data = new Uint8Array(res.id)
+
+            let str = ""
+            let aa = [4]
+            data.forEach((e, index) => {
+
+                let item = e.toString(16)
+
+                if (item.length == 1) {
+
+                    item = '0' + item
+
+                }
+
+                item = item.toUpperCase()
+                aa[3 - index] = item
+                console.log(item)
+
+                str += item
+
+            })
+            let id = ""
+            aa.forEach(it => {
+                id += it
+            })
+            id = parseInt(id, 16) + ""
+            let len = id.length;
+
+            if (len < 10) {
+                for (let i = 0; i < (10 - len); i++) {
+                    id = "0" + id;
+                }
+            }
+
+            wx.showToast({
+
+                title: '读取成功！',
+
+                icon: 'none'
+
+            })
+            const innerAudioContext = wx.createInnerAudioContext()
+            innerAudioContext.autoplay = true
+            innerAudioContext.src = 'packageA/assets/sound/aa.mp3'
+            innerAudioContext.onPlay(() => {
+                console.log('开始播放')
+            })
+            innerAudioContext.onError((res) => {
+                console.log(res.errMsg)
+                console.log(res.errCode)
+            })
+            func(id)
+
+        }
+
+        nfcBody.handler = discoverHandler
+
+        nfc.startDiscovery({
+
+            success(res) {
+
+                console.log(res)
+
+                wx.showToast({
+
+                    title: 'NFC读取功能已开启！',
+
+                    icon: 'none'
+
+                })
+
+                nfc.onDiscovered(discoverHandler)
+
+            },
+
+            fail(err) {
+
+                console.log('failed to discover:', err)
+
+                if (!err.errCode) {
+
+                    wx.showToast({
+
+                        title: '请检查NFC功能是否正常!',
+
+                        icon: 'none'
+
+                    })
+
+                    return
+
+                }
+
+                switch (err.errCode) {
+
+                    case 13000:
+
+                        wx.showToast({
+
+                            title: '设备不支持NFC!',
+
+                            icon: 'none'
+
+                        })
+
+                        break;
+
+                    case 13001:
+
+                        wx.showToast({
+
+                            title: '系统NFC开关未打开!',
+
+                            icon: 'none'
+
+                        })
+
+                        break;
+
+                    case 13019:
+
+                        wx.showToast({
+
+                            title: '用户未授权!',
+
+                            icon: 'none'
+
+                        })
+
+                        break;
+
+                    case 13010:
+
+                        wx.showToast({
+
+                            title: '未知错误!',
+
+                            icon: 'none'
+
+                        })
+
+                        break;
+
+                }
+
+            }
+
+        })
+        return nfcBody
+    },
+
     logout() {
         wx.setStorageSync('token', null)
     },

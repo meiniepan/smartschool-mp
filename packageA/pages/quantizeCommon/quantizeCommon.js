@@ -1,5 +1,5 @@
 // packageA/pages/quantizeCommon/quantizeCommon.js
-import {showToastWithoutIcon} from "../../../utils/util";
+import {showModal, showToastWithoutIcon} from "../../../utils/util";
 
 let app = getApp();
 Page({
@@ -18,8 +18,8 @@ Page({
         choosePosition: 0,
         departData: [],
         classData: [],
-        scoreMap:new Map(),
-        totalScore:0,
+        scoreMap: new Map(),
+        totalScore: 0,
     },
 
     /**
@@ -49,7 +49,7 @@ Page({
             console.log("data", mData)
             if (mData.template.length > 0) {
                 mData.template = JSON.parse(mData.template)
-                mData.template.forEach((it,index) => {
+                mData.template.forEach((it, index) => {
                     if (it.name == "InputNumber") {
                         if (it.label == "扣分") {
                             this.data.requestBody.score = it.value
@@ -57,9 +57,9 @@ Page({
                             this.data.requestBody.correctscore = it.value
                         }
                         it.mNumber = parseInt(it.value)
-                    }else  if (it.name == "InputScore"){
+                    } else if (it.name == "InputScore") {
                         it.mNumber = parseInt(it.value)
-                        scoreMap.set(index,it.mNumber)
+                        scoreMap.set(index, it.mNumber)
                     }
                     if (it.value != null && it.value.length > 0) {
                         it.rules.required.hasValue = true
@@ -98,7 +98,7 @@ Page({
                 if (cc[i].rules.required.hasValue != true) {
                     let s = '请完善信息'
                     let message = cc[i].rules.required.message
-                    if (message != null&&message.length>0) {
+                    if (message != null && message.length > 0) {
                         s = message
                     }
                     showToastWithoutIcon(s)
@@ -130,12 +130,12 @@ Page({
         });
     },
 
-    setTotalScore(){
+    setTotalScore() {
         let totalScore = 0
         this.data.scoreMap.forEach((value => {
-            if (typeof (value)=="number"){
+            if (typeof (value) == "number") {
 
-            totalScore+=value
+                totalScore += value
             }
         }))
         this.data.requestBody.score = totalScore.toString()
@@ -163,10 +163,10 @@ Page({
         } else if (this.data.mData.template[p].label == "综合加分") {
             this.data.requestBody.correctscore = ss
         } else {
-            this.data.scoreMap.set(p,parseInt(ss))
+            this.data.scoreMap.set(p, parseInt(ss))
             this.setData({
                 scoreMap: this.data.scoreMap,
-            },()=>{
+            }, () => {
                 this.setTotalScore()
             });
         }
@@ -196,11 +196,11 @@ Page({
                 this.data.totalScore = mNumber
             } else if (this.data.mData.template[p].label == "综合加分") {
                 this.data.requestBody.correctscore = mNumber.toString()
-            }else {
-                this.data.scoreMap.set(p,mNumber)
+            } else {
+                this.data.scoreMap.set(p, mNumber)
                 this.setData({
                     scoreMap: this.data.scoreMap,
-                },()=>{
+                }, () => {
                     this.setTotalScore()
                 });
             }
@@ -217,10 +217,10 @@ Page({
         const p = e.currentTarget.dataset.position;
 
         let mNumber = this.data.mData.template[p].mNumber
-        console.log("num",mNumber)
-        console.log("max",this.data.mData.template[p].setting.max)
-        console.log("min",this.data.mData.template[p].setting.min)
-        console.log("score",this.data.requestBody.score)
+        console.log("num", mNumber)
+        console.log("max", this.data.mData.template[p].setting.max)
+        console.log("min", this.data.mData.template[p].setting.min)
+        console.log("score", this.data.requestBody.score)
         if (mNumber < this.data.mData.template[p].setting.max) {
             mNumber += this.data.mData.template[p].setting.step
             if (mNumber > this.data.mData.template[p].setting.max) {
@@ -234,12 +234,12 @@ Page({
                 this.data.totalScore = mNumber
             } else if (this.data.mData.template[p].label == "综合加分") {
                 this.data.requestBody.correctscore = mNumber.toString()
-            }else {
-                this.data.scoreMap.set(p,mNumber)
+            } else {
+                this.data.scoreMap.set(p, mNumber)
                 this.setData({
                     scoreMap: this.data.scoreMap,
-                },()=>{
-                this.setTotalScore()
+                }, () => {
+                    this.setTotalScore()
                 });
             }
         } else {
@@ -389,6 +389,14 @@ Page({
             },
         });
     },
+
+    doNfc(e) {
+        this.setData({
+            choosePosition: e.currentTarget.dataset.position,
+        })
+
+    },
+
     doResult(data) {
         let str = '', involves = []
         var v = this.data.mData.template[this.data.choosePosition]
@@ -439,13 +447,18 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow: function () {
-
+       let nfcBody= app.nfcRead((id)=>{
+           showModal(id)
+       })
+        this.nfc = nfcBody.nfc
+        this.handler = nfcBody.handler
     },
 
     /**
      * 生命周期函数--监听页面隐藏
      */
     onHide: function () {
+        console.log("onhide", "=====")
 
     },
 
@@ -453,7 +466,9 @@ Page({
      * 生命周期函数--监听页面卸载
      */
     onUnload: function () {
-
+        this.nfc.offDiscovered(this.handler)
+        this.nfc.stopDiscovery()
+        console.log("unload", "=====")
     },
 
     /**
@@ -477,7 +492,7 @@ Page({
         return {
             title: '汇文云',
             path: 'pages/splash/splash',
-            imageUrl:"../../assets/images/bac_share.png",
+            imageUrl: "../../assets/images/bac_share.png",
         }
     }
 })

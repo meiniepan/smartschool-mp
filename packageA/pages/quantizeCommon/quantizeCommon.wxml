@@ -134,6 +134,14 @@
                 <image class="next" src="../../assets/images/ic_next.png" style="height: 28rpx" mode="widthFix"></image>
             </view>
 
+            <view wx:if="{{item.name=='ChoseStudents'}}" class="item" data-position="{{index}}"
+                  bindtap="doNfc">
+                <view class="key text bold">刷卡识别</view>
+                <view wx:if="{{item.rules.required.required}}" class="require bold">*</view>
+                <view class="value">{{item.value2}}</view>
+                <image class="next" src="../../assets/images/ic_next.png" style="height: 28rpx" mode="widthFix"></image>
+            </view>
+
         </view>
     </view>
     <view class="bottom">
