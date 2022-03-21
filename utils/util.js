@@ -11,7 +11,7 @@ function clickBlock() {
     }
 }
 
-const formatTime = date => {
+const formatTime = (date=new Date())  => {
     const year = date.getFullYear()
     const month = date.getMonth() + 1
     const day = date.getDate()
@@ -22,7 +22,7 @@ const formatTime = date => {
     return [year, month, day].map(formatNumber).join('/') + ' ' + [hour, minute, second].map(formatNumber).join(':')
 }
 
-const formatDate = (date) => {
+const formatDate = (date=new Date()) => {
     const year = date.getFullYear()
     const month = date.getMonth() + 1
     const day = date.getDate()
@@ -282,4 +282,5 @@ module.exports = {
     isImage: isImage,
     clickBlock: clickBlock,
     formatStarPhoneNum: formatStarPhoneNum,
+    formatNumber: formatNumber,
 }

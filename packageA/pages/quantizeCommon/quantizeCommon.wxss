@@ -1,4 +1,53 @@
 /* packageA/pages/quantizeCommon/quantizeCommon.wxss */
+.tabs {
+    border-top: var(--splitColor) 1rpx solid;
+    border-bottom: var(--splitColor) 1rpx solid;
+    padding: 24rpx var(--titlePadding);
+    display: flex;
+    align-content: space-between;
+    position: fixed;
+    width: 100%;
+    box-sizing: border-box;
+    background: var(--white);
+    z-index: 9;
+}
+
+.tab-self{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: calc(100% - 2*var(--titlePadding) - 34rpx);
+    height: 88rpx;
+    background: var(--themeColor);
+    border-radius: 44rpx;
+    color: var(--white);
+}
+.tab-share{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: calc(100% - 2*var(--titlePadding) - 34rpx);
+    height: 88rpx;
+    background: var(--white);
+    border-radius: 44rpx;
+    border: var(--themeColor) 1rpx solid;
+    color: var(--themeColor);
+    box-sizing: border-box;
+}
+.record{
+    display: flex;
+    flex-direction: column;
+}
+.tips{
+    margin: 20rpx var(--titlePadding);
+}
+.cells_record{
+    display: flex;
+    flex-direction: column;
+}
+.cell_record{
+margin: 20rpx var(--titlePadding);
+}
 
 .cells0{
     display: flex;

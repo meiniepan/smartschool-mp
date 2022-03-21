@@ -1,7 +1,42 @@
 <!--packageA/pages/quantizeCommon/quantizeCommon.wxml-->
-<view class="out" >
+<view class="out">
     <view class="split-line"></view>
-    <view class="cells0">
+    <view class="tabs">
+        <view class="{{categoryCur==0?'tab-self':'tab-share'}}" bindtap="check1">{{categoryMenu[0]}}</view>
+        <view class="{{categoryCur!=0?'tab-self':'tab-share'}}" style="margin-left: 34rpx" bindtap="check2">
+            {{categoryMenu[1]}}
+        </view>
+    </view>
+
+    <view style="margin-top: 136rpx;height: 100%" wx:if="{{categoryCur==1}}" class="record">
+        <view class="item" bindtap="">
+            <view class="key text bold">{{mData.template[scoreItemIndex].label}}</view>
+            <view wx:if="{{mData.template[scoreItemIndex].rules.required.required}}" class="require bold">*</view>
+            <view class="value"></view>
+            <image class="" data-position="{{scoreItemIndex}}" bindtap="doMinus" src="../../assets/images/ic_jian.png"
+                   style="height:72rpx;width: 72rpx" mode="widthFix"></image>
+            <input value="{{mData.template[scoreItemIndex].value}}" class="number" type="number" data-position="{{scoreItemIndex}}"
+                   bindinput="doInputNum"/>
+            <image class="" data-position="{{scoreItemIndex}}" bindtap="doPlus" src="../../assets/images/ic_jia.png"
+                   style="height:72rpx;width: 72rpx;margin-left: 40rpx" mode="widthFix"></image>
+        </view>
+
+        <text class="tips">{{tips}}</text>
+
+        <emptyView wx:if="{{isEmpty}}"/>
+        <view wx:else class="cells_record">
+            <view class="cell_record"
+                  wx:for="{{mDataRecord}}"
+                  wx:key="index"
+                  data-bean="{{item}}"
+            >
+               <text>{{item}}</text>
+            </view>
+        </view>
+
+    </view>
+
+    <view style="margin-top: 136rpx;height: 100%" wx:if="{{categoryCur==0}}" class="cells0">
         <view class="cell0"
               wx:for="{{mData.template}}"
               wx:key="index"
@@ -41,7 +76,8 @@
                 <view class="value"></view>
                 <image class="" data-position="{{index}}" bindtap="doMinus" src="../../assets/images/ic_jian.png"
                        style="height:72rpx;width: 72rpx" mode="widthFix"></image>
-                <input value="{{item.label=='扣分'?totalScore:item.value}}" class="number" type="number" data-position="{{index}}"
+                <input value="{{item.label=='扣分'?totalScore:item.value}}" class="number" type="number"
+                       data-position="{{index}}"
                        bindinput="doInputNum"/>
                 <image class="" data-position="{{index}}" bindtap="doPlus" src="../../assets/images/ic_jia.png"
                        style="height:72rpx;width: 72rpx;margin-left: 40rpx" mode="widthFix"></image>
@@ -130,23 +166,17 @@
                   bindtap="doChooseStudent">
                 <view class="key text bold">{{item.label}}</view>
                 <view wx:if="{{item.rules.required.required}}" class="require bold">*</view>
-                <view class="value">{{item.value2}}</view>
-                <image class="next" src="../../assets/images/ic_next.png" style="height: 28rpx" mode="widthFix"></image>
-            </view>
-
-            <view wx:if="{{item.name=='ChoseStudents'}}" class="item" data-position="{{index}}"
-                  bindtap="doNfc">
-                <view class="key text bold">刷卡识别</view>
-                <view wx:if="{{item.rules.required.required}}" class="require bold">*</view>
+                <view class="hint" style="font-size: 24rpx">(安卓手机支持NFC刷卡识别)</view>
                 <view class="value">{{item.value2}}</view>
                 <image class="next" src="../../assets/images/ic_next.png" style="height: 28rpx" mode="widthFix"></image>
             </view>
 
         </view>
+        <view class="bottom">
+            <view class="confirm" bindtap="doConfirm">提交</view>
+        </view>
     </view>
-    <view class="bottom">
-        <view class="confirm" bindtap="doConfirm">提交</view>
-    </view>
+
 </view>
 <page-container
         show="{{show}}"

@@ -1,5 +1,5 @@
 // packageA/pages/quantizeCommon/quantizeCommon.js
-import {showModal, showToastWithoutIcon} from "../../../utils/util";
+import {formatDate, formatNumber, showModal, showToastWithoutIcon} from "../../../utils/util";
 
 let app = getApp();
 Page({
@@ -8,6 +8,11 @@ Page({
      * 页面的初始数据
      */
     data: {
+        tips: "请将卡片靠近手机NFC识别区域\n录入记录",
+        mDataRecord: [],
+        categoryCur: 0, // 当前数据列索引
+        categoryMenu: ['手动录入', '刷卡录入'], // 分类菜单数据
+        isEmpty: true,
         requestBody: {
             token: '',
             score: "",
@@ -20,6 +25,8 @@ Page({
         classData: [],
         scoreMap: new Map(),
         totalScore: 0,
+        stuItemIndex: -1,
+        classItemIndex: -1,
     },
 
     /**
@@ -32,6 +39,60 @@ Page({
         })
         this.getList(bean.id)
     },
+
+    /**
+     * 生命周期函数--监听页面初次渲染完成
+     */
+    onReady: function () {
+
+    },
+
+    /**
+     * 生命周期函数--监听页面显示
+     */
+    onShow: function () {
+        let nfcBody = app.nfcRead((id) => {
+            // showModal(id)
+            this.icRequest("12")
+        })
+        this.nfc = nfcBody.nfc
+        this.handler = nfcBody.handler
+    },
+
+    /**
+     * 生命周期函数--监听页面隐藏
+     */
+    onHide: function () {
+        console.log("onhide", "=====")
+
+    },
+
+    /**
+     * 生命周期函数--监听页面卸载
+     */
+    onUnload: function () {
+        this.nfc.offDiscovered(this.handler)
+        this.nfc.stopDiscovery()
+        console.log("unload", "=====")
+    },
+
+    check1() {
+        if (this.data.categoryCur !== 0) {
+            this.setData({
+                categoryCur: 0
+            });
+
+        }
+    },
+    check2() {
+        if (this.data.categoryCur !== 1) {
+            this.setData({
+                categoryCur: 1
+            });
+
+        }
+    },
+
     getList(id) {
         let url = '';
         let data;
@@ -46,6 +107,9 @@ Page({
         app.httpPost(url, data).then((res) => {
             let scoreMap = new Map()
             let mData = res.respResult
+            let stuItemIndex = -1
+            let classItemIndex = -1
+            let scoreItemIndex = -1
             console.log("data", mData)
             if (mData.template.length > 0) {
                 mData.template = JSON.parse(mData.template)
@@ -53,6 +117,7 @@ Page({
                     if (it.name == "InputNumber") {
                         if (it.label == "扣分") {
                             this.data.requestBody.score = it.value
+                            scoreItemIndex = index
                         } else if (it.label == "综合加分") {
                             this.data.requestBody.correctscore = it.value
                         }
@@ -60,6 +125,15 @@ Page({
                     } else if (it.name == "InputScore") {
                         it.mNumber = parseInt(it.value)
                         scoreMap.set(index, it.mNumber)
+                    } else if (it.name == "ChoseStudents") {
+                        stuItemIndex = index
+                    } else if (it.name == "CascaderClass") {
+                        classItemIndex = index
+                    }else if (it.name == "DatePicker") {
+                        let v = this.data.requestBody
+                        v.checktime = formatDate()
+                        it.value = formatDate()
+                        it.rules.required.hasValue = true
                     }
                     if (it.value != null && it.value.length > 0) {
                         it.rules.required.hasValue = true
@@ -82,6 +156,9 @@ Page({
                     mData,
                     mDataClasses,
                     requestBody: this.data.requestBody,
+                    stuItemIndex,
+                    classItemIndex,
+                    scoreItemIndex,
                     scoreMap,
                 })
             })
@@ -89,7 +166,7 @@ Page({
         })
     },
 
-    doConfirm() {
+    doConfirm(classV,nameV) {
         let bean = this.data.requestBody
         bean.token = wx.getStorageSync('token')
         let cc = this.data.mData.template
@@ -109,13 +186,36 @@ Page({
 
         bean.templatedata = JSON.stringify(this.data.mData.template)
         bean.typeid = this.data.bean.id
+        let attendances = this.data.bean.attendances
+        if (attendances == "1") {
+            let url = "/api/v17/moral/ioschool/checkCard"
+        } else {
+        }
         let url = "/api/v17/moral/moralScore/add"
         let data = bean
         app.httpPost(url, data).then((res) => {
+            if (this.data.categoryCur == "1") {
+                if (this.data.categoryCur == "1") {
+                    let date = new Date()
+                    const hour = date.getHours()
+                    const minute = date.getMinutes()
+                    const second = date.getSeconds()
+                    let classValue = classV
+                    let realname = nameV
+                    let time = [hour, minute, second].map(formatNumber).join(':')
+                    let score = this.data.requestBody.score+"分"
+                    let gap = "　　"
+                    let ss = time + gap + classValue + gap + realname + gap + score
+                    this.data.mDataRecord.unshift(ss)
+                    this.setData({
+                        mDataRecord: this.data.mDataRecord,
+                        isEmpty: this.data.mDataRecord.length == 0,
+                    })
+                }
+            }else {
             showToastWithoutIcon('处理完成')
-            wx.navigateBack({
-                delta: 1
-            })
+            }
+
         });
     },
     doInput: function (e) {
@@ -327,7 +427,6 @@ Page({
     bindDate(e) {
         let v = this.data.requestBody
         const p = e.currentTarget.dataset.position;
-        let cc = this.data.mData.template[p]
         v.checktime = e.detail.value
         this.data.mData.template[p].value = e.detail.value
         this.data.mData.template[p].rules.required.hasValue = true
@@ -436,41 +535,38 @@ Page({
             }
         )
     },
-    /**
-     * 生命周期函数--监听页面初次渲染完成
-     */
-    onReady: function () {
 
+
+    icRequest(id) {
+        let url = '/api/v17/user/login/cardinfo'
+        let data = {
+            token: wx.getStorageSync('token'),
+            cardno: id,
+        }
+        app.httpPost(url, data).then((res) => {
+            let data = res.respResult
+            if (this.data.stuItemIndex != -1 && this.data.classItemIndex != -1) {
+                var v = this.data.mData.template[this.data.stuItemIndex]
+                var vClass = this.data.mData.template[this.data.classItemIndex]
+                v.value2 = data.realname
+                vClass.value = data.levelclass
+                this.data.requestBody.classid = data.classid
+                let involves=[]
+                involves.push(data)
+                this.data.requestBody.involve = JSON.stringify(involves)
+
+                this.setData({
+                    mData: this.data.mData,
+                    requestBody: this.data.requestBody,
+                },()=>{
+                    if (this.data.categoryCur == "1") {
+                        this.doConfirm(data.levelclass, data.realname)
+                    }
+                })
+            }
+
+        })
     },
-
-    /**
-     * 生命周期函数--监听页面显示
-     */
-    onShow: function () {
-       let nfcBody= app.nfcRead((id)=>{
-           showModal(id)
-       })
-        this.nfc = nfcBody.nfc
-        this.handler = nfcBody.handler
-    },
-
-    /**
-     * 生命周期函数--监听页面隐藏
-     */
-    onHide: function () {
-        console.log("onhide", "=====")
-
-    },
-
-    /**
-     * 生命周期函数--监听页面卸载
-     */
-    onUnload: function () {
-        this.nfc.offDiscovered(this.handler)
-        this.nfc.stopDiscovery()
-        console.log("unload", "=====")
-    },
-
     /**
      * 页面相关事件处理函数--监听用户下拉动作
      */

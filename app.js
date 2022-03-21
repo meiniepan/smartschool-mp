@@ -85,7 +85,7 @@ App({
      */
     httpBase: function (method, url, data, loading = false, loadingMsg) {
         let that = this
-        let requestUrl = host.BASE_URL + url;
+        let requestUrl = host.BASE_URL_DEV + url;
         console.log("url", requestUrl)
         console.log("body", data)
         if (loading) {
@@ -454,7 +454,7 @@ App({
             })
             const innerAudioContext = wx.createInnerAudioContext()
             innerAudioContext.autoplay = true
-            innerAudioContext.src = 'packageA/assets/sound/aa.mp3'
+            innerAudioContext.src = 'packageA/assets/sound/yes2.mp3'
             innerAudioContext.onPlay(() => {
                 console.log('开始播放')
             })
