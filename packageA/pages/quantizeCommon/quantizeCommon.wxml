@@ -104,7 +104,7 @@
             </view>
 
             <picker wx:if="{{item.name=='DatePicker'}}" mode="date" value="" data-position="{{index}}"
-                    start="2020-09-01" end="2025-09-01"
+
                     data-type="indexClass" bindchange="bindDate">
                 <view class="item" bindtap="">
                     <view class="key text bold">{{item.label}}</view>
@@ -116,7 +116,7 @@
             </picker>
 
             <dateTimePicker wx:if="{{item.name=='DateTimePicker'}}" value="" data-position="{{index}}"
-                            start="2020-09-01" end="2025-09-01"
+
                             data-type="indexClass" bindchange="bindTime">
                 <view class="item" bindtap="">
                     <view class="key text bold">{{item.label}}</view>

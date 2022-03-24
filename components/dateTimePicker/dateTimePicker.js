@@ -10,7 +10,7 @@ const leftPad0 = function(v, n) {
   return (prefix + v).substr(-n);
 };
 const stringToDate = function(str) {
-  str = str.replace(/-/g, "/");
+  // str = str.replace(/-/g, "/");
   return new Date(str);
 };
 const isLeapYear = function(year) {
@@ -141,7 +141,7 @@ Component({
         let v = this.data.rangeValues[i][e.detail.value[i]];
         dateArr.push(v.toString().substr(0, v.length - 1))
       }
-      let dateString = dateArr[0] + "/" + dateArr[1] + "/" + dateArr[2] + " " + dateArr[3] + ":" + dateArr[4] ;
+      let dateString = dateArr[0] + "-" + dateArr[1] + "-" + dateArr[2] + " " + dateArr[3] + ":" + dateArr[4] ;
       this.triggerEvent('change', {
         date: stringToDate(dateString),
         dateString

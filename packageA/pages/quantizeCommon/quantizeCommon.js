@@ -1,5 +1,5 @@
 // packageA/pages/quantizeCommon/quantizeCommon.js
-import {formatDate, formatNumber, showModal, showToastWithoutIcon} from "../../../utils/util";
+import {formatDate, formatNumber, formatTimeHM, showModal, showToastWithoutIcon} from "../../../utils/util";
 
 let app = getApp();
 Page({
@@ -51,9 +51,15 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow: function () {
+        // let attendances = this.data.bean.attendances
+        // if (attendances == "1") {
+        //     this.doConfirm("", "", "12")
+        // } else {
+        //     this.icRequest("12")
+        // }
         let nfcBody = app.nfcRead((id) => {
             // showModal(id)
-            this.icRequest("12")
+            this.icRequest(id)
         })
         this.nfc = nfcBody.nfc
         this.handler = nfcBody.handler
@@ -117,6 +123,7 @@ Page({
                     if (it.name == "InputNumber") {
                         if (it.label == "扣分") {
                             this.data.requestBody.score = it.value
+                            this.data.totalScore = it.value
                             scoreItemIndex = index
                         } else if (it.label == "综合加分") {
                             this.data.requestBody.correctscore = it.value
@@ -129,10 +136,15 @@ Page({
                         stuItemIndex = index
                     } else if (it.name == "CascaderClass") {
                         classItemIndex = index
-                    }else if (it.name == "DatePicker") {
+                    } else if (it.name == "DatePicker") {
                         let v = this.data.requestBody
                         v.checktime = formatDate()
                         it.value = formatDate()
+                        it.rules.required.hasValue = true
+                    } else if (it.name == "DateTimePicker") {
+                        let v = this.data.requestBody
+                        v.checktime = formatTimeHM()
+                        it.value = formatTimeHM()
                         it.rules.required.hasValue = true
                     }
                     if (it.value != null && it.value.length > 0) {
@@ -156,6 +168,7 @@ Page({
                     mData,
                     mDataClasses,
                     requestBody: this.data.requestBody,
+                    totalScore: this.data.totalScore,
                     stuItemIndex,
                     classItemIndex,
                     scoreItemIndex,
@@ -166,57 +179,89 @@ Page({
         })
     },
 
-    doConfirm(classV,nameV) {
-        let bean = this.data.requestBody
-        bean.token = wx.getStorageSync('token')
-        let cc = this.data.mData.template
-        for (let i = 0; i < cc.length; i++) {
-            if (cc[i].rules.required.required == true) {
-                if (cc[i].rules.required.hasValue != true) {
-                    let s = '请完善信息'
-                    let message = cc[i].rules.required.message
-                    if (message != null && message.length > 0) {
-                        s = message
-                    }
-                    showToastWithoutIcon(s)
-                    return
-                }
-            }
-        }
+    dealList: function (classV, nameV) {
+        let date = new Date()
+        const hour = date.getHours()
+        const minute = date.getMinutes()
+        const second = date.getSeconds()
+        let classValue = classV
+        let realname = nameV
+        let time = [hour, minute, second].map(formatNumber).join(':')
+        let score = this.data.requestBody.score + "分"
+        let gap = "　　"
+        let ss = time + gap + classValue + gap + realname + gap + score
+        this.data.mDataRecord.unshift(ss)
+        this.setData({
+            mDataRecord: this.data.mDataRecord,
+            isEmpty: this.data.mDataRecord.length == 0,
+        })
+    },
+    doConfirm(classV, nameV, cardno) {
 
-        bean.templatedata = JSON.stringify(this.data.mData.template)
-        bean.typeid = this.data.bean.id
+        let url = "/api/v17/moral/moralScore/add"
+        let data = ""
         let attendances = this.data.bean.attendances
         if (attendances == "1") {
-            let url = "/api/v17/moral/ioschool/checkCard"
-        } else {
-        }
-        let url = "/api/v17/moral/moralScore/add"
-        let data = bean
-        app.httpPost(url, data).then((res) => {
-            if (this.data.categoryCur == "1") {
-                if (this.data.categoryCur == "1") {
-                    let date = new Date()
-                    const hour = date.getHours()
-                    const minute = date.getMinutes()
-                    const second = date.getSeconds()
-                    let classValue = classV
-                    let realname = nameV
-                    let time = [hour, minute, second].map(formatNumber).join(':')
-                    let score = this.data.requestBody.score+"分"
-                    let gap = "　　"
-                    let ss = time + gap + classValue + gap + realname + gap + score
-                    this.data.mDataRecord.unshift(ss)
-                    this.setData({
-                        mDataRecord: this.data.mDataRecord,
-                        isEmpty: this.data.mDataRecord.length == 0,
+            url = "/api/v17/moral/ioschool/checkCard"
+            data = {
+                token: wx.getStorageSync('token'),
+                cardno: "12",
+                attendances: "1",
+            }
+            app.httpPost(url, data).then((res) => {
+                let data = res.respResult
+                let test = "0629005406"
+                if (cardno == test) {
+                    const innerAudioContext = wx.createInnerAudioContext()
+                    innerAudioContext.autoplay = true
+                    innerAudioContext.src = 'packageA/assets/sound/err1.mp3'
+                    innerAudioContext.onPlay(() => {
+                        console.log('开始播放')
                     })
+                    innerAudioContext.onError((res) => {
+                        console.log(res.errMsg)
+                        console.log(res.errCode)
+                    })
+                    showModal("学生（" + data.realname + "）不被允许出校")
+                } else {
+                    showToastWithoutIcon('处理完成')
                 }
-            }else {
-            showToastWithoutIcon('处理完成')
+                this.dealList(classV, nameV);
+            });
+
+        } else {
+            let bean = this.data.requestBody
+            bean.token = wx.getStorageSync('token')
+            let cc = this.data.mData.template
+            for (let i = 0; i < cc.length; i++) {
+                if (cc[i].rules.required.required == true) {
+                    if (cc[i].rules.required.hasValue != true) {
+                        let s = '请完善信息'
+                        let message = cc[i].rules.required.message
+                        if (message != null && message.length > 0) {
+                            s = message
+                        }
+                        showToastWithoutIcon(s)
+                        return
+                    }
+                }
             }
 
-        });
+            bean.templatedata = JSON.stringify(this.data.mData.template)
+            bean.typeid = this.data.bean.id
+            data = bean
+            app.httpPost(url, data).then((res) => {
+                if (this.data.categoryCur == "1") {
+                    if (this.data.categoryCur == "1") {
+                        this.dealList(classV, nameV);
+                    }
+                } else {
+                    showToastWithoutIcon('处理完成')
+                }
+
+            });
+        }
+
     },
     doInput: function (e) {
         const p = e.currentTarget.dataset.position;
@@ -538,10 +583,11 @@ Page({
 
 
     icRequest(id) {
+
         let url = '/api/v17/user/login/cardinfo'
         let data = {
             token: wx.getStorageSync('token'),
-            cardno: id,
+            cardno: "12",
         }
         app.httpPost(url, data).then((res) => {
             let data = res.respResult
@@ -549,18 +595,20 @@ Page({
                 var v = this.data.mData.template[this.data.stuItemIndex]
                 var vClass = this.data.mData.template[this.data.classItemIndex]
                 v.value2 = data.realname
+                v.rules.required.hasValue = true
+                vClass.rules.required.hasValue = true
                 vClass.value = data.levelclass
                 this.data.requestBody.classid = data.classid
-                let involves=[]
+                let involves = []
                 involves.push(data)
                 this.data.requestBody.involve = JSON.stringify(involves)
 
                 this.setData({
                     mData: this.data.mData,
                     requestBody: this.data.requestBody,
-                },()=>{
+                }, () => {
                     if (this.data.categoryCur == "1") {
-                        this.doConfirm(data.levelclass, data.realname)
+                        this.doConfirm(data.levelclass, data.realname, id)
                     }
                 })
             }

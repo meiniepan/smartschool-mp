@@ -19,7 +19,17 @@ const formatTime = (date=new Date())  => {
     const minute = date.getMinutes()
     const second = date.getSeconds()
 
-    return [year, month, day].map(formatNumber).join('/') + ' ' + [hour, minute, second].map(formatNumber).join(':')
+    return [year, month, day].map(formatNumber).join('-') + ' ' + [hour, minute, second].map(formatNumber).join(':')
+}
+
+const formatTimeHM = (date=new Date())  => {
+    const year = date.getFullYear()
+    const month = date.getMonth() + 1
+    const day = date.getDate()
+    const hour = date.getHours()
+    const minute = date.getMinutes()
+
+    return [year, month, day].map(formatNumber).join('-') + ' ' + [hour, minute].map(formatNumber).join(':')
 }
 
 const formatDate = (date=new Date()) => {
@@ -263,6 +273,7 @@ function isImage(path) {
 
 module.exports = {
     formatTime: formatTime,
+    formatTimeHM: formatTimeHM,
     formatDate: formatDate,
     isEmpty: isEmpty,
     isLogin: isLogin,
