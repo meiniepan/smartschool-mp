@@ -396,6 +396,31 @@ App({
 
     },
 
+    soundCommon(){
+        const innerAudioContext = wx.createInnerAudioContext()
+        innerAudioContext.autoplay = true
+        innerAudioContext.src = 'packageA/assets/sound/yes2.mp3'
+        innerAudioContext.onPlay(() => {
+            console.log('开始播放')
+        })
+        innerAudioContext.onError((res) => {
+            console.log(res.errMsg)
+            console.log(res.errCode)
+        })
+    },
+    soundErr(){
+        const innerAudioContext = wx.createInnerAudioContext()
+        innerAudioContext.autoplay = true
+        innerAudioContext.src = 'packageA/assets/sound/err1.mp3'
+        innerAudioContext.onPlay(() => {
+            console.log('开始播放')
+        })
+        innerAudioContext.onError((res) => {
+            console.log(res.errMsg)
+            console.log(res.errCode)
+        })
+    },
+
     nfcRead(func) {
 
         let nfcBody = {nfc: null, handler: null}
@@ -452,16 +477,7 @@ App({
                 icon: 'none'
 
             })
-            const innerAudioContext = wx.createInnerAudioContext()
-            innerAudioContext.autoplay = true
-            innerAudioContext.src = 'packageA/assets/sound/yes2.mp3'
-            innerAudioContext.onPlay(() => {
-                console.log('开始播放')
-            })
-            innerAudioContext.onError((res) => {
-                console.log(res.errMsg)
-                console.log(res.errCode)
-            })
+            this.soundCommon()
             func(id)
 
         }
@@ -650,6 +666,7 @@ App({
         timetableTitle: "我的课表",
         eduAttendance: "教学考勤",
         teaTitle: "教师档案",
+        cardTitle: "考勤管理",
 
         deleteSure: "确定删除？",
     }

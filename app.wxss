@@ -57,6 +57,10 @@ page {
   font-size: 28rpx;
   color: var(--commonHint);
 }
+.hint2{
+  font-size: 30rpx;
+  color: var(--commonHint);
+}
 .horizontal{
   display: flex;
   flex-direction: row;

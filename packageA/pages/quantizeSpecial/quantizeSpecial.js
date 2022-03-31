@@ -19,8 +19,8 @@ Page({
             types: null,
             remark: null,
         },
-        actArrays: ['病假', '事假','住宿生外出','课外活动', '外出考试',
-            '个人培训','不参加课后服务', '其他'],
+        actArrays: ['病假', '事假', '住宿生外出', '课外活动', '外出考试',
+            '个人培训', '不参加课后服务', '其他'],
         ruleArrays: [],
         departData: [],
         classData: [],
@@ -36,9 +36,10 @@ Page({
         eventChannel.on('choseInvolve', res => {
             console.log(res.data) // my from index page
         })
-
-        this.getMoralTypeList()
-
+        let ruleArrays = JSON.parse(options.bean)
+        this.setData({
+            ruleArrays,
+        })
         let date = new Date()
         const year = date.getFullYear()
         const month = date.getMonth() + 1
@@ -56,6 +57,7 @@ Page({
             })
         }
     },
+
     doConfirm() {
         let bean = this.data.requestBody
         bean.token = wx.getStorageSync('token')
@@ -76,21 +78,7 @@ Page({
         });
     },
 
-    getMoralTypeList() {
-        let url = "/api/v17/moral/moralType/lists"
-        let data = {
-            token: wx.getStorageSync('token'),
-        }
-        app.httpPost(url, data).then((res) => {
-            let data = res.respResult.data;
-            data.forEach(item => {
-                item.checked = false
-            })
-            this.setData({
-                ruleArrays: data
-            })
-        });
-    },
+
     check2() {
         let temp = new Date()
         let year = temp.getFullYear()
@@ -326,7 +314,7 @@ Page({
         return {
             title: '汇文云',
             path: 'pages/splash/splash',
-            imageUrl:"../../assets/images/bac_share.png",
+            imageUrl: "../../assets/images/bac_share.png",
         }
     }
 })

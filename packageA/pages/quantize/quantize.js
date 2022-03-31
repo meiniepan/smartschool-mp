@@ -32,11 +32,17 @@ Page({
         app.httpPost(url, data).then((res) => {
             let data = res.respResult.data
             let mData = [], mDataType = []
+
             mData.push({typename: '特殊情况报备'})
             if (app.checkRule2("moral/moralScore/add")) {
-                mData = mData.concat(data)
+                data.forEach(it=>{
+                        mData.push(it)
+                    if (it.showspecial=="1"){
+                        it.checked = false
+                        mDataType.push(it)
+                    }
+                })
             }
-            mDataType = data
             this.setData({
                 mData,
                 mDataType,
@@ -50,7 +56,7 @@ Page({
             url = '/packageA/pages/quantizeSpecialList/quantizeSpecialList?bean=' + JSON.stringify(bean)
         } else {
             if (bean.typename == '特殊情况报备') {
-                url = '/packageA/pages/quantizeSpecial/quantizeSpecial?bean=' + JSON.stringify(bean)
+                url = '/packageA/pages/quantizeSpecial/quantizeSpecial?bean=' + JSON.stringify(this.data.mDataType)
             } else {
                 url = '/packageA/pages/quantizeCommon/quantizeCommon?bean=' + JSON.stringify(bean)
             }

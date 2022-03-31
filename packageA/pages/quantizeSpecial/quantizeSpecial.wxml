@@ -79,7 +79,7 @@
     <view wx:if="{{show}}" class="layout0">
         <view class="cells">
             <view class="cell" wx:for="{{ruleArrays}}" wx:key="index" data-index="{{index}}" bindtap="checkRule">
-                <view>
+                <view class="{{item.typename=='入校迟到'&&!canCheck?'hint2':'text'}}">
                     {{item.typename}}
                 </view>
                 <image wx:if="{{item.checked}}" class="image" mode="heightFix"
