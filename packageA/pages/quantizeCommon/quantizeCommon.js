@@ -212,16 +212,7 @@ Page({
                 let data = res.respResult
                 let test = "0629005406"
                 if (cardno == test) {
-                    const innerAudioContext = wx.createInnerAudioContext()
-                    innerAudioContext.autoplay = true
-                    innerAudioContext.src = 'packageA/assets/sound/err1.mp3'
-                    innerAudioContext.onPlay(() => {
-                        console.log('开始播放')
-                    })
-                    innerAudioContext.onError((res) => {
-                        console.log(res.errMsg)
-                        console.log(res.errCode)
-                    })
+                    app.soundErr()
                     showModal("学生（" + data.realname + "）不被允许出校")
                 } else {
                     showToastWithoutIcon('处理完成')

@@ -11,9 +11,13 @@
     background: var(--white);
     z-index: 9;
 }
-
+.key3{
+    display: flex;
+    white-space: nowrap;
+    flex-grow: 1;
+}
 .out3{
-    transform: scale(.8)
+    transform: scale(.8);
 }
 
 .tab-self{

@@ -477,7 +477,7 @@ App({
                 icon: 'none'
 
             })
-            this.soundCommon()
+            _this.soundCommon()
             func(id)
 
         }
@@ -490,13 +490,13 @@ App({
 
                 console.log(res)
 
-                wx.showToast({
-
-                    title: 'NFC读取功能已开启！',
-
-                    icon: 'none'
-
-                })
+                // wx.showToast({
+                //
+                //     title: 'NFC读取功能已开启！',
+                //
+                //     icon: 'none'
+                //
+                // })
 
                 nfc.onDiscovered(discoverHandler)
 
@@ -508,13 +508,13 @@ App({
 
                 if (!err.errCode) {
 
-                    wx.showToast({
-
-                        title: '请检查NFC功能是否正常!',
-
-                        icon: 'none'
-
-                    })
+                    // wx.showToast({
+                    //
+                    //     title: '请检查NFC功能是否正常!',
+                    //
+                    //     icon: 'none'
+                    //
+                    // })
 
                     return
 

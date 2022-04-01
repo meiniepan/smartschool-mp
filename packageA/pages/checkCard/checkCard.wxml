@@ -9,17 +9,7 @@
     </view>
 
     <view style="margin-top: 136rpx;height: 100%" wx:if="{{categoryCur==1}}" class="record">
-        <view class="item" bindtap="">
-            <view class="key text bold">{{mData.template[scoreItemIndex].label}}</view>
-            <view wx:if="{{mData.template[scoreItemIndex].rules.required.required}}" class="require bold">*</view>
-            <view class="value"></view>
-            <image class="" data-position="{{scoreItemIndex}}" bindtap="doMinus" src="../../assets/images/ic_jian.png"
-                   style="height:72rpx;width: 72rpx" mode="widthFix"></image>
-            <input value="{{mData.template[scoreItemIndex].value}}" class="number" type="number" data-position="{{scoreItemIndex}}"
-                   bindinput="doInputNum"/>
-            <image class="" data-position="{{scoreItemIndex}}" bindtap="doPlus" src="../../assets/images/ic_jia.png"
-                   style="height:72rpx;width: 72rpx;margin-left: 40rpx" mode="widthFix"></image>
-        </view>
+
 
         <text class="tips">{{tips}}</text>
 
@@ -37,20 +27,32 @@
     </view>
 
     <view style="margin-top: 136rpx;height: 100%" wx:if="{{categoryCur==0}}" class="cells0">
-        <view class="cell0"
-
-        >
+        <view class="cell0">
             <view class="item" bindtap="">
-                <view class="key text bold">打卡类型</view>
-            <switch class="out3 value"  color='#F95B49' bindchange="switchChange"/>
+                <view class="key3 text bold">考勤消息通知</view>
+            <switch class="out3 " checked="{{checked}}"  color='#F95B49' bindchange="switchChange"/>
             </view>
-            <picker  bindchange="doAct"
-                    data-type="indexAct"  range="{{dataTypes}}">
+
+            <picker  bindchange="doType"
+                    data-type="indexAct"  range="{{dataTypes}}" range-key="typename">
                 <view class="item" bindtap="">
                     <view class="key text bold">打卡类型</view>
                     <view  class="require bold">*</view>
                     <text class="value"
-                    >{{item.value}}
+                    >{{dataTypes[indexType].typename}}
+                    </text>
+                    <image class="next" src="../../assets/images/ic_next.png" style="height: 28rpx"
+                           mode="widthFix"></image>
+                </view>
+            </picker>
+
+            <picker  bindchange="doRoom"
+                     data-type="indexAct"  range="{{dataRooms}}" range-key="classroomname">
+                <view class="item" bindtap="">
+                    <view class="key text bold">打卡地点</view>
+                    <view  class="require bold">*</view>
+                    <text class="value"
+                    >{{dataRooms[indexRoom].classroomname}}
                     </text>
                     <image class="next" src="../../assets/images/ic_next.png" style="height: 28rpx"
                            mode="widthFix"></image>

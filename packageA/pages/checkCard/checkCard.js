@@ -1,5 +1,5 @@
 // packageA/pages/checkCard/checkCard.js
-import {formatDate, formatNumber, formatTimeHM, showModal, showToastWithoutIcon} from "../../../utils/util";
+import {formatDate, formatNumber, formatTimeHM, isEmpty, showModal, showToastWithoutIcon} from "../../../utils/util";
 
 let app = getApp();
 Page({
@@ -20,18 +20,17 @@ Page({
             iotype: "",
             attendances: "",
             uid: "",
-            remark: null,
+            remark: "",
         },
         bean: {},
         choosePosition: 0,
         departData: [],
         classData: [],
-        scoreMap: new Map(),
-        totalScore: 0,
-        stuItemIndex: -1,
-        classItemIndex: -1,
+        indexType: -1,
+        indexRoom: -1,
         dataTypes: [],
         dataRooms: [],
+        checked: true,
     },
 
     /**
@@ -97,7 +96,6 @@ Page({
             this.setData({
                 categoryCur: 1
             });
-
         }
     },
 
@@ -137,7 +135,7 @@ Page({
         const second = date.getSeconds()
         let time = [hour, minute, second].map(formatNumber).join(':')
         let gap = "　　"
-        let ss =  data.levelclass + gap + data.realname + gap + remark+ gap + time
+        let ss = data.levelclass + gap + data.realname + gap + data.remark + gap + time
         this.data.mDataRecord.unshift(ss)
         this.setData({
             mDataRecord: this.data.mDataRecord,
@@ -145,37 +143,50 @@ Page({
         })
     },
     doConfirm(cardno) {
-
-        let url = "/api/v17/moral/ioschool/checkCard"
-        let data = {
-            token: wx.getStorageSync('token'),
-            cardno: "12",
-            attendances: "1",
+        if (isEmpty(this.data.requestBody.iotype) || isEmpty(this.data.requestBody.classroomid)) {
+            showToastWithoutIcon('请完善信息')
+            return
         }
+        let url = "/api/v17/moral/ioschool/checkCard"
+        this.data.requestBody.token = wx.getStorageSync('token')
+        this.data.requestBody.cardno = "12"
+        this.data.requestBody.attendances = this.data.checked ? "1" : "0"
+        let data = this.data.requestBody
 
-            app.httpPost(url, data).then((res) => {
-                let data = res.respResult
-                let test = "0629005406"
-                if (cardno == test) {
-                    app.soundErr()
-                    showModal("学生（" + data.realname + "）不被允许出校")
-                } else {
-                    showToastWithoutIcon('处理完成')
-                }
+        app.httpPost(url, data).then((res) => {
+            let data = res.respResult
+            let test = "0629005406"
+            if (cardno == test) {
+                app.soundErr()
+                showModal("学生（" + data.realname + "）不被允许出校")
+            } else {
+                showToastWithoutIcon('处理完成')
+            }
+            if (this.data.categoryCur == "1") {
                 this.dealList(data);
-            });
+            }
+        });
 
     },
 
-    doAct(e) {
-        const p = e.currentTarget.dataset.position;
-        let v = this.data.mData.template[p]
-        this.data.mData.template[p].value = v.selections[e.detail.value]
-        this.data.mData.template[p].rules.required.hasValue = true
+    doType(e) {
+        let index = e.detail.value
+        this.data.requestBody.iotype = this.data.dataTypes[index].id
         this.setData({
-            mData: this.data.mData
+            requestBody: this.data.requestBody,
+            indexType: index,
         })
     },
+
+    doRoom(e) {
+        let index = e.detail.value
+        this.data.requestBody.classroomid = this.data.dataRooms[index].id
+        this.setData({
+            requestBody: this.data.requestBody,
+            indexRoom: index,
+        })
+    },
+
     doClass(e) {
         const p = e.currentTarget.dataset.position;
         let vv = this.data.mDataClasses
@@ -224,13 +235,13 @@ Page({
         data.mDataDepartment.forEach(it => {
             if (it.num > 0) {
                 realname = it.list[0].realname
-                uid = it.list[0].uid
+                this.data.requestBody.uid = it.list[0].uid
             }
         })
         data.mDataClasses.forEach(it => {
             if (it.num > 0) {
                 realname = it.list[0].realname
-                uid = it.list[0].uid
+                this.data.requestBody.uid = it.list[0].uid
             }
         })
         console.log('stu', realname)
@@ -239,14 +250,16 @@ Page({
 
         this.setData({
                 realname,
-                uid,
+                requestBody: this.data.requestBody,
             }
         )
     },
 
     switchChange(e) {
-
         let checked = e.detail.value
+        this.setData({
+            checked,
+        })
 
     },
 
