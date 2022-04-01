@@ -1,5 +1,5 @@
 // packageA/pages/quantizeCommon/quantizeCommon.js
-import {formatDate, formatNumber, formatTimeHM, showModal, showToastWithoutIcon} from "../../../utils/util";
+import {formatDate, formatNumber, formatTimeHM, isEmpty, showModal, showToastWithoutIcon} from "../../../utils/util";
 
 let app = getApp();
 Page({
@@ -179,24 +179,33 @@ Page({
         })
     },
 
-    dealList: function (classV, nameV) {
+    dealList: function (data) {
         let date = new Date()
         const hour = date.getHours()
         const minute = date.getMinutes()
         const second = date.getSeconds()
-        let classValue = classV
-        let realname = nameV
+        let classValue = data.levelclass
+        let realname = data.realname
         let time = [hour, minute, second].map(formatNumber).join(':')
         let score = this.data.requestBody.score + "分"
         let gap = "　　"
-        let ss = time + gap + classValue + gap + realname + gap + score
+        let remark = ""
+        if (!isEmpty(data.remark)) {
+            remark = data.remark + gap
+        }
+        let ss = classValue + gap + realname + gap + score + gap + remark + time
         this.data.mDataRecord.unshift(ss)
         this.setData({
             mDataRecord: this.data.mDataRecord,
             isEmpty: this.data.mDataRecord.length == 0,
         })
     },
-    doConfirm(classV, nameV, cardno) {
+
+    doConfirm(e) {
+        this.onConfirm("", "")
+    },
+
+    onConfirm(data2, cardno) {
 
         let url = "/api/v17/moral/moralScore/add"
         let data = ""
@@ -217,7 +226,7 @@ Page({
                 } else {
                     showToastWithoutIcon('处理完成')
                 }
-                this.dealList(classV, nameV);
+                this.dealList(data2);
             });
 
         } else {
@@ -244,7 +253,7 @@ Page({
             app.httpPost(url, data).then((res) => {
                 if (this.data.categoryCur == "1") {
                     if (this.data.categoryCur == "1") {
-                        this.dealList(classV, nameV);
+                        this.dealList(data2);
                     }
                 } else {
                     showToastWithoutIcon('处理完成')
@@ -599,7 +608,7 @@ Page({
                     requestBody: this.data.requestBody,
                 }, () => {
                     if (this.data.categoryCur == "1") {
-                        this.doConfirm(data.levelclass, data.realname, id)
+                        this.onConfirm(data, id)
                     }
                 })
             }

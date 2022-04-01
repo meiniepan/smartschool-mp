@@ -26,8 +26,8 @@ Page({
         choosePosition: 0,
         departData: [],
         classData: [],
-        indexType: -1,
-        indexRoom: -1,
+        indexType: 0,
+        indexRoom: 0,
         dataTypes: [],
         dataRooms: [],
         checked: true,
@@ -135,22 +135,33 @@ Page({
         const second = date.getSeconds()
         let time = [hour, minute, second].map(formatNumber).join(':')
         let gap = "　　"
-        let ss = data.levelclass + gap + data.realname + gap + data.remark + gap + time
+        let remark = ""
+        if (!isEmpty(data.remark)){
+            remark = data.remark+gap
+        }
+        let ss = data.levelclass + gap + data.realname + gap +remark+ time
         this.data.mDataRecord.unshift(ss)
         this.setData({
             mDataRecord: this.data.mDataRecord,
             isEmpty: this.data.mDataRecord.length == 0,
         })
     },
-    doConfirm(cardno) {
-        if (isEmpty(this.data.requestBody.iotype) || isEmpty(this.data.requestBody.classroomid)) {
+
+    onConfirm(cardno) {
+        let url = "/api/v17/moral/ioschool/checkCard"
+        this.data.requestBody.token = wx.getStorageSync('token')
+        this.data.requestBody.cardno = cardno
+        this.data.requestBody.iotype = this.data.dataTypes[this.data.indexType].id
+        this.data.requestBody.classroomid = this.data.dataRooms[this.data.indexRoom].id
+        this.data.requestBody.attendances = this.data.checked ? "1" : "0"
+
+        if (isEmpty(this.data.requestBody.iotype)
+            || isEmpty(this.data.requestBody.classroomid)
+            || (isEmpty(this.data.requestBody.cardno) && isEmpty(this.data.requestBody.uid))) {
             showToastWithoutIcon('请完善信息')
             return
         }
-        let url = "/api/v17/moral/ioschool/checkCard"
-        this.data.requestBody.token = wx.getStorageSync('token')
-        this.data.requestBody.cardno = "12"
-        this.data.requestBody.attendances = this.data.checked ? "1" : "0"
+
         let data = this.data.requestBody
 
         app.httpPost(url, data).then((res) => {
@@ -166,23 +177,22 @@ Page({
                 this.dealList(data);
             }
         });
+    },
 
+    doConfirm(e) {
+        this.onConfirm("")
     },
 
     doType(e) {
         let index = e.detail.value
-        this.data.requestBody.iotype = this.data.dataTypes[index].id
         this.setData({
-            requestBody: this.data.requestBody,
             indexType: index,
         })
     },
 
     doRoom(e) {
         let index = e.detail.value
-        this.data.requestBody.classroomid = this.data.dataRooms[index].id
         this.setData({
-            requestBody: this.data.requestBody,
             indexRoom: index,
         })
     },
@@ -265,7 +275,7 @@ Page({
 
     icRequest(id) {
         if (this.data.categoryCur == "1") {
-            this.doConfirm(id)
+            this.onConfirm("12")
         }
     },
     /**
