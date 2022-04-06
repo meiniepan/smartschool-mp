@@ -34,7 +34,7 @@
             </view>
 
             <picker  bindchange="doType"
-                    data-type="indexAct"  range="{{dataTypes}}" range-key="typename">
+                    data-type="indexType" value="{{indexType}}"  range="{{dataTypes}}" range-key="typename">
                 <view class="item" bindtap="">
                     <view class="key text bold">打卡类型</view>
                     <view  class="require bold">*</view>
@@ -46,13 +46,26 @@
                 </view>
             </picker>
 
-            <picker  bindchange="doRoom"
-                     data-type="indexAct"  range="{{dataRooms}}" range-key="classroomname">
+            <picker  bindchange="doType"
+                     data-type="indexRoom" value="{{indexRoom}}"  range="{{dataRooms}}" range-key="classroomname">
                 <view class="item" bindtap="">
                     <view class="key text bold">打卡地点</view>
                     <view  class="require bold">*</view>
                     <text class="value"
                     >{{dataRooms[indexRoom].classroomname}}
+                    </text>
+                    <image class="next" src="../../assets/images/ic_next.png" style="height: 28rpx"
+                           mode="widthFix"></image>
+                </view>
+            </picker>
+
+            <picker  bindchange="doType"
+                     data-type="indexType3" value="{{indexType3}}"  range="{{dataTypes3}}" range-key="typename">
+                <view class="item" bindtap="">
+                    <view class="key text bold">特殊情况类型</view>
+                    <view  class="require bold">*</view>
+                    <text class="value"
+                    >{{dataTypes3[indexType3].typename}}
                     </text>
                     <image class="next" src="../../assets/images/ic_next.png" style="height: 28rpx"
                            mode="widthFix"></image>

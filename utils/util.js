@@ -46,7 +46,7 @@ const formatNumber = n => {
 }
 
 function isEmpty(string) {
-    if (typeof (string) == 'undefined' || string == null || string == '') {
+    if (typeof (string) == 'undefined' || string == null || string === '') {
         return true;
     } else {
         return false;

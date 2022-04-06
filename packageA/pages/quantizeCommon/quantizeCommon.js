@@ -209,58 +209,38 @@ Page({
 
         let url = "/api/v17/moral/moralScore/add"
         let data = ""
-        let attendances = this.data.bean.attendances
-        if (attendances == "1") {
-            url = "/api/v17/moral/ioschool/checkCard"
-            data = {
-                token: wx.getStorageSync('token'),
-                cardno: "12",
-                attendances: "1",
-            }
-            app.httpPost(url, data).then((res) => {
-                let data = res.respResult
-                let test = "0629005406"
-                if (cardno == test) {
-                    app.soundErr()
-                    showModal("学生（" + data.realname + "）不被允许出校")
-                } else {
-                    showToastWithoutIcon('处理完成')
-                }
-                this.dealList(data2);
-            });
 
-        } else {
-            let bean = this.data.requestBody
-            bean.token = wx.getStorageSync('token')
-            let cc = this.data.mData.template
-            for (let i = 0; i < cc.length; i++) {
-                if (cc[i].rules.required.required == true) {
-                    if (cc[i].rules.required.hasValue != true) {
-                        let s = '请完善信息'
-                        let message = cc[i].rules.required.message
-                        if (message != null && message.length > 0) {
-                            s = message
-                        }
-                        showToastWithoutIcon(s)
-                        return
+        let bean = this.data.requestBody
+        bean.token = wx.getStorageSync('token')
+        let cc = this.data.mData.template
+        for (let i = 0; i < cc.length; i++) {
+            if (cc[i].rules.required.required == true) {
+                if (cc[i].rules.required.hasValue != true) {
+                    let s = '请完善信息'
+                    let message = cc[i].rules.required.message
+                    if (message != null && message.length > 0) {
+                        s = message
                     }
+                    showToastWithoutIcon(s)
+                    return
                 }
             }
-
-            bean.templatedata = JSON.stringify(this.data.mData.template)
-            bean.typeid = this.data.bean.id
-            data = bean
-            app.httpPost(url, data).then((res) => {
-                if (this.data.categoryCur == "1") {
-                    if (this.data.categoryCur == "1") {
-                        this.dealList(data2);
-                    }
-                } else {
-                    showToastWithoutIcon('处理完成')
-                }
-
-            });
         }
+
+        bean.templatedata = JSON.stringify(this.data.mData.template)
+        bean.typeid = this.data.bean.id
+        data = bean
+        app.httpPost(url, data).then((res) => {
+            if (this.data.categoryCur == "1") {
+                if (this.data.categoryCur == "1") {
+                    this.dealList(data2);
+                }
+            } else {
+                showToastWithoutIcon('处理完成')
+            }
+
+        });
+
 
     },
     doInput: function (e) {

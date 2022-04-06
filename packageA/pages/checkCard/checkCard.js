@@ -28,6 +28,7 @@ Page({
         classData: [],
         indexType: 0,
         indexRoom: 0,
+        indexType3: 0,
         dataTypes: [],
         dataRooms: [],
         checked: true,
@@ -37,7 +38,12 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-
+        let indexType3 = wx.getStorageSync("indexType3")
+        if (!isEmpty(indexType3)) {
+            this.setData({
+                indexType3,
+            })
+        }
         this.getList()
     },
 
@@ -92,6 +98,7 @@ Page({
         }
     },
     check2() {
+        this.icRequest("12")
         if (this.data.categoryCur !== 1) {
             this.setData({
                 categoryCur: 1
@@ -104,6 +111,7 @@ Page({
         let data;
         let dataTypes = []
         let dataRooms = []
+        let dataTypes3 = []
 
         url = '/api/v17/moral/ioschool/listsType'
         data = {
@@ -119,10 +127,19 @@ Page({
             }
             app.httpPost(url, data).then((res) => {
                 dataRooms = res.respResult.data
-                this.setData({
-                    dataTypes,
-                    dataRooms,
+                let url = '/api/v17/moral/moralType/lists'
+                let data = {
+                    token: wx.getStorageSync('token'),
+                }
+                app.httpPost(url, data).then((res) => {
+                    dataTypes3 = res.respResult.data
+                    this.setData({
+                        dataTypes,
+                        dataRooms,
+                        dataTypes3,
+                    })
                 })
+
             })
 
         })
@@ -136,10 +153,10 @@ Page({
         let time = [hour, minute, second].map(formatNumber).join(':')
         let gap = "　　"
         let remark = ""
-        if (!isEmpty(data.remark)){
-            remark = data.remark+gap
+        if (!isEmpty(data.remark)) {
+            remark = data.remark + gap
         }
-        let ss = data.levelclass + gap + data.realname + gap +remark+ time
+        let ss = data.levelclass + gap + data.realname + gap + remark + time
         this.data.mDataRecord.unshift(ss)
         this.setData({
             mDataRecord: this.data.mDataRecord,
@@ -153,10 +170,12 @@ Page({
         this.data.requestBody.cardno = cardno
         this.data.requestBody.iotype = this.data.dataTypes[this.data.indexType].id
         this.data.requestBody.classroomid = this.data.dataRooms[this.data.indexRoom].id
+        this.data.requestBody.specialtype = this.data.dataTypes3[this.data.indexType3].id
         this.data.requestBody.attendances = this.data.checked ? "1" : "0"
 
         if (isEmpty(this.data.requestBody.iotype)
             || isEmpty(this.data.requestBody.classroomid)
+            || isEmpty(this.data.requestBody.specialtype)
             || (isEmpty(this.data.requestBody.cardno) && isEmpty(this.data.requestBody.uid))) {
             showToastWithoutIcon('请完善信息')
             return
@@ -167,11 +186,17 @@ Page({
         app.httpPost(url, data).then((res) => {
             let data = res.respResult
             let test = "0629005406"
-            if (cardno == test) {
-                app.soundErr()
-                showModal("学生（" + data.realname + "）不被允许出校")
-            } else {
-                showToastWithoutIcon('处理完成')
+            if (!isEmpty(data.specials)) {
+                let str = ""
+                if (data.specials.length > 0) {
+                    data.specials.forEach(it => {
+                        str += it + "\n"
+                    })
+                    app.soundErr()
+                } else {
+                    str = "没有特殊情况报备"
+                }
+                showModal(str, "特殊情况报备")
             }
             if (this.data.categoryCur == "1") {
                 this.dealList(data);
@@ -185,15 +210,12 @@ Page({
 
     doType(e) {
         let index = e.detail.value
+        let type = e.currentTarget.dataset.type
+        if (type == "indexType3") {
+            wx.setStorageSync("indexType3", index)
+        }
         this.setData({
-            indexType: index,
-        })
-    },
-
-    doRoom(e) {
-        let index = e.detail.value
-        this.setData({
-            indexRoom: index,
+            [type]: index,
         })
     },
 
