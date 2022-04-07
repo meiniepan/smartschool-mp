@@ -10,8 +10,10 @@ Page({
     data: {
         requestBody: {
             token: '',
-            stime: '请选择开始时间',
-            etime: '请选择结束时间',
+            stime: '请选择开始日期',
+            etime: '请选择结束日期',
+            shis: '',
+            ehis: '',
             stuStr: '请选择学生',
             involve: [],
             actname: '请选择情况类型',
@@ -60,13 +62,21 @@ Page({
 
     doConfirm() {
         let bean = this.data.requestBody
+        if (bean.shis != "" && bean.ehis == "") {
+            bean.ehis = "23:59"
+        }
+        if (bean.shis == "" && bean.ehis != "") {
+            bean.shis = "00:00"
+        }
+        console.log("request", bean)
         bean.token = wx.getStorageSync('token')
-        if (bean.involve.length == 0 || bean.stime == "请选择开始时间" ||
-            bean.etime == "请选择结束时间" || bean.actname == "请选择情况类型" ||
+        if (bean.involve.length == 0 || bean.stime == "请选择开始日期" ||
+            bean.etime == "请选择结束日期" || bean.actname == "请选择情况类型" ||
             bean.rulename == "请选择影响项目" || bean.remark == null || bean.remark == '') {
             showToastWithoutIcon('请完善信息')
             return
         }
+
 
         let url = "/api/v17/moral/moralRuleSpecial/add"
         let data = bean
@@ -125,7 +135,6 @@ Page({
         let depart = that.data.departData
         let classes = that.data.classData
 
-        console.log('depart', depart)
         wx.navigateTo({
             url: "../addInvolve/addInvolve?data=" + JSON.stringify(depart)
                 + '&data2=' + JSON.stringify(classes)
@@ -183,6 +192,14 @@ Page({
             requestBody: v,
         })
     },
+    bindTime2(e) {
+        let v = this.data.requestBody
+        let type = e.currentTarget.dataset.type
+        v.[type] = e.detail.value
+        this.setData({
+            requestBody: v,
+        })
+    },
     doAct(e) {
         let v = this.data.requestBody
         v.actname = this.data.actArrays[e.detail.value]
@@ -201,10 +218,8 @@ Page({
 
         let mill1 = new Date(year, month - 1, day).getTime()
         let stime = this.data.requestBody.stime
-        if (stime != "请选择开始时间") {
+        if (stime != "请选择开始日期") {
             let mill2 = new Date(stime.replace(/-/g, "/")).getTime()
-            console.log("mill1", mill1)
-            console.log("mill2", mill2)
             if (mill2 > mill1) {
                 this.data.canCheck = true
             }
@@ -246,7 +261,6 @@ Page({
     },
     checkRule(e) {
         var v = this.data.ruleArrays
-        console.log("idx", e.currentTarget.dataset)
         if (v[e.currentTarget.dataset.index].typename == '入校迟到') {
             if (this.data.canCheck) {
                 v[e.currentTarget.dataset.index].checked = !v[e.currentTarget.dataset.index].checked

@@ -9,7 +9,7 @@
     </view>
 
     <view class="item">
-        <view class="key text bold">选择开始时间</view>
+        <view class="key text bold">选择开始日期</view>
         <view class="require bold">*</view>
 
         <view class="{{checked1?'label-checked':'label'}}" bindtap="check1">期</view>
@@ -25,7 +25,19 @@
     </view>
 
     <view class="item">
-        <view class="key text bold">选择结束时间</view>
+        <view class="key text bold">选择开始时间</view>
+        <view style="flex-grow: 1"></view>
+        <picker mode="time" value=""
+                data-type="shis" bindchange="bindTime2">
+            <view class="value0">
+                <view class="value1 hint">{{requestBody.shis}}</view>
+                <image class="next" src="../../assets/images/ic_next.png" style="height: 28rpx" mode="widthFix"></image>
+            </view>
+        </picker>
+    </view>
+
+    <view class="item">
+        <view class="key text bold">选择结束日期</view>
         <view class="require bold">*</view>
         <view style="flex-grow: 1"></view>
         <picker mode="date" value=""
@@ -36,6 +48,19 @@
             </view>
         </picker>
     </view>
+
+    <view class="item">
+        <view class="key text bold">选择结束时间</view>
+        <view style="flex-grow: 1"></view>
+        <picker mode="time" value=""
+                data-type="ehis" bindchange="bindTime2">
+            <view class="value0">
+                <view class="value1 hint">{{requestBody.ehis}}</view>
+                <image class="next" src="../../assets/images/ic_next.png" style="height: 28rpx" mode="widthFix"></image>
+            </view>
+        </picker>
+    </view>
+
     <picker bindchange="doAct"
             data-type="indexAct" value="{{requestBody.actname}}" range="{{actArrays}}">
         <view class="item">
