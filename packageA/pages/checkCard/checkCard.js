@@ -196,7 +196,7 @@ Page({
                 } else {
                     str = "没有特殊情况报备"
                 }
-                showModal(str, "特殊情况报备")
+                showModal(str, data.realname+"-特殊情况")
             }
             if (this.data.categoryCur == "1") {
                 this.dealList(data);
