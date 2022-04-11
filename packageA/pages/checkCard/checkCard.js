@@ -157,6 +157,7 @@ Page({
             remark = data.remark + gap
         }
         let ss = data.levelclass + gap + data.realname + gap + remark + time
+            + "\n" + data.speStr + "\n"
         this.data.mDataRecord.unshift(ss)
         this.setData({
             mDataRecord: this.data.mDataRecord,
@@ -196,7 +197,8 @@ Page({
                 } else {
                     str = "没有特殊情况报备"
                 }
-                showModal(str, data.realname+"-特殊情况")
+                showModal(str, data.realname + "-特殊情况")
+                data.speStr = str
             }
             if (this.data.categoryCur == "1") {
                 this.dealList(data);
