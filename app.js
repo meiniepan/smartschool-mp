@@ -3,6 +3,7 @@ import {isEmpty, showModal} from "./utils/util";
 
 let host = require('/utils/host.js');
 let uploadImage = require('/ossjs/uploadImg/uploadImg.js');//地址换成你自己存放文件的位置
+var pluginSpeech = requirePlugin("WechatSI");
 
 App({
     onLaunch: function () {
@@ -421,6 +422,29 @@ App({
         })
     },
 
+    textToSpeech(content) {
+        pluginSpeech.textToSpeech({
+            lang: "zh_CN",
+            tts: true,
+            content: content,
+            success: (res) =>{
+                this.speech(res.filename)
+            },
+            fail:  (res)=> {
+                console.log("fail tts", res)
+            }
+        })
+    },
+    speech(url) {
+        const audio = wx.createInnerAudioContext()
+        audio.autoplay = true
+        audio.src = url
+        audio.volume = 1
+        audio.onPlay(() => {
+            console.log('开始播放')
+        })
+    },
+
     nfcRead(func) {
 
         let nfcBody = {nfc: null, handler: null}
@@ -470,13 +494,13 @@ App({
                 }
             }
 
-            wx.showToast({
-
-                title: '读取成功！',
-
-                icon: 'none'
-
-            })
+            // wx.showToast({
+            //
+            //     title: '读取成功！',
+            //
+            //     icon: 'none'
+            //
+            // })
             _this.soundCommon()
             func(id)
 

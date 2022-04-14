@@ -106,6 +106,7 @@ Page({
         }
     },
 
+
     getList() {
         let url = '';
         let data;
@@ -187,18 +188,23 @@ Page({
         app.httpPost(url, data).then((res) => {
             let data = res.respResult
             let test = "0629005406"
+            // data.specials.push("0629005406")
+            // data.specials.push("请假条2")
+            // data.specials.push("请假条3")
             if (!isEmpty(data.specials)) {
                 let str = ""
                 if (data.specials.length > 0) {
                     data.specials.forEach(it => {
                         str += it + "\n"
                     })
-                    app.soundErr()
+
+
                 } else {
                     str = "没有特殊情况报备"
                 }
-                showModal(str, data.realname + "-特殊情况")
+                // showModal(str, data.realname + "-特殊情况")
                 data.speStr = str
+                app.textToSpeech(str)
             }
             if (this.data.categoryCur == "1") {
                 this.dealList(data);
