@@ -314,12 +314,12 @@ App({
     httpGet: function (url, data, loading, loadingMsg) {
         return this.httpBase('GET', url, data, loading, loadingMsg);
     },
-    httpGet0: function (url, data, loading, loadingMsg) {
-        return this.httpBase0('GET', url, data, loading, loadingMsg);
-    },
-
     httpPost: function (url, data, loading = true, loadingMsg) {
         return this.httpBase('POST', url, data, loading, loadingMsg);
+    },
+
+    httpGet0: function (url, data, loading, loadingMsg) {
+        return this.httpBase0('GET', url, data, loading, loadingMsg);
     },
     httpPost0: function (url, data, loading = true, loadingMsg, contentType) {
         return this.httpBase0('POST', url, data, loading, loadingMsg, contentType);
