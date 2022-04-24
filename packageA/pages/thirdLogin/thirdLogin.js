@@ -105,7 +105,7 @@ Page({
                 this.sendLog(cno, name, '登录失败')
                 showModal(
                     '教工号不存在,是否手动登录',
-                    '校能云温馨提示',
+                    '温馨提示',
                     (res) => {
                         if (res.confirm) {
                             wx.redirectTo({

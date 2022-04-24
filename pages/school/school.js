@@ -203,15 +203,15 @@ Page({
                 })
         }
 
-        if (true) {
-            bean1.items.push(
-                {
-                    name: globalData.cardTitle,
-                    remark: "有卡打卡 无卡手录",
-                    icon: "/assets/images/ic_checkcard.png",
-                    click: "/packageA/pages/checkCard/checkCard"
-                })
-        }
+        // if (true) {
+        //     bean1.items.push(
+        //         {
+        //             name: globalData.cardTitle,
+        //             remark: "有卡打卡 无卡手录",
+        //             icon: "/assets/images/ic_checkcard.png",
+        //             click: "/packageA/pages/checkCard/checkCard"
+        //         })
+        // }
 
         if (bean1.items.length > 0) {
             mData.push(bean1)

@@ -86,7 +86,7 @@ App({
      */
     httpBase: function (method, url, data, loading = false, loadingMsg) {
         let that = this
-        let requestUrl = host.BASE_URL_DEV + url;
+        let requestUrl = host.BASE_URL + url;
         console.log("url", requestUrl)
         console.log("body", data)
         if (loading) {
