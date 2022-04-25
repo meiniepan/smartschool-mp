@@ -88,8 +88,12 @@ font-size: 32rpx;
 }
 
 .name {
+    display: flex;
     margin-top: 4rpx;
     font-size: 24rpx;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
     color: var(--commonHint);
 }
 .bottom{

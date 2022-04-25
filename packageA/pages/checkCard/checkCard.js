@@ -206,9 +206,7 @@ Page({
                 data.speStr = str
                 app.textToSpeech(str)
             }
-            if (this.data.categoryCur == "1") {
                 this.dealList(data);
-            }
         });
     },
 

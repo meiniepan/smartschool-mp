@@ -134,12 +134,19 @@ Page({
         let that = this
         let depart = that.data.departData
         let classes = that.data.classData
-
+        let authStr = ""
+        if(wx.getStorageSync('levelmaster')==="1") {
+            authStr = "&all=0&level="+wx.getStorageSync('level')
+        }else if(wx.getStorageSync('classmaster')==="1") {
+            authStr = "&all=0&level="
+        }else {
+        }
         wx.navigateTo({
+
             url: "../addInvolve/addInvolve?data=" + JSON.stringify(depart)
                 + '&data2=' + JSON.stringify(classes)
                 + '&type=1'
-                + '&all=0',
+                + authStr,
             events: {
                 // 为指定事件添加一个监听器，获取被打开页面传送到当前页面的数据
                 quantizeSpecial: function (data) {

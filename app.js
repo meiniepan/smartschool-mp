@@ -86,7 +86,7 @@ App({
      */
     httpBase: function (method, url, data, loading = false, loadingMsg) {
         let that = this
-        let requestUrl = host.BASE_URL + url;
+        let requestUrl = host.BASE_URL_DEV + url;
         console.log("url", requestUrl)
         console.log("body", data)
         if (loading) {
@@ -631,7 +631,9 @@ App({
         wx.setStorageSync('parentphone', data.parentphone)
         wx.setStorageSync('parentuid', data.parentuid)
         wx.setStorageSync('parentname', data.parentname)
-        wx.setStorageSync('classmaster', data.classmaster)
+        wx.setStorageSync('classmaster', data.classmaster)//班主任
+        wx.setStorageSync('levelmaster', data.levelmaster)//年级组长
+        wx.setStorageSync('level', data.level)//年级ID
         wx.setStorageSync('isad', data.isad)
         wx.setStorageSync('roleid', data.roleid)
         wx.setStorageSync('usertype', data.usertype)

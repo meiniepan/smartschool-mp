@@ -50,6 +50,7 @@ Page({
 
         this.setData({
             fromType: options.all,
+            level: options.level,
             type: options.type,
         })
         if (options.type == '1') {
@@ -108,7 +109,11 @@ Page({
                 }
 
                 if (this.data.fromType == "0") {
-
+                    data2 = {
+                        token: wx.getStorageSync('token'),
+                        realname: key,
+                        level: this.data.level,
+                    }
                 } else {
                     data2 = {
                         token: wx.getStorageSync('token'),
@@ -149,7 +154,11 @@ Page({
                     }
 
                     if (this.data.fromType == "0") {
-
+                        data2 = {
+                            token: wx.getStorageSync('token'),
+                            realname: key,
+                            level: this.data.level,
+                        }
                     } else {
                         data2 = {
                             token: wx.getStorageSync('token'),
@@ -305,7 +314,10 @@ Page({
             url = urlLeft
         } else {
             if (this.data.fromType == "0") {
-
+                data = {
+                    token: wx.getStorageSync('token'),
+                    level: this.data.level,
+                }
             } else {
                 data = {
                     token: wx.getStorageSync('token'),

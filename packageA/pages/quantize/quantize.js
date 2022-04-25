@@ -20,8 +20,8 @@ Page({
         let url = '';
         let data;
 
-        if (wx.getStorageSync('usertype') == '1') {
-            url = '/api/v17/moral/moralType/lists'
+        if (app.checkRule2("moral/moralRuleSpecial/confirm")) {//门卫角色
+            url = '/api/v17/moral/moralType/listsByAuth'
         } else {
             url = '/api/v17/moral/moralType/lists'
         }
@@ -32,8 +32,9 @@ Page({
         app.httpPost(url, data).then((res) => {
             let data = res.respResult.data
             let mData = [], mDataType = []
-
-            mData.push({typename: '特殊情况报备'})
+            if (!app.checkRule2("moral/moralRuleSpecial/confirm")) {
+                mData.push({typename: '特殊情况报备'})
+            }
             if (app.checkRule2("moral/moralScore/add")) {
                 data.forEach(it=>{
                         mData.push(it)
