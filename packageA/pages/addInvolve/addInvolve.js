@@ -50,7 +50,6 @@ Page({
 
         this.setData({
             fromType: options.all,
-            level: options.level,
             type: options.type,
         })
         if (options.type == '1') {
@@ -112,7 +111,6 @@ Page({
                     data2 = {
                         token: wx.getStorageSync('token'),
                         realname: key,
-                        level: this.data.level,
                     }
                 } else {
                     data2 = {
@@ -157,7 +155,6 @@ Page({
                         data2 = {
                             token: wx.getStorageSync('token'),
                             realname: key,
-                            level: this.data.level,
                         }
                     } else {
                         data2 = {
@@ -316,7 +313,6 @@ Page({
             if (this.data.fromType == "0") {
                 data = {
                     token: wx.getStorageSync('token'),
-                    level: this.data.level,
                 }
             } else {
                 data = {

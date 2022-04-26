@@ -135,10 +135,12 @@ Page({
         let depart = that.data.departData
         let classes = that.data.classData
         let authStr = ""
-        if(wx.getStorageSync('levelmaster')==="1") {
-            authStr = "&all=0&level="+wx.getStorageSync('level')
-        }else if(wx.getStorageSync('classmaster')==="1") {
-            authStr = "&all=0&level="
+        if(app.checkRule2("moral/moralScore/examines")) {//德育老师
+
+        }else if(wx.getStorageSync('levelmaster')==="1") {//年级组长
+            authStr = "&all=0"
+        }else if(wx.getStorageSync('classmaster')==="1") {//班主任
+            authStr = "&all=0"
         }else {
         }
         wx.navigateTo({
