@@ -263,6 +263,7 @@ function isImage(path) {
     if (path.endsWith(".jpg") || path.endsWith(".png")
         || path.endsWith(".jpeg")
         || path.endsWith(".gif")
+        || path.endsWith(".heic")//ios图片格式
         || path.endsWith(".bmp")) {
         type = true
     }
