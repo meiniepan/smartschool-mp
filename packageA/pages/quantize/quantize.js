@@ -35,15 +35,17 @@ Page({
             if (!app.checkRule2("moral/moralRuleSpecial/confirm")) {
                 mData.push({typename: '特殊情况报备'})
             }
-            if (app.checkRule2("moral/moralScore/add")) {
-                data.forEach(it=>{
-                        mData.push(it)
-                    if (it.showspecial=="1"){
-                        it.checked = false
-                        mDataType.push(it)
-                    }
-                })
-            }
+
+            data.forEach(it => {
+                if (app.checkRule2("moral/moralScore/add")) {
+                    mData.push(it)
+                }
+                if (it.showspecial == "1") {
+                    it.checked = false
+                    mDataType.push(it)
+                }
+            })
+
             this.setData({
                 mData,
                 mDataType,
@@ -116,7 +118,7 @@ Page({
         return {
             title: '汇文云',
             path: 'pages/splash/splash',
-            imageUrl:"../../assets/images/bac_share.png",
+            imageUrl: "../../assets/images/bac_share.png",
         }
     }
 })

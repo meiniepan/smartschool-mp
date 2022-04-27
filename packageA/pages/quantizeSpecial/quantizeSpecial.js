@@ -12,8 +12,8 @@ Page({
             token: '',
             stime: '请选择开始日期',
             etime: '请选择结束日期',
-            shis: '',
-            ehis: '',
+            shis: '00:00',
+            ehis: '23:59',
             stuStr: '请选择学生',
             involve: [],
             actname: '请选择情况类型',
@@ -39,6 +39,7 @@ Page({
             console.log(res.data) // my from index page
         })
         let ruleArrays = JSON.parse(options.bean)
+        console.log("ruleArrays",ruleArrays)
         this.setData({
             ruleArrays,
         })

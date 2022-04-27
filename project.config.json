@@ -5,7 +5,7 @@
     "ignore": []
   },
   "setting": {
-    "urlCheck": false,
+    "urlCheck": true,
     "es6": true,
     "enhance": false,
     "postcss": true,
@@ -47,7 +47,7 @@
   },
   "scripts": {},
   "isGameTourist": false,
-  "simulatorType": "qywx_simulator_plugin",
+  "simulatorType": "wechat",
   "simulatorPluginLibVersion": {
     "qywx_simulator_plugin": "2.17.0"
   },
