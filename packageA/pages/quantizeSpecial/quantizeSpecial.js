@@ -63,12 +63,7 @@ Page({
 
     doConfirm() {
         let bean = this.data.requestBody
-        if (bean.shis != "" && bean.ehis == "") {
-            bean.ehis = "23:59"
-        }
-        if (bean.shis == "" && bean.ehis != "") {
-            bean.shis = "00:00"
-        }
+
         console.log("request", bean)
         bean.token = wx.getStorageSync('token')
         if (bean.involve.length == 0 || bean.stime == "请选择开始日期" ||
@@ -77,7 +72,6 @@ Page({
             showToastWithoutIcon('请完善信息')
             return
         }
-
 
         let url = "/api/v17/moral/moralRuleSpecial/add"
         let data = bean
