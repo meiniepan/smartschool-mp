@@ -58,7 +58,7 @@
                             <view class="status">{{item.statusStr}}</view>
                         </view>
                         <text class="tag1">{{item.line2Str}}</text>
-                        <text class="tag">{{item.remark}}</text>
+                        <text wx:if="{{item.remark.length>0}}" class="tag">备注：{{item.remark}}</text>
                         <text class="tag">{{item.line4Str}}</text>
                     </view>
                 </view>

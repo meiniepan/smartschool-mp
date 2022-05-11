@@ -217,7 +217,6 @@ Page({
             }
         }
         this.setCurrentData(currentCur, pageData);
-        console.log('data', data)
         app.httpPost(url, data).then((res) => {
 
             let data = res.respResult || {

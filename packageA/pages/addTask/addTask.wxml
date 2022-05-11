@@ -30,7 +30,6 @@
     <view class="item-remark" bindtap="">
         <view class="horizontal">
             <view class="key text bold">备注</view>
-            <view class="require bold">*</view>
         </view>
         <input placeholder="请填写备注" maxlength="20" bindinput="doInput" data-type="remark" value="{{requestBody.remark}}"/>
     </view>
