@@ -25,9 +25,9 @@
           "scene": null
         },
         {
-          "name": "packageA/pages/login_t/login_t",
-          "pathName": "packageA/pages/login_t/login_t",
-          "query": "id=2",
+          "name": "packageA/pages/webTest/webTest",
+          "pathName": "packageA/pages/webTest/webTest",
+          "query": "",
           "scene": null
         }
       ]

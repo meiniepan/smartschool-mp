@@ -123,7 +123,7 @@ function getTodayStr() {
     let year = temp.getFullYear(),
         month = temp.getMonth() + 1,
         date = temp.getDate();
-    let today = year.toString() + zero(month) + zero(date);
+    let today = year.toString()+"-" + zero(month)+"-" + zero(date);
     return today
 }
 

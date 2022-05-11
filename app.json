@@ -59,7 +59,8 @@
         "pages/eduAttendanceDetail/eduAttendanceDetail",
         "pages/archives/archives",
         "pages/checkCard/checkCard",
-        "pages/webDetail/webDetail"
+        "pages/webDetail/webDetail",
+        "pages/webTest/webTest"
       ]
 
     },

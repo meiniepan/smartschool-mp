@@ -1,5 +1,5 @@
 // pages/quantizeSpecial/quantizeSpecial.js
-import {showToastWithoutIcon} from "../../../utils/util";
+import {getTodayStr, showToastWithoutIcon} from "../../../utils/util";
 
 let app = getApp();
 Page({
@@ -10,8 +10,8 @@ Page({
     data: {
         requestBody: {
             token: '',
-            stime: '请选择开始日期',
-            etime: '请选择结束日期',
+            stime: getTodayStr(),
+            etime: getTodayStr(),
             shis: '00:00',
             ehis: '23:59',
             stuStr: '请选择学生',
@@ -74,6 +74,8 @@ Page({
         }
 
         let url = "/api/v17/moral/moralRuleSpecial/add"
+        bean.stime += " "+bean.shis
+        bean.etime += " "+bean.ehis
         let data = bean
         app.httpPost(url, data).then((res) => {
             showToastWithoutIcon('处理完成')
@@ -94,7 +96,7 @@ Page({
         } else {
             year = year - 1
         }
-        this.data.requestBody.stime = year + "-09-01"
+        // this.data.requestBody.stime = year + "-09-01"
         this.data.requestBody.etime = year + 1 + "-08-31"
         this.setData({
             checked1: false,
@@ -103,8 +105,8 @@ Page({
         })
     },
     check1() {
-        var stime = wx.getStorageSync('stime')
-        var etime = wx.getStorageSync('etime')
+        let stime = wx.getStorageSync('stime')
+        let etime = wx.getStorageSync('etime')
         if (stime.length >= 8) {
             stime = stime.substring(0, 4) + "-" + stime.substring(
                 4,
@@ -117,7 +119,7 @@ Page({
                 6
             ) + "-" + etime.substring(6, 8)
         }
-        this.data.requestBody.stime = stime
+        this.data.requestBody.stime = getTodayStr()
         this.data.requestBody.etime = etime
         this.setData({
             checked1: true,

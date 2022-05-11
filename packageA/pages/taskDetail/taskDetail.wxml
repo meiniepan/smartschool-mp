@@ -62,7 +62,7 @@
     <view class="log-area" bindtap="">
         <view class="item-log">
             <view class="textBtn" wx:if="{{requestBody.addLog}}" style="margin-left: 20rpx" bindtap="doAddLog">参与任务</view>
-            <view class="textBtn">{{requestBody.finishStr}}</view>
+            <view class="textBtn" bindtap="doReceive">{{requestBody.finishStr}}</view>
         </view>
         <emptyView wx:if="{{requestBody.mDataLog.length==0}}"/>
             <view wx:else class="log-cells">

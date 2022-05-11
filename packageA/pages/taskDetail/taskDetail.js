@@ -1,5 +1,5 @@
 // pages/taskDetail/taskDetail.js
-import {getFileImage, isImage, isVideo, showToastWithoutIcon} from "../../../utils/util";
+import {getFileImage, isEmpty, isImage, isVideo, showToastWithoutIcon} from "../../../utils/util";
 
 let app = getApp();
 Page({
@@ -139,11 +139,12 @@ Page({
             this.setData({
                 requestBody: mData,
                 mType: this.data.type,
+                mDataUnread,
                 mFiles,
                 showClose,
                 isOperator,
             })
-            this.doResult(mData.involve)
+            this.doResult(mData)
         });
     },
     doClose() {
@@ -161,19 +162,59 @@ Page({
         });
     },
     doResult(data) {
-        let str = '', involves = []
-
-        data.forEach(it => {
-            str = str + it.realname + "、"
-            involves.push(it)
-        })
-
-        str = str.substring(0, str.length - 1)
-        this.data.requestBody.stuStr = str
+        let ss = '', involves = []
+        let sendlabel = data.sendlabel
+        if (sendlabel==="all"){
+            sendlabel="所有人"
+        }else if (sendlabel==="teacher"){
+            sendlabel="所有老师"
+        }else if (sendlabel==="classmaster"){
+            sendlabel="所有班主任"
+        }else if (sendlabel==="students"){
+            sendlabel="所有学生"
+        }
+        if (!isEmpty(sendlabel)){
+            ss = sendlabel+"、"
+        }
+        let it = data.involve
+        if (it.length > 3) {
+            ss = ss+ it[0].realname + "、" +
+                it[1].realname + "、" +
+                it[2].realname + "等" + it.length + "人..."
+        } else {
+            if (it.length > 0) {
+                it.forEach((it) => {
+                    ss = ss + it.realname + "、"
+                })
+                ss = ss.substring(0, ss.length - 1)
+            } else {
+                if (ss.length > 0) {
+                    ss = ss.substring(0, ss.length - 1)
+                }
+            }
+        }
+        this.data.requestBody.stuStr = ss
         this.setData({
                 requestBody: this.data.requestBody,
             }
         )
+    },
+    doReceive(e) {
+        let ss = this.data.mDataUnread
+        console.log("ss=====",ss)
+        let str = "未参与（"+ss.length+")\n"
+            if (ss.length > 0) {
+                ss.forEach(it => {
+                        str = str + it.username + "、"
+                    }
+                )
+                str = str.substring(0, str.length - 1)
+            }
+
+        let url = '/packageA/pages/persons/persons?str=' + str
+        wx.navigateTo({
+            url: url,
+        })
     },
     doFinish() {
         wx.navigateBack({

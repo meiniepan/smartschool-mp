@@ -2,10 +2,11 @@
 <view class="out">
     <view class="split-line"></view>
     <view class="tabs" wx:if="{{mType==2}}">
-        <view class="{{categoryCur==0?'tab-self':'tab-share'}}" bindtap="checkPri">{{categoryMenu[0]}}</view>
-        <view class="{{categoryCur!=0?'tab-self':'tab-share'}}" style="margin-left: 34rpx" bindtap="checkPub">
+        <view class="{{categoryCur!=0?'tab-self':'tab-share'}}"  bindtap="check1">
             {{categoryMenu[1]}}
         </view>
+        <view class="{{categoryCur==0?'tab-self':'tab-share'}}" style="margin-left: 34rpx" bindtap="check0">{{categoryMenu[0]}}</view>
+
     </view>
     <view class="area" style="margin-top: {{mType==2?'136':'0'}}rpx;">
         <picker bindchange="doAct" bindtap=""

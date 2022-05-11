@@ -229,6 +229,8 @@ Page({
 
         bean.templatedata = JSON.stringify(this.data.mData.template)
         bean.typeid = this.data.bean.id
+        bean.stime = bean.checktime
+        bean.etime = bean.checktime
         data = bean
         app.httpPost(url, data).then((res) => {
             if (this.data.categoryCur == "1") {

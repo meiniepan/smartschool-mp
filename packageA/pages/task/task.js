@@ -1,5 +1,5 @@
 // pages/task/task.js
-import {isLogin, showToastWithoutIcon} from '../../../utils/util';
+import {isEmpty, isLogin, showToastWithoutIcon} from '../../../utils/util';
 
 let app = getApp();
 Page({
@@ -8,7 +8,7 @@ Page({
      */
     data: {
         duration: 300,  // swiper-item 切换过渡时间
-        categoryCur: 0, // 当前数据列索引
+        categoryCur: 1, // 当前数据列索引
         categoryMenu: ['我发起的', '我参与的'], // 分类菜单数据
         categoryData: [], // 所有数据列
         statusArr: [], // 状态数据列
@@ -110,7 +110,7 @@ Page({
             url: '/packageA/pages/addTask/addTask'
         })
     },
-    checkPri() {
+    check0() {
         if (this.data.categoryCur !== 0) {
             this.setData({
                 categoryCur: 0,
@@ -127,7 +127,7 @@ Page({
             }
         }
     },
-    checkPub() {
+    check1() {
         if (this.data.categoryCur !== 1) {
             this.setData({
                 categoryCur: 1,
@@ -249,11 +249,24 @@ Page({
             let statusStr = ""
             var line2Str = "负责人：" + item.operatorname
             var ss = ""
+            let sendlabel = item.sendlabel
+            if (sendlabel==="all"){
+                sendlabel="所有人"
+            }else if (sendlabel==="teacher"){
+                sendlabel="所有老师"
+            }else if (sendlabel==="classmaster"){
+                sendlabel="所有班主任"
+            }else if (sendlabel==="students"){
+                sendlabel="所有学生"
+            }
+            if (!isEmpty(sendlabel)){
+                ss = sendlabel+"、"
+            }
             let it = item.involve
             if (it.length > 3) {
-                ss = it[0].realname + "、" +
+                ss = ss+ it[0].realname + "、" +
                     it[1].realname + "、" +
-                    it[2].realname + "等" + item.involve.length + "人..."
+                    it[2].realname + "等" + it.length + "人..."
             } else {
                 if (it.length > 0) {
                     it.forEach((it) => {
@@ -261,7 +274,9 @@ Page({
                     })
                     ss = ss.substring(0, ss.length - 1)
                 } else {
-                    ss = ss
+                    if (ss.length > 0) {
+                        ss = ss.substring(0, ss.length - 1)
+                    }
                 }
             }
             var line4Str = "参与人：" + ss
