@@ -10,8 +10,8 @@ Page({
     data: {
         requestBody: {
             token: '',
-            stime: getTodayStr(),
-            etime: getTodayStr(),
+            sday: getTodayStr(),
+            eday: getTodayStr(),
             shis: '00:00',
             ehis: '23:59',
             stuStr: '请选择学生',
@@ -39,7 +39,7 @@ Page({
             console.log(res.data) // my from index page
         })
         let ruleArrays = JSON.parse(options.bean)
-        console.log("ruleArrays",ruleArrays)
+        console.log("ruleArrays", ruleArrays)
         this.setData({
             ruleArrays,
         })
@@ -66,22 +66,23 @@ Page({
 
         console.log("request", bean)
         bean.token = wx.getStorageSync('token')
-        if (bean.involve.length == 0 || bean.stime == "请选择开始日期" ||
-            bean.etime == "请选择结束日期" || bean.actname == "请选择情况类型" ||
+        if (bean.involve.length == 0 || bean.sday == "请选择开始日期" ||
+            bean.eday == "请选择结束日期" || bean.actname == "请选择情况类型" ||
             bean.rulename == "请选择影响项目" || bean.remark == null || bean.remark == '') {
             showToastWithoutIcon('请完善信息')
             return
         }
 
         let url = "/api/v17/moral/moralRuleSpecial/add"
-        bean.stime += " "+bean.shis
-        bean.etime += " "+bean.ehis
+        bean.stime =bean.sday+ " " + bean.shis
+        bean.etime =bean.eday+ " " + bean.ehis
         let data = bean
         app.httpPost(url, data).then((res) => {
-            showToastWithoutIcon('处理完成')
             wx.navigateBack({
                 delta: 1
             })
+            showToastWithoutIcon('处理完成')
+
         });
     },
 
@@ -96,8 +97,8 @@ Page({
         } else {
             year = year - 1
         }
-        // this.data.requestBody.stime = year + "-09-01"
-        this.data.requestBody.etime = year + 1 + "-08-31"
+        // this.data.requestBody.sday = year + "-09-01"
+        this.data.requestBody.eday = year + 1 + "-08-31"
         this.setData({
             checked1: false,
             checked2: true,
@@ -105,22 +106,22 @@ Page({
         })
     },
     check1() {
-        let stime = wx.getStorageSync('stime')
-        let etime = wx.getStorageSync('etime')
-        if (stime.length >= 8) {
-            stime = stime.substring(0, 4) + "-" + stime.substring(
+        let sday = wx.getStorageSync('stime')
+        let eday = wx.getStorageSync('etime')
+        if (sday.length >= 8) {
+            sday = sday.substring(0, 4) + "-" + sday.substring(
                 4,
                 6
-            ) + "-" + stime.substring(6, 8)
+            ) + "-" + sday.substring(6, 8)
         }
-        if (etime.length >= 8) {
-            etime = etime.substring(0, 4) + "-" + etime.substring(
+        if (eday.length >= 8) {
+            eday = eday.substring(0, 4) + "-" + eday.substring(
                 4,
                 6
-            ) + "-" + etime.substring(6, 8)
+            ) + "-" + eday.substring(6, 8)
         }
-        this.data.requestBody.stime = getTodayStr()
-        this.data.requestBody.etime = etime
+        this.data.requestBody.sday = getTodayStr()
+        this.data.requestBody.eday = eday
         this.setData({
             checked1: true,
             checked2: false,
@@ -132,13 +133,13 @@ Page({
         let depart = that.data.departData
         let classes = that.data.classData
         let authStr = ""
-        if(app.checkRule2("moral/moralScore/examines")) {//德育老师
+        if (app.checkRule2("moral/moralScore/examines")) {//德育老师
 
-        }else if(wx.getStorageSync('levelmaster')==="1") {//年级组长
+        } else if (wx.getStorageSync('levelmaster') === "1") {//年级组长
             authStr = "&all=0"
-        }else if(wx.getStorageSync('classmaster')==="1") {//班主任
+        } else if (wx.getStorageSync('classmaster') === "1") {//班主任
             authStr = "&all=0"
-        }else {
+        } else {
         }
         wx.navigateTo({
 
@@ -186,14 +187,14 @@ Page({
     },
     bindTimeS(e) {
         let v = this.data.requestBody
-        v.stime = e.detail.value
+        v.sday = e.detail.value
         this.setData({
             requestBody: v,
         })
     },
     bindTimeE(e) {
         let v = this.data.requestBody
-        v.etime = e.detail.value
+        v.eday = e.detail.value
         this.setData({
             requestBody: v,
         })
@@ -201,7 +202,7 @@ Page({
     bindTime2(e) {
         let v = this.data.requestBody
         let type = e.currentTarget.dataset.type
-        v.[type] = e.detail.value
+        v[type] = e.detail.value
         this.setData({
             requestBody: v,
         })
@@ -223,9 +224,9 @@ Page({
         const second = date.getSeconds()
 
         let mill1 = new Date(year, month - 1, day).getTime()
-        let stime = this.data.requestBody.stime
-        if (stime != "请选择开始日期") {
-            let mill2 = new Date(stime.replace(/-/g, "/")).getTime()
+        let sday = this.data.requestBody.sday
+        if (sday != "请选择开始日期") {
+            let mill2 = new Date(sday.replace(/-/g, "/")).getTime()
             if (mill2 > mill1) {
                 this.data.canCheck = true
             }
@@ -256,9 +257,12 @@ Page({
                 types = types + it.id + ","
             }
         })
-        if (str.length > 1) {
+        if (str.length > 0) {
             str = str.substring(0, str.length - 1)
             bean.rulename = str
+            if (types.length > 0) {
+                types = types.substring(0, types.length - 1)
+            }
             bean.types = types
             this.setData({
                 requestBody: bean

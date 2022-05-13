@@ -53,7 +53,7 @@ Page({
                         wx.requestSubscribeMessage({
                             tmplIds: [template_id],
                             success(res) {
-                                let request = res.[template_id]
+                                let request = res[template_id]
                                 wx.setStorageSync("request_accept", request === "accept")
                                 func()
                             },
