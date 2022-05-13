@@ -1,0 +1,4 @@
+<!--pages/login.wxml-->
+<view class="bg">
+  <image class="img" src="https://sc-open-pre-1256143407.file.myqcloud.com/static/images/loading_0104.gif"></image>
+</view>

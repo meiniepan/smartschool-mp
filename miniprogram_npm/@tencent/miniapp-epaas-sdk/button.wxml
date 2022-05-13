@@ -1,0 +1,4 @@
+<!-- button.wxml -->
+<button class="auto-phone-button" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">
+  {{name}}
+</button>

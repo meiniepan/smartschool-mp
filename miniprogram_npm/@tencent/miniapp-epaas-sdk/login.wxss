@@ -1,0 +1,14 @@
+/* pages/login.wxss */
+
+page,.bg {
+	height: 100%;
+}
+.bg {
+  overflow: hidden;
+}
+.img {
+  width: 96rpx;
+  height: 96rpx;
+  display: block;
+  margin: 500rpx auto;
+}
