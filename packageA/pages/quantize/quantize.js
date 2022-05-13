@@ -18,12 +18,14 @@ Page({
     },
     getList() {
         let url = '';
+        let urlType = '/api/v17/moral/moralType/lists'
         let data;
 
         if (app.checkRule2("moral/moralRuleSpecial/confirm")) {//门卫角色
             url = '/api/v17/moral/moralType/listsByAuth'
         } else {
-            url = '/api/v17/moral/moralType/lists'
+            // url = '/api/v17/moral/moralType/lists'
+            url = '/api/v17/moral/moralType/listsByAuth'
         }
         data = {
             token: wx.getStorageSync('token'),
@@ -38,8 +40,22 @@ Page({
 
             data.forEach(it => {
                 if (app.checkRule2("moral/moralScore/add")) {
-                    mData.push(it)
+                    if (it.showtype == "1") {
+                        mData.push(it)
+                    }
                 }
+            })
+
+            this.setData({
+                mData,
+            })
+        })
+
+        app.httpPost(urlType, data).then((res) => {
+            let data = res.respResult.data
+            let mDataType = []
+
+            data.forEach(it => {
                 if (it.showspecial == "1") {
                     it.checked = false
                     mDataType.push(it)
@@ -47,7 +63,6 @@ Page({
             })
 
             this.setData({
-                mData,
                 mDataType,
             })
         })

@@ -18,7 +18,7 @@
         <picker mode="date" value=""
                 data-type="indexClass" bindchange="bindTimeS">
             <view class="value0">
-            <view class="value1 hint">{{requestBody.stime}}</view>
+            <view class="value1 hint">{{requestBody.sday}}</view>
             <image class="next" src="../../assets/images/ic_next.png" style="height: 28rpx" mode="widthFix"></image>
             </view>
         </picker>
@@ -33,7 +33,7 @@
         <picker mode="date" value=""
                 data-type="indexClass" bindchange="bindTimeE">
             <view class="value0">
-            <view class="value1 hint">{{requestBody.etime}}</view>
+            <view class="value1 hint">{{requestBody.eday}}</view>
             <image class="next" src="../../assets/images/ic_next.png" style="height: 28rpx" mode="widthFix"></image>
             </view>
         </picker>
