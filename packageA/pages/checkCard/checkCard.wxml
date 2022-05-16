@@ -30,7 +30,7 @@
         <view class="cell0">
             <view class="item" bindtap="">
                 <view class="key3 text bold">考勤消息通知</view>
-            <switch class="out3 " checked="{{checked}}"  color='#F95B49' bindchange="switchChange"/>
+            <switch class="out3 " checked="{{checked}}"  color="{{themeColor}}" bindchange="switchChange"/>
             </view>
 
             <picker  bindchange="doType"

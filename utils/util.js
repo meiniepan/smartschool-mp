@@ -1,3 +1,4 @@
+const {themeColor} = require("./host");
 let oldTime = 0
 
 function clickBlock() {
@@ -86,7 +87,7 @@ function showModal(content, title = '温馨提示', suc = () => {
         success(res) {
             suc(res)
         },
-        confirmColor: "#F95B49",
+        confirmColor: themeColor,
     })
 }
 

@@ -1,5 +1,6 @@
 // packageA/pages/quantizeCommon/quantizeCommon.js
 import {formatDate, formatNumber, formatTimeHM, isEmpty, showModal, showToastWithoutIcon} from "../../../utils/util";
+import {themeColor} from "../../../utils/host";
 
 let app = getApp();
 Page({
@@ -16,6 +17,7 @@ Page({
         requestBody: {
             token: '',
             score: "",
+            cno:"",
             correctscore: "",
             remark: null,
         },
@@ -514,6 +516,64 @@ Page({
                 }
             },
         });
+    },
+
+    doCno(e) {
+        var v = this.data.mData.template[e.currentTarget.dataset.position]
+        this.setData({
+            choosePosition: e.currentTarget.dataset.position,
+        })
+        let this_ = this
+        wx.showModal({
+            title: "输入学号查询",
+            content: this_.data.requestBody.cno,
+            editable: true,
+            confirmText: "查询",
+            confirmColor: themeColor,
+            success: (res) => {
+                if (res.confirm) {
+                    if (res.content.length == 0) {
+                        wx.showToast({
+                            icon: 'none',
+                            title: '学号不能为空'
+                        })
+                        return
+                    }else {
+                        this_.data.requestBody.cno = res.content
+                        this_.setData({
+                            requestBody: this_.data.requestBody,
+                        })
+                    }
+                    if (isEmpty(this_.data.requestBody.classid)) {
+                        wx.showToast({
+                            icon: 'none',
+                            title: '请先选择班级'
+                        })
+                        return
+                    }
+                    let url = '/api/v17/user/student/infoByParms'
+                    let data = {
+                        token: wx.getStorageSync('token'),
+                        classid: this_.data.requestBody.classid,
+                        cno: res.content,
+                        realname:"",
+                    }
+                    app.httpPost(url, data).then((res) => {
+                        let data = res.respResult
+                        this_.data.requestBody.uid = data.uid
+                        this_.data.requestBody.realname = data.realname
+                        this_.data.requestBody.usertype = data.usertype
+                        v.value = data.realname+"("+data.cno+")"
+                        this_.data.requestBody.nameStr = data.realname+"("+data.cno+")"
+                        this_.setData({
+                            mData:this_.data.mData,
+                            requestBody: this_.data.requestBody,
+                        })
+                    })
+                }
+            },
+
+        })
     },
 
     doNfc(e) {

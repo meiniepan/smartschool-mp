@@ -1,5 +1,6 @@
 // packageA/pages/checkCard/checkCard.js
 import {formatDate, formatNumber, formatTimeHM, isEmpty, showModal, showToastWithoutIcon} from "../../../utils/util";
+import {themeColor} from "../../../utils/host";
 
 let app = getApp();
 Page({
@@ -9,6 +10,7 @@ Page({
      */
     data: {
         tips: "请将卡片靠近手机NFC识别区域\n录入记录",
+        themeColor:themeColor,
         mDataRecord: [],
         categoryCur: 0, // 当前数据列索引
         categoryMenu: ['手动录入', '刷卡录入'], // 分类菜单数据
