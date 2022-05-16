@@ -36,7 +36,7 @@
 
     </view>
 
-    <view style="margin-top: 136rpx;height: 100%" wx:if="{{categoryCur==0}}" class="cells0">
+    <view class="cells0" style="margin-top: 136rpx;" wx:if="{{categoryCur==0}}" >
         <view class="cell0"
               wx:for="{{mData.template}}"
               wx:key="index"
@@ -172,11 +172,12 @@
             </view>
 
         </view>
-        <view class="bottom">
-            <view class="confirm" bindtap="doConfirm">提交</view>
-        </view>
+        <text class="m"></text>
     </view>
 
+    <view class="bottom">
+        <view class="confirm" bindtap="doConfirm">提交</view>
+    </view>
 </view>
 <page-container
         show="{{show}}"

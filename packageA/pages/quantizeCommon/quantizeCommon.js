@@ -536,6 +536,9 @@ Page({
         })
         data.mDataClasses.forEach(it => {
             if (it.num > 0) {
+                this.data.requestBody.uid = it.list[0].uid
+                this.data.requestBody.realname = it.list[0].realname
+                this.data.requestBody.usertype = it.list[0].usertype
                 it.list.forEach(it => {
                     str = str + it.realname + "、"
                     involves.push(it)

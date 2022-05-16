@@ -1,5 +1,5 @@
 <!--pages/quantizeSpecial/quantizeSpecial.wxml-->
-<view class="out" style="padding-bottom: 84rpx">
+<view class="out">
     <view class="split-line"></view>
     <view class="item" bindtap="doChooseStudent">
         <view class="key text bold">选择学生</view>
@@ -86,6 +86,7 @@
         </view>
         <input placeholder="最多20个字" maxlength="20" bindinput="doInput" data-type="remark" value="{{phone}}"/>
     </view>
+    <text class="m"></text>
     <view class="bottom">
         <view class="confirm" bindtap="doConfirm">提交</view>
     </view>
