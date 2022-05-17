@@ -1,17 +1,20 @@
 <!--packageA/pages/archives/archives.wxml-->
-<view class="out0">
-    <image class="bac" src="{{bac}}" mode="aspectFill"></image>
     <view class="out">
+        <view class="bac-area">
+            <image class="bac" src="{{bac}}" mode="aspectFill"></image>
+        </view>
         <navigation title="{{title}}" titleColor="#ffffff" bgColor="transparent">
             <image class="act" src="../../assets/images/icon_back_white_a.png" mode="widthFix"
-                   bindtap="doFinish"></image>
+                   bindtap="doFinish"/>
+            <image class="act2" src="../../assets/images/ic_search_white.png" mode="widthFix"
+                   bindtap="doSearch"/>
         </navigation>
         <view class="out2">
-            <view class="tri"></view>
             <view class="img-area">
-            <image class="img" src="{{img}}" mode="aspectFill" binderror="binderror" bindtap="chooseAvatar"></image>
+                <image class="img" src="{{mData.portrait}}" mode="aspectFill" binderror="binderror" bindtap="chooseAvatar"></image>
                 <text class="text2">{{mData.realname}}</text>
             </view>
+            <view class="line"></view>
             <view class="info-area">
                 <view class="info-line">
                     <text>出生日期</text>
@@ -52,6 +55,16 @@
                     <text class="text">{{mData.join_time}}</text>
                 </view>
             </view>
+            <view class="tabs">
+                <view class="{{curTab==0?'tabChecked':'tabCommon'}}" bindtap="check0">任职任教</view>
+                <view class="{{curTab==1?'tabChecked':'tabCommon'}}" style="margin-left: 6rpx" bindtap="check1">个人荣誉</view>
+                <view class="{{curTab==2?'tabChecked':'tabCommon'}}" style="margin-left: 6rpx" bindtap="check2">个人成就</view>
+            </view>
+            <emptyView wx:if="{{mDataTab.length==0}}"/>
+            <view class="cells" wx:else>
+                <view class="cell" wx:for="{{mDataTab}}" wx:key="index" data-position="{{index}}" bindtap="">
+                    <view class="title0">{{item.name}}</view>
+                </view>
+            </view>
         </view>
     </view>
-</view>

@@ -199,7 +199,7 @@ Page({
                     name: globalData.teaTitle,
                     remark: "个人成长 长期维护",
                     icon: "/assets/images/ic_teacher.png",
-                    click: "/packageA/pages/archives/archives"
+                    click: "/packageA/pages/archives/archives?uid="+wx.getStorageSync('uid')
                 })
         }
 

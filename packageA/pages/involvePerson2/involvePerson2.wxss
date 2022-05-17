@@ -1,0 +1,116 @@
+/* pages/involvePerson/involvePerson2.wxss */
+.navi-1{
+    font-size: 28rpx;
+    color: var(--themeColor);
+}
+.act{
+    width: 20rpx;
+    height: 20rpx;
+    padding: 20rpx;
+    margin-left: 20rpx;
+    margin-right: 40rpx;
+}
+.cells {
+    display: flex;
+    flex-direction: column;
+    padding: 40rpx var(--titlePadding);
+}
+
+.cell {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20rpx;
+}
+
+.title-area {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.title {
+    display: flex;
+    flex-grow: 1;
+    font-size: 36rpx;
+    font-weight: bold;
+}
+
+.check {
+    width: 36rpx;
+    height: 36rpx;
+    margin-right: 16rpx;
+}
+
+.text {
+font-size: 32rpx;
+}
+
+.cells0 {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 30rpx;
+    padding: 0 18rpx;
+}
+
+.cell0 {
+    display: flex;
+    width: 120rpx;
+    flex-direction: column;
+    margin-bottom: 20rpx;
+    align-items: center;
+    justify-content: center;
+}
+
+.label {
+    display: flex;
+    width: 80rpx;
+    height: 80rpx;
+    align-items: center;
+    justify-content: center;
+    background: var(--white);
+    color: var(--themeColor);
+    border-radius: 50%;
+    border: 1rpx solid var(--themeColor);
+    font-size: 44rpx;
+    box-sizing: border-box;
+}
+.label-c {
+    display: flex;
+    width: 80rpx;
+    height: 80rpx;
+    align-items: center;
+    justify-content: center;
+    background: var(--themeColor);
+    color: var(--white);
+    border-radius: 50%;
+    font-size: 44rpx;
+    box-sizing: border-box;
+}
+
+.name {
+    display: flex;
+    margin-top: 4rpx;
+    font-size: 24rpx;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    color: var(--commonHint);
+}
+.bottom{
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    display: flex;
+    flex-direction: row-reverse;
+    height: 84rpx;
+    background: var(--grayF6);
+}
+.confirm{
+    display: flex;
+    width: 172rpx;
+    height: 100%;
+    background: var(--themeBac);
+    color: var(--white);
+    align-items: center;
+    justify-content: center;
+}

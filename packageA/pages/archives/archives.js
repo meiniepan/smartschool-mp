@@ -1,4 +1,5 @@
 // packageA/pages/archives/archives.js
+const {isEmpty} = require("../../../utils/util");
 let app = getApp()
 Page({
 
@@ -8,6 +9,8 @@ Page({
     data: {
         img: "/assets/images/ic_avatar_default.png",
         title: "教师成长档案",
+        curTab: 0,
+        mDataTab:[],
         bac: "",
     },
 
@@ -16,7 +19,7 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-        let bac = wx.getStorageSync("archives_bac")
+        let bac = wx.getStorageSync("archives_bac2")
         if (bac.length > 0) {
             this.setData({
                 bac,
@@ -24,16 +27,8 @@ Page({
         } else {
             this.getBac();
         }
-        let img = ""
-        if (wx.getStorageSync("portrait") == "") {
-            img = "/assets/images/ic_avatar_default.png"
-        } else {
-            img = wx.getStorageSync("domain") + wx.getStorageSync("portrait");
-        }
-        this.setData({
-            img,
-        })
-        this.getData()
+        this.getData(options.uid)
+
     },
 
     /**
@@ -54,7 +49,20 @@ Page({
             delta: 1,
         })
     },
-
+    doSearch(){
+        let this_ = this
+        wx.navigateTo({
+            url: "../addInvolve2/addInvolve2",
+            events: {
+                // 为指定事件添加一个监听器，获取被打开页面传送到当前页面的数据
+                involvePerson: function (data) {
+                    //这里是获取被打开页面传送到当前页面的数据
+                    console.log("uid===",data)
+                    this_.getData(data);
+                }
+            },
+        });
+    },
     getBac: function () {
         wx.showLoading({
             title: '加载中...',
@@ -64,7 +72,7 @@ Page({
             fileID: 'cloud://env-4gwafyi0129f4b02.656e-env-4gwafyi0129f4b02-1308234288/bac_archives.png',
             success: res => {
                 // get temp file path
-                wx.setStorageSync("archives_bac", res.tempFilePath)
+                wx.setStorageSync("archives_bac2", res.tempFilePath)
                 this.setData({
                     bac: res.tempFilePath,
                 })
@@ -78,21 +86,26 @@ Page({
     },
 
     binderror(e) {
-        let img = "/assets/images/ic_avatar_default.png"
+        this.data.mData.portrait = "/assets/images/ic_avatar_default.png"
         this.setData({
-            img
+            mData:this.data.mData,
         })
     },
-    getData() {
+    getData(uid) {
         let url = "/api/v17/develop/teachers/info"
         let data = {
             token: wx.getStorageSync('token'),
-            uid: wx.getStorageSync('uid'),
+            uid: uid,
         }
 
         app.httpPost(url, data).then((res) => {
             console.log("data", res)
             let mData = res.respResult
+            if (!isEmpty(mData.portrait)){
+                mData.portrait = wx.getStorageSync("domain") + mData.portrait;
+            }else {
+                mData.portrait= "/assets/images/ic_avatar_default.png"
+            }
             let sex = mData.sex == "1" ? "男" : mData.sex == "2" ? "女" : "未知";
             if (mData.work_year.length > 0) {
                 mData.work_year = mData.work_year + "年"
@@ -104,6 +117,21 @@ Page({
             this.setData({
                 mData,
             })
+        })
+    },
+    check0(e) {
+        this.setData({
+            curTab: 0,
+        })
+    },
+    check1(e) {
+        this.setData({
+            curTab: 1,
+        })
+    },
+    check2(e) {
+        this.setData({
+            curTab: 2,
         })
     },
     /**

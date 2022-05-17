@@ -1,0 +1,21 @@
+<!--pages/involvePerson/involvePerson2.wxml-->
+<view class="out">
+
+    <view class="split"></view>
+    <view class="cells">
+        <view class="cell" wx:for="{{mDataInvolve}}" wx:key="index" data-position="{{index}}">
+            <view class="title-area">
+                <view class="title">{{item.departmentsname}}</view>
+            </view>
+            <view class="cells0">
+                <view class="cell0" wx:for="{{item.data}}" wx:for-index="idx" wx:for-item="bean" wx:key="idx"
+                      data-position0="{{index}}" data-position="{{idx}}"  bindtap="doPerson">
+                    <view class="{{bean.checked?'label-c':'label'}}">{{bean.label}}</view>
+                    <view class="name singleLine">{{bean.realname}}</view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view style="padding-top: 84rpx;"></view>
+
+</view>

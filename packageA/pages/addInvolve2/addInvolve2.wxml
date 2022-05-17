@@ -1,0 +1,35 @@
+<!--pages/addInvolve2/addInvolve2.wxml-->
+<view class="out">
+    <view class="top">
+        <view class="search-area">
+            <image style="width: 28rpx;height: 28rpx" mode="heightFix" src="../../assets/images/ic_search.png"></image>
+            <input class="search hint singleLine" maxlength="20" placeholder="搜索姓名查找信息" bindinput="doInput"
+                   bindconfirm="doSearch" confirm-type="search" data-type="realname"/>
+            <image wx:if="{{b0}}" style="width: 28rpx;height: 28rpx;margin-left: 10rpx" mode="heightFix"
+                   src="../../assets/images/ic_search_clear.png" bindtap="doClear"></image>
+        </view>
+
+    </view>
+    <view class="search-result" style="margin-top: 120rpx" wx:if="{{b0}}">
+        <emptyView wx:if="{{isEmpty0}}"/>
+        <view class="cells2" wx:else>
+            <view class="cell2" wx:for="{{mData0}}" wx:key="index" data-bean="{{item}}" bindtap="doDetail0">
+                <view class="search2">{{item.realname}}</view>
+                <view class="search2">{{item.d}}</view>
+            </view>
+        </view>
+    </view>
+    <view wx:if="{{!b0}}" class="other">
+        <view style="margin-top: 100rpx; "></view>
+
+        <emptyView wx:if="{{isEmpty}}"/>
+        <view class="cells" wx:else>
+            <view class="cell" wx:for="{{mData}}" wx:key="index" data-position="{{index}}" bindtap="doDetail">
+                <view class="title0">{{item.name}}</view>
+                <view wx:if="{{item.num>0}}" class="num">{{item.num}}</view>
+            </view>
+        </view>
+        <view style="padding-top: 84rpx;"></view>
+
+    </view>
+</view>
