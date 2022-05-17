@@ -27,7 +27,7 @@ page {
 .bac {
     width: 100%;
     height: 336rpx;
-    margin: 120rpx 60rpx 120rpx;
+    margin: 130rpx 60rpx 120rpx;
     box-sizing: border-box;
 }
 
