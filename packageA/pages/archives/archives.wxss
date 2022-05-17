@@ -21,7 +21,7 @@ page {
 .bac-area {
     display: flex;
     width: 100%;
-    background: var(--themeColor);
+    background: var(--themeBac);
 }
 
 .bac {
@@ -93,6 +93,7 @@ page {
     background: var(--themeColor);
     color: var(--white);
     box-sizing: border-box;
+    border-radius: 4rpx;
 }
 .tabCommon{
     display: flex;
@@ -104,4 +105,5 @@ page {
     color: var(--themeColor);
     border: 1rpx solid var(--themeColor);
     box-sizing: border-box;
+    border-radius: 4rpx;
 }
