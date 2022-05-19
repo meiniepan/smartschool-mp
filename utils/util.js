@@ -91,6 +91,11 @@ function showModal(content, title = '温馨提示', suc = () => {
     })
 }
 
+function getRpx(){
+    var winWidth = wx.getSystemInfoSync().windowWidth;
+    return 750/winWidth;
+}
+
 function isEmptyObj(obj) {
     if (Object.keys(obj).length > 0) {
         return false;
@@ -296,4 +301,5 @@ module.exports = {
     clickBlock: clickBlock,
     formatStarPhoneNum: formatStarPhoneNum,
     formatNumber: formatNumber,
+    getRpx: getRpx,
 }

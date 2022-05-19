@@ -100,7 +100,7 @@ Page({
         }
     },
     check2() {
-        this.icRequest("12")
+        // this.icRequest("0629005406")
         if (this.data.categoryCur !== 1) {
             this.setData({
                 categoryCur: 1
@@ -169,6 +169,15 @@ Page({
     },
 
     onConfirm(cardno) {
+
+        if (this.data.dataTypes.length==0
+            || this.data.dataRooms.length==0
+            || this.data.dataTypes3.length==0
+            ) {
+            showToastWithoutIcon('请完善信息')
+            return
+        }
+
         let url = "/api/v17/moral/ioschool/checkCard"
         this.data.requestBody.token = wx.getStorageSync('token')
         this.data.requestBody.cardno = cardno
@@ -305,7 +314,7 @@ Page({
 
     icRequest(id) {
         if (this.data.categoryCur == "1") {
-            this.onConfirm("12")
+            this.onConfirm(id)
         }
     },
     /**

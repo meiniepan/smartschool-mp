@@ -89,7 +89,7 @@ App({
         let requestUrl = host.BASE_URL + url;
         // let requestUrl = host.BASE_URL_DEV + url;
         console.log("url", requestUrl)
-        console.log("body", data)
+        console.log("body", JSON.stringify(data))
         if (loading) {
             wx.showLoading({
                 title: loadingMsg || '加载中...',

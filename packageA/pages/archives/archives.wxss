@@ -35,7 +35,7 @@ page {
 .out2 {
     display: flex;
     flex-direction: column;
-    margin: -220rpx var(--titlePadding) var(--titlePadding);
+    margin: -120rpx var(--titlePadding) var(--titlePadding);
     padding: 40rpx;
     background: var(--white);
     border-radius: 12rpx;

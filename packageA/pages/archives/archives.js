@@ -1,6 +1,8 @@
 // packageA/pages/archives/archives.js
+const {getRpx} = require("../../../utils/util");
 const {isEmpty} = require("../../../utils/util");
 let app = getApp()
+let bacArchives = "archives_bac2"
 Page({
 
     /**
@@ -12,6 +14,7 @@ Page({
         curTab: 0,
         mDataTab:[],
         bac: "",
+        mMarginTop: app.globalData.navigationHeight*getRpx()+115
     },
 
 
@@ -19,7 +22,7 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-        let bac = wx.getStorageSync("archives_bac2")
+        let bac = wx.getStorageSync(bacArchives)
         if (bac.length > 0) {
             this.setData({
                 bac,
@@ -72,7 +75,7 @@ Page({
             fileID: 'cloud://env-4gwafyi0129f4b02.656e-env-4gwafyi0129f4b02-1308234288/bac_archives.png',
             success: res => {
                 // get temp file path
-                wx.setStorageSync("archives_bac2", res.tempFilePath)
+                wx.setStorageSync(bacArchives, res.tempFilePath)
                 this.setData({
                     bac: res.tempFilePath,
                 })
@@ -99,7 +102,6 @@ Page({
         }
 
         app.httpPost(url, data).then((res) => {
-            console.log("data", res)
             let mData = res.respResult
             if (!isEmpty(mData.portrait)){
                 mData.portrait = wx.getStorageSync("domain") + mData.portrait;
@@ -119,6 +121,55 @@ Page({
             })
         })
     },
+
+    getDataTab0(uid) {
+        let url = "/api/v17/develop/teachers/teacherTeach_list"
+        let data = {
+            token: wx.getStorageSync('token'),
+            uid: uid,
+        }
+
+        app.httpPost(url, data).then((res) => {
+            let mDataTab0 = res.respResult
+
+            this.setData({
+                mDataTab0,
+            })
+        })
+    },
+
+    getDataTab1(uid) {
+        let url = "/api/v17/develop/teachers/honorary_list"
+        let data = {
+            token: wx.getStorageSync('token'),
+            uid: uid,
+        }
+
+        app.httpPost(url, data).then((res) => {
+            let mDataTab0 = res.respResult
+
+            this.setData({
+                mDataTab0,
+            })
+        })
+    },
+
+    getDataTab2(uid) {
+        let url = "/api/v17/develop/teachers/teacherTeach_list"
+        let data = {
+            token: wx.getStorageSync('token'),
+            uid: uid,
+        }
+
+        app.httpPost(url, data).then((res) => {
+            let mDataTab0 = res.respResult
+
+            this.setData({
+                mDataTab0,
+            })
+        })
+    },
+
     check0(e) {
         this.setData({
             curTab: 0,

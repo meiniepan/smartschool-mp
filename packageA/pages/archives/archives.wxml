@@ -9,7 +9,7 @@
             <image class="act2" src="../../assets/images/ic_search_white.png" mode="widthFix"
                    bindtap="doSearch"/>
         </navigation>
-        <view class="out2">
+        <view class="out2" style="margin-top: {{-mMarginTop}}rpx">
             <view class="img-area">
                 <image class="img" src="{{mData.portrait}}" mode="aspectFill" binderror="binderror" bindtap="chooseAvatar"></image>
                 <text class="text2">{{mData.realname}}</text>
