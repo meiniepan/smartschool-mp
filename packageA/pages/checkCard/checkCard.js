@@ -1,5 +1,13 @@
 // packageA/pages/checkCard/checkCard.js
-import {formatDate, formatNumber, formatTimeHM, isEmpty, showModal, showToastWithoutIcon} from "../../../utils/util";
+import {
+    formatDate,
+    formatNumber,
+    formatTimeHM,
+    getTimeStr,
+    isEmpty,
+    showModal,
+    showToastWithoutIcon
+} from "../../../utils/util";
 import {themeColor} from "../../../utils/host";
 
 let app = getApp();
@@ -92,6 +100,7 @@ Page({
     },
 
     check1() {
+
         if (this.data.categoryCur !== 0) {
             this.setData({
                 categoryCur: 0
@@ -100,7 +109,7 @@ Page({
         }
     },
     check2() {
-        // this.icRequest("0629005406")
+        this.icRequest("0629005406")
         if (this.data.categoryCur !== 1) {
             this.setData({
                 categoryCur: 1
@@ -160,7 +169,9 @@ Page({
             remark = data.remark + gap
         }
         let ss = data.levelclass + gap + data.realname + gap + remark + time
-            + "\n" + data.speStr + "\n"
+        if(this.data.dataTypes3[this.data.indexType3].attendances=="1") {
+            ss = ss+ "\n" + data.can + "\n"+ data.speStr
+        }
         this.data.mDataRecord.unshift(ss)
         this.setData({
             mDataRecord: this.data.mDataRecord,
@@ -202,20 +213,33 @@ Page({
             // data.specials.push("0629005406")
             // data.specials.push("请假条2")
             // data.specials.push("请假条3")
-            if (!isEmpty(data.specials)) {
-                let str = ""
-                if (data.specials.length > 0) {
-                    data.specials.forEach(it => {
-                        str += it + "\n"
-                    })
+            if(this.data.dataTypes3[this.data.indexType3].attendances=="1") {
+                if (!isEmpty(data.specials)) {
+                    let str = ""
+                    let cur = new Date().getTime() / 1000
+                    if (!isEmpty(data.ioschool_time) && data.ioschool_time.length > 10) {
+                        cur = new Date(data.ioschool_time).getTime() / 1000
+                    }
+                    console.log("cur=====", cur)
+                    let can = "不能离校！"
+                    if (data.specials.length > 0) {
+                        str = "特殊情况:\n"
+                        data.specials.forEach(it => {
+                            if (it.stime < cur && cur < it.etime) {
+                                can = "可以离校！"
+                            }
+                            str += it.actname + "\n" + getTimeStr(it.stime) + "至" + getTimeStr(it.etime) + "\n"
+                        })
 
 
-                } else {
-                    str = "没有特殊情况报备"
+                    } else {
+                        str = "没有特殊情况报备"
+                    }
+                    // showModal(str, data.realname + "-特殊情况")
+                    data.speStr = str
+                    data.can = can
+                    app.textToSpeech(can)
                 }
-                // showModal(str, data.realname + "-特殊情况")
-                data.speStr = str
-                app.textToSpeech(str)
             }
                 this.dealList(data);
         });

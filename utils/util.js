@@ -133,6 +133,20 @@ function getTodayStr() {
     return today
 }
 
+function getTimeStr(time) {
+    let temp = new Date();
+    temp.setTime(parseInt(time)*1000)
+    let year = temp.getFullYear(),
+        month = temp.getMonth() + 1,
+        date = temp.getDate(),
+        hh = temp.getHours(),
+        mm = temp.getMinutes(),
+        ss = temp.getSeconds();
+    let today = year.toString()+"-" + zero(month)+"-" + zero(date)
+    +" "+zero(hh)+":"+zero(mm)+":"+zero(ss);
+    return today
+}
+
 function getToday() {
     let value = ['周日', '周一', '周二', '周三', '周四', '周五', '周六']
     let temp = new Date();
@@ -302,4 +316,5 @@ module.exports = {
     formatStarPhoneNum: formatStarPhoneNum,
     formatNumber: formatNumber,
     getRpx: getRpx,
+    getTimeStr: getTimeStr,
 }
