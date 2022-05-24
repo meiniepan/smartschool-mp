@@ -36,9 +36,9 @@ Page({
         choosePosition: 0,
         departData: [],
         classData: [],
-        indexType: 0,
-        indexRoom: 0,
-        indexType3: 0,
+        indexType_checkCard: 0,
+        indexRoom_checkCard: 0,
+        indexType3_checkCard: 0,
         dataTypes: [],
         dataRooms: [],
         checked: true,
@@ -48,12 +48,7 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-        let indexType3 = wx.getStorageSync("indexType3")
-        if (!isEmpty(indexType3)) {
-            this.setData({
-                indexType3,
-            })
-        }
+
         this.getList()
     },
 
@@ -124,6 +119,9 @@ Page({
         let dataTypes = []
         let dataRooms = []
         let dataTypes3 = []
+        let indexRoom_checkCard = 0
+        let indexType_checkCard = 0
+        let indexType3_checkCard = 0
 
         url = '/api/v17/moral/ioschool/listsType'
         data = {
@@ -133,22 +131,40 @@ Page({
         app.httpPost(url, data).then((res) => {
             dataTypes = res.respResult.data
 
+             let index0 = wx.getStorageSync("indexType_checkCard")
+            console.log("index0",index0)
+            if (!isEmpty(index0)&&index0<dataTypes.length) {
+                indexType_checkCard = index0
+            }
             let url = '/api/v17/admin/classroom/lists'
             let data = {
                 token: wx.getStorageSync('token'),
             }
             app.httpPost(url, data).then((res) => {
                 dataRooms = res.respResult.data
+                let index1 = wx.getStorageSync("indexRoom_checkCard")
+                console.log("index1",index1)
+                if (!isEmpty(index1)&&index1<dataRooms.length) {
+                    indexRoom_checkCard = index1
+                }
                 let url = '/api/v17/moral/moralType/lists'
                 let data = {
                     token: wx.getStorageSync('token'),
                 }
                 app.httpPost(url, data).then((res) => {
                     dataTypes3 = res.respResult.data
+                    let index2 = wx.getStorageSync("indexType3_checkCard")
+                    console.log("index2",index2)
+                    if (!isEmpty(index2)&&index2<dataTypes3.length) {
+                        indexType3_checkCard = index2
+                    }
                     this.setData({
                         dataTypes,
                         dataRooms,
                         dataTypes3,
+                        indexRoom_checkCard,
+                        indexType_checkCard,
+                        indexType3_checkCard,
                     })
                 })
 
@@ -169,7 +185,7 @@ Page({
             remark = data.remark + gap
         }
         let ss = data.levelclass + gap + data.realname + gap + remark + time
-        if(this.data.dataTypes3[this.data.indexType3].attendances=="1") {
+        if(this.data.dataTypes3[this.data.indexType3_checkCard].attendances=="1") {
             ss = ss+ "\n" + data.can + "\n"+ data.speStr
         }
         this.data.mDataRecord.unshift(ss)
@@ -192,9 +208,9 @@ Page({
         let url = "/api/v17/moral/ioschool/checkCard"
         this.data.requestBody.token = wx.getStorageSync('token')
         this.data.requestBody.cardno = cardno
-        this.data.requestBody.iotype = this.data.dataTypes[this.data.indexType].id
-        this.data.requestBody.classroomid = this.data.dataRooms[this.data.indexRoom].id
-        this.data.requestBody.specialtype = this.data.dataTypes3[this.data.indexType3].id
+        this.data.requestBody.iotype = this.data.dataTypes[this.data.indexType_checkCard].id
+        this.data.requestBody.classroomid = this.data.dataRooms[this.data.indexRoom_checkCard].id
+        this.data.requestBody.specialtype = this.data.dataTypes3[this.data.indexType3_checkCard].id
         this.data.requestBody.attendances = this.data.checked ? "1" : "0"
 
         if (isEmpty(this.data.requestBody.iotype)
@@ -213,7 +229,7 @@ Page({
             // data.specials.push("0629005406")
             // data.specials.push("请假条2")
             // data.specials.push("请假条3")
-            if(this.data.dataTypes3[this.data.indexType3].attendances=="1") {
+            if(this.data.dataTypes3[this.data.indexType3_checkCard].attendances=="1") {
                 if (!isEmpty(data.specials)) {
                     let str = ""
                     let cur = new Date().getTime() / 1000
@@ -252,9 +268,7 @@ Page({
     doType(e) {
         let index = e.detail.value
         let type = e.currentTarget.dataset.type
-        if (type == "indexType3") {
-            wx.setStorageSync("indexType3", index)
-        }
+            wx.setStorageSync(type, index)
         this.setData({
             [type]: index,
         })
