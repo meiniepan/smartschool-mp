@@ -107,3 +107,11 @@ page {
     box-sizing: border-box;
     border-radius: 4rpx;
 }
+.cell{
+    display: flex;
+    flex-direction: column;
+}
+.cell0{
+    display: flex;
+    flex-direction: column;
+}

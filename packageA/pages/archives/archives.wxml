@@ -60,10 +60,19 @@
                 <view class="{{curTab==1?'tabChecked':'tabCommon'}}" style="margin-left: 6rpx" bindtap="check1">个人荣誉</view>
                 <view class="{{curTab==2?'tabChecked':'tabCommon'}}" style="margin-left: 6rpx" bindtap="check2">个人成就</view>
             </view>
-            <emptyView wx:if="{{mDataTab.length==0}}"/>
-            <view class="cells" wx:else>
-                <view class="cell" wx:for="{{mDataTab}}" wx:key="index" data-position="{{index}}" bindtap="">
-                    <view class="title0">{{item.name}}</view>
+
+            <view class="cells" >
+                <view class="cell" wx:for="{{dataUrls0}}" wx:key="index" data-position="{{index}}" bindtap="">
+                    <view class="title">{{item.name}}</view>
+                    <view wx:if="{{item.count==0}}" class="empty">暂无数据</view>
+                    <view class="cells0" wx:else >
+                    <view class="cell0" wx:for="{{item.data}}" wx:for-index="idx" wx:for-item="bean" wx:key="idx"
+                          >
+                        <view class="">{{bean.time}}</view>
+                        <view class="name singleLine">{{bean.str}}</view>
+                    </view>
+                    </view>
+                    <view wx:if="{{item.count>5}}" class="more" data-data="{{item}}" bindtap="doMore">查看全部</view>
                 </view>
             </view>
         </view>

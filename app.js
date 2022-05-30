@@ -86,8 +86,8 @@ App({
      */
     httpBase: function (method, url, data, loading = false, loadingMsg) {
         let that = this
-        let requestUrl = host.BASE_URL + url;
-        // let requestUrl = host.BASE_URL_DEV + url;
+        // let requestUrl = host.BASE_URL + url;
+        let requestUrl = host.BASE_URL_DEV + url;
         console.log("url", requestUrl)
         console.log("body", JSON.stringify(data))
         if (loading) {
@@ -126,7 +126,16 @@ App({
 
                     if (code != '0000') {
                         if (code == '0004') {
-                            that.reLogin()
+                            showModal(
+                                '登录失效，是否重新登录？',
+                                '温馨提示',
+                                (res) => {
+                                    if (res.confirm) {
+                                        // 重新登录
+                                        that.reLogin()
+                                    }
+                                }
+                            )
                         }
                         reject(res);
                         if (errMsg) {

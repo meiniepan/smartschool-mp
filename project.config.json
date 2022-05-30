@@ -31,20 +31,13 @@
       "disablePlugins": [],
       "outputPath": ""
     },
-    "bundle": false,
+    "enableEngineNative": false,
     "useIsolateContext": true,
-    "useCompilerModule": true,
-    "userConfirmedUseCompilerModuleSwitch": false,
     "userConfirmedBundleSwitch": false,
     "packNpmManually": false,
     "packNpmRelationList": [],
     "minifyWXSS": true,
-    "minifyWXML": true,
-    "disableUseStrict": false,
-    "useStaticServer": true,
-    "showES6CompileOption": false,
-    "useCompilerPlugins": false,
-    "ignoreUploadUnusedFiles": false
+    "showES6CompileOption": false
   },
   "compileType": "miniprogram",
   "libVersion": "2.22.1",

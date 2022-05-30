@@ -60,6 +60,7 @@
         "pages/eduAttendance/eduAttendance",
         "pages/eduAttendanceDetail/eduAttendanceDetail",
         "pages/archives/archives",
+        "pages/archivesMore/archivesMore",
         "pages/checkCard/checkCard",
         "pages/webDetail/webDetail",
         "pages/webTest/webTest"
