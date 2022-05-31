@@ -173,37 +173,39 @@ Page({
             if (data.length>5){
                 data = data.slice(0,5)
             }
+            let sss = " "
             data.forEach(it=>{
                 it.time= ""
                 it.str= ""
+
                 if(i == 0&&j==0){
-                    it.time= it.start_time+it.start_time?"~":""+it.end_time
+                    it.time= it.start_time+(!isEmpty(it.start_time)?" ~ ":"")+it.end_time
                     it.str= it.class_other
-                    +"\n"+it.classtype_other?it.classtype_other:it.classtype_str
+                        +sss+(!isEmpty(it.classtype_other)?it.classtype_other:it.classtype_str)
                 }else if(i == 0&&j==1){
-                    it.time= it.start_time+it.start_time?"~":""+it.end_time
+                    it.time= it.start_time+(!isEmpty(it.start_time)?" ~ ":"")+it.end_time
                     it.str= it.class_other
-                    +"\n"+it.subject_other?it.subject_other:it.subject_str
-                    +"\n"+it.teachtype_other?it.teachtype_other:it.teachtype_str
+                        +sss+(!isEmpty(it.subject_other)?it.subject_other:it.subject_str)
+                        +sss+(!isEmpty(it.teachtype_other)?it.teachtype_other:it.teachtype_str)
                 }if(i == 0&&j==2){
-                    it.time= it.start_time+it.start_time?"~":""+it.end_time
-                    it.str= it.post_other?it.post_other:it.post_str
+                    it.time= it.start_time+(!isEmpty(it.start_time)?" ~ ":"")+it.end_time
+                    it.str= (!isEmpty(it.post_other)?it.post_other:it.post_str)
                 }if(i == 1&&j==0){
-                    it.time= it.start_time+it.start_time?"~":""+it.end_time
-                    it.str= it.professional_other?it.professional_other:it.professional_str
+                    it.time= it.start_time+(!isEmpty(it.start_time)?" ~ ":"")+it.end_time
+                    it.str= (!isEmpty(it.professional_other)?it.professional_other:it.professional_str)
                 }if(i == 1&&j==1){
-                    it.time= it.start_time+it.start_time?"~":""+it.end_time
-                    it.str= it.backbone_other?it.backbone_other:it.backbone_str
+                    it.time= it.start_time+(!isEmpty(it.start_time)?" ~ ":"")+it.end_time
+                    it.str= (!isEmpty(it.backbone_other)?it.backbone_other:it.backbone_str)
                 }if(i == 1&&j==2){
                     it.time= it.grant_time
-                    it.str= it.honorary_other?it.honorary_other:it.honorary_str
+                    it.str= (!isEmpty(it.honorary_other)?it.honorary_other:it.honorary_str)
                 }if(i == 2&&j==0){
-                    it.time= it.start_time+it.start_time?"~":""+it.end_time
+                    it.time= it.start_time+(!isEmpty(it.start_time)?" ~ ":"")+it.end_time
                     it.str= it.name
                 }if(i == 2&&j==1){
                     it.time= it.award_time
                     it.str= it.name
-                    +"\n"+it.award_grade_other?it.award_grade_other:it.award_grade_str
+                        +sss+(!isEmpty(it.award_grade_other)?it.award_grade_other:it.award_grade_str)
                 }if(i == 2&&j==2){
                     it.time= it.publish_time
                     it.str= it.article_name
@@ -213,13 +215,13 @@ Page({
                 }if(i == 2&&j==4){
                     it.time= it.course_time
                     it.str= it.name
-                    +"\n"+it.course_grade_other?it.course_grade_other:it.course_grade_str
+                        +sss+(!isEmpty(it.course_grade_other)?it.course_grade_other:it.course_grade_str)
                 }if(i == 2&&j==5){
-                    it.time= it.start_time+it.start_time?"~":""+it.end_time
+                    it.time= it.start_time+(!isEmpty(it.start_time)?" ~ ":"")+it.end_time
                     it.str= it.pupil_name
-                    +"\n"+it.pupil_subject_other?it.pupil_subject_other:it.pupil_subject_str
+                        +sss+(!isEmpty(it.pupil_subject_other)?it.pupil_subject_other:it.pupil_subject_str)
                 }if(i == 2&&j==6){
-                    it.time= it.start_time+it.start_time?"~":""+it.end_time
+                    it.time= it.start_time+(!isEmpty(it.start_time)?" ~ ":"")+it.end_time
                     it.str= it.partjob
                 }
             })
@@ -228,15 +230,19 @@ Page({
             this.setData({
                 [ss]: urls,
             })
-            console.log([ss],urls)
         })
     },
 
     doMore(e) {
         let url = e.currentTarget.dataset.data.url
         let name = e.currentTarget.dataset.data.name
+        let j = e.currentTarget.dataset.j
+        let i = this.data.curTab
+        let uid = this.uid
         wx.navigateTo({
-            url: "../archivesMore/archivesMore?url="+url+"&uid="+uid+"&name="+name,
+            url: "../archivesMore/archivesMore?url="+url+"&uid="+uid+"&name="+name
+                +"&i="+i
+                +"&j="+j,
         });
     },
 

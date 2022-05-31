@@ -1,6 +1,5 @@
 {
   "usingComponents": {
-    "dateTimePicker": "/components/dateTimePicker/dateTimePicker",
     "scroll": "/components/scroll/scroll"
   },
   "navigationBarTitleText": "任务协作",

@@ -1,79 +1,88 @@
 <!--packageA/pages/archives/archives.wxml-->
-    <view class="out">
-        <view class="bac-area">
-            <image class="bac" src="{{bac}}" mode="aspectFill"></image>
+<view class="out">
+    <view class="bac-area">
+        <image class="bac" src="{{bac}}" mode="aspectFill"></image>
+    </view>
+    <navigation title="{{title}}" titleColor="#ffffff" bgColor="transparent">
+        <image class="act" src="../../assets/images/icon_back_white_a.png" mode="widthFix"
+               bindtap="doFinish"/>
+        <image class="act2" src="../../assets/images/ic_search_white.png" mode="widthFix"
+               bindtap="doSearch"/>
+    </navigation>
+    <view class="out2" style="margin-top: {{-mMarginTop}}rpx">
+        <view class="img-area">
+            <image class="img" src="{{mData.portrait}}" mode="aspectFill" binderror="binderror"
+                   bindtap="chooseAvatar"></image>
+            <text class="text2">{{mData.realname}}</text>
         </view>
-        <navigation title="{{title}}" titleColor="#ffffff" bgColor="transparent">
-            <image class="act" src="../../assets/images/icon_back_white_a.png" mode="widthFix"
-                   bindtap="doFinish"/>
-            <image class="act2" src="../../assets/images/ic_search_white.png" mode="widthFix"
-                   bindtap="doSearch"/>
-        </navigation>
-        <view class="out2" style="margin-top: {{-mMarginTop}}rpx">
-            <view class="img-area">
-                <image class="img" src="{{mData.portrait}}" mode="aspectFill" binderror="binderror" bindtap="chooseAvatar"></image>
-                <text class="text2">{{mData.realname}}</text>
-            </view>
-            <view class="line"></view>
-            <view class="info-area">
-                <view class="info-line">
-                    <text>出生日期</text>
-                    <text class="text">{{mData.birthday}}</text>
-                </view>
-
-                <view class="info-line" style="margin-top: 40rpx">
-                    <text>性别</text>
-                    <text class="text">{{mData.sex}}</text>
-                </view>
-                <view class="info-line" style="margin-top: 40rpx">
-                    <text>最高学历</text>
-                    <text class="text">{{mData.highest_education_str}}</text>
-                </view>
-                <view class="info-line" style="margin-top: 40rpx">
-                    <text>政治面貌</text>
-                    <text class="text">{{mData.political_str}}</text>
-                </view>
-                <view class="info-line" style="margin-top: 40rpx">
-                    <text>初高中任教学科</text>
-                    <text class="text">{{mData.teach_subject_str}}</text>
-                </view>
-                <view class="info-line" style="margin-top: 40rpx">
-                    <text>人事关系所在校区</text>
-                    <text class="text">{{mData.relation_school_str}}</text>
-                </view>
-                <view class="info-line" style="margin-top: 40rpx">
-                    <text>工龄</text>
-                    <text class="text">{{mData.work_year}}</text>
-                </view>
-
-                <view class="info-line" style="margin-top: 40rpx">
-                    <text>教龄</text>
-                    <text class="text">{{mData.teach_year}}</text>
-                </view>
-                <view class="info-line" style="margin-top: 40rpx">
-                    <text>入本集团时间</text>
-                    <text class="text">{{mData.join_time}}</text>
-                </view>
-            </view>
-            <view class="tabs">
-                <view class="{{curTab==0?'tabChecked':'tabCommon'}}" bindtap="check0">任职任教</view>
-                <view class="{{curTab==1?'tabChecked':'tabCommon'}}" style="margin-left: 6rpx" bindtap="check1">个人荣誉</view>
-                <view class="{{curTab==2?'tabChecked':'tabCommon'}}" style="margin-left: 6rpx" bindtap="check2">个人成就</view>
+        <view class="line"></view>
+        <view class="info-area">
+            <view class="info-line">
+                <text>出生日期</text>
+                <text class="text">{{mData.birthday}}</text>
             </view>
 
-            <view class="cells" >
-                <view class="cell" wx:for="{{dataUrls0}}" wx:key="index" data-position="{{index}}" bindtap="">
-                    <view class="title">{{item.name}}</view>
-                    <view wx:if="{{item.count==0}}" class="empty">暂无数据</view>
-                    <view class="cells0" wx:else >
+            <view class="info-line" style="margin-top: 40rpx">
+                <text>性别</text>
+                <text class="text">{{mData.sex}}</text>
+            </view>
+            <view class="info-line" style="margin-top: 40rpx">
+                <text>最高学历</text>
+                <text class="text">{{mData.highest_education_str}}</text>
+            </view>
+            <view class="info-line" style="margin-top: 40rpx">
+                <text>政治面貌</text>
+                <text class="text">{{mData.political_str}}</text>
+            </view>
+            <view class="info-line" style="margin-top: 40rpx">
+                <text>初高中任教学科</text>
+                <text class="text">{{mData.teach_subject_str}}</text>
+            </view>
+            <view class="info-line" style="margin-top: 40rpx">
+                <text>人事关系所在校区</text>
+                <text class="text">{{mData.relation_school_str}}</text>
+            </view>
+            <view class="info-line" style="margin-top: 40rpx">
+                <text>工龄</text>
+                <text class="text">{{mData.work_year}}</text>
+            </view>
+
+            <view class="info-line" style="margin-top: 40rpx">
+                <text>教龄</text>
+                <text class="text">{{mData.teach_year}}</text>
+            </view>
+            <view class="info-line" style="margin-top: 40rpx">
+                <text>入本集团时间</text>
+                <text class="text">{{mData.join_time}}</text>
+            </view>
+        </view>
+        <view class="tabs">
+            <view class="{{curTab==0?'tabChecked':'tabCommon'}}" bindtap="check0">任职任教</view>
+            <view class="{{curTab==1?'tabChecked':'tabCommon'}}" style="margin-left: 6rpx" bindtap="check1">个人荣誉</view>
+            <view class="{{curTab==2?'tabChecked':'tabCommon'}}" style="margin-left: 6rpx" bindtap="check2">个人成就</view>
+        </view>
+
+        <view class="cells">
+            <view class="cell" wx:for="{{curTab==0?dataUrls0:curTab==1?dataUrls1:dataUrls2}}" wx:key="index"
+                  data-position="{{index}}" bindtap="">
+                <view class="title">{{item.name}}</view>
+                <view wx:if="{{item.count==0}}" class="empty">暂无数据</view>
+                <view class="cells0" wx:else>
                     <view class="cell0" wx:for="{{item.data}}" wx:for-index="idx" wx:for-item="bean" wx:key="idx"
-                          >
-                        <view class="">{{bean.time}}</view>
-                        <view class="name singleLine">{{bean.str}}</view>
+                    >
+                        <view class="left">
+                            <view class="pp"></view>
+                            <view class="ll"></view>
+                        </view>
+                        <view class="right">
+                            <view class="time">{{bean.time}}</view>
+                            <view class="name singleLine">{{bean.str}}</view>
+                        </view>
+
                     </view>
-                    </view>
-                    <view wx:if="{{item.count>5}}" class="more" data-data="{{item}}" bindtap="doMore">查看全部</view>
                 </view>
+                <view wx:if="{{item.count>5}}" class="more" data-data="{{item}}" data-j="{{index}}" bindtap="doMore">查看全部</view>
             </view>
         </view>
     </view>
+</view>

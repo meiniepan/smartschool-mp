@@ -1,2 +1,24 @@
 <!--packageA/pages/archivesMore/archivesMore.wxml-->
-<text>packageA/pages/archivesMore/archivesMore.wxml</text>
+<view class="out">
+<scroll requesting="{{mRequest.requesting}}"
+        scrollTop="{{scrollTop}}"
+        end="{{mRequest.end}}"
+        empty-show="{{mRequest.emptyShow}}"
+        list-count="{{mData.length}}"
+        bottom-size="{{0}}"
+        bind:refresh="refresh"
+        bind:more="more">
+    <view class="cells">
+        <view class="cell" wx:for="{{mData}}" wx:key="index" data-index="{{index}}" data-bean="{{item}}" bindtap="">
+            <view class="left">
+                <view class="pp"></view>
+                <view class="ll"></view>
+            </view>
+            <view class="right">
+                <view class="time">{{item.time}}</view>
+                <view class="name singleLine">{{item.str}}</view>
+            </view>
+        </view>
+    </view>
+</scroll>
+</view>

@@ -1,1 +1,40 @@
 /* packageA/pages/archivesMore/archivesMore.wxss */
+.cells{
+    margin: 20rpx var(--titlePadding);
+    display: flex;
+    flex-direction: column;
+}
+
+.cell{
+    display: flex;
+    flex-direction: row;
+}
+
+.left{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.pp{
+    width: 18rpx;
+    height: 18rpx;
+    background: var(--commonHint);
+    margin-top: 0rpx;
+    border-radius: 50%;
+}
+.ll{
+    width: 4rpx;
+    height: 100%;
+    background: var(--commonHint);
+}
+.right{
+    display: flex;
+    flex-direction: column;
+    margin-left: 4rpx;
+    margin-top: -10rpx;
+    margin-bottom: 10rpx;
+}
+.time{
+    font-size: 24rpx;
+    color: var(--commonHint);
+}
