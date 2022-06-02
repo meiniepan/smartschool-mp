@@ -16,7 +16,7 @@
             </view>
             <view class="right">
                 <view class="time">{{item.time}}</view>
-                <view class="name singleLine">{{item.str}}</view>
+                <view class="name">{{item.str}}</view>
             </view>
         </view>
     </view>

@@ -76,7 +76,7 @@
                         </view>
                         <view class="right">
                             <view class="time">{{bean.time}}</view>
-                            <view class="name singleLine">{{bean.str}}</view>
+                            <view class="name">{{bean.str}}</view>
                         </view>
 
                     </view>
