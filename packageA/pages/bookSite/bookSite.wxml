@@ -12,7 +12,8 @@
 
     <view  class="list">
         <emptyView wx:if="{{isEmpty}}"/>
-    <scroll-view wx:else class="cells" style="height: {{scrollHeight}}px" enable-flex scroll-y>
+    <scroll-view wx:else  style="height: {{scrollHeight}}px" enable-flex scroll-y>
+        <view class="cells">
         <view class="cell" wx:for="{{mDataDay}}" wx:key="index" data-id="{{item}}" bindtap="doDetail">
             <view class="title-area">
                 <view class="title">
@@ -27,6 +28,7 @@
                 <view class="remark textc">{{item.remark}}</view>
                 <view class="remark realname text-right">{{item.operator.realname}}</view>
             </view>
+        </view>
         </view>
     </scroll-view>
     </view>

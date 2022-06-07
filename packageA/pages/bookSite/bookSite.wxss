@@ -46,6 +46,7 @@ page{
     padding-left: var(--titlePadding);
     padding-right: var(--titlePadding);
     overflow: hidden;
+    padding-bottom: 40rpx;
     box-sizing: border-box;
 }
 
