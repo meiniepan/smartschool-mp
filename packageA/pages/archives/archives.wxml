@@ -81,7 +81,9 @@
 
                     </view>
                 </view>
-                <view wx:if="{{item.count>5}}" class="more" data-data="{{item}}" data-j="{{index}}" bindtap="doMore">查看全部</view>
+                <view wx:if="{{item.count>5}}" class="more" data-data="{{item}}" data-j="{{index}}" bindtap="doMore">
+                    查看全部
+                </view>
             </view>
         </view>
     </view>
