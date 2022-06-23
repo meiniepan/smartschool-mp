@@ -37,7 +37,8 @@ Page({
      */
     onLoad: function (options) {
         let bac = wx.getStorageSync(bacArchives)
-        if (bac.length > 0) {
+        console.log("bac=====",bac)
+        if (!isEmpty(bac)) {
             this.setData({
                 bac,
             })
@@ -81,6 +82,7 @@ Page({
         });
     },
     getBac: function () {
+        let this_ = this
         wx.showLoading({
             title: '加载中...',
             mask: true
@@ -89,10 +91,11 @@ Page({
             fileID: 'cloud://env-4gwafyi0129f4b02.656e-env-4gwafyi0129f4b02-1308234288/bac_archives.png',
             success: res => {
                 // get temp file path
-                wx.setStorageSync(bacArchives, res.tempFilePath)
-                this.setData({
-                    bac: res.tempFilePath,
-                })
+                        console.log("res=====",res)
+                        wx.setStorageSync(bacArchives, res.tempFilePath)
+                        this_.setData({
+                            bac: res.tempFilePath,
+                        })
 
             },
             fail: err => {
@@ -107,6 +110,10 @@ Page({
         this.setData({
             mData: this.data.mData,
         })
+    },
+
+    binderrorBac(e) {
+        this.getBac();
     },
 
     getData(uid) {

@@ -1,7 +1,7 @@
 <!--packageA/pages/archives/archives.wxml-->
 <view class="out">
     <view class="bac-area">
-        <image class="bac" src="{{bac}}" mode="aspectFill"></image>
+        <image class="bac" src="{{bac}}" mode="aspectFill" binderror="binderrorBac"></image>
     </view>
     <navigation title="{{title}}" titleColor="#ffffff" bgColor="transparent">
         <image class="act" src="../../assets/images/icon_back_white_a.png" mode="widthFix"
